@@ -97,16 +97,19 @@
 
 <!-- ===== HEADER ===== -->
 <header class="header">
-  <div class="header-logo">
-    <span class="icon">&#9878;</span>
-    <span>Comparatif <span style="color:var(--accent);font-weight:400;font-size:14px">Agents IA Terminal</span></span>
-  </div>
+  <a href="../" class="header-logo-link">
+    <div class="header-logo">
+      <span class="icon">&#9878;</span>
+      <span>Comparatif <span style="color:var(--accent);font-weight:400;font-size:14px">Agents IA Terminal</span></span>
+    </div>
+  </a>
   <nav class="header-nav">
     <a href="#" data-page="comparatif" class="active" onclick="showPage('comparatif');return false;">Comparatif</a>
     <a href="#" data-page="scénarios" onclick="showPage('scénarios');return false;">Scénarios</a>
     <a href="#" data-page="decision" onclick="showPage('decision');return false;">Arbre de Décision</a>
   </nav>
   <a class="header-github" href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank" title="Voir sur GitHub">&#9733; GitHub</a>
+  <button class="dark-mode-toggle-header" onclick="toggleDarkMode()" title="Basculer thème sombre/clair">🌙</button>
   <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
 </header>
 

@@ -28,16 +28,19 @@
 
 <!-- ===== HEADER ===== -->
 <header class="header">
-  <div class="header-logo">
-    <span class="icon">&#9881;</span>
-    <span>OpenCode <span style="color:var(--accent);font-weight:400;font-size:14px">via Copilot</span></span>
-  </div>
+  <a href="../" class="header-logo-link">
+    <div class="header-logo">
+      <span class="icon">&#9881;</span>
+      <span>OpenCode <span style="color:var(--accent);font-weight:400;font-size:14px">via Copilot</span></span>
+    </div>
+  </a>
   <nav class="header-nav">
     <a href="#" data-page="quickstart" class="active" onclick="showPage('quickstart');return false;">Quick Start</a>
     <a href="#" data-page="guide" onclick="showPage('guide');return false;">Guide Detaille</a>
     <a href="#" data-page="référence" onclick="showPage('référence');return false;">Référence</a>
   </nav>
   <a class="header-github" href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank" title="Voir sur GitHub">&#9733; GitHub</a>
+  <button class="dark-mode-toggle-header" onclick="toggleDarkMode()" title="Basculer thème sombre/clair">🌙</button>
   <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
 </header>
 

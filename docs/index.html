@@ -321,28 +321,23 @@
       .schema-arrow { transform: rotate(90deg); }
     }
 
-    /* ===== Dark Mode Toggle Button ===== */
-    .dark-mode-toggle {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: var(--bg-card);
-      font-size: 20px;
+    /* ===== Header logo link ===== */
+    a.header-logo-link { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px; }
+    a.header-logo-link:hover { color: inherit; text-decoration: none; }
+
+    /* ===== Dark Mode Toggle (header) ===== */
+    .dark-mode-toggle-header {
+      background: none;
+      border: none;
+      font-size: 18px;
       cursor: pointer;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,.15);
-      transition: all .2s;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background .2s;
+      line-height: 1;
     }
-    .dark-mode-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    .dark-mode-toggle-header:hover {
+      background: rgba(255,255,255,.1);
     }
 
     /* ===== Dark Mode ===== */
@@ -364,6 +359,30 @@
     }
     [data-theme="dark"] .compliance {
       background: linear-gradient(135deg, #2d2d2d 0%, #3d1520 50%, #2d1a3d 100%);
+    }
+    [data-theme="dark"] .header {
+      background: #111111;
+    }
+    [data-theme="dark"] .hero {
+      background: linear-gradient(165deg, #111 0%, #1a1a1a 100%);
+    }
+    [data-theme="dark"] .footer {
+      border-color: #333;
+    }
+    [data-theme="dark"] .card {
+      background: #2d2d2d;
+      border-color: #404040;
+    }
+    [data-theme="dark"] .card:hover {
+      background: #333;
+    }
+    [data-theme="dark"] .problem-card {
+      background: #2d2d2d;
+      border-color: #404040;
+    }
+    [data-theme="dark"] .schema-box {
+      background: #2d2d2d;
+      border-color: #404040;
     }
     pre[class*="language-"] { margin: 16px 0; border-radius: var(--radius); font-size: 13px; }
     code[class*="language-"] { font-family: var(--font-mono); }
@@ -387,6 +406,7 @@
   </div>
   <div class="header-links">
     <a href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank">GitHub</a>
+    <button class="dark-mode-toggle-header" onclick="toggleDarkMode()" title="Basculer thème sombre/clair">🌙</button>
   </div>
 </header>
 
@@ -523,27 +543,26 @@
 </footer>
 
 <script>
-// ===== Dark Mode Toggle =====
-(function setupDarkMode() {
+// ===== Dark Mode =====
+function toggleDarkMode() {
+  var current = document.documentElement.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateDarkModeIcon();
+}
+function updateDarkModeIcon() {
+  var btn = document.querySelector('.dark-mode-toggle-header');
+  if (btn) btn.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+}
+(function initTheme() {
   var saved = localStorage.getItem('theme');
   if (saved) {
     document.documentElement.setAttribute('data-theme', saved);
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
-
-  var btn = document.createElement('button');
-  btn.className = 'dark-mode-toggle';
-  btn.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-  btn.title = 'Basculer thème sombre/clair';
-  btn.onclick = function() {
-    var current = document.documentElement.getAttribute('data-theme');
-    var next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    btn.innerHTML = next === 'dark' ? '☀️' : '🌙';
-  };
-  document.body.appendChild(btn);
+  document.addEventListener('DOMContentLoaded', updateDarkModeIcon);
 })();
 </script>
 

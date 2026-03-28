@@ -340,28 +340,23 @@ tr:hover td { background: var(--accent-light); }
 ::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* ===== Dark Mode Toggle Button ===== */
-.dark-mode-toggle {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  background: var(--bg-card);
-  font-size: 20px;
+/* ===== Header logo link ===== */
+a.header-logo-link { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px; }
+a.header-logo-link:hover { color: inherit; text-decoration: none; }
+
+/* ===== Dark Mode Toggle (header) ===== */
+.dark-mode-toggle-header {
+  background: none;
+  border: none;
+  font-size: 18px;
   cursor: pointer;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  transition: all .2s;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background .2s;
+  line-height: 1;
 }
-.dark-mode-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+.dark-mode-toggle-header:hover {
+  background: rgba(255,255,255,.1);
 }
 
 /* ===== Dark Mode ===== */
@@ -396,6 +391,35 @@ tr:hover td { background: var(--accent-light); }
 [data-theme="dark"] .box-success {
   border-color: #404040;
   background: #2d2d2d;
+}
+[data-theme="dark"] .header {
+  background: #111111;
+}
+[data-theme="dark"] .hero {
+  background: linear-gradient(165deg, #111 0%, #1a1a1a 100%);
+}
+[data-theme="dark"] .footer {
+  border-color: #333;
+}
+[data-theme="dark"] .header-github {
+  color: #999;
+}
+[data-theme="dark"] .header-github:hover {
+  color: #fff;
+}
+[data-theme="dark"] .tab.active {
+  background: var(--accent);
+}
+[data-theme="dark"] .step {
+  background: #2d2d2d;
+  border-color: #404040;
+}
+[data-theme="dark"] .card {
+  background: #2d2d2d;
+  border-color: #404040;
+}
+[data-theme="dark"] .card:hover {
+  background: #333;
 }
 
 /* ===== Prism.js overrides ===== */
