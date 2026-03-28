@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenCode via GitHub Copilot - Guide Complet</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <span class="icon">&#9881;</span>
+    <span>OpenCode <span style="color:var(--accent);font-weight:400;font-size:14px">via Copilot</span></span>
+  </div>
+  <nav class="header-nav">
+    <a href="#" data-page="quickstart" class="active" onclick="showPage('quickstart');return false;">Quick Start</a>
+    <a href="#" data-page="guide" onclick="showPage('guide');return false;">Guide Detaille</a>
+    <a href="#" data-page="reference" onclick="showPage('reference');return false;">Reference</a>
+  </nav>
+  <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+</header>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+
+  <!-- Quick Start sidebar -->
+  <div class="sidebar-page-section" data-page="quickstart">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Quick Start</div>
+      <a href="#qs-what">C'est quoi OpenCode ?</a>
+      <a href="#qs-prereqs">Pre-requis</a>
+      <a href="#qs-install">Installation</a>
+      <a href="#qs-connect">Connexion Copilot</a>
+      <a href="#qs-use">Utilisation</a>
+      <a href="#qs-troubleshoot">Depannage rapide</a>
+    </div>
+  </div>
+
+  <!-- Guide sidebar -->
+  <div class="sidebar-page-section" data-page="guide" style="display:none">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Installation</div>
+      <a href="#g-install-npm">npm / bun</a>
+      <a href="#g-install-brew">Homebrew / Scoop</a>
+      <a href="#g-install-curl">curl</a>
+      <a href="#g-install-go">Go (source)</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Copilot</div>
+      <a href="#g-copilot-connect">Connexion /connect</a>
+      <a href="#g-copilot-auto">Detection auto token</a>
+      <a href="#g-copilot-models">Modeles disponibles</a>
+      <a href="#g-copilot-tokens">Consommation tokens</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Configuration</div>
+      <a href="#g-config-file">Fichier .opencode.json</a>
+      <a href="#g-config-agents">Agents (coder/task)</a>
+      <a href="#g-config-providers">Providers custom</a>
+      <a href="#g-config-mcp">Serveurs MCP</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Avance</div>
+      <a href="#g-proxy-entreprise">Proxy entreprise</a>
+      <a href="#g-vs-claude">OpenCode vs Claude Code</a>
+      <a href="#g-securite">Securite et risques</a>
+    </div>
+  </div>
+
+  <!-- Reference sidebar -->
+  <div class="sidebar-page-section" data-page="reference" style="display:none">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reference</div>
+      <a href="#r-env">Variables d'env</a>
+      <a href="#r-config">Config complete</a>
+      <a href="#r-commands">Commandes /slash</a>
+      <a href="#r-shortcuts">Raccourcis clavier</a>
+      <a href="#r-cli">Options CLI</a>
+      <a href="#r-providers">Tous les providers</a>
+      <a href="#r-models">Modeles Copilot</a>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+<!-- ============================================================ -->
+<!-- PAGE: QUICK START                                             -->
+<!-- ============================================================ -->
+<div id="quickstart" class="page active">
+
+  <h1>Quick Start</h1>
+  <p class="subtitle">OpenCode connecte a GitHub Copilot en 3 minutes. Support natif, pas besoin de proxy.</p>
+
+  <h2 id="qs-what">C'est quoi OpenCode ?</h2>
+  <p><strong>OpenCode</strong> est un agent IA de coding en terminal, open source (MIT), avec 120K+ stars sur GitHub. C'est une alternative a Claude Code qui supporte <strong>75+ providers</strong> dont GitHub Copilot nativement.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">&#127793;</div>
+      <div class="card-title">Open Source (MIT)</div>
+      <div class="card-desc">Code source ouvert, pas de vendor lock-in, communaute active.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128279;</div>
+      <div class="card-title">Copilot natif</div>
+      <div class="card-desc">Support GitHub Copilot integre. Pas de proxy, pas de hack.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9881;</div>
+      <div class="card-title">75+ providers</div>
+      <div class="card-desc">OpenAI, Anthropic, Google, Ollama, Azure, Bedrock, et plus.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128187;</div>
+      <div class="card-title">TUI moderne</div>
+      <div class="card-desc">Interface terminal Bubble Tea avec keybindings vim.</div>
+    </div>
+  </div>
+
+  <div class="box box-success">
+    <div class="box-title">Avantage vs Claude Code + proxy</div>
+    <p>OpenCode supporte GitHub Copilot <strong>nativement</strong>. Pas besoin d'installer un proxy, pas de hack, pas d'API non-officielle. C'est un partenariat officiel entre GitHub et OpenCode (janvier 2026).</p>
+  </div>
+
+  <div class="box box-danger">
+    <div class="box-title">&#9888; Consommation de tokens Copilot</div>
+    <p>Comme tout agent IA en terminal, OpenCode consomme <strong>beaucoup plus de tokens</strong> qu'un simple chat Copilot. Une session de travail peut consommer l'equivalent d'une journee de Copilot Chat. Voir la section <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-copilot-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Consommation de tokens</a> pour les details.</p>
+  </div>
+
+  <h2 id="qs-prereqs">Pre-requis</h2>
+  <ul>
+    <li><strong>Node.js >= 18</strong> (pour l'install npm) ou <strong>Homebrew / curl</strong></li>
+    <li><strong>GitHub Copilot</strong> actif (Individual, Pro, Pro+, Business, ou Enterprise)</li>
+  </ul>
+  <pre><code>node --version    # >= 18
+npm --version</code></pre>
+
+  <h2 id="qs-install">Installation</h2>
+  <pre><code># npm (recommande)
+npm install -g opencode-ai@latest
+
+# ou bun
+bun install -g opencode-ai@latest
+
+# Verifiez
+opencode --version</code></pre>
+
+  <div class="box box-info">
+    <div class="box-title">Autres methodes d'installation</div>
+    <pre><code># Homebrew (macOS/Linux)
+brew install anomalyco/tap/opencode
+
+# Scoop (Windows)
+scoop install opencode
+
+# curl
+curl -fsSL https://opencode.ai/install | bash</code></pre>
+  </div>
+
+  <h2 id="qs-connect">Connexion a GitHub Copilot</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-title">Lancez OpenCode dans votre projet</div>
+      <pre><code>cd votre-projet
+opencode</code></pre>
+    </div>
+    <div class="step">
+      <div class="step-title">Connectez Copilot</div>
+      <p>Dans l'interface OpenCode, tapez :</p>
+      <pre><code>/connect</code></pre>
+      <p>Selectionnez <strong>"GitHub Copilot"</strong> dans la liste.</p>
+    </div>
+    <div class="step">
+      <div class="step-title">Authentifiez-vous</div>
+      <p>Un code s'affiche. Ouvrez <a href="https://github.com/login/device" target="_blank">github.com/login/device</a> et entrez le code.</p>
+    </div>
+    <div class="step">
+      <div class="step-title">Choisissez votre modele</div>
+      <pre><code>/models</code></pre>
+      <p>Selectionnez un modele Copilot (ex: <code>copilot.gpt-4.1</code>, <code>copilot.claude-sonnet-4</code>).</p>
+    </div>
+  </div>
+
+  <div class="box box-success">
+    <div class="box-title">&#10003; C'est pret !</div>
+    <p>OpenCode est connecte a Copilot. Tapez vos commandes directement.</p>
+  </div>
+
+  <h2 id="qs-use">Utilisation de base</h2>
+  <pre><code># Lancer OpenCode
+opencode
+
+# Mode non-interactif (scripting)
+opencode -p "explique ce fichier" -f json
+
+# Raccourcis dans l'interface
+# Ctrl+O : changer de modele
+# Ctrl+K : palette de commandes
+# Ctrl+N : nouvelle session
+# Ctrl+X : annuler la generation</code></pre>
+
+  <h2 id="qs-troubleshoot">Depannage rapide</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Probleme</th><th>Solution</th></tr></thead>
+      <tbody>
+        <tr><td><code>/connect</code> ne propose pas Copilot</td><td>Mettez a jour : <code>npm update -g opencode-ai</code></td></tr>
+        <tr><td>Device code expire</td><td>Copiez l'URL manuellement et ouvrez sur un autre appareil</td></tr>
+        <tr><td>Modele indisponible</td><td>Certains modeles (Claude) necessitent Copilot <strong>Pro+</strong></td></tr>
+        <tr><td>Token non detecte</td><td>Lancez <code>/connect</code> pour re-authentifier</td></tr>
+        <tr><td>Proxy entreprise</td><td>Configurez <code>HTTP_PROXY</code> avant de lancer</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: GUIDE DETAILLE                                          -->
+<!-- ============================================================ -->
+<div id="guide" class="page">
+
+  <h1>Guide Detaille</h1>
+  <p class="subtitle">Installation, configuration, et utilisation avancee d'OpenCode avec GitHub Copilot.</p>
+
+  <!-- ===== INSTALLATION ===== -->
+  <h2 id="g-install-npm">Installation via npm / bun</h2>
+  <p><span class="badge badge-easy">Facile</span> <span class="badge badge-npm">npm</span></p>
+
+  <pre><code># npm (le plus courant)
+npm install -g opencode-ai@latest
+
+# bun (plus rapide)
+bun install -g opencode-ai@latest
+
+# Verifier
+opencode --version</code></pre>
+
+  <p><strong>Si npm est bloque par le proxy entreprise :</strong></p>
+  <pre><code># Configurer npm pour le proxy
+npm config set proxy http://proxy.entreprise.fr:8080
+npm config set https-proxy http://proxy.entreprise.fr:8080
+
+# Puis relancer
+npm install -g opencode-ai@latest</code></pre>
+
+  <p><strong>Si pas de droits d'install globale :</strong></p>
+  <pre><code>npm install --prefix ~/.local opencode-ai@latest
+export PATH="$HOME/.local/node_modules/.bin:$PATH"</code></pre>
+
+  <h2 id="g-install-brew">Installation via Homebrew / Scoop / Chocolatey</h2>
+
+  <div class="tabs" data-group="install">
+    <button class="tab active" data-target="install-brew">Homebrew</button>
+    <button class="tab" data-target="install-scoop">Scoop</button>
+    <button class="tab" data-target="install-choco">Chocolatey</button>
+    <button class="tab" data-target="install-arch">Arch Linux</button>
+  </div>
+
+  <div id="install-brew" class="tab-content active" data-group="install">
+    <pre><code># macOS / Linux
+brew install anomalyco/tap/opencode</code></pre>
+  </div>
+
+  <div id="install-scoop" class="tab-content" data-group="install">
+    <pre><code># Windows
+scoop install opencode</code></pre>
+  </div>
+
+  <div id="install-choco" class="tab-content" data-group="install">
+    <pre><code># Windows
+choco install opencode</code></pre>
+  </div>
+
+  <div id="install-arch" class="tab-content" data-group="install">
+    <pre><code># Arch Linux
+sudo pacman -S opencode
+
+# Ou via AUR
+paru -S opencode-bin</code></pre>
+  </div>
+
+  <h2 id="g-install-curl">Installation via curl</h2>
+  <pre><code># Installation rapide
+curl -fsSL https://opencode.ai/install | bash
+
+# Version specifique
+curl -fsSL https://opencode.ai/install | VERSION=1.3.3 bash</code></pre>
+
+  <h2 id="g-install-go">Installation depuis les sources (Go)</h2>
+  <p><span class="badge badge-medium">Moyen</span> <span class="badge badge-clone">Clone</span></p>
+
+  <pre><code># Necessite Go >= 1.21
+git clone https://github.com/anomalyco/opencode.git
+cd opencode
+go build -o opencode .
+./opencode --version
+
+# Ou directement
+go install github.com/opencode-ai/opencode@latest</code></pre>
+
+  <div class="box box-warn">
+    <div class="box-title">Attention au bon repo</div>
+    <p>Le repo original <code>opencode-ai/opencode</code> a ete archive en septembre 2025. Le projet actif est maintenant sur <strong><code>anomalyco/opencode</code></strong>.</p>
+  </div>
+
+  <!-- ===== COPILOT ===== -->
+  <h2 id="g-copilot-connect">Connexion a Copilot : /connect</h2>
+
+  <p>OpenCode supporte GitHub Copilot <strong>nativement</strong> depuis le partenariat officiel de janvier 2026. Pas besoin de proxy.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-title">Lancez OpenCode</div>
+      <pre><code>opencode</code></pre>
+    </div>
+    <div class="step">
+      <div class="step-title">Tapez /connect</div>
+      <p>Selectionnez "GitHub Copilot" dans la liste des providers.</p>
+    </div>
+    <div class="step">
+      <div class="step-title">Authentification Device Flow</div>
+      <p>OpenCode affiche un code (ex: <code>AB12-CD34</code>). Ouvrez <a href="https://github.com/login/device" target="_blank">github.com/login/device</a> et entrez-le.</p>
+    </div>
+    <div class="step">
+      <div class="step-title">Selectionnez votre modele</div>
+      <pre><code>/models</code></pre>
+      <p>Choisissez parmi les modeles Copilot disponibles.</p>
+    </div>
+  </div>
+
+  <h2 id="g-copilot-auto">Detection automatique du token</h2>
+
+  <p>Si vous utilisez deja Copilot dans VS Code, le GitHub CLI, ou Neovim, OpenCode <strong>detecte automatiquement</strong> votre token depuis :</p>
+  <ul>
+    <li><code>~/.config/github-copilot/hosts.json</code></li>
+    <li><code>~/.config/github-copilot/apps.json</code></li>
+  </ul>
+
+  <p>Vous pouvez aussi fournir le token manuellement :</p>
+  <pre><code># Via variable d'environnement
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
+opencode</code></pre>
+
+  <p>Ou dans <code>.opencode.json</code> :</p>
+  <pre><code>{
+  "provider": {
+    "copilot": {
+      "apiKey": "ghp_xxxxxxxxxxxx",
+      "disabled": false
+    }
+  }
+}</code></pre>
+
+  <p>Verifier les providers authentifies :</p>
+  <pre><code>opencode auth list</code></pre>
+
+  <h2 id="g-copilot-models">Modeles disponibles via Copilot</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Modele</th><th>Fournisseur</th><th>Licence requise</th><th>Forces</th></tr></thead>
+      <tbody>
+        <tr><td><code>copilot.gpt-4.1</code></td><td>OpenAI</td><td>Pro</td><td>Polyvalent, bon en code</td></tr>
+        <tr><td><code>copilot.gpt-4o</code></td><td>OpenAI</td><td>Pro</td><td>Multimodal, rapide</td></tr>
+        <tr><td><code>copilot.gpt-4o-mini</code></td><td>OpenAI</td><td>Pro</td><td>Tres rapide, economique</td></tr>
+        <tr><td><code>copilot.claude-sonnet-4</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td>Excellent en code</td></tr>
+        <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td>Raisonnement + code</td></tr>
+        <tr><td><code>copilot.o3-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td>Raisonnement avance</td></tr>
+        <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td>Raisonnement rapide</td></tr>
+        <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td><strong>Pro+</strong></td><td>Long contexte</td></tr>
+        <tr><td><code>copilot.gemini-2.0-flash</code></td><td>Google</td><td>Pro</td><td>Rapide</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">Certains modeles necessitent Copilot Pro+</div>
+    <p>Les modeles Claude, O3, O4 et Gemini Pro necessitent un abonnement <strong>Copilot Pro+</strong> (et non juste Pro ou Business). Verifiez votre licence sur <a href="https://github.com/settings/copilot" target="_blank">github.com/settings/copilot</a>.</p>
+  </div>
+
+  <!-- ===== TOKENS ===== -->
+  <h2 id="g-copilot-tokens">Consommation de tokens Copilot</h2>
+
+  <div class="box box-danger">
+    <div class="box-title">&#9888; OpenCode consomme votre quota Copilot</div>
+    <p>Chaque interaction avec OpenCode consomme des tokens de votre licence GitHub Copilot. Un agent terminal consomme <strong>beaucoup plus</strong> qu'un chat Copilot classique.</p>
+  </div>
+
+  <h3>Pourquoi la consommation est elevee</h3>
+  <ul>
+    <li><strong>Contexte volumineux</strong> : OpenCode envoie le contenu des fichiers, l'historique, les resultats d'outils a chaque requete (10 000 - 50 000 tokens d'entree)</li>
+    <li><strong>Appels en cascade</strong> : une commande peut generer 3 a 15 appels API (lecture, reflexion, edition, verification)</li>
+    <li><strong>Reponses longues</strong> : les reponses contenant du code sont 5 a 20x plus longues qu'un chat</li>
+  </ul>
+
+  <h3>Ordres de grandeur</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Action</th><th>Tokens estimes</th><th>Equivalent Copilot Chat</th></tr></thead>
+      <tbody>
+        <tr><td>Question simple</td><td>5 000 - 15 000</td><td>3-5 messages chat</td></tr>
+        <tr><td>Edition de fichier</td><td>50 000 - 150 000</td><td>30-50 messages chat</td></tr>
+        <tr><td>Tache complexe</td><td>200 000 - 500 000</td><td>100-200 messages chat</td></tr>
+        <tr><td>Session 30 min</td><td>500 000 - 2 000 000</td><td><strong>1 journee de chat</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Comment reduire la consommation</h3>
+  <ul>
+    <li><strong>Activez <code>autoCompact</code></strong> (actif par defaut) : compresse le contexte a 95% d'utilisation</li>
+    <li><strong>Choisissez des modeles economes</strong> : <code>gpt-4o-mini</code> ou <code>gemini-2.0-flash</code> pour les taches simples</li>
+    <li><strong>Soyez precis</strong> : "corrige la ligne 42 de server.js" consomme moins que "corrige les bugs"</li>
+    <li><strong>Fermez et relancez</strong> regulierement pour reinitialiser le contexte</li>
+    <li><strong>Mode non-interactif</strong> pour les taches ponctuelles : <code>opencode -p "question"</code></li>
+  </ul>
+
+  <!-- ===== CONFIG ===== -->
+  <h2 id="g-config-file">Fichier .opencode.json</h2>
+
+  <p>OpenCode cherche la config dans cet ordre :</p>
+  <ol>
+    <li><code>./.opencode.json</code> (racine du projet, prioritaire)</li>
+    <li><code>$XDG_CONFIG_HOME/opencode/.opencode.json</code></li>
+    <li><code>$HOME/.opencode.json</code> (global)</li>
+  </ol>
+
+  <h3>Config minimale avec Copilot</h3>
+  <pre><code>{
+  "provider": {
+    "copilot": {
+      "disabled": false
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "copilot.gpt-4.1"
+    }
+  }
+}</code></pre>
+
+  <h3>Config complete</h3>
+  <pre><code>{
+  "provider": {
+    "copilot": {
+      "disabled": false
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "copilot.claude-sonnet-4",
+      "maxTokens": 5000
+    },
+    "task": {
+      "model": "copilot.gpt-4o",
+      "maxTokens": 5000
+    },
+    "title": {
+      "model": "copilot.gpt-4o-mini",
+      "maxTokens": 80
+    }
+  },
+  "autoCompact": true,
+  "debug": false
+}</code></pre>
+
+  <h2 id="g-config-agents">Agents : coder, task, title</h2>
+  <p>OpenCode utilise 3 agents avec des roles differents :</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Role</th><th>Modele recommande</th></tr></thead>
+      <tbody>
+        <tr><td><code>coder</code></td><td>Agent principal : ecrit et edite le code</td><td><code>copilot.gpt-4.1</code> ou <code>copilot.claude-sonnet-4</code></td></tr>
+        <tr><td><code>task</code></td><td>Sous-taches, recherche, reflexion</td><td><code>copilot.gpt-4o</code></td></tr>
+        <tr><td><code>title</code></td><td>Generation des titres de session</td><td><code>copilot.gpt-4o-mini</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Strategie d'economie de tokens</div>
+    <p>Utilisez un modele puissant pour <code>coder</code> et des modeles legers pour <code>task</code> et <code>title</code>. Ainsi seules les taches importantes consomment beaucoup.</p>
+  </div>
+
+  <h2 id="g-config-providers">Providers custom</h2>
+  <p>OpenCode peut se connecter a n'importe quel endpoint OpenAI-compatible :</p>
+
+  <pre><code>{
+  "provider": {
+    "copilot": { "disabled": false },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "llama3": { "name": "Llama 3" },
+        "mistral": { "name": "Mistral" }
+      }
+    },
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1"
+      },
+      "models": {
+        "local-model": { "name": "Mon modele local" }
+      }
+    }
+  }
+}</code></pre>
+
+  <h2 id="g-config-mcp">Serveurs MCP</h2>
+  <pre><code>{
+  "mcpServers": {
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/chemin"]
+    },
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "{env:GITHUB_TOKEN}" }
+    }
+  }
+}</code></pre>
+
+  <!-- ===== PROXY ENTREPRISE ===== -->
+  <h2 id="g-proxy-entreprise">Proxy entreprise</h2>
+
+  <h3>Variables d'environnement</h3>
+  <pre><code>export HTTP_PROXY=http://proxy.entreprise.fr:8080
+export HTTPS_PROXY=http://proxy.entreprise.fr:8080
+export NO_PROXY=localhost,127.0.0.1
+opencode</code></pre>
+
+  <h3>npm derriere un proxy</h3>
+  <pre><code>npm config set proxy http://proxy.entreprise.fr:8080
+npm config set https-proxy http://proxy.entreprise.fr:8080
+npm install -g opencode-ai@latest</code></pre>
+
+  <h3>Certificats SSL auto-signes</h3>
+  <pre><code># Meilleure solution
+export NODE_EXTRA_CA_CERTS=/chemin/vers/cert-entreprise.pem
+
+# Solution rapide (dev uniquement)
+export NODE_TLS_REJECT_UNAUTHORIZED=0</code></pre>
+
+  <!-- ===== VS CLAUDE CODE ===== -->
+  <h2 id="g-vs-claude">OpenCode vs Claude Code</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Critere</th><th>OpenCode</th><th>Claude Code</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Copilot natif</strong></td><td><span style="color:var(--green)">&#10003; Oui, officiel</span></td><td><span style="color:var(--red)">&#10007; Proxy non-officiel requis</span></td></tr>
+        <tr><td><strong>Open source</strong></td><td><span style="color:var(--green)">&#10003; MIT</span></td><td><span style="color:var(--red)">&#10007; Proprietaire</span></td></tr>
+        <tr><td><strong>Providers</strong></td><td>75+ (BYO key)</td><td>Anthropic uniquement</td></tr>
+        <tr><td><strong>Modeles locaux</strong></td><td><span style="color:var(--green)">&#10003; Ollama, LM Studio</span></td><td><span style="color:var(--red)">&#10007; Non</span></td></tr>
+        <tr><td><strong>MCP</strong></td><td>Oui</td><td>Oui</td></tr>
+        <tr><td><strong>LSP integre</strong></td><td><span style="color:var(--green)">&#10003; Auto-detection</span></td><td><span style="color:var(--red)">&#10007; Non</span></td></tr>
+        <tr><td><strong>Multi-session</strong></td><td><span style="color:var(--green)">&#10003; Oui</span></td><td>Session unique</td></tr>
+        <tr><td><strong>Desktop app</strong></td><td><span style="color:var(--green)">&#10003; macOS, Win, Linux</span></td><td><span style="color:var(--red)">&#10007; CLI only</span></td></tr>
+        <tr><td><strong>Risque compte</strong></td><td><span style="color:var(--green)">Aucun (officiel)</span></td><td><span style="color:var(--red)">Possible (API non-officielle)</span></td></tr>
+        <tr><td><strong>GitHub stars</strong></td><td>120K+</td><td>71K+</td></tr>
+        <tr><td><strong>Auto-compact</strong></td><td>Oui (95% seuil)</td><td>Oui</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-success">
+    <div class="box-title">Recommandation pour l'entreprise</div>
+    <p>Si votre entreprise autorise uniquement GitHub Copilot, <strong>OpenCode est le choix le plus sur</strong> : support officiel, pas de proxy hack, pas de risque de suspension de compte. Claude Code via proxy reste une option mais avec des risques.</p>
+  </div>
+
+  <!-- ===== SECURITE ===== -->
+  <h2 id="g-securite">Securite et risques</h2>
+
+  <h3>Points positifs</h3>
+  <ul>
+    <li><strong>Open source</strong> : code auditable, pas de boite noire</li>
+    <li><strong>Partenariat officiel GitHub</strong> : usage autorise, pas d'API non-officielle</li>
+    <li><strong>Privacy-first</strong> : OpenCode ne stocke pas votre code</li>
+    <li><strong>Tokens locaux</strong> : stockes dans <code>~/.config/github-copilot/</code></li>
+  </ul>
+
+  <h3>Points de vigilance</h3>
+  <ul>
+    <li><strong>Consommation de quota</strong> : peut epuiser le quota Copilot rapidement</li>
+    <li><strong>Donnees transitent</strong> par les serveurs du provider (GitHub/OpenAI/Anthropic/Google)</li>
+    <li><strong>Ne commitez jamais les tokens</strong> : ajoutez <code>.opencode.json</code> a <code>.gitignore</code> s'il contient des cles</li>
+    <li><strong>Verifiez la conformite</strong> avec votre equipe securite</li>
+  </ul>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: REFERENCE                                               -->
+<!-- ============================================================ -->
+<div id="reference" class="page">
+
+  <h1>Reference</h1>
+  <p class="subtitle">Toutes les variables, commandes et options en un coup d'oeil.</p>
+
+  <h2 id="r-env">Variables d'environnement</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Variable</th><th>Provider</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>GITHUB_TOKEN</code></td><td>GitHub Copilot</td><td>Token GitHub (auto-detecte si VS Code installe)</td></tr>
+        <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Anthropic</td><td>Cle API Claude directe</td></tr>
+        <tr><td><code>OPENAI_API_KEY</code></td><td>OpenAI</td><td>Cle API OpenAI directe</td></tr>
+        <tr><td><code>GEMINI_API_KEY</code></td><td>Google Gemini</td><td>Cle API Gemini</td></tr>
+        <tr><td><code>GROQ_API_KEY</code></td><td>Groq</td><td>Cle API Groq</td></tr>
+        <tr><td><code>AWS_ACCESS_KEY_ID</code></td><td>AWS Bedrock</td><td>Identifiant AWS</td></tr>
+        <tr><td><code>AWS_SECRET_ACCESS_KEY</code></td><td>AWS Bedrock</td><td>Cle secrete AWS</td></tr>
+        <tr><td><code>AZURE_OPENAI_ENDPOINT</code></td><td>Azure OpenAI</td><td>Endpoint Azure</td></tr>
+        <tr><td><code>AZURE_OPENAI_API_KEY</code></td><td>Azure OpenAI</td><td>Cle API Azure</td></tr>
+        <tr><td><code>HTTP_PROXY</code></td><td>Systeme</td><td>Proxy HTTP d'entreprise</td></tr>
+        <tr><td><code>HTTPS_PROXY</code></td><td>Systeme</td><td>Proxy HTTPS d'entreprise</td></tr>
+        <tr><td><code>NODE_EXTRA_CA_CERTS</code></td><td>Systeme</td><td>Certificat SSL entreprise</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="r-config">Config .opencode.json complete</h2>
+  <pre><code>{
+  "provider": {
+    "copilot": {
+      "disabled": false
+    },
+    "anthropic": {
+      "options": { "baseURL": "https://api.anthropic.com/v1" }
+    },
+    "openai": {
+      "options": { "baseURL": "https://api.openai.com/v1" }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": { "baseURL": "http://localhost:11434/v1" },
+      "models": {
+        "llama3": { "name": "Llama 3" }
+      }
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "copilot.gpt-4.1",
+      "maxTokens": 5000
+    },
+    "task": {
+      "model": "copilot.gpt-4o",
+      "maxTokens": 5000
+    },
+    "title": {
+      "model": "copilot.gpt-4o-mini",
+      "maxTokens": 80
+    }
+  },
+  "mcpServers": {
+    "example": {
+      "type": "stdio",
+      "command": "path/to/mcp-server",
+      "env": [],
+      "args": []
+    }
+  },
+  "shell": {
+    "path": "/bin/bash",
+    "args": ["-l"]
+  },
+  "autoCompact": true,
+  "debug": false
+}</code></pre>
+
+  <div class="box box-info">
+    <div class="box-title">Syntaxe pour les variables d'env dans la config</div>
+    <p>Utilisez <code>"{env:NOM_VARIABLE}"</code> pour referencer des variables d'environnement :</p>
+    <pre><code>"apiKey": "{env:GITHUB_TOKEN}"</code></pre>
+  </div>
+
+  <h2 id="r-commands">Commandes /slash</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Commande</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>/connect</code></td><td>Connecter un provider (Copilot, OpenAI, etc.)</td></tr>
+        <tr><td><code>/models</code></td><td>Changer de modele en cours de session</td></tr>
+        <tr><td><code>/compact</code></td><td>Compresser le contexte pour economiser les tokens</td></tr>
+        <tr><td><code>/clear</code></td><td>Effacer la session courante</td></tr>
+        <tr><td><code>/help</code></td><td>Afficher l'aide</td></tr>
+        <tr><td><code>/quit</code></td><td>Quitter OpenCode</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="r-shortcuts">Raccourcis clavier</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Raccourci</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl+O</code></td><td>Selection de modele</td></tr>
+        <tr><td><code>Ctrl+K</code></td><td>Palette de commandes</td></tr>
+        <tr><td><code>Ctrl+N</code></td><td>Nouvelle session</td></tr>
+        <tr><td><code>Ctrl+A</code></td><td>Changer de session</td></tr>
+        <tr><td><code>Ctrl+X</code></td><td>Annuler la generation en cours</td></tr>
+        <tr><td><code>Ctrl+C</code></td><td>Quitter</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="r-cli">Options CLI</h2>
+  <pre><code># Lancer normalement
+opencode
+
+# Mode non-interactif
+opencode -p "ta question ici"
+
+# Sortie JSON (pour scripting)
+opencode -p "explique ce code" -f json
+
+# Mode silencieux
+opencode -p "corrige le bug" -q
+
+# Verifier la version
+opencode --version
+
+# Lister les providers authentifies
+opencode auth list</code></pre>
+
+  <h2 id="r-providers">Tous les providers supportes</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Provider</th><th>Type</th><th>Config / Cle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GitHub Copilot</strong></td><td>Cloud</td><td><code>/connect</code> ou <code>GITHUB_TOKEN</code></td></tr>
+        <tr><td><strong>OpenAI</strong></td><td>Cloud</td><td><code>OPENAI_API_KEY</code></td></tr>
+        <tr><td><strong>Anthropic</strong></td><td>Cloud</td><td><code>ANTHROPIC_API_KEY</code></td></tr>
+        <tr><td><strong>Google Gemini</strong></td><td>Cloud</td><td><code>GEMINI_API_KEY</code></td></tr>
+        <tr><td><strong>Groq</strong></td><td>Cloud</td><td><code>GROQ_API_KEY</code></td></tr>
+        <tr><td><strong>AWS Bedrock</strong></td><td>Cloud</td><td>AWS credentials</td></tr>
+        <tr><td><strong>Azure OpenAI</strong></td><td>Cloud</td><td>Azure endpoint + key</td></tr>
+        <tr><td><strong>Google Vertex AI</strong></td><td>Cloud</td><td>GCP credentials</td></tr>
+        <tr><td><strong>OpenRouter</strong></td><td>Aggregateur</td><td><code>OPENROUTER_API_KEY</code></td></tr>
+        <tr><td><strong>DeepSeek</strong></td><td>Cloud</td><td><code>DEEPSEEK_API_KEY</code></td></tr>
+        <tr><td><strong>Ollama</strong></td><td>Local</td><td><code>http://localhost:11434/v1</code></td></tr>
+        <tr><td><strong>LM Studio</strong></td><td>Local</td><td><code>http://127.0.0.1:1234/v1</code></td></tr>
+        <tr><td><strong>OpenCode Zen</strong></td><td>Curated</td><td>Via l'app</td></tr>
+        <tr><td><strong>+ 60 autres</strong></td><td>Varies</td><td>Via <code>@ai-sdk/openai-compatible</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="r-models">Modeles Copilot detailles</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID dans OpenCode</th><th>Fournisseur</th><th>Licence</th><th>Usage recommande</th></tr></thead>
+      <tbody>
+        <tr><td><code>copilot.gpt-4.1</code></td><td>OpenAI</td><td>Pro</td><td>Agent coder principal</td></tr>
+        <tr><td><code>copilot.gpt-4o</code></td><td>OpenAI</td><td>Pro</td><td>Agent task, multimodal</td></tr>
+        <tr><td><code>copilot.gpt-4o-mini</code></td><td>OpenAI</td><td>Pro</td><td>Agent title, taches legeres</td></tr>
+        <tr><td><code>copilot.claude-sonnet-4</code></td><td>Anthropic</td><td>Pro+</td><td>Agent coder (qualite max)</td></tr>
+        <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td>Pro+</td><td>Raisonnement + code</td></tr>
+        <tr><td><code>copilot.o3-mini</code></td><td>OpenAI</td><td>Pro+</td><td>Problemes complexes</td></tr>
+        <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td>Pro+</td><td>Raisonnement rapide</td></tr>
+        <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td>Pro+</td><td>Long contexte</td></tr>
+        <tr><td><code>copilot.gemini-2.0-flash</code></td><td>Google</td><td>Pro</td><td>Rapide et economique</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Combinaisons recommandees</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">&#128640;</div>
+      <div class="card-title">Quotidien (Copilot Pro)</div>
+      <div class="card-desc">
+        <code>coder: copilot.gpt-4.1</code><br>
+        <code>task: copilot.gpt-4o</code><br>
+        <code>title: copilot.gpt-4o-mini</code>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9733;</div>
+      <div class="card-title">Qualite max (Pro+)</div>
+      <div class="card-desc">
+        <code>coder: copilot.claude-sonnet-4</code><br>
+        <code>task: copilot.gpt-4o</code><br>
+        <code>title: copilot.gpt-4o-mini</code>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128176;</div>
+      <div class="card-title">Economique</div>
+      <div class="card-desc">
+        <code>coder: copilot.gpt-4o-mini</code><br>
+        <code>task: copilot.gpt-4o-mini</code><br>
+        <code>title: copilot.gpt-4o-mini</code>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script src="js/app.js"></script>
+</body>
+</html>

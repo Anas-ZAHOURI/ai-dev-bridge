@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code vs OpenCode - Comparatif pour entreprise</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    .vs-banner {
+      display: flex; align-items: center; justify-content: center; gap: 32px;
+      margin: 32px 0 40px; padding: 32px;
+      background: linear-gradient(135deg, #f7f7f7 0%, #fff0f2 100%);
+      border: 1px solid var(--border); border-radius: var(--radius);
+    }
+    .vs-banner .vs-tool {
+      text-align: center; flex: 1;
+    }
+    .vs-banner .vs-tool-name {
+      font-size: 28px; font-weight: 800; color: var(--text);
+    }
+    .vs-banner .vs-tool-sub {
+      font-size: 13px; color: var(--text-muted); margin-top: 4px;
+    }
+    .vs-banner .vs-sep {
+      font-size: 36px; font-weight: 800; color: var(--accent);
+      background: var(--accent-light); width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .verdict {
+      background: var(--accent-light); border: 2px solid var(--accent);
+      border-radius: var(--radius); padding: 20px 24px; margin: 16px 0;
+      font-size: 15px;
+    }
+    .verdict-title {
+      font-weight: 700; color: var(--accent); font-size: 16px; margin-bottom: 6px;
+    }
+    .score-bar {
+      display: flex; align-items: center; gap: 12px; margin: 6px 0;
+    }
+    .score-bar-label {
+      width: 120px; font-size: 13px; font-weight: 600; text-align: right;
+      flex-shrink: 0;
+    }
+    .score-bar-track {
+      flex: 1; height: 20px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; position: relative;
+    }
+    .score-bar-fill {
+      height: 100%; border-radius: 10px; transition: width .5s ease;
+    }
+    .score-bar-fill.red { background: var(--accent); }
+    .score-bar-fill.green { background: var(--green); }
+    .score-bar-fill.blue { background: #1a6dcc; }
+    .score-bar-value {
+      width: 40px; font-size: 13px; font-weight: 700; text-align: center;
+    }
+    .winner { color: var(--green); font-weight: 700; }
+    .loser { color: var(--text-muted); }
+    .tie { color: var(--orange); font-weight: 600; }
+    .check { color: var(--green); }
+    .cross { color: var(--accent); }
+    .nav-links {
+      display: flex; gap: 12px; margin: 24px 0;
+    }
+    .nav-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border: 2px solid var(--accent);
+      border-radius: var(--radius); font-weight: 600; font-size: 14px;
+      color: var(--accent); transition: all .2s;
+    }
+    .nav-link:hover {
+      background: var(--accent); color: #fff; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <span class="icon">&#9878;</span>
+    <span>Comparatif <span style="color:var(--accent);font-weight:400;font-size:14px">Agents IA Terminal</span></span>
+  </div>
+  <nav class="header-nav">
+    <a href="#" data-page="comparatif" class="active" onclick="showPage('comparatif');return false;">Comparatif</a>
+    <a href="#" data-page="scenarios" onclick="showPage('scenarios');return false;">Scenarios</a>
+    <a href="#" data-page="decision" onclick="showPage('decision');return false;">Arbre de Decision</a>
+  </nav>
+  <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+</header>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-page-section" data-page="comparatif">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Comparatif</div>
+      <a href="#c-overview">Vue d'ensemble</a>
+      <a href="#c-install">Installation</a>
+      <a href="#c-copilot">Support Copilot</a>
+      <a href="#c-features">Fonctionnalites</a>
+      <a href="#c-models">Modeles &amp; Providers</a>
+      <a href="#c-tokens">Consommation tokens</a>
+      <a href="#c-securite">Securite entreprise</a>
+      <a href="#c-ux">Experience utilisateur</a>
+      <a href="#c-scores">Scores</a>
+    </div>
+  </div>
+  <div class="sidebar-page-section" data-page="scenarios" style="display:none">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Scenarios</div>
+      <a href="#s-enterprise">Entreprise stricte</a>
+      <a href="#s-startup">Startup / equipe libre</a>
+      <a href="#s-airgap">Environnement air-gap</a>
+      <a href="#s-multimodel">Multi-modeles</a>
+      <a href="#s-quality">Qualite max du code</a>
+      <a href="#s-budget">Budget serre</a>
+    </div>
+  </div>
+  <div class="sidebar-page-section" data-page="decision" style="display:none">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Decision</div>
+      <a href="#d-tree">Arbre de decision</a>
+      <a href="#d-migration">Migration</a>
+      <a href="#d-links">Liens vers les docs</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+<!-- ============================================================ -->
+<!-- PAGE: COMPARATIF                                              -->
+<!-- ============================================================ -->
+<div id="comparatif" class="page active">
+
+  <h1>Claude Code vs OpenCode</h1>
+  <p class="subtitle">Quel agent IA terminal choisir quand votre entreprise autorise uniquement GitHub Copilot ?</p>
+
+  <div class="vs-banner">
+    <div class="vs-tool">
+      <div class="vs-tool-name">Claude Code</div>
+      <div class="vs-tool-sub">par Anthropic &middot; Proprietaire &middot; 71K stars</div>
+    </div>
+    <div class="vs-sep">VS</div>
+    <div class="vs-tool">
+      <div class="vs-tool-name">OpenCode</div>
+      <div class="vs-tool-sub">par Anomaly &middot; MIT Open Source &middot; 120K stars</div>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <h2 id="c-overview">Vue d'ensemble</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Critere</th><th>Claude Code</th><th>OpenCode</th><th>Gagnant</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Support Copilot</strong></td>
+          <td>Via proxy non-officiel</td>
+          <td>Natif (partenariat officiel)</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Open source</strong></td>
+          <td><span class="cross">&#10007;</span> Proprietaire</td>
+          <td><span class="check">&#10003;</span> MIT</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Providers</strong></td>
+          <td>Anthropic uniquement</td>
+          <td>75+ providers</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Modeles locaux</strong></td>
+          <td><span class="cross">&#10007;</span> Non</td>
+          <td><span class="check">&#10003;</span> Ollama, LM Studio</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Qualite code Claude</strong></td>
+          <td>Optimise pour Claude (natif)</td>
+          <td>Bon mais pas specialise</td>
+          <td class="winner">Claude Code</td>
+        </tr>
+        <tr>
+          <td><strong>Risque compte</strong></td>
+          <td><span class="cross">&#10007;</span> Possible (API non-officielle)</td>
+          <td><span class="check">&#10003;</span> Aucun (officiel)</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>MCP</strong></td>
+          <td><span class="check">&#10003;</span> Oui</td>
+          <td><span class="check">&#10003;</span> Oui</td>
+          <td class="tie">Egalite</td>
+        </tr>
+        <tr>
+          <td><strong>LSP integre</strong></td>
+          <td><span class="cross">&#10007;</span> Non</td>
+          <td><span class="check">&#10003;</span> Auto-detection</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Multi-session</strong></td>
+          <td>Session unique</td>
+          <td>Sessions multiples</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Desktop app</strong></td>
+          <td><span class="cross">&#10007;</span> CLI only</td>
+          <td><span class="check">&#10003;</span> macOS, Win, Linux</td>
+          <td class="winner">OpenCode</td>
+        </tr>
+        <tr>
+          <td><strong>Ecosysteme outils</strong></td>
+          <td>Hooks, CLAUDE.md, riche</td>
+          <td>Custom commands, MCP</td>
+          <td class="winner">Claude Code</td>
+        </tr>
+        <tr>
+          <td><strong>Communaute</strong></td>
+          <td>71K stars, Anthropic-backed</td>
+          <td>120K stars, communaute open source</td>
+          <td class="tie">Egalite</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Installation -->
+  <h2 id="c-install">Installation</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Methode</th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td><strong>npm</strong></td><td><code>npm i -g @anthropic-ai/claude-code</code></td><td><code>npm i -g opencode-ai@latest</code></td></tr>
+        <tr><td><strong>bun</strong></td><td>Non supporte</td><td><code>bun i -g opencode-ai@latest</code></td></tr>
+        <tr><td><strong>Homebrew</strong></td><td>Non supporte</td><td><code>brew install anomalyco/tap/opencode</code></td></tr>
+        <tr><td><strong>Scoop</strong></td><td>Non supporte</td><td><code>scoop install opencode</code></td></tr>
+        <tr><td><strong>curl</strong></td><td>Non supporte</td><td><code>curl -fsSL https://opencode.ai/install | bash</code></td></tr>
+        <tr><td><strong>Go</strong></td><td>Non supporte</td><td><code>go install github.com/opencode-ai/opencode@latest</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Verdict : Installation</div>
+    <strong>OpenCode</strong> offre 6 methodes d'installation contre 1 seule pour Claude Code. Plus facile a deployer en entreprise quelle que soit la stack.
+  </div>
+
+  <!-- Support Copilot -->
+  <h2 id="c-copilot">Support GitHub Copilot</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aspect</th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Type de support</strong></td>
+          <td><span class="cross">&#10007;</span> Non supporte nativement<br>Necessite un proxy tiers</td>
+          <td><span class="check">&#10003;</span> Support natif officiel<br>Partenariat GitHub (janv. 2026)</td>
+        </tr>
+        <tr>
+          <td><strong>Setup</strong></td>
+          <td>Installer un proxy (copilot-api, LiteLLM...)<br>+ configurer variables d'env<br>+ 2 terminaux</td>
+          <td>Taper <code>/connect</code><br>Selectionner "GitHub Copilot"<br>Entrer le device code</td>
+        </tr>
+        <tr>
+          <td><strong>Auth auto</strong></td>
+          <td>Non (device flow via proxy)</td>
+          <td>Oui (detecte tokens VS Code/gh CLI)</td>
+        </tr>
+        <tr>
+          <td><strong>Stabilite</strong></td>
+          <td>API non-officielle, peut casser</td>
+          <td>API officielle, stable</td>
+        </tr>
+        <tr>
+          <td><strong>Risque</strong></td>
+          <td>Suspension possible du compte</td>
+          <td>Aucun risque</td>
+        </tr>
+        <tr>
+          <td><strong>Maintenance</strong></td>
+          <td>Proxy a maintenir/mettre a jour</td>
+          <td>Rien (integre)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Verdict : Support Copilot</div>
+    <strong>OpenCode gagne clairement.</strong> Support natif, officiel, sans proxy, sans risque. Claude Code necessite un proxy non-officiel avec des risques de suspension de compte.
+  </div>
+
+  <!-- Features -->
+  <h2 id="c-features">Fonctionnalites</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fonctionnalite</th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td>Lecture/edition de fichiers</td><td><span class="check">&#10003;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>Execution de commandes shell</td><td><span class="check">&#10003;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>Recherche dans le code (grep/glob)</td><td><span class="check">&#10003;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>MCP (Model Context Protocol)</td><td><span class="check">&#10003;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>Auto-compact du contexte</td><td><span class="check">&#10003;</span></td><td><span class="check">&#10003;</span> (seuil 95%)</td></tr>
+        <tr><td>Hooks (pre/post actions)</td><td><span class="check">&#10003;</span> Riche</td><td>Basique</td></tr>
+        <tr><td>CLAUDE.md / instructions projet</td><td><span class="check">&#10003;</span> CLAUDE.md</td><td>Custom commands (Markdown)</td></tr>
+        <tr><td>LSP (Language Server Protocol)</td><td><span class="cross">&#10007;</span></td><td><span class="check">&#10003;</span> Auto-detection</td></tr>
+        <tr><td>Multi-session simultanee</td><td><span class="cross">&#10007;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>Partage de session</td><td><span class="cross">&#10007;</span></td><td><span class="check">&#10003;</span> Liens partageables</td></tr>
+        <tr><td>Mode non-interactif (CI/CD)</td><td><code>claude -p "..."</code></td><td><code>opencode -p "..." -f json</code></td></tr>
+        <tr><td>Desktop app</td><td><span class="cross">&#10007;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>Extensions IDE</td><td><span class="cross">&#10007;</span></td><td><span class="check">&#10003;</span></td></tr>
+        <tr><td>TUI (interface terminal riche)</td><td>Basique</td><td><span class="check">&#10003;</span> Bubble Tea + vim keys</td></tr>
+        <tr><td>Recherche web</td><td><span class="check">&#10003;</span></td><td>Via MCP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Verdict : Fonctionnalites</div>
+    <strong>OpenCode</strong> a plus de fonctionnalites (LSP, multi-session, desktop, partage). <strong>Claude Code</strong> a un ecosysteme d'outils plus mature (hooks, CLAUDE.md). Les fonctionnalites de base (edition, shell, MCP) sont equivalentes.
+  </div>
+
+  <!-- Models -->
+  <h2 id="c-models">Modeles &amp; Providers</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Providers natifs</strong></td><td>1 (Anthropic)</td><td>75+</td></tr>
+        <tr><td><strong>Via Copilot</strong></td><td>Proxy requis</td><td>Natif</td></tr>
+        <tr><td><strong>Modeles locaux</strong></td><td>Non</td><td>Ollama, LM Studio</td></tr>
+        <tr><td><strong>Changement de modele</strong></td><td>Variable d'env</td><td><code>/models</code> ou <code>Ctrl+O</code></td></tr>
+        <tr><td><strong>Agents differencies</strong></td><td>1 modele pour tout</td><td>3 agents (coder/task/title)</td></tr>
+        <tr><td><strong>Mix de providers</strong></td><td>Non</td><td>Oui (coder sur Claude, task sur GPT...)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Verdict : Modeles</div>
+    <strong>OpenCode</strong> est imbattable : 75+ providers, changement en un raccourci, mix de modeles par agent. Claude Code est verrouille sur Anthropic (sauf via proxy).
+  </div>
+
+  <!-- Tokens -->
+  <h2 id="c-tokens">Consommation de tokens Copilot</h2>
+
+  <div class="box box-danger">
+    <div class="box-title">&#9888; Les deux outils consomment beaucoup de tokens</div>
+    <p>Tout agent IA terminal consomme <strong>10 a 100x plus de tokens</strong> qu'un chat Copilot classique. Cela s'applique a Claude Code ET OpenCode.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aspect</th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Consommation relative</strong></td>
+          <td>Tres elevee</td>
+          <td>Elevee (legerement mieux)</td>
+        </tr>
+        <tr>
+          <td><strong>Flags d'optimisation</strong></td>
+          <td><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code><br><code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code></td>
+          <td><code>autoCompact: true</code> (par defaut)<br>Agents differencies (modeles legers pour task/title)</td>
+        </tr>
+        <tr>
+          <td><strong>Rate limiting</strong></td>
+          <td>Via le proxy (<code>--rate-limit</code>)</td>
+          <td>Non integre (mais conso mieux repartie)</td>
+        </tr>
+        <tr>
+          <td><strong>Surveillance quota</strong></td>
+          <td><code>copilot-api check-usage</code></td>
+          <td>Pas d'outil integre</td>
+        </tr>
+        <tr>
+          <td><strong>Strategie d'economie</strong></td>
+          <td>Variables d'env + rate limit proxy</td>
+          <td>3 agents avec modeles differents (coder puissant, task/title legers)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Estimation comparative</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Action</th><th>Claude Code (via proxy)</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td>Question simple</td><td>5 000 - 15 000 tokens</td><td>5 000 - 12 000 tokens</td></tr>
+        <tr><td>Edition de fichier</td><td>50 000 - 150 000 tokens</td><td>40 000 - 120 000 tokens</td></tr>
+        <tr><td>Tache complexe</td><td>200 000 - 500 000 tokens</td><td>150 000 - 400 000 tokens</td></tr>
+        <tr><td>Session 30 min</td><td>500 000 - 2 000 000 tokens</td><td>400 000 - 1 500 000 tokens</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Verdict : Consommation tokens</div>
+    <strong>OpenCode consomme legerement moins</strong> grace aux agents differencies (modeles legers pour les sous-taches). Mais les deux outils restent tres gourmands. Le systeme de 3 agents d'OpenCode (coder puissant + task/title legers) est une meilleure strategie d'economie que les flags de Claude Code.
+  </div>
+
+  <!-- Securite -->
+  <h2 id="c-securite">Securite entreprise</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Critere</th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>API officielle ?</strong></td>
+          <td><span class="cross">&#10007;</span> Non (reverse-engineered)</td>
+          <td><span class="check">&#10003;</span> Oui (partenariat GitHub)</td>
+        </tr>
+        <tr>
+          <td><strong>Risque suspension compte</strong></td>
+          <td><span class="cross">&#10007;</span> Possible</td>
+          <td><span class="check">&#10003;</span> Aucun</td>
+        </tr>
+        <tr>
+          <td><strong>Conforme ToS GitHub</strong></td>
+          <td><span class="cross">&#10007;</span> Zone grise</td>
+          <td><span class="check">&#10003;</span> Oui</td>
+        </tr>
+        <tr>
+          <td><strong>Code auditable</strong></td>
+          <td><span class="cross">&#10007;</span> Proprietaire</td>
+          <td><span class="check">&#10003;</span> MIT open source</td>
+        </tr>
+        <tr>
+          <td><strong>Proxy local requis</strong></td>
+          <td><span class="cross">&#10007;</span> Oui (surface d'attaque +1)</td>
+          <td><span class="check">&#10003;</span> Non</td>
+        </tr>
+        <tr>
+          <td><strong>Stockage des donnees</strong></td>
+          <td>Selon politique Anthropic</td>
+          <td>Privacy-first, pas de stockage</td>
+        </tr>
+        <tr>
+          <td><strong>Validable par la securite</strong></td>
+          <td>Difficile (proxy non-officiel)</td>
+          <td>Plus facile (officiel + open source)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Verdict : Securite entreprise</div>
+    <strong>OpenCode est nettement plus sur.</strong> Support officiel GitHub, open source auditable, pas de proxy intermediaire, pas de risque de suspension. Pour une validation par l'equipe securite, OpenCode est beaucoup plus facile a justifier.
+  </div>
+
+  <!-- UX -->
+  <h2 id="c-ux">Experience utilisateur</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aspect</th><th>Claude Code</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Interface</strong></td><td>Terminal simple, texte</td><td>TUI Bubble Tea, panneaux, vim keys</td></tr>
+        <tr><td><strong>Setup initial</strong></td><td>npm install + proxy + config env</td><td>npm install + /connect</td></tr>
+        <tr><td><strong>Temps de setup</strong></td><td>5-15 min (avec proxy)</td><td>2-3 min</td></tr>
+        <tr><td><strong>Changer de modele</strong></td><td>Modifier variables d'env, relancer</td><td><code>Ctrl+O</code> ou <code>/models</code> (en live)</td></tr>
+        <tr><td><strong>Raccourcis clavier</strong></td><td>Basiques</td><td>Riches (Ctrl+O, K, N, A, X)</td></tr>
+        <tr><td><strong>Courbe d'apprentissage</strong></td><td>Facile (si deja Claude)</td><td>Facile (TUI intuitive)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Scores -->
+  <h2 id="c-scores">Scores globaux</h2>
+
+  <p>Notation sur 10 pour un usage <strong>en entreprise avec GitHub Copilot uniquement</strong> :</p>
+
+  <div style="margin:24px 0">
+    <div class="score-bar"><div class="score-bar-label">Copilot</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:30%"></div></div><div class="score-bar-value">3</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:100%"></div></div><div class="score-bar-value">10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Securite</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:40%"></div></div><div class="score-bar-value">4</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:90%"></div></div><div class="score-bar-value">9</div></div>
+    <div class="score-bar"><div class="score-bar-label">Installation</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:50%"></div></div><div class="score-bar-value">5</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:90%"></div></div><div class="score-bar-value">9</div></div>
+    <div class="score-bar"><div class="score-bar-label">Fonctionnalites</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:70%"></div></div><div class="score-bar-value">7</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:80%"></div></div><div class="score-bar-value">8</div></div>
+    <div class="score-bar"><div class="score-bar-label">Multi-modeles</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:20%"></div></div><div class="score-bar-value">2</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:100%"></div></div><div class="score-bar-value">10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Tokens</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:50%"></div></div><div class="score-bar-value">5</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:60%"></div></div><div class="score-bar-value">6</div></div>
+    <div class="score-bar"><div class="score-bar-label">UX</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:60%"></div></div><div class="score-bar-value">6</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:80%"></div></div><div class="score-bar-value">8</div></div>
+    <div class="score-bar"><div class="score-bar-label">Qualite Claude</div><div class="score-bar-track"><div class="score-bar-fill red" style="width:90%"></div></div><div class="score-bar-value">9</div><div class="score-bar-track"><div class="score-bar-fill green" style="width:70%"></div></div><div class="score-bar-value">7</div></div>
+  </div>
+
+  <div style="display:flex;gap:24px;margin:12px 0;font-size:13px;color:var(--text-muted)">
+    <span><span style="display:inline-block;width:12px;height:12px;background:var(--accent);border-radius:2px;margin-right:4px;vertical-align:middle"></span> Claude Code</span>
+    <span><span style="display:inline-block;width:12px;height:12px;background:var(--green);border-radius:2px;margin-right:4px;vertical-align:middle"></span> OpenCode</span>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Score total (contexte entreprise + Copilot)</div>
+    <p><strong>Claude Code : 41/80</strong> &mdash; Excellent outil, mais penalise par l'absence de support Copilot natif et les risques de securite du proxy.</p>
+    <p><strong>OpenCode : 67/80</strong> &mdash; Gagnant pour le cas d'usage entreprise avec Copilot. Support natif, open source, multi-providers.</p>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: SCENARIOS                                               -->
+<!-- ============================================================ -->
+<div id="scenarios" class="page">
+
+  <h1>Scenarios d'utilisation</h1>
+  <p class="subtitle">Quel outil choisir selon votre situation ?</p>
+
+  <h2 id="s-enterprise">Entreprise stricte (Copilot uniquement autorise)</h2>
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--green)">
+      <div class="card-icon">&#10003;</div>
+      <div class="card-title" style="color:var(--green)">OpenCode recommande</div>
+      <div class="card-desc">
+        <ul>
+          <li>Support Copilot officiel = facile a valider par la securite</li>
+          <li>Pas de proxy = pas de composant supplementaire a maintenir</li>
+          <li>Open source = auditable par l'equipe securite</li>
+          <li>Aucun risque de suspension de compte</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--accent)">
+      <div class="card-icon">&#9888;</div>
+      <div class="card-title" style="color:var(--accent)">Claude Code : possible mais risque</div>
+      <div class="card-desc">
+        <ul>
+          <li>Necessite un proxy non-officiel (copilot-api, LiteLLM...)</li>
+          <li>API reverse-engineered = peut casser, risque de suspension</li>
+          <li>Difficile a justifier aupres de l'equipe securite</li>
+          <li>Maintenance du proxy en plus</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="s-startup">Startup / equipe libre (choix du provider)</h2>
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--green)">
+      <div class="card-icon">&#9733;</div>
+      <div class="card-title" style="color:var(--green)">Claude Code si cle API Anthropic</div>
+      <div class="card-desc">Si vous avez une cle API Anthropic directe, Claude Code offre la meilleure experience avec les modeles Claude. Prompts optimises, hooks riches, CLAUDE.md.</div>
+    </div>
+    <div class="card" style="border-color:var(--green)">
+      <div class="card-icon">&#128640;</div>
+      <div class="card-title" style="color:var(--green)">OpenCode si multi-providers</div>
+      <div class="card-desc">Si vous voulez mixer les providers (Claude pour le code, GPT pour les taches, Ollama en local), OpenCode est imbattable avec ses 75+ providers et 3 agents.</div>
+    </div>
+  </div>
+
+  <h2 id="s-airgap">Environnement air-gapped / deconnecte</h2>
+  <div class="verdict">
+    <div class="verdict-title">OpenCode uniquement</div>
+    <p>Seul OpenCode supporte les modeles locaux (Ollama, LM Studio). Claude Code necessite toujours une connexion a un serveur distant.</p>
+  </div>
+
+  <h2 id="s-multimodel">Besoin de plusieurs modeles</h2>
+  <div class="verdict">
+    <div class="verdict-title">OpenCode</div>
+    <p>Changement de modele en live avec <code>Ctrl+O</code>, 3 agents configurables independamment, mix de providers. Claude Code est verrouille sur un seul modele a la fois.</p>
+  </div>
+
+  <h2 id="s-quality">Qualite maximale du code genere</h2>
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--green)">
+      <div class="card-icon">&#129351;</div>
+      <div class="card-title" style="color:var(--green)">Claude Code avec API Anthropic</div>
+      <div class="card-desc">Les prompts de Claude Code sont optimises pour les modeles Claude. C'est la combinaison la plus puissante pour la generation de code.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#129352;</div>
+      <div class="card-title">OpenCode avec Claude via Copilot Pro+</div>
+      <div class="card-desc">Vous pouvez utiliser <code>copilot.claude-sonnet-4</code> dans OpenCode. Tres bon, mais pas aussi optimise que Claude Code natif.</div>
+    </div>
+  </div>
+
+  <h2 id="s-budget">Budget serre / quota limite</h2>
+  <div class="verdict">
+    <div class="verdict-title">OpenCode (leger avantage)</div>
+    <p>Le systeme de 3 agents permet d'utiliser des modeles legers pour les sous-taches. Claude Code utilise le meme modele (et donc le meme cout) pour tout. Les deux consomment beaucoup, mais OpenCode permet une meilleure repartition.</p>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: ARBRE DE DECISION                                       -->
+<!-- ============================================================ -->
+<div id="decision" class="page">
+
+  <h1>Arbre de Decision</h1>
+  <p class="subtitle">Repondez aux questions pour trouver le bon outil.</p>
+
+  <h2 id="d-tree">Quel outil choisir ?</h2>
+
+  <div class="diagram"><span class="highlight">Votre entreprise autorise-t-elle uniquement GitHub Copilot ?</span>
+  │
+  ├─ <span class="green">OUI</span>
+  │   │
+  │   ├─ Voulez-vous un outil officiel et sans risque ?
+  │   │   │
+  │   │   ├─ <span class="green">OUI</span> ──── <span class="green">&#10148; OpenCode</span> (support Copilot natif)
+  │   │   │
+  │   │   └─ <span class="orange">NON, Claude Code est meilleur pour moi</span>
+  │   │       │
+  │   │       └─ Etes-vous pret a maintenir un proxy ?
+  │   │           │
+  │   │           ├─ <span class="green">OUI</span> ──── <span class="orange">&#10148; Claude Code + proxy</span>
+  │   │           │            (copilot-api ou LiteLLM)
+  │   │           │
+  │   │           └─ <span class="green">NON</span> ──── <span class="green">&#10148; OpenCode</span>
+  │   │
+  │   └─ Avez-vous besoin de modeles locaux (air-gap) ?
+  │       │
+  │       └─ <span class="green">OUI</span> ──── <span class="green">&#10148; OpenCode + Ollama</span>
+  │
+  └─ <span class="orange">NON</span> (acces direct aux API)
+      │
+      ├─ Budget Anthropic disponible ?
+      │   │
+      │   ├─ <span class="green">OUI</span> ──── <span class="purple">&#10148; Claude Code</span> (experience optimale)
+      │   │
+      │   └─ <span class="orange">NON</span> ──── <span class="green">&#10148; OpenCode</span> (multi-providers gratuits)
+      │
+      └─ Besoin de mixer plusieurs providers ?
+          │
+          ├─ <span class="green">OUI</span> ──── <span class="green">&#10148; OpenCode</span> (75+ providers)
+          │
+          └─ <span class="orange">NON</span> ──── <span class="purple">&#10148; Claude Code OU OpenCode</span>
+                     (les deux conviennent)</div>
+
+  <h2 id="d-migration">Migration entre les deux outils</h2>
+
+  <h3>De Claude Code vers OpenCode</h3>
+  <ul>
+    <li>Les fichiers <code>CLAUDE.md</code> peuvent etre convertis en custom commands OpenCode (fichiers Markdown)</li>
+    <li>Les hooks Claude Code n'ont pas d'equivalent direct, mais MCP couvre la plupart des cas</li>
+    <li>La syntaxe des commandes est similaire mais pas identique</li>
+    <li>OpenCode detecte automatiquement les tokens Copilot existants</li>
+  </ul>
+
+  <h3>D'OpenCode vers Claude Code</h3>
+  <ul>
+    <li>Necessaire seulement si vous obtenez une cle API Anthropic directe</li>
+    <li>Les custom commands OpenCode deviennent des instructions dans <code>CLAUDE.md</code></li>
+    <li>Plus besoin de proxy si vous avez une cle Anthropic</li>
+  </ul>
+
+  <h2 id="d-links">Acces aux documentations</h2>
+
+  <div class="nav-links">
+    <a href="../docs/" class="nav-link">&#9881; Doc Claude Code via Copilot</a>
+    <a href="../docs-opencode/" class="nav-link">&#128187; Doc OpenCode via Copilot</a>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Recommandation finale</div>
+    <p>Pour un <strong>PC de dev entreprise qui autorise uniquement GitHub Copilot</strong>, la recommandation est :</p>
+    <ol>
+      <li><strong>OpenCode</strong> en premier choix : officiel, sans risque, plus de fonctionnalites</li>
+      <li><strong>Claude Code + proxy</strong> en second choix : si vous preferez l'experience Claude Code et acceptez les risques du proxy non-officiel</li>
+      <li><strong>Les deux</strong> peuvent coexister : testez les deux et gardez celui qui vous convient le mieux</li>
+    </ol>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script src="js/app.js"></script>
+</body>
+</html>
