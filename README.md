@@ -30,6 +30,10 @@ npx http-server docs/ -p 8080
 cd docs/ && npm install && node test-site.mjs
 ```
 
+## Auteur
+
+**Anas ZAHOURI** -- [LinkedIn](https://www.linkedin.com/in/anaszahouri/) | [GitHub](https://github.com/Anas-ZAHOURI)
+
 ## Licence
 
 Ce projet est mis à disposition à des fins éducatives et documentaires.
