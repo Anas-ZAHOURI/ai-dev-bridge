@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Dev Bridge - Utilisez Claude Code et OpenCode avec votre abonnement GitHub Copilot entreprise via des proxys locaux. Guide complet en francais.">
+  <meta property="og:title" content="AI Dev Bridge - Gardez vos outils, utilisez votre abonnement">
+  <meta property="og:description" content="AI Dev Bridge - Utilisez Claude Code et OpenCode avec votre abonnement GitHub Copilot entreprise via des proxys locaux. Guide complet en francais.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anas-zahouri.github.io/ai-dev-bridge/">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>">
   <title>AI Dev Bridge - Gardez vos outils, utilisez votre abonnement</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -312,7 +320,62 @@
       .schema-flow { flex-direction: column; }
       .schema-arrow { transform: rotate(90deg); }
     }
+
+    /* ===== Dark Mode Toggle Button ===== */
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--bg-card);
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+      transition: all .2s;
+    }
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+
+    /* ===== Dark Mode ===== */
+    [data-theme="dark"] {
+      --bg: #1a1a1a;
+      --bg-card: #2d2d2d;
+      --bg-card-hover: #333333;
+      --border: #404040;
+      --text: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --text-light: #777777;
+      --accent-light: #3d1520;
+    }
+    [data-theme="dark"] .card {
+      background: #2d2d2d;
+    }
+    [data-theme="dark"] .schema-node {
+      background: #2d2d2d;
+    }
+    [data-theme="dark"] .compliance {
+      background: linear-gradient(135deg, #2d2d2d 0%, #3d1520 50%, #2d1a3d 100%);
+    }
+    pre[class*="language-"] { margin: 16px 0; border-radius: var(--radius); font-size: 13px; }
+    code[class*="language-"] { font-family: var(--font-mono); }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
 </head>
 <body>
 
@@ -339,41 +402,41 @@
   <p>
     Votre entreprise vous fournit GitHub Copilot ou Gemini, mais vous travaillez mieux avec Claude Code ou OpenCode.
     Bonne nouvelle : les deux sont compatibles. Ce guide vous montre comment les brancher ensemble,
-    sans rien casser, sans contourner les regles.
+    sans rien casser, sans contourner les règles.
   </p>
 </section>
 
 <!-- ===== LE PROBLEME ===== -->
 <div class="section">
-  <h2 class="section-title">Le probleme que tout le monde connait</h2>
-  <p class="section-sub">Vous avez vos habitudes, vos reflexes, votre productivite. Puis l'entreprise impose un outil different.</p>
+  <h2 class="section-title">Le problème que tout le monde connaît</h2>
+  <p class="section-sub">Vous avez vos habitudes, vos réflexes, votre productivité. Puis l'entreprise impose un outil différent.</p>
 
   <div class="problem-grid">
     <div class="problem-card pain">
-      <h3><span>&#10060;</span> Abonnement impose, outil limite</h3>
+      <h3><span>&#10060;</span> Abonnement imposé, outil limité</h3>
       <p>L'entreprise paye GitHub Copilot ou Gemini. Vous n'avez pas le choix de l'abonnement,
          mais l'interface chat ou l'autocompletion ne couvrent pas vos besoins.</p>
     </div>
     <div class="problem-card pain">
-      <h3><span>&#10060;</span> Perte de reflexes et de vitesse</h3>
-      <p>Vous avez appris a etre productif avec Claude Code ou OpenCode. Changer d'outil,
-         c'est perdre des semaines de muscle memory et de workflows rodees.</p>
+      <h3><span>&#10060;</span> Perte de réflexes et de vitesse</h3>
+      <p>Vous avez appris à être productif avec Claude Code ou OpenCode. Changer d'outil,
+         c'est perdre des semaines de muscle memory et de workflows rodées.</p>
     </div>
     <div class="problem-card solution">
       <h3><span>&#9989;</span> Un proxy local, transparent</h3>
-      <p>Un petit serveur local traduit les appels entre votre outil prefere et l'API de l'abonnement entreprise.
-         Rien n'est installe sur les serveurs de l'entreprise.</p>
+      <p>Un petit serveur local traduit les appels entre votre outil préféré et l'API de l'abonnement entreprise.
+         Rien n'est installé sur les serveurs de l'entreprise.</p>
     </div>
     <div class="problem-card solution">
       <h3><span>&#9989;</span> Conforme aux standards</h3>
-      <p>Le trafic passe par l'abonnement officiel. Pas de cle API personnelle, pas de compte parallele.
-         Vous restez dans le cadre autorise par votre organisation.</p>
+      <p>Le trafic passe par l'abonnement officiel. Pas de clé API personnelle, pas de compte parallèle.
+         Vous restez dans le cadre autorisé par votre organisation.</p>
     </div>
   </div>
 
   <!-- Schema -->
   <div class="schema-box">
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;font-weight:600;">Comment ca marche</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;font-weight:600;">Comment ça marche</p>
     <div class="schema-flow">
       <span class="schema-node tool">Claude Code / OpenCode</span>
       <span class="schema-arrow">&#8594;</span>
@@ -382,7 +445,7 @@
       <span class="schema-node provider">GitHub Copilot / Gemini</span>
     </div>
     <p style="font-size:12px;color:var(--text-light);margin-top:14px;">
-      Le proxy tourne sur votre machine, traduit le format d'API a la volee. Aucune donnee ne sort du circuit officiel.
+      Le proxy tourne sur votre machine, traduit le format d'API à la volée. Aucune donnée ne sort du circuit officiel.
     </p>
   </div>
 
@@ -390,20 +453,20 @@
   <div class="compliance">
     <h3>Respectueux des standards entreprise</h3>
     <p>
-      Cette approche ne contourne rien. Elle utilise l'abonnement que votre entreprise paye deja,
-      via les API officielles, en passant par le reseau autorise. Vous changez l'interface, pas le tuyau.
+      Cette approche ne contourne rien. Elle utilise l'abonnement que votre entreprise paye déjà,
+      via les API officielles, en passant par le réseau autorisé. Vous changez l'interface, pas le tuyau.
     </p>
     <div class="compliance-checks">
-      <span class="compliance-check">&#10003; Abonnement entreprise utilise</span>
-      <span class="compliance-check">&#10003; Aucune cle API externe</span>
+      <span class="compliance-check">&#10003; Abonnement entreprise utilisé</span>
+      <span class="compliance-check">&#10003; Aucune clé API externe</span>
       <span class="compliance-check">&#10003; Proxy local uniquement</span>
-      <span class="compliance-check">&#10003; Donnees dans le circuit officiel</span>
+      <span class="compliance-check">&#10003; Données dans le circuit officiel</span>
     </div>
   </div>
 
   <!-- Cards documentation -->
   <h2 class="section-title">Les guides</h2>
-  <p class="section-sub">Trois docs, trois angles. Choisissez celle qui correspond a votre besoin.</p>
+  <p class="section-sub">Trois docs, trois angles. Choisissez celle qui correspond à votre besoin.</p>
 
   <div class="cards">
     <a href="claude-code.html" class="card" style="text-decoration:none;color:inherit;">
@@ -411,8 +474,8 @@
       <h3>Claude Code via Copilot</h3>
       <p class="card-desc">
         Guide complet pour brancher Claude Code sur votre abonnement GitHub Copilot.
-        Quick start en 5 minutes, guide detaille avec 6 methodes de proxy,
-        et reference des variables d'environnement.
+        Quick start en 5 minutes, guide détaillé avec 6 méthodes de proxy,
+        et référence des variables d'environnement.
       </p>
       <div class="card-tags">
         <span class="card-tag">Claude Code</span>
@@ -426,13 +489,13 @@
       <div class="card-icon purple">&#9878;</div>
       <h3>Comparatif Claude Code vs OpenCode</h3>
       <p class="card-desc">
-        Vous hesitez entre Claude Code et OpenCode ? Ce comparatif detaille les forces de chacun,
-        les scenarios ou l'un brille plus que l'autre, et vous aide a faire votre choix.
+        Vous hésitez entre Claude Code et OpenCode ? Ce comparatif détaillé les forces de chacun,
+        les scénarios ou l'un brille plus que l'autre, et vous aide à faire votre choix.
       </p>
       <div class="card-tags">
         <span class="card-tag">Comparatif</span>
-        <span class="card-tag">Decision</span>
-        <span class="card-tag">Scenarios</span>
+        <span class="card-tag">Décision</span>
+        <span class="card-tag">Scénarios</span>
       </div>
       <span class="card-link">Voir le comparatif</span>
     </a>
@@ -442,7 +505,7 @@
       <h3>OpenCode via Copilot</h3>
       <p class="card-desc">
         Guide complet pour utiliser OpenCode avec votre abonnement GitHub Copilot.
-        Meme approche de proxy local, adaptee a l'ecosysteme OpenCode.
+        Meme approche de proxy local, adaptee a l'ecosystème OpenCode.
       </p>
       <div class="card-tags">
         <span class="card-tag">OpenCode</span>
@@ -458,6 +521,31 @@
 <footer class="footer">
   <p>AI Dev Bridge par <a href="https://www.linkedin.com/in/anaszahouri/" target="_blank">Anas ZAHOURI</a> &mdash; <a href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank">GitHub</a></p>
 </footer>
+
+<script>
+// ===== Dark Mode Toggle =====
+(function setupDarkMode() {
+  var saved = localStorage.getItem('theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  var btn = document.createElement('button');
+  btn.className = 'dark-mode-toggle';
+  btn.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+  btn.title = 'Basculer thème sombre/clair';
+  btn.onclick = function() {
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    btn.innerHTML = next === 'dark' ? '☀️' : '🌙';
+  };
+  document.body.appendChild(btn);
+})();
+</script>
 
 </body>
 </html>

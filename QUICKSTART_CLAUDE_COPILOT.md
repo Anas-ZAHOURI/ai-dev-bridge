@@ -9,32 +9,32 @@ node --version    # >= 18 requis
 npm --version     # doit fonctionner
 ```
 
-Si Node.js n'est pas installe :
+Si Node.js n'est pas installé :
 ```bash
-# Via nvm (recommande)
+# Via nvm (recommandé)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 nvm use 20
 
-# Ou telechargez sur https://nodejs.org
+# Ou téléchargez sur https://nodejs.org
 ```
 
 ---
 
-## Etape 1 : Installer Claude Code
+## Étape 1 : Installer Claude Code
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-Verifiez :
+Vérifiez :
 ```bash
 claude --version
 ```
 
 ---
 
-## Etape 2 : Lancer le proxy
+## Étape 2 : Lancer le proxy
 
 Ouvrez un terminal et lancez :
 
@@ -43,18 +43,18 @@ npx copilot-api@latest start --claude-code
 ```
 
 Ce qui se passe :
-1. Le proxy demarre sur le port 4141
+1. Le proxy démarre sur le port 4141
 2. Un code s'affiche : `Entrez ce code sur GitHub : XXXX-XXXX`
 3. Votre navigateur s'ouvre sur github.com/login/device
 4. Entrez le code, autorisez
-5. Le proxy vous demande de choisir 2 modeles
-6. Une commande est copiee dans votre presse-papier
+5. Le proxy vous demande de choisir 2 modèles
+6. Une commande est copiée dans votre presse-papier
 
 ---
 
-## Etape 3 : Lancer Claude Code
+## Étape 3 : Lancer Claude Code
 
-Ouvrez un **2e terminal** et collez la commande du presse-papier. Elle ressemble a :
+Ouvrez un **2e terminal** et collez la commande du presse-papier. Elle ressemble à :
 
 ```bash
 ANTHROPIC_BASE_URL=http://localhost:4141 \
@@ -67,16 +67,16 @@ claude
 
 ---
 
-## C'est pret !
+## C'est prêt !
 
-Claude Code est maintenant connecte a Copilot. Tapez vos commandes normalement.
+Claude Code est maintenant connecté a Copilot. Tapez vos commandes normalement.
 
 ---
 
 ## Pour les prochaines fois
 
 ```bash
-# Terminal 1 : relancez le proxy (le token est sauvegarde)
+# Terminal 1 : relancez le proxy (le token est sauvegardé)
 npx copilot-api@latest start
 
 # Terminal 2 : lancez claude avec la config
@@ -88,9 +88,9 @@ besoin des variables d'environnement a chaque fois.
 
 ---
 
-## Configuration permanente (optionnel mais recommande)
+## Configuration permanente (optionnel mais recommandé)
 
-Creez le fichier `~/.claude/settings.json` :
+Créez le fichier `~/.claude/settings.json` :
 
 ```json
 {
@@ -108,7 +108,7 @@ Creez le fichier `~/.claude/settings.json` :
 }
 ```
 
-Apres ca, il suffit de :
+Après ça, il suffit de :
 ```bash
 # Terminal 1
 npx copilot-api@latest start
@@ -119,7 +119,7 @@ claude
 
 ---
 
-## Depannage rapide
+## Dépannage rapide
 
 | Probleme | Solution |
 |----------|----------|
@@ -127,4 +127,4 @@ claude
 | `401 Unauthorized` | Relancez `npx copilot-api@latest auth` |
 | `thinking parameter error` | Normal avec LiteLLM, ajoutez `drop_params: true` |
 | Quota epuise rapidement | Ajoutez `--rate-limit 30 --wait` au proxy |
-| Proxy entreprise bloque | Ajoutez `--proxy-env` au proxy |
+| Proxy entreprise bloqué | Ajoutez `--proxy-env` au proxy |

@@ -3,10 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guide complet pour utiliser Claude Code via votre abonnement GitHub Copilot entreprise. Configuration du proxy, integration et bonnes pratiques.">
+  <meta property="og:title" content="Claude Code via Copilot - Guide Complet">
+  <meta property="og:description" content="Guide complet pour utiliser Claude Code via votre abonnement GitHub Copilot entreprise. Configuration du proxy, integration et bonnes pratiques.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anas-zahouri.github.io/ai-dev-bridge/claude-code.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>">
   <title>Claude Code via Copilot - Guide Complet</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
 </head>
 <body>
 
@@ -19,7 +35,7 @@
   <nav class="header-nav">
     <a href="#" data-page="quickstart" class="active" onclick="showPage('quickstart');return false;">Quick Start</a>
     <a href="#" data-page="guide" onclick="showPage('guide');return false;">Guide Detaille</a>
-    <a href="#" data-page="reference" onclick="showPage('reference');return false;">Reference</a>
+    <a href="#" data-page="référence" onclick="showPage('référence');return false;">Référence</a>
   </nav>
   <a class="header-github" href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank" title="Voir sur GitHub">&#9733; GitHub</a>
   <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
@@ -37,7 +53,7 @@
       <a href="#qs-proxy">Lancer le proxy</a>
       <a href="#qs-launch">Lancer Claude Code</a>
       <a href="#qs-permanent">Config permanente</a>
-      <a href="#qs-troubleshoot">Depannage rapide</a>
+      <a href="#qs-troubleshoot">Dépannage rapide</a>
     </div>
   </div>
 
@@ -45,18 +61,18 @@
   <div class="sidebar-page-section" data-page="guide" style="display:none">
     <div class="sidebar-section">
       <div class="sidebar-section-title">Architecture</div>
-      <a href="#g-archi">Comment ca marche</a>
+      <a href="#g-archi">Comment ça marche</a>
       <a href="#g-tokens">Consommation de tokens</a>
-      <a href="#g-prereqs">Pre-requis detailles</a>
+      <a href="#g-prereqs">Pre-requis détaillés</a>
     </div>
     <div class="sidebar-section">
-      <div class="sidebar-section-title">Methode 1 : npm / npx</div>
+      <div class="sidebar-section-title">Méthode 1 : npm / npx</div>
       <a href="#g-m1-copilot-api">copilot-api</a>
       <a href="#g-m1-copilot-proxy">copilot-proxy (daemon)</a>
       <a href="#g-m1-lm-proxy">LM Proxy (VS Code)</a>
     </div>
     <div class="sidebar-section">
-      <div class="sidebar-section-title">Methode 2 : Clone</div>
+      <div class="sidebar-section-title">Méthode 2 : Clone</div>
       <a href="#g-m2-copilot-api">copilot-api (build)</a>
       <a href="#g-m2-ccc">claude-code-copilot</a>
       <a href="#g-m2-litellm">LiteLLM (Python)</a>
@@ -67,24 +83,24 @@
       <a href="#g-config">Config permanente</a>
       <a href="#g-proxy-entreprise">Proxy entreprise</a>
       <a href="#g-optimisation">Optimisation quota</a>
-      <a href="#g-modeles">Choix des modeles</a>
+      <a href="#g-modèles">Choix des modèles</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-section-title">Aide</div>
-      <a href="#g-depannage">Depannage</a>
-      <a href="#g-securite">Securite</a>
+      <a href="#g-dépannage">Dépannage</a>
+      <a href="#g-sécurité">Sécurité</a>
       <a href="#g-comparatif">Comparatif</a>
     </div>
   </div>
 
-  <!-- Reference sidebar -->
-  <div class="sidebar-page-section" data-page="reference" style="display:none">
+  <!-- Référence sidebar -->
+  <div class="sidebar-page-section" data-page="référence" style="display:none">
     <div class="sidebar-section">
-      <div class="sidebar-section-title">Reference</div>
+      <div class="sidebar-section-title">Référence</div>
       <a href="#r-env">Variables d'env</a>
       <a href="#r-cli">Options CLI</a>
       <a href="#r-endpoints">Endpoints API</a>
-      <a href="#r-modeles">Modeles disponibles</a>
+      <a href="#r-modèles">Modèles disponibles</a>
       <a href="#r-settings">settings.json</a>
       <a href="#r-tokens-detail">Tokens &amp; Quota</a>
     </div>
@@ -101,12 +117,12 @@
 <div id="quickstart" class="page active">
 
   <h1>Quick Start</h1>
-  <p class="subtitle">Claude Code connecte a votre licence GitHub Copilot en 5 minutes.</p>
+  <p class="subtitle">Claude Code connecté a votre licence GitHub Copilot en 5 minutes.</p>
 
   <!-- Warning tokens -->
   <div class="box box-danger">
     <div class="box-title">&#9888; Avertissement : consommation de tokens Copilot</div>
-    <p>Cette methode utilise <strong>votre quota de tokens GitHub Copilot</strong>. Claude Code est extremement gourmand :
+    <p>Cette méthode utilise <strong>votre quota de tokens GitHub Copilot</strong>. Claude Code est extrêmement gourmand :
     il consomme <strong>10 a 100 fois plus de tokens</strong> qu'un chat Copilot classique.</p>
     <ul>
       <li>Une seule commande "edite ce fichier" = <strong>50 000 a 150 000 tokens</strong></li>
@@ -117,29 +133,29 @@
   </div>
 
   <h2 id="qs-prereqs">Pre-requis</h2>
-  <pre><code>node --version    # >= 18 requis
+  <pre><code class="language-bash">node --version    # >= 18 requis
 npm --version     # doit fonctionner</code></pre>
 
   <div class="box box-info">
-    <div class="box-title">Node.js pas installe ?</div>
-    <pre><code># Via nvm (recommande)
+    <div class="box-title">Node.js pas installé ?</div>
+    <pre><code class="language-bash"># Via nvm (recommandé)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20 && nvm use 20
 
-# Ou telechargez sur https://nodejs.org</code></pre>
+# Ou téléchargez sur https://nodejs.org</code></pre>
   </div>
 
-  <h2 id="qs-install">Etape 1 : Installer Claude Code</h2>
-  <pre><code>npm install -g @anthropic-ai/claude-code
+  <h2 id="qs-install">Étape 1 : Installer Claude Code</h2>
+  <pre><code class="language-bash">npm install -g @anthropic-ai/claude-code
 claude --version</code></pre>
 
-  <h2 id="qs-proxy">Etape 2 : Lancer le proxy</h2>
+  <h2 id="qs-proxy">Étape 2 : Lancer le proxy</h2>
   <p>Ouvrez un terminal :</p>
-  <pre><code>npx copilot-api@latest start --claude-code</code></pre>
+  <pre><code class="language-bash">npx copilot-api@latest start --claude-code</code></pre>
 
   <div class="steps">
     <div class="step">
-      <div class="step-title">Le proxy demarre sur le port 4141</div>
+      <div class="step-title">Le proxy démarre sur le port 4141</div>
     </div>
     <div class="step">
       <div class="step-title">Un code s'affiche</div>
@@ -150,17 +166,17 @@ claude --version</code></pre>
       <p>Entrez le code, autorisez l'application.</p>
     </div>
     <div class="step">
-      <div class="step-title">Choisissez vos modeles</div>
-      <p>Modele principal (ex: <code>gpt-4.1</code>) et modele rapide (ex: <code>gpt-4.1-mini</code>).</p>
+      <div class="step-title">Choisissez vos modèles</div>
+      <p>Modèle principal (ex: <code>gpt-4.1</code>) et modèle rapide (ex: <code>gpt-4.1-mini</code>).</p>
     </div>
     <div class="step">
-      <div class="step-title">Commande copiee dans le presse-papier</div>
+      <div class="step-title">Commande copiée dans le presse-papier</div>
     </div>
   </div>
 
-  <h2 id="qs-launch">Etape 3 : Lancer Claude Code</h2>
-  <p>Ouvrez un <strong>2e terminal</strong> et collez la commande. Elle ressemble a :</p>
-  <pre><code>ANTHROPIC_BASE_URL=http://localhost:4141 \
+  <h2 id="qs-launch">Étape 3 : Lancer Claude Code</h2>
+  <p>Ouvrez un <strong>2e terminal</strong> et collez la commande. Elle ressemble à :</p>
+  <pre><code class="language-bash">ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
 ANTHROPIC_MODEL=gpt-4.1 \
 ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini \
@@ -168,13 +184,13 @@ DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude</code></pre>
 
   <div class="box box-success">
-    <div class="box-title">&#10003; C'est pret !</div>
-    Claude Code est connecte a Copilot. Tapez vos commandes normalement.
+    <div class="box-title">&#10003; C'est prêt !</div>
+    Claude Code est connecté a Copilot. Tapez vos commandes normalement.
   </div>
 
   <h2 id="qs-permanent">Configuration permanente</h2>
-  <p>Pour ne plus taper les variables a chaque fois, creez <code>~/.claude/settings.json</code> :</p>
-  <pre><code>{
+  <p>Pour ne plus taper les variables a chaque fois, créez <code>~/.claude/settings.json</code> :</p>
+  <pre><code class="language-json">{
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
@@ -188,13 +204,13 @@ claude</code></pre>
   }
 }</code></pre>
   <p>Ensuite, il suffit de :</p>
-  <pre><code># Terminal 1
+  <pre><code class="language-bash"># Terminal 1
 npx copilot-api@latest start
 
 # Terminal 2
 claude</code></pre>
 
-  <h2 id="qs-troubleshoot">Depannage rapide</h2>
+  <h2 id="qs-troubleshoot">Dépannage rapide</h2>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Probleme</th><th>Solution</th></tr></thead>
@@ -216,22 +232,22 @@ claude</code></pre>
 <div id="guide" class="page">
 
   <h1>Guide Detaille</h1>
-  <p class="subtitle">Toutes les methodes d'installation et de configuration pour PC de dev entreprise.</p>
+  <p class="subtitle">Toutes les méthodes d'installation et de configuration pour PC de dev entreprise.</p>
 
   <!-- ===== Architecture ===== -->
-  <h2 id="g-archi">Comment ca marche</h2>
+  <h2 id="g-archi">Comment ça marche</h2>
   <p>Claude Code parle le format <strong>Anthropic Messages API</strong>. GitHub Copilot parle le format <strong>OpenAI</strong>. Un proxy local traduit entre les deux.</p>
 
   <div class="diagram"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Proxy local</span>  ───&gt;  <span class="purple">API GitHub Copilot</span>
  (terminal)       (localhost:4141)     (api.github.com)
 
  Format Anthropic    Traduction      Format OpenAI
- POST /v1/messages   automatique     POST /v1/chat/completions
+ POST /v1/messages   automatique     POST /v1/chat/complétions
 
-Le proxy gere aussi :
+Le proxy gère aussi :
  <span class="orange">&#9679;</span> Authentification OAuth GitHub
  <span class="orange">&#9679;</span> Renouvellement automatique du token
- <span class="orange">&#9679;</span> Suppression du parametre "thinking"
+ <span class="orange">&#9679;</span> Suppression du paramètre "thinking"
  <span class="orange">&#9679;</span> Rate limiting</div>
 
   <h3>Flux d'authentification</h3>
@@ -240,23 +256,23 @@ Le proxy gere aussi :
     <div class="step"><div class="step-title">Le proxy demande un device code a GitHub</div></div>
     <div class="step"><div class="step-title">Vous entrez le code sur github.com/login/device</div></div>
     <div class="step"><div class="step-title">Le proxy recoit un token OAuth (<code>ghu_...</code>)</div><p>Sauvegarde localement, renouvele automatiquement.</p></div>
-    <div class="step"><div class="step-title">A chaque requete, le token obtient un jeton temporaire Copilot</div></div>
+    <div class="step"><div class="step-title">A chaque requête, le token obtient un jeton temporaire Copilot</div></div>
   </div>
 
   <!-- ===== TOKENS WARNING ===== -->
   <h2 id="g-tokens">&#9888; Consommation de tokens Copilot</h2>
 
   <div class="box box-danger">
-    <div class="box-title">IMPORTANT : Cette methode consomme votre quota Copilot</div>
-    <p>Toutes les methodes decrites dans ce guide font passer les requetes de Claude Code a travers votre licence GitHub Copilot. <strong>Chaque interaction avec Claude Code consomme des tokens Copilot</strong>, exactement comme si vous utilisiez Copilot Chat, mais en beaucoup plus grande quantite.</p>
+    <div class="box-title">IMPORTANT : Cette méthode consomme votre quota Copilot</div>
+    <p>Toutes les méthodes décrites dans ce guide font passer les requêtes de Claude Code a travers votre licence GitHub Copilot. <strong>Chaque interaction avec Claude Code consomme des tokens Copilot</strong>, exactement comme si vous utilisiez Copilot Chat, mais en beaucoup plus grande quantite.</p>
   </div>
 
   <h3>Pourquoi Claude Code consomme autant ?</h3>
   <p>Claude Code fonctionne differemment d'un simple chat :</p>
   <ul>
-    <li><strong>Contexte massif</strong> : a chaque requete, Claude Code envoie le contenu des fichiers ouverts, l'historique de conversation, les resultats d'outils, etc. Un seul message peut contenir 10 000 a 50 000 tokens de contexte.</li>
+    <li><strong>Contexte massif</strong> : a chaque requête, Claude Code envoie le contenu des fichiers ouverts, l'historique de conversation, les resultats d'outils, etc. Un seul message peut contenir 10 000 a 50 000 tokens de contexte.</li>
     <li><strong>Appels multiples</strong> : une seule commande utilisateur peut generer 3 a 15 appels API en cascade (lecture de fichiers, reflexion, edition, verification...).</li>
-    <li><strong>Requetes en arriere-plan</strong> : sans les flags d'optimisation, Claude Code fait des appels supplementaires pour les completions, suggestions et telemetrie.</li>
+    <li><strong>Requetes en arrière-plan</strong> : sans les flags d'optimisation, Claude Code fait des appels supplémentaires pour les complétions, suggestions et télémétrie.</li>
     <li><strong>Reponses longues</strong> : les reponses contenant du code genere sont souvent 5 a 20x plus longues qu'un chat classique.</li>
   </ul>
 
@@ -277,26 +293,26 @@ Le proxy gere aussi :
   <h3>Comment reduire la consommation</h3>
 
   <h4>1. Variables d'environnement obligatoires</h4>
-  <pre><code># Reduit les appels en arriere-plan (completions, suggestions)
+  <pre><code class="language-bash"># Réduit les appels en arrière-plan (complétions, suggestions)
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1
 
-# Desactive le trafic non-essentiel (telemetrie, checks)
+# Désactive le trafic non-essentiel (télémétrie, checks)
 CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code></pre>
   <div class="box box-warn">
     <div class="box-title">Sans ces variables, la consommation double ou triple</div>
-    <p>Claude Code fait des dizaines d'appels supplementaires que vous ne voyez pas. Ces variables les desactivent.</p>
+    <p>Claude Code fait des dizaines d'appels supplémentaires que vous ne voyez pas. Ces variables les desactivent.</p>
   </div>
 
   <h4>2. Rate limiting sur le proxy</h4>
-  <pre><code># Minimum 30 secondes entre chaque requete
+  <pre><code class="language-bash"># Minimum 30 secondes entre chaque requête
 npx copilot-api@latest start --rate-limit 30 --wait</code></pre>
 
-  <h4>3. Desactiver la recherche web</h4>
-  <pre><code># Dans settings.json
+  <h4>3. Désactiver la recherche web</h4>
+  <pre><code class="language-json"># Dans settings.json
 "permissions": { "deny": ["WebSearch"] }</code></pre>
 
-  <h4>4. Choisir des modeles economes</h4>
-  <pre><code>ANTHROPIC_MODEL=gpt-4.1-mini          # au lieu de gpt-4.1
+  <h4>4. Choisir des modèles économes</h4>
+  <pre><code class="language-bash">ANTHROPIC_MODEL=gpt-4.1-mini          # au lieu de gpt-4.1
 ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini</code></pre>
 
   <h4>5. Bonnes pratiques d'utilisation</h4>
@@ -305,18 +321,18 @@ ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini</code></pre>
     <li><strong>Utilisez <code>/compact</code></strong> dans Claude Code pour compresser le contexte</li>
     <li><strong>Fermez et relancez</strong> Claude Code regulierement pour reinitialiser le contexte</li>
     <li><strong>Surveillez le quota</strong> : <code>npx copilot-api@latest check-usage</code></li>
-    <li><strong>Evitez les "agent loops"</strong> ou Claude Code enchaine les outils sans fin</li>
+    <li><strong>Évitez les "agent loops"</strong> ou Claude Code enchaine les outils sans fin</li>
   </ul>
 
   <h4>6. Surveillance du quota</h4>
-  <pre><code># Voir la consommation actuelle
+  <pre><code class="language-bash"># Voir la consommation actuelle
 npx copilot-api@latest check-usage
 
 # Voir les stats en temps reel (si le proxy tourne)
 curl http://localhost:4141/usage</code></pre>
 
   <!-- ===== Pre-requis ===== -->
-  <h2 id="g-prereqs">Pre-requis detailles</h2>
+  <h2 id="g-prereqs">Pre-requis détaillés</h2>
 
   <div class="tabs" data-group="prereqs">
     <button class="tab active" data-target="prereq-node">Node.js</button>
@@ -326,10 +342,10 @@ curl http://localhost:4141/usage</code></pre>
   </div>
 
   <div id="prereq-node" class="tab-content active" data-group="prereqs">
-    <pre><code>node --version   # >= 18 requis
+    <pre><code class="language-bash">node --version   # >= 18 requis
 npm --version    # >= 9 requis</code></pre>
     <p><strong>Installation :</strong></p>
-    <pre><code># nvm (recommande)
+    <pre><code class="language-bash"># nvm (recommandé)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 source ~/.bashrc
 nvm install 20 && nvm use 20
@@ -342,17 +358,17 @@ nvm use 20</code></pre>
 
   <div id="prereq-python" class="tab-content" data-group="prereqs">
     <p>Uniquement pour LiteLLM :</p>
-    <pre><code>python --version   # >= 3.8
+    <pre><code class="language-bash">python --version   # >= 3.8
 pip --version</code></pre>
   </div>
 
   <div id="prereq-go" class="tab-content" data-group="prereqs">
     <p>Uniquement pour claude-copilot-proxy :</p>
-    <pre><code>go version   # >= 1.21</code></pre>
+    <pre><code class="language-bash">go version   # >= 1.21</code></pre>
   </div>
 
   <div id="prereq-copilot" class="tab-content" data-group="prereqs">
-    <p>Verifiez que votre licence est active :</p>
+    <p>Vérifiez que votre licence est active :</p>
     <ol>
       <li>Allez sur <a href="https://github.com/settings/copilot" target="_blank">github.com/settings/copilot</a></li>
       <li>Vous devez voir "Copilot is active"</li>
@@ -360,23 +376,23 @@ pip --version</code></pre>
     </ol>
   </div>
 
-  <!-- ===== METHODE 1 ===== -->
-  <h2 id="g-m1-copilot-api">Methode 1A : copilot-api via npx</h2>
+  <!-- ===== MÉTHODE 1 ===== -->
+  <h2 id="g-m1-copilot-api">Méthode 1A : copilot-api via npx</h2>
   <p><span class="badge badge-easy">Facile</span> <span class="badge badge-npm">npm/npx</span> &mdash; <a href="https://github.com/ericc-ch/copilot-api" target="_blank">github.com/ericc-ch/copilot-api</a></p>
 
   <h3>Lancement automatique</h3>
-  <pre><code># Rien a installer, npx telecharge et execute
+  <pre><code class="language-bash"># Rien a installer, npx télécharge et execute
 npx copilot-api@latest start --claude-code</code></pre>
 
   <h3>Lancement manuel avec options</h3>
-  <pre><code># Terminal 1
+  <pre><code class="language-bash"># Terminal 1
 npx copilot-api@latest start \
   --port 4141 \
   --account-type business \
   --rate-limit 30 \
   --wait \
   --verbose</code></pre>
-  <pre><code># Terminal 2
+  <pre><code class="language-bash"># Terminal 2
 ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
 ANTHROPIC_MODEL=gpt-4.1 \
@@ -386,22 +402,22 @@ CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
 claude</code></pre>
 
   <h3>Installation globale</h3>
-  <pre><code>npm install -g copilot-api
+  <pre><code class="language-bash">npm install -g copilot-api
 copilot-api start --claude-code</code></pre>
 
   <h3>Commandes utiles</h3>
-  <pre><code>npx copilot-api@latest auth           # Authentification seule
+  <pre><code class="language-bash">npx copilot-api@latest auth           # Authentification seule
 npx copilot-api@latest check-usage    # Voir le quota restant
 npx copilot-api@latest debug          # Diagnostic</code></pre>
 
   <!-- copilot-proxy -->
-  <h2 id="g-m1-copilot-proxy">Methode 1B : copilot-proxy avec daemon</h2>
+  <h2 id="g-m1-copilot-proxy">Méthode 1B : copilot-proxy avec daemon</h2>
   <p><span class="badge badge-easy">Facile</span> <span class="badge badge-npm">npm/npx</span> &mdash; <a href="https://github.com/Jer-y/copilot-proxy" target="_blank">github.com/Jer-y/copilot-proxy</a></p>
 
-  <pre><code>npx @jer-y/copilot-proxy@latest start --claude-code</code></pre>
+  <pre><code class="language-bash">npx @jer-y/copilot-proxy@latest start --claude-code</code></pre>
 
-  <h3>Mode daemon (arriere-plan)</h3>
-  <pre><code># Installer en global
+  <h3>Mode daemon (arrière-plan)</h3>
+  <pre><code class="language-bash"># Installer en global
 npm install -g @jer-y/copilot-proxy
 
 # Authentification
@@ -413,13 +429,13 @@ copilot-proxy start -d
 # Gestion
 copilot-proxy status       # Voir le statut
 copilot-proxy logs         # Voir les logs
-copilot-proxy stop         # Arreter
-copilot-proxy restart      # Redemarrer
-copilot-proxy enable       # Auto-demarrage au boot
-copilot-proxy disable      # Desactiver l'auto-demarrage</code></pre>
+copilot-proxy stop         # Arrêter
+copilot-proxy restart      # Redémarrer
+copilot-proxy enable       # Auto-démarrage au boot
+copilot-proxy disable      # Désactiver l'auto-démarrage</code></pre>
 
   <div class="box box-info">
-    <div class="box-title">Auto-demarrage au boot</div>
+    <div class="box-title">Auto-démarrage au boot</div>
     <p><code>copilot-proxy enable</code> cree selon l'OS :</p>
     <ul>
       <li><strong>Linux</strong> : service systemd dans <code>~/.config/systemd/user/</code></li>
@@ -430,22 +446,22 @@ copilot-proxy disable      # Desactiver l'auto-demarrage</code></pre>
   </div>
 
   <!-- LM Proxy -->
-  <h2 id="g-m1-lm-proxy">Methode 1C : LM Proxy (extension VS Code)</h2>
-  <p><span class="badge badge-easy">Tres facile</span> &mdash; <a href="https://github.com/ryonakae/vscode-lm-proxy" target="_blank">github.com/ryonakae/vscode-lm-proxy</a></p>
+  <h2 id="g-m1-lm-proxy">Méthode 1C : LM Proxy (extension VS Code)</h2>
+  <p><span class="badge badge-easy">Très facile</span> &mdash; <a href="https://github.com/ryonakae/vscode-lm-proxy" target="_blank">github.com/ryonakae/vscode-lm-proxy</a></p>
 
   <div class="steps">
     <div class="step">
       <div class="step-title">Installez l'extension dans VS Code</div>
-      <pre><code>code --install-extension ryonakae.vscode-lm-proxy</code></pre>
+      <pre><code class="language-bash">code --install-extension ryonakae.vscode-lm-proxy</code></pre>
       <p>Ou cherchez "LM Proxy" dans le marketplace (Ctrl+Shift+X).</p>
     </div>
     <div class="step">
       <div class="step-title">Ouvrez VS Code</div>
-      <p>L'extension utilise l'auth Copilot deja presente. Rien d'autre a configurer.</p>
+      <p>L'extension utilise l'auth Copilot déjà presente. Rien d'autre à configurer.</p>
     </div>
     <div class="step">
       <div class="step-title">Lancez Claude Code</div>
-      <pre><code>ANTHROPIC_BASE_URL=http://localhost:4000/anthropic/claude \
+      <pre><code class="language-bash">ANTHROPIC_BASE_URL=http://localhost:4000/anthropic/claude \
 ANTHROPIC_API_KEY=dummy \
 claude</code></pre>
     </div>
@@ -456,15 +472,15 @@ claude</code></pre>
     <p>Le proxy tourne a l'interieur de VS Code. Si vous fermez VS Code, le proxy s'arrete.</p>
   </div>
 
-  <!-- ===== METHODE 2 ===== -->
-  <h2 id="g-m2-copilot-api">Methode 2A : Cloner copilot-api</h2>
-  <p><span class="badge badge-medium">Moyen</span> <span class="badge badge-clone">Clone</span> &mdash; Quand npx est bloque ou que vous voulez modifier le code.</p>
+  <!-- ===== MÉTHODE 2 ===== -->
+  <h2 id="g-m2-copilot-api">Méthode 2A : Cloner copilot-api</h2>
+  <p><span class="badge badge-medium">Moyen</span> <span class="badge badge-clone">Clone</span> &mdash; Quand npx est bloqué ou que vous voulez modifier le code.</p>
 
-  <pre><code># 1. Cloner
+  <pre><code class="language-bash"># 1. Cloner
 git clone https://github.com/ericc-ch/copilot-api.git
 cd copilot-api
 
-# 2. Installer les dependances
+# 2. Installer les dépendances
 npm install
 
 # 3. Builder
@@ -476,22 +492,22 @@ node dist/index.js start --claude-code
 # Ou avec options
 node dist/index.js start --port 4141 --verbose</code></pre>
 
-  <h3>Mettre a jour</h3>
-  <pre><code>cd copilot-api
+  <h3>Mettre à jour</h3>
+  <pre><code class="language-bash">cd copilot-api
 git pull origin main
 npm install
 npm run build</code></pre>
 
   <!-- claude-code-copilot -->
-  <h2 id="g-m2-ccc">Methode 2B : claude-code-copilot (zero dependance)</h2>
+  <h2 id="g-m2-ccc">Méthode 2B : claude-code-copilot (zero dépendance)</h2>
   <p><span class="badge badge-easy">Facile</span> <span class="badge badge-clone">Clone</span> &mdash; <a href="https://github.com/samarth777/claude-code-copilot" target="_blank">github.com/samarth777/claude-code-copilot</a></p>
 
   <div class="box box-success">
-    <div class="box-title">Aucune dependance npm</div>
+    <div class="box-title">Aucune dépendance npm</div>
     <p>Ce projet utilise uniquement les modules natifs de Node.js. Pas de <code>npm install</code>.</p>
   </div>
 
-  <pre><code># 1. Cloner
+  <pre><code class="language-bash"># 1. Cloner
 git clone https://github.com/samarth777/claude-code-copilot.git
 cd claude-code-copilot
 
@@ -513,7 +529,7 @@ claude</code></pre>
   <h3>Variables d'environnement</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Variable</th><th>Defaut</th><th>Description</th></tr></thead>
+      <thead><tr><th>Variable</th><th>Défaut</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td><code>COPILOT_PROXY_PORT</code></td><td>18080</td><td>Port du proxy</td></tr>
         <tr><td><code>COPILOT_AUTH_FILE</code></td><td>~/.claude-copilot-auth.json</td><td>Fichier token OAuth</td></tr>
@@ -523,28 +539,28 @@ claude</code></pre>
     </table>
   </div>
 
-  <h3>Recherche web integree</h3>
+  <h3>Recherche web intégrée</h3>
   <p>Seul proxy avec recherche web fonctionnelle :</p>
   <ul>
-    <li><strong>Sans cle API</strong> : DuckDuckGo (gratuit)</li>
-    <li><strong>Avec <code>BRAVE_API_KEY</code></strong> : Brave Search (meilleure qualite)</li>
+    <li><strong>Sans clé API</strong> : DuckDuckGo (gratuit)</li>
+    <li><strong>Avec <code>BRAVE_API_KEY</code></strong> : Brave Search (meilleure qualité)</li>
   </ul>
 
   <h3>Docker</h3>
-  <pre><code>docker compose up -d
+  <pre><code class="language-bash">docker compose up -d
 ANTHROPIC_BASE_URL=http://localhost:18080 ANTHROPIC_API_KEY=copilot-proxy claude</code></pre>
 
   <!-- LiteLLM -->
-  <h2 id="g-m2-litellm">Methode 2C : LiteLLM (Python)</h2>
+  <h2 id="g-m2-litellm">Méthode 2C : LiteLLM (Python)</h2>
   <p><span class="badge badge-medium">Moyen</span> <span class="badge badge-clone">pip</span> &mdash; Le plus flexible, interface web d'admin.</p>
 
   <h3>Installation</h3>
-  <pre><code>pip install 'litellm[proxy]'
+  <pre><code class="language-bash">pip install 'litellm[proxy]'
 litellm --version</code></pre>
 
   <h3>Configuration</h3>
-  <p>Creez <code>copilot-config.yaml</code> :</p>
-  <pre><code>model_list:
+  <p>Créez <code>copilot-config.yaml</code> :</p>
+  <pre><code class="language-yaml">model_list:
   - model_name: claude-sonnet-4
     litellm_params:
       model: github_copilot/claude-sonnet-4
@@ -571,11 +587,11 @@ litellm_settings:
 
   <div class="box box-danger">
     <div class="box-title"><code>drop_params: true</code> est obligatoire</div>
-    <p>Sans cette ligne, le parametre <code>thinking</code> envoye par Claude Code provoque une erreur 400 sur l'API Copilot.</p>
+    <p>Sans cette ligne, le paramètre <code>thinking</code> envoyé par Claude Code provoque une erreur 400 sur l'API Copilot.</p>
   </div>
 
   <h3>Lancement</h3>
-  <pre><code># Obtenir un token (si pas deja fait)
+  <pre><code class="language-bash"># Obtenir un token (si pas déjà fait)
 npx copilot-api@latest auth --show-token
 export GITHUB_TOKEN=ghu_xxxxxxxxxxxx
 
@@ -583,7 +599,7 @@ export GITHUB_TOKEN=ghu_xxxxxxxxxxxx
 litellm --config copilot-config.yaml --port 4000</code></pre>
 
   <h3>settings.json pour LiteLLM</h3>
-  <pre><code>{
+  <pre><code class="language-json">{
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
@@ -595,13 +611,13 @@ litellm --config copilot-config.yaml --port 4000</code></pre>
 }</code></pre>
 
   <h3>Dashboard web</h3>
-  <p>LiteLLM inclut une interface d'administration sur <code>http://localhost:4000/ui</code> : requetes en temps reel, consommation de tokens, gestion des modeles, erreurs.</p>
+  <p>LiteLLM inclut une interface d'administration sur <code>http://localhost:4000/ui</code> : requêtes en temps reel, consommation de tokens, gestion des modèles, erreurs.</p>
 
   <!-- Go proxy -->
-  <h2 id="g-m2-go">Methode 2D : claude-copilot-proxy (Go)</h2>
+  <h2 id="g-m2-go">Méthode 2D : claude-copilot-proxy (Go)</h2>
   <p><span class="badge badge-medium">Moyen</span> <span class="badge badge-clone">Clone</span> &mdash; <a href="https://github.com/acheong08/claude-copilot-proxy" target="_blank">github.com/acheong08/claude-copilot-proxy</a></p>
 
-  <pre><code># 1. Cloner
+  <pre><code class="language-bash"># 1. Cloner
 git clone https://github.com/acheong08/claude-copilot-proxy.git
 cd claude-copilot-proxy
 
@@ -618,7 +634,7 @@ ANTHROPIC_API_KEY=copilot-proxy \
 claude</code></pre>
 
   <h3>Builder un binaire</h3>
-  <pre><code>go build -o copilot-proxy ./cmd/proxy/
+  <pre><code class="language-bash">go build -o copilot-proxy ./cmd/proxy/
 COPILOT_API_KEY="ghu_..." ./copilot-proxy</code></pre>
 
   <!-- ===== CONFIG ===== -->
@@ -634,7 +650,7 @@ COPILOT_API_KEY="ghu_..." ./copilot-proxy</code></pre>
     <p><strong>Global</strong> (tous les projets) : <code>~/.claude/settings.json</code></p>
     <p><strong>Par projet</strong> : <code>.claude/settings.json</code> a la racine du projet</p>
     <p>Windows : <code>C:\Users\VOTRE_USER\.claude\settings.json</code></p>
-    <pre><code>{
+    <pre><code class="language-json">{
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
@@ -651,7 +667,7 @@ COPILOT_API_KEY="ghu_..." ./copilot-proxy</code></pre>
 
   <div id="config-bash" class="tab-content" data-group="config">
     <p>Ajoutez dans <code>~/.bashrc</code> ou <code>~/.zshrc</code> :</p>
-    <pre><code>export ANTHROPIC_BASE_URL="http://localhost:4141"
+    <pre><code class="language-bash">export ANTHROPIC_BASE_URL="http://localhost:4141"
 export ANTHROPIC_AUTH_TOKEN="dummy"
 export ANTHROPIC_MODEL="gpt-4.1"
 export ANTHROPIC_SMALL_FAST_MODEL="gpt-4.1-mini"
@@ -661,7 +677,7 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"</code></pre>
 
   <div id="config-ps" class="tab-content" data-group="config">
     <p>Ajoutez dans <code>$PROFILE</code> PowerShell :</p>
-    <pre><code>$env:ANTHROPIC_BASE_URL = "http://localhost:4141"
+    <pre><code class="language-bash">$env:ANTHROPIC_BASE_URL = "http://localhost:4141"
 $env:ANTHROPIC_AUTH_TOKEN = "dummy"
 $env:ANTHROPIC_MODEL = "gpt-4.1"
 $env:ANTHROPIC_SMALL_FAST_MODEL = "gpt-4.1-mini"
@@ -673,18 +689,18 @@ $env:CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"</code></pre>
   <h2 id="g-proxy-entreprise">Proxy entreprise (HTTP_PROXY)</h2>
 
   <h3>npm</h3>
-  <pre><code>npm config set proxy http://proxy.entreprise.fr:8080
+  <pre><code class="language-bash">npm config set proxy http://proxy.entreprise.fr:8080
 npm config set https-proxy http://proxy.entreprise.fr:8080
 
 # Avec authentification
 npm config set proxy http://user:pass@proxy.entreprise.fr:8080</code></pre>
 
   <h3>git</h3>
-  <pre><code>git config --global http.proxy http://proxy.entreprise.fr:8080
+  <pre><code class="language-bash">git config --global http.proxy http://proxy.entreprise.fr:8080
 git config --global https.proxy http://proxy.entreprise.fr:8080</code></pre>
 
   <h3>Le proxy copilot-api</h3>
-  <pre><code># Option 1 : flag
+  <pre><code class="language-bash"># Option 1 : flag
 npx copilot-api@latest start --proxy-env
 
 # Option 2 : variables
@@ -694,13 +710,13 @@ export NO_PROXY=localhost,127.0.0.1
 npx copilot-api@latest start</code></pre>
 
   <h3>pip (LiteLLM)</h3>
-  <pre><code>pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'</code></pre>
+  <pre><code class="language-bash">pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'</code></pre>
 
-  <h3>Certificats SSL auto-signes</h3>
-  <pre><code># Node.js (copilot-api, claude code)
+  <h3>Certificats SSL auto-signés</h3>
+  <pre><code class="language-bash"># Node.js (copilot-api, claude code)
 export NODE_EXTRA_CA_CERTS=/chemin/vers/cert-entreprise.pem
 
-# Si urgent (desactive la verif SSL - dev uniquement !)
+# Si urgent (désactive la verif SSL - dev uniquement !)
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 
 # Python (LiteLLM)
@@ -715,33 +731,33 @@ export REQUESTS_CA_BUNDLE=/chemin/vers/cert-entreprise.pem</code></pre>
   </div>
 
   <h3>Variables obligatoires</h3>
-  <pre><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1
+  <pre><code class="language-bash">DISABLE_NON_ESSENTIAL_MODEL_CALLS=1
 CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code></pre>
 
   <h3>Rate limiting</h3>
-  <pre><code>npx copilot-api@latest start --rate-limit 30 --wait</code></pre>
+  <pre><code class="language-bash">npx copilot-api@latest start --rate-limit 30 --wait</code></pre>
 
   <h3>Surveiller</h3>
-  <pre><code>npx copilot-api@latest check-usage
+  <pre><code class="language-bash">npx copilot-api@latest check-usage
 curl http://localhost:4141/usage</code></pre>
 
   <!-- ===== MODELES ===== -->
-  <h2 id="g-modeles">Choix des modeles</h2>
+  <h2 id="g-modèles">Choix des modèles</h2>
 
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Modele</th><th>Fournisseur</th><th>Tokens/req</th><th>Qualite</th></tr></thead>
+      <thead><tr><th>Modèle</th><th>Fournisseur</th><th>Tokens/req</th><th>Qualite</th></tr></thead>
       <tbody>
         <tr><td><code>gpt-4.1-mini</code></td><td>OpenAI</td><td>Faible</td><td>Correcte</td></tr>
         <tr><td><code>gpt-4.1</code></td><td>OpenAI</td><td>Moyen</td><td>Bonne</td></tr>
-        <tr><td><code>claude-sonnet-4</code></td><td>Anthropic</td><td>Moyen</td><td>Tres bonne</td></tr>
+        <tr><td><code>claude-sonnet-4</code></td><td>Anthropic</td><td>Moyen</td><td>Très bonne</td></tr>
         <tr><td><code>claude-opus-4</code></td><td>Anthropic</td><td>Eleve</td><td>Excellente</td></tr>
         <tr><td><code>o3-mini</code></td><td>OpenAI</td><td>Moyen</td><td>Bonne (raisonnement)</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Combinaisons recommandees</h3>
+  <h3>Combinaisons recommandées</h3>
   <div class="card-grid">
     <div class="card">
       <div class="card-title">&#128640; Dev quotidien</div>
@@ -767,14 +783,14 @@ curl http://localhost:4141/usage</code></pre>
   </div>
 
   <!-- ===== DEPANNAGE ===== -->
-  <h2 id="g-depannage">Depannage</h2>
+  <h2 id="g-dépannage">Dépannage</h2>
 
   <h3>Connexion</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Erreur</th><th>Cause</th><th>Solution</th></tr></thead>
       <tbody>
-        <tr><td><code>ECONNREFUSED</code></td><td>Proxy pas lance</td><td>Verifiez le terminal 1</td></tr>
+        <tr><td><code>ECONNREFUSED</code></td><td>Proxy pas lance</td><td>Vérifiez le terminal 1</td></tr>
         <tr><td><code>ECONNRESET</code></td><td>Proxy a crashe</td><td>Relancez avec <code>--verbose</code></td></tr>
         <tr><td><code>ETIMEDOUT</code></td><td>Proxy entreprise</td><td><code>--proxy-env</code> ou <code>HTTP_PROXY</code></td></tr>
       </tbody>
@@ -787,18 +803,18 @@ curl http://localhost:4141/usage</code></pre>
       <thead><tr><th>Erreur</th><th>Cause</th><th>Solution</th></tr></thead>
       <tbody>
         <tr><td><code>401</code></td><td>Token expire</td><td><code>npx copilot-api@latest auth</code></td></tr>
-        <tr><td><code>403</code></td><td>Licence inactive ou modele non autorise</td><td>Verifiez github.com/settings/copilot, essayez <code>--account-type</code></td></tr>
+        <tr><td><code>403</code></td><td>Licence inactive ou modèle non autorisé</td><td>Vérifiez github.com/settings/copilot, essayez <code>--account-type</code></td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Modeles</h3>
+  <h3>Modèles</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Erreur</th><th>Cause</th><th>Solution</th></tr></thead>
       <tbody>
-        <tr><td><code>thinking parameter</code></td><td>Copilot ne supporte pas</td><td>Proxies Node.js : automatique. LiteLLM : <code>drop_params: true</code></td></tr>
-        <tr><td><code>model not found</code></td><td>Modele indisponible</td><td><code>curl localhost:4141/v1/models</code></td></tr>
+        <tr><td><code>thinking parameter</code></td><td>Copilot ne supporté pas</td><td>Proxies Node.js : automatique. LiteLLM : <code>drop_params: true</code></td></tr>
+        <tr><td><code>model not found</code></td><td>Modèle indisponible</td><td><code>curl localhost:4141/v1/models</code></td></tr>
       </tbody>
     </table>
   </div>
@@ -808,7 +824,7 @@ curl http://localhost:4141/usage</code></pre>
     <table>
       <thead><tr><th>Probleme</th><th>Solution</th></tr></thead>
       <tbody>
-        <tr><td><code>npx</code> introuvable</td><td>Reinstallez Node.js avec "Add to PATH"</td></tr>
+        <tr><td><code>npx</code> introuvable</td><td>Réinstallez Node.js avec "Add to PATH"</td></tr>
         <tr><td>Scripts <code>.sh</code> ne marchent pas</td><td>Utilisez Git Bash ou WSL</td></tr>
         <tr><td>Droits npm global</td><td><code>npm config set prefix %USERPROFILE%\.npm-global</code></td></tr>
       </tbody>
@@ -816,14 +832,14 @@ curl http://localhost:4141/usage</code></pre>
   </div>
 
   <!-- ===== SECURITE ===== -->
-  <h2 id="g-securite">Securite et risques</h2>
+  <h2 id="g-sécurité">Sécurité et risques</h2>
 
   <div class="box box-danger">
     <div class="box-title">API non-officielle</div>
-    <p>Tous ces proxies utilisent des API <strong>reverse-engineered</strong> de GitHub Copilot. Ce n'est PAS supporte officiellement.</p>
+    <p>Tous ces proxies utilisent des API <strong>reverse-engineered</strong> de GitHub Copilot. Ce n'est PAS supporté officiellement.</p>
     <ul>
-      <li>Risque de suspension temporaire en cas d'abus detecte</li>
-      <li>Les API peuvent changer sans preavis</li>
+      <li>Risque de suspension temporaire en cas d'abus détecté</li>
+      <li>Les API peuvent changer sans préavis</li>
       <li>Pas de support officiel</li>
     </ul>
   </div>
@@ -833,7 +849,7 @@ curl http://localhost:4141/usage</code></pre>
     <li><strong>Ne commitez jamais vos tokens</strong> : ajoutez <code>.claude-copilot-auth.json</code> et <code>.copilot-api/</code> a <code>.gitignore</code></li>
     <li><strong>Proxy en local uniquement</strong> : n'exposez jamais sur <code>0.0.0.0</code></li>
     <li><strong>Utilisez le rate-limiting</strong> pour eviter la detection d'abus</li>
-    <li><strong>Consultez votre equipe securite</strong> avant utilisation en entreprise</li>
+    <li><strong>Consultez votre equipe sécurité</strong> avant utilisation en entreprise</li>
   </ul>
 
   <!-- ===== COMPARATIF ===== -->
@@ -843,7 +859,7 @@ curl http://localhost:4141/usage</code></pre>
     <table>
       <thead>
         <tr>
-          <th>Projet</th><th>Type</th><th>Difficulte</th><th>Daemon</th><th>Auth auto</th><th>Rate limit</th><th>Web search</th><th>Port</th>
+          <th>Projet</th><th>Type</th><th>Difficulté</th><th>Daemon</th><th>Auth auto</th><th>Rate limit</th><th>Web search</th><th>Port</th>
         </tr>
       </thead>
       <tbody>
@@ -875,37 +891,37 @@ curl http://localhost:4141/usage</code></pre>
     </table>
   </div>
 
-  <h3>Quelle methode choisir ?</h3>
+  <h3>Quelle méthode choisir ?</h3>
   <div class="card-grid">
     <div class="card" data-goto="#g-m1-copilot-api">
       <div class="card-icon">&#9889;</div>
-      <div class="card-title">Je veux que ca marche vite</div>
+      <div class="card-title">Je veux que ça marche vite</div>
       <div class="card-desc">copilot-api avec npx &mdash; 2 commandes et c'est parti</div>
     </div>
     <div class="card" data-goto="#g-m1-copilot-proxy">
       <div class="card-icon">&#127981;</div>
       <div class="card-title">Usage permanent en entreprise</div>
-      <div class="card-desc">copilot-proxy avec daemon &mdash; auto-demarrage au boot</div>
+      <div class="card-desc">copilot-proxy avec daemon &mdash; auto-démarrage au boot</div>
     </div>
     <div class="card" data-goto="#g-m1-lm-proxy">
       <div class="card-icon">&#128187;</div>
       <div class="card-title">VS Code toujours ouvert</div>
-      <div class="card-desc">LM Proxy &mdash; zero config supplementaire</div>
+      <div class="card-desc">LM Proxy &mdash; zero config supplémentaire</div>
     </div>
     <div class="card" data-goto="#g-m2-ccc">
       <div class="card-icon">&#128274;</div>
-      <div class="card-title">npx bloque en entreprise</div>
-      <div class="card-desc">claude-code-copilot clone &mdash; zero dependance</div>
+      <div class="card-title">npx bloqué en entreprise</div>
+      <div class="card-desc">claude-code-copilot clone &mdash; zero dépendance</div>
     </div>
     <div class="card" data-goto="#g-m2-litellm">
       <div class="card-icon">&#9881;</div>
       <div class="card-title">Controle total</div>
-      <div class="card-desc">LiteLLM &mdash; dashboard web, multi-modeles</div>
+      <div class="card-desc">LiteLLM &mdash; dashboard web, multi-modèles</div>
     </div>
     <div class="card" data-goto="#g-m2-go">
       <div class="card-icon">&#128039;</div>
       <div class="card-title">Developpeur Go</div>
-      <div class="card-desc">claude-copilot-proxy &mdash; leger, un binaire</div>
+      <div class="card-desc">claude-copilot-proxy &mdash; léger, un binaire</div>
     </div>
   </div>
 
@@ -914,9 +930,9 @@ curl http://localhost:4141/usage</code></pre>
 <!-- ============================================================ -->
 <!-- PAGE: REFERENCE                                               -->
 <!-- ============================================================ -->
-<div id="reference" class="page">
+<div id="référence" class="page">
 
-  <h1>Reference</h1>
+  <h1>Référence</h1>
   <p class="subtitle">Toutes les variables, options et endpoints en un coup d'oeil.</p>
 
   <h2 id="r-env">Variables d'environnement</h2>
@@ -927,10 +943,10 @@ curl http://localhost:4141/usage</code></pre>
         <tr><td><code>ANTHROPIC_BASE_URL</code></td><td>URL du proxy local</td><td><code>http://localhost:4141</code></td><td>Oui</td></tr>
         <tr><td><code>ANTHROPIC_AUTH_TOKEN</code></td><td>Token (valeur bidon acceptee)</td><td><code>dummy</code></td><td>Oui</td></tr>
         <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Alternative a AUTH_TOKEN</td><td><code>copilot-proxy</code></td><td>Oui (ou AUTH_TOKEN)</td></tr>
-        <tr><td><code>ANTHROPIC_MODEL</code></td><td>Modele principal</td><td><code>gpt-4.1</code></td><td>Recommande</td></tr>
-        <tr><td><code>ANTHROPIC_SMALL_FAST_MODEL</code></td><td>Modele rapide/leger</td><td><code>gpt-4.1-mini</code></td><td>Recommande</td></tr>
-        <tr><td><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS</code></td><td>Reduit les appels inutiles</td><td><code>1</code></td><td><strong>Fortement recommande</strong></td></tr>
-        <tr><td><code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC</code></td><td>Reduit le trafic non-essentiel</td><td><code>1</code></td><td><strong>Fortement recommande</strong></td></tr>
+        <tr><td><code>ANTHROPIC_MODEL</code></td><td>Modèle principal</td><td><code>gpt-4.1</code></td><td>Recommande</td></tr>
+        <tr><td><code>ANTHROPIC_SMALL_FAST_MODEL</code></td><td>Modèle rapide/léger</td><td><code>gpt-4.1-mini</code></td><td>Recommande</td></tr>
+        <tr><td><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS</code></td><td>Réduit les appels inutiles</td><td><code>1</code></td><td><strong>Fortement recommandé</strong></td></tr>
+        <tr><td><code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC</code></td><td>Réduit le trafic non-essentiel</td><td><code>1</code></td><td><strong>Fortement recommandé</strong></td></tr>
       </tbody>
     </table>
   </div>
@@ -938,24 +954,24 @@ curl http://localhost:4141/usage</code></pre>
   <h2 id="r-cli">Options CLI de copilot-api</h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Flag</th><th>Court</th><th>Description</th><th>Defaut</th></tr></thead>
+      <thead><tr><th>Flag</th><th>Court</th><th>Description</th><th>Défaut</th></tr></thead>
       <tbody>
         <tr><td><code>--port</code></td><td><code>-p</code></td><td>Port du proxy</td><td>4141</td></tr>
-        <tr><td><code>--verbose</code></td><td><code>-v</code></td><td>Logs detailles</td><td>off</td></tr>
+        <tr><td><code>--verbose</code></td><td><code>-v</code></td><td>Logs détaillés</td><td>off</td></tr>
         <tr><td><code>--account-type</code></td><td><code>-a</code></td><td>individual / business / enterprise</td><td>individual</td></tr>
-        <tr><td><code>--manual</code></td><td></td><td>Confirmer chaque requete</td><td>off</td></tr>
-        <tr><td><code>--rate-limit</code></td><td><code>-r</code></td><td>Delai min entre requetes (sec)</td><td>0</td></tr>
+        <tr><td><code>--manual</code></td><td></td><td>Confirmer chaque requête</td><td>off</td></tr>
+        <tr><td><code>--rate-limit</code></td><td><code>-r</code></td><td>Délai min entre requêtes (sec)</td><td>0</td></tr>
         <tr><td><code>--wait</code></td><td><code>-w</code></td><td>Attendre si rate-limited</td><td>off</td></tr>
         <tr><td><code>--github-token</code></td><td><code>-g</code></td><td>Token GitHub direct</td><td></td></tr>
         <tr><td><code>--claude-code</code></td><td><code>-c</code></td><td>Mode interactif Claude Code</td><td>off</td></tr>
         <tr><td><code>--show-token</code></td><td></td><td>Afficher les tokens</td><td>off</td></tr>
-        <tr><td><code>--proxy-env</code></td><td></td><td>Utiliser HTTP_PROXY systeme</td><td>off</td></tr>
+        <tr><td><code>--proxy-env</code></td><td></td><td>Utiliser HTTP_PROXY système</td><td>off</td></tr>
       </tbody>
     </table>
   </div>
 
   <h3>Autres commandes</h3>
-  <pre><code>copilot-api auth           # Authentification seule
+  <pre><code class="language-bash">copilot-api auth           # Authentification seule
 copilot-api check-usage    # Consommation de quota
 copilot-api debug          # Diagnostic</code></pre>
 
@@ -966,8 +982,8 @@ copilot-api debug          # Diagnostic</code></pre>
       <tbody>
         <tr><td><code>POST /v1/messages</code></td><td>Anthropic</td><td>Utilise par Claude Code</td></tr>
         <tr><td><code>POST /v1/messages/count_tokens</code></td><td>Anthropic</td><td>Comptage de tokens</td></tr>
-        <tr><td><code>POST /v1/chat/completions</code></td><td>OpenAI</td><td>Compatible autres outils</td></tr>
-        <tr><td><code>GET /v1/models</code></td><td>OpenAI</td><td>Liste des modeles</td></tr>
+        <tr><td><code>POST /v1/chat/complétions</code></td><td>OpenAI</td><td>Compatible autres outils</td></tr>
+        <tr><td><code>GET /v1/models</code></td><td>OpenAI</td><td>Liste des modèles</td></tr>
         <tr><td><code>POST /v1/embeddings</code></td><td>OpenAI</td><td>Embeddings</td></tr>
         <tr><td><code>GET /usage</code></td><td>Custom</td><td>Stats d'utilisation</td></tr>
         <tr><td><code>GET /token</code></td><td>Custom</td><td>Info token actuel</td></tr>
@@ -975,15 +991,15 @@ copilot-api debug          # Diagnostic</code></pre>
     </table>
   </div>
 
-  <h2 id="r-modeles">Modeles disponibles</h2>
+  <h2 id="r-modèles">Modèles disponibles</h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Modele</th><th>Fournisseur</th><th>Forces</th><th>Conso tokens</th></tr></thead>
+      <thead><tr><th>Modèle</th><th>Fournisseur</th><th>Forces</th><th>Conso tokens</th></tr></thead>
       <tbody>
         <tr><td><code>gpt-4.1</code></td><td>OpenAI</td><td>Polyvalent, bon en code</td><td>Moyenne</td></tr>
         <tr><td><code>gpt-4.1-mini</code></td><td>OpenAI</td><td>Rapide, economique</td><td>Faible</td></tr>
         <tr><td><code>gpt-4o</code></td><td>OpenAI</td><td>Multimodal</td><td>Moyenne</td></tr>
-        <tr><td><code>gpt-4o-mini</code></td><td>OpenAI</td><td>Tres rapide</td><td>Faible</td></tr>
+        <tr><td><code>gpt-4o-mini</code></td><td>OpenAI</td><td>Très rapide</td><td>Faible</td></tr>
         <tr><td><code>claude-sonnet-4</code></td><td>Anthropic</td><td>Excellent en code</td><td>Moyenne</td></tr>
         <tr><td><code>claude-opus-4</code></td><td>Anthropic</td><td>Le plus puissant</td><td>Elevee</td></tr>
         <tr><td><code>o3</code></td><td>OpenAI</td><td>Raisonnement avance</td><td>Elevee</td></tr>
@@ -991,19 +1007,19 @@ copilot-api debug          # Diagnostic</code></pre>
       </tbody>
     </table>
   </div>
-  <pre><code># Voir les modeles disponibles sur votre proxy
+  <pre><code class="language-bash"># Voir les modèles disponibles sur votre proxy
 curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
 
   <h2 id="r-settings">settings.json complet</h2>
-  <p>Fichier de reference avec toutes les options :</p>
-  <pre><code>// ~/.claude/settings.json
+  <p>Fichier de référence avec toutes les options :</p>
+  <pre><code class="language-json">// ~/.claude/settings.json
 {
   "env": {
     // Connexion au proxy (OBLIGATOIRE)
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
 
-    // Modeles (RECOMMANDE)
+    // Modèles (RECOMMANDE)
     "ANTHROPIC_MODEL": "gpt-4.1",
     "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
 
@@ -1012,7 +1028,7 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
   "permissions": {
-    // Desactive la recherche web (ne fonctionne pas via Copilot)
+    // Désactive la recherche web (ne fonctionne pas via Copilot)
     "deny": ["WebSearch"]
   }
 }</code></pre>
@@ -1024,10 +1040,10 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     <div class="box-title">Pourquoi la consommation est si elevee</div>
     <p>Claude Code n'est pas un simple chatbot. A chaque interaction, il :</p>
     <ol>
-      <li>Envoie <strong>tout le contexte</strong> (fichiers, historique, resultats d'outils) = 10 000-50 000 tokens d'entree</li>
+      <li>Envoie <strong>tout le contexte</strong> (fichiers, historique, resultats d'outils) = 10 000-50 000 tokens d'entrée</li>
       <li>Peut enchainer <strong>3 a 15 appels API</strong> en cascade pour une seule commande</li>
       <li>Genere des <strong>reponses longues</strong> avec du code complet = 2 000-10 000 tokens de sortie</li>
-      <li>Fait des <strong>appels en arriere-plan</strong> (sans les flags d'optimisation)</li>
+      <li>Fait des <strong>appels en arrière-plan</strong> (sans les flags d'optimisation)</li>
     </ol>
   </div>
 
@@ -1054,11 +1070,11 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     <div class="card">
       <div class="card-icon">&#9201;</div>
       <div class="card-title">Rate limiting</div>
-      <div class="card-desc"><code>--rate-limit 30 --wait</code> espace les requetes et evite les pics</div>
+      <div class="card-desc"><code>--rate-limit 30 --wait</code> espace les requêtes et evite les pics</div>
     </div>
     <div class="card">
       <div class="card-icon">&#128269;</div>
-      <div class="card-title">Desactiver WebSearch</div>
+      <div class="card-title">Désactiver WebSearch</div>
       <div class="card-desc"><code>"deny": ["WebSearch"]</code> evite des appels gaspilles</div>
     </div>
     <div class="card">

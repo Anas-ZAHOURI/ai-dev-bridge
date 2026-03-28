@@ -1,12 +1,12 @@
 # Manuel d'utilisation : Claude Code via GitHub Copilot
 
-> **Contexte** : Vous etes sur un PC de dev entreprise qui autorise uniquement GitHub Copilot.
+> **Contexte** : Vous êtes sur un PC de dev entreprise qui autorise uniquement GitHub Copilot.
 > Ce guide vous permet d'utiliser **Claude Code** en passant par votre licence Copilot existante,
-> grace a un proxy local qui traduit les requetes entre les deux API.
+> grace a un proxy local qui traduit les requêtes entre les deux API.
 
 ---
 
-## Comment ca marche ?
+## Comment ça marche ?
 
 ```
 Claude Code  --->  Proxy local (localhost)  --->  API GitHub Copilot
@@ -14,13 +14,13 @@ Claude Code  --->  Proxy local (localhost)  --->  API GitHub Copilot
 ```
 
 Le proxy intercepte les appels de Claude Code (format Anthropic), les convertit au format
-Copilot/OpenAI, envoie la requete a GitHub, puis retraduit la reponse pour Claude Code.
+Copilot/OpenAI, envoie la requête a GitHub, puis retraduit la réponse pour Claude Code.
 
 ---
 
 ## Prerequis communs
 
-- **Node.js** >= 18 installe (verifiez avec `node --version`)
+- **Node.js** >= 18 installe (vérifiez avec `node --version`)
 - **GitHub Copilot** actif sur votre compte GitHub (Individual, Business ou Enterprise)
 - **Claude Code** installe :
   ```bash
@@ -29,16 +29,16 @@ Copilot/OpenAI, envoie la requete a GitHub, puis retraduit la reponse pour Claud
 
 ---
 
-# METHODE 1 : Installation via npm/npx (rapide)
+# MÉTHODE 1 : Installation via npm/npx (rapide)
 
 ## Option A : copilot-api (le plus populaire)
 
 **Repo** : https://github.com/ericc-ch/copilot-api
 
-### Etape 1 : Lancer le proxy
+### Étape 1 : Lancer le proxy
 
 ```bash
-# Methode rapide avec npx (rien a installer)
+# Méthode rapide avec npx (rien a installer)
 npx copilot-api@latest start --claude-code
 ```
 
@@ -48,24 +48,24 @@ npm install -g copilot-api
 copilot-api start --claude-code
 ```
 
-### Etape 2 : Authentification
+### Étape 2 : Authentification
 
 Au premier lancement, le proxy affiche un **code d'appareil** et ouvre votre navigateur.
 1. Connectez-vous a GitHub
 2. Entrez le code affiche dans le terminal
 3. Autorisez l'application
 
-### Etape 3 : Selection des modeles
+### Étape 3 : Selection des modèles
 
 Le flag `--claude-code` vous demande de choisir :
-- Un **modele principal** (ex: `gpt-4.1`, `claude-sonnet-4`)
-- Un **modele rapide** (ex: `gpt-4.1-mini`)
+- Un **modèle principal** (ex: `gpt-4.1`, `claude-sonnet-4`)
+- Un **modèle rapide** (ex: `gpt-4.1-mini`)
 
-Une commande de lancement est **copiee dans votre presse-papier**. Collez-la dans un 2e terminal.
+Une commande de lancement est **copiée dans votre presse-papier**. Collez-la dans un 2e terminal.
 
-### Etape 4 : Configuration manuelle (alternative)
+### Étape 4 : Configuration manuelle (alternative)
 
-Si vous preferez configurer manuellement, creez/editez le fichier `.claude/settings.json`
+Si vous preferez configurer manuellement, créez/editez le fichier `.claude/settings.json`
 dans votre home ou votre projet :
 
 ```json
@@ -97,14 +97,14 @@ claude
 
 | Flag | Description |
 |------|-------------|
-| `--port 4141` | Port du proxy (defaut: 4141) |
+| `--port 4141` | Port du proxy (défaut: 4141) |
 | `--account-type business` | Type de compte : `individual`, `business`, `enterprise` |
-| `--rate-limit 30` | Delai minimum (secondes) entre les requetes |
+| `--rate-limit 30` | Délai minimum (secondes) entre les requêtes |
 | `--wait` | Attendre au lieu d'erreur si rate-limit atteint |
-| `--verbose` | Logs detailles |
-| `--proxy-env` | Utiliser HTTP_PROXY/HTTPS_PROXY du systeme |
+| `--verbose` | Logs détaillés |
+| `--proxy-env` | Utiliser HTTP_PROXY/HTTPS_PROXY du système |
 
-### Commandes supplementaires
+### Commandes supplémentaires
 
 ```bash
 npx copilot-api@latest auth           # Authentification seule
@@ -127,18 +127,18 @@ npm install -g @jer-y/copilot-proxy
 copilot-proxy start --claude-code
 ```
 
-**Port par defaut** : 4399
+**Port par défaut** : 4399
 
-### Avantage : mode daemon (arriere-plan)
+### Avantage : mode daemon (arrière-plan)
 
 ```bash
-copilot-proxy start -d       # Demarrer en arriere-plan
+copilot-proxy start -d       # Demarrer en arrière-plan
 copilot-proxy status          # Voir le statut
 copilot-proxy logs            # Voir les logs
-copilot-proxy stop            # Arreter
-copilot-proxy restart         # Redemarrer
-copilot-proxy enable          # Auto-demarrage au boot
-copilot-proxy disable         # Desactiver l'auto-demarrage
+copilot-proxy stop            # Arrêter
+copilot-proxy restart         # Redémarrer
+copilot-proxy enable          # Auto-démarrage au boot
+copilot-proxy disable         # Désactiver l'auto-démarrage
 ```
 
 Configuration `.claude/settings.json` :
@@ -163,21 +163,21 @@ Configuration `.claude/settings.json` :
 **Marketplace** : cherchez "LM Proxy" dans les extensions VS Code
 
 1. Installez l'extension dans VS Code
-2. Elle utilise l'authentification Copilot deja presente dans VS Code
+2. Elle utilise l'authentification Copilot déjà presente dans VS Code
 3. Lancez Claude Code avec :
 
 ```bash
 ANTHROPIC_BASE_URL=http://localhost:4000/anthropic/claude claude
 ```
 
-> **Avantage** : Pas besoin d'authentification separee, utilise directement celle de VS Code.
-> **Inconvenient** : VS Code doit rester ouvert.
+> **Avantage** : Pas besoin d'authentification séparée, utilise directement celle de VS Code.
+> **Inconvénient** : VS Code doit rester ouvert.
 
 ---
 
-# METHODE 2 : Cloner les projets et les demarrer a la main
+# MÉTHODE 2 : Cloner les projets et les démarrer à la main
 
-Pour un controle total ou si npx est bloque par votre proxy entreprise.
+Pour un controle total ou si npx est bloqué par votre proxy entreprise.
 
 ## Projet A : copilot-api (Node.js)
 
@@ -186,7 +186,7 @@ Pour un controle total ou si npx est bloque par votre proxy entreprise.
 git clone https://github.com/ericc-ch/copilot-api.git
 cd copilot-api
 
-# 2. Installer les dependances
+# 2. Installer les dépendances
 npm install
 
 # 3. Builder le projet
@@ -201,7 +201,7 @@ node dist/index.js start --port 4141 --verbose
 
 ---
 
-## Projet B : claude-code-copilot (Node.js pur, zero dependance externe)
+## Projet B : claude-code-copilot (Node.js pur, zero dépendance externe)
 
 **Repo** : https://github.com/samarth777/claude-code-copilot
 
@@ -217,7 +217,7 @@ node scripts/auth.mjs
 bash scripts/launch.sh
 
 # Ou manuellement :
-# Terminal 1 : proxy (port 18080 par defaut)
+# Terminal 1 : proxy (port 18080 par défaut)
 node src/proxy.mjs
 
 # Terminal 2 : Claude Code
@@ -226,13 +226,13 @@ ANTHROPIC_BASE_URL=http://localhost:18080 ANTHROPIC_API_KEY=copilot-proxy claude
 
 **Variables d'environnement optionnelles** :
 
-| Variable | Defaut | Description |
+| Variable | Défaut | Description |
 |----------|--------|-------------|
 | `COPILOT_PROXY_PORT` | 18080 | Port du proxy |
 | `COPILOT_AUTH_FILE` | ~/.claude-copilot-auth.json | Fichier token OAuth |
 | `BRAVE_API_KEY` | (aucun) | Cle Brave Search (recherche web) |
 
-> **Bonus** : Ce projet inclut une recherche web integree (DuckDuckGo gratuit ou Brave Search).
+> **Bonus** : Ce projet inclut une recherche web intégrée (DuckDuckGo gratuit ou Brave Search).
 
 ---
 
@@ -259,7 +259,7 @@ node dist/index.js start --claude-code --port 4399
 
 **Repo** : https://github.com/acheong08/claude-copilot-proxy
 
-> Necessite Go installe (`go version`)
+> Nécessite Go installé (`go version`)
 
 ```bash
 # 1. Cloner
@@ -284,7 +284,7 @@ ANTHROPIC_BASE_URL=http://localhost:8082 ANTHROPIC_API_KEY=copilot-proxy claude
 # 1. Installer
 pip install 'litellm[proxy]'
 
-# 2. Creer le fichier de config copilot-config.yaml :
+# 2. Créer le fichier de config copilot-config.yaml :
 ```
 
 Contenu de `copilot-config.yaml` :
@@ -307,8 +307,8 @@ litellm_settings:
   drop_params: true
 ```
 
-> **IMPORTANT** : `drop_params: true` est obligatoire, sinon le parametre `thinking`
-> envoye par Claude Code provoque une erreur.
+> **IMPORTANT** : `drop_params: true` est obligatoire, sinon le paramètre `thinking`
+> envoyé par Claude Code provoque une erreur.
 
 ```bash
 # 3. Lancer
@@ -332,17 +332,17 @@ litellm --config copilot-config.yaml
 
 ---
 
-# Reference des variables d'environnement
+# Référence des variables d'environnement
 
 | Variable | Role | Exemple |
 |----------|------|---------|
 | `ANTHROPIC_BASE_URL` | URL du proxy local | `http://localhost:4141` |
 | `ANTHROPIC_AUTH_TOKEN` | Token (valeur bidon acceptee) | `dummy` |
 | `ANTHROPIC_API_KEY` | Alternative a AUTH_TOKEN | `copilot-proxy` |
-| `ANTHROPIC_MODEL` | Modele principal | `gpt-4.1`, `claude-sonnet-4` |
-| `ANTHROPIC_SMALL_FAST_MODEL` | Modele rapide/leger | `gpt-4.1-mini` |
-| `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Reduit les appels inutiles | `1` |
-| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Reduit encore plus le trafic | `1` |
+| `ANTHROPIC_MODEL` | Modèle principal | `gpt-4.1`, `claude-sonnet-4` |
+| `ANTHROPIC_SMALL_FAST_MODEL` | Modèle rapide/léger | `gpt-4.1-mini` |
+| `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Réduit les appels inutiles | `1` |
+| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Réduit encore plus le trafic | `1` |
 
 ---
 
@@ -352,20 +352,20 @@ litellm --config copilot-config.yaml
 Claude Code consomme **10 a 100x plus de tokens** qu'un chat Copilot classique.
 Une seule commande "edite ce fichier" peut consommer 50 000 a 150 000 tokens.
 - Activez `DISABLE_NON_ESSENTIAL_MODEL_CALLS=1`
-- Utilisez `--rate-limit 30 --wait` pour espacer les requetes
+- Utilisez `--rate-limit 30 --wait` pour espacer les requêtes
 
 ### 2. Erreur "thinking parameter"
-Claude Code envoie un parametre `thinking` que Copilot ne supporte pas.
-- Les proxies Node.js (copilot-api, copilot-proxy) gerent ca automatiquement
+Claude Code envoie un paramètre `thinking` que Copilot ne supporté pas.
+- Les proxies Node.js (copilot-api, copilot-proxy) gèrent ca automatiquement
 - Avec LiteLLM, mettez `drop_params: true` dans la config
 
-### 3. Recherche web qui echoue
+### 3. Recherche web qui échoue
 Claude Code tente des recherches web qui ne passent pas par Copilot.
 - Ajoutez `"deny": ["WebSearch"]` dans vos permissions
-- Ou utilisez claude-code-copilot qui a sa propre recherche web integree
+- Ou utilisez claude-code-copilot qui a sa propre recherche web intégrée
 
 ### 4. Proxy entreprise
-Si vous etes derriere un proxy HTTP d'entreprise :
+Si vous êtes derrière un proxy HTTP d'entreprise :
 ```bash
 # Pour copilot-api
 npx copilot-api@latest start --proxy-env
@@ -377,19 +377,19 @@ export HTTPS_PROXY=http://proxy.entreprise.fr:8080
 
 ### 5. Risque sur le compte
 Ces outils utilisent des API **non-officielles** de GitHub Copilot.
-Une utilisation excessive peut declencher une detection d'abus.
+Une utilisation excessive peut déclencher une detection d'abus.
 - Utilisez le rate-limiting
-- Evitez les sessions tres longues sans pause
+- Évitez les sessions tres longues sans pause
 
-### 6. Noms de modeles
-Meme si Claude Code pense parler a l'API Anthropic, vous specifiez des noms
-de modeles **Copilot** (ex: `gpt-4.1`). Le proxy traduit tout.
+### 6. Noms de modèles
+Meme si Claude Code pense parler à l'API Anthropic, vous specifiez des noms
+de modèles **Copilot** (ex: `gpt-4.1`). Le proxy traduit tout.
 
 ---
 
 # Tableau comparatif
 
-| Projet | Langage | Install npx | Daemon | Auth auto | Port defaut |
+| Projet | Langage | Install npx | Daemon | Auth auto | Port défaut |
 |--------|---------|-------------|--------|-----------|-------------|
 | copilot-api | Node.js | `npx copilot-api@latest` | Non | Oui | 4141 |
 | copilot-proxy (Jer-y) | Node.js | `npx @jer-y/copilot-proxy@latest` | Oui | Oui | 4399 |
@@ -400,14 +400,14 @@ de modeles **Copilot** (ex: `gpt-4.1`). Le proxy traduit tout.
 
 ---
 
-# Demarrage rapide (TL;DR)
+# Démarrage rapide (TL;DR)
 
 ### Le plus simple (2 commandes) :
 ```bash
 # Terminal 1
 npx copilot-api@latest start --claude-code
 
-# Terminal 2 : collez la commande copiee dans le presse-papier
+# Terminal 2 : collez la commande copiée dans le presse-papier
 ```
 
 ### Le plus robuste pour entreprise :
@@ -415,7 +415,7 @@ npx copilot-api@latest start --claude-code
 # Installer en global + daemon
 npm install -g @jer-y/copilot-proxy
 copilot-proxy start --claude-code -d
-copilot-proxy enable   # auto-demarrage au boot
+copilot-proxy enable   # auto-démarrage au boot
 ```
 
 ### Le plus flexible (Python) :

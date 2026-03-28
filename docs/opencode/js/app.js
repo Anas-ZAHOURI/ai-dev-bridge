@@ -139,3 +139,27 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('quickstart');
   }
 });
+
+// ===== Dark Mode Toggle =====
+function setupDarkMode() {
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  const btn = document.createElement('button');
+  btn.className = 'dark-mode-toggle';
+  btn.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+  btn.title = 'Basculer thème sombre/clair';
+  btn.onclick = function() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    btn.innerHTML = next === 'dark' ? '☀️' : '🌙';
+  };
+  document.body.appendChild(btn);
+}
+setupDarkMode();
