@@ -358,6 +358,9 @@ a.header-logo-link:hover { color: inherit; text-decoration: none; }
 .dark-mode-toggle-header:hover {
   background: rgba(255,255,255,.1);
 }
+.header-github i, .dark-mode-toggle-header i {
+  vertical-align: middle;
+}
 
 /* ===== Dark Mode ===== */
 [data-theme="dark"] {
