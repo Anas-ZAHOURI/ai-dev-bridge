@@ -18,7 +18,7 @@
   --orange: #d17a00;
   --red: #e60028;
   --purple: #6b21a8;
-  --blue: #1a6dcc;
+  --blue: #6b7280;
   --sidebar-w: 280px;
   --header-h: 60px;
   --radius: 6px;
@@ -217,7 +217,7 @@ pre:hover .copy-btn { opacity: 1; }
   border-left: 4px solid;
   font-size: 14px;
 }
-.box-info { background: #f0f7ff; border-color: var(--blue); }
+.box-info { background: #f3f4f6; border-color: var(--blue); }
 .box-warn { background: #fff8eb; border-color: var(--orange); }
 .box-danger { background: var(--accent-light); border-color: var(--accent); }
 .box-success { background: #f0faf4; border-color: var(--green); }
@@ -314,7 +314,7 @@ tr:hover td { background: var(--accent-light); }
 .badge-easy { background: #f0faf4; color: var(--green); border: 1px solid var(--green); }
 .badge-medium { background: #fff8eb; color: var(--orange); border: 1px solid var(--orange); }
 .badge-hard { background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); }
-.badge-npm { background: #f0f7ff; color: var(--blue); border: 1px solid var(--blue); }
+.badge-npm { background: #f3f4f6; color: var(--blue); border: 1px solid var(--blue); }
 .badge-clone { background: #f5f0ff; color: var(--purple); border: 1px solid var(--purple); }
 
 /* ===== Responsive ===== */
