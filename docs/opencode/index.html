@@ -580,6 +580,51 @@ export NODE_EXTRA_CA_CERTS=/chemin/vers/cert-entreprise.pem
 # Solution rapide (dev uniquement)
 export NODE_TLS_REJECT_UNAUTHORIZED=0</code></pre>
 
+  <h3>Authentification NTLM / Kerberos</h3>
+  <p>Utilisez <strong>Cntlm</strong> comme relais proxy local pour gérer l'authentification NTLM :</p>
+  <pre><code class="language-bash"># Installer et configurer Cntlm
+# Puis utiliser comme proxy local sans auth :
+export HTTP_PROXY=http://127.0.0.1:3128
+export HTTPS_PROXY=http://127.0.0.1:3128
+opencode</code></pre>
+
+  <h3>Domaines à autoriser (whitelist)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Domaine</th><th>Port</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>github.com</code></td><td>443</td><td>Authentification OAuth</td></tr>
+        <tr><td><code>api.github.com</code></td><td>443</td><td>API REST GitHub</td></tr>
+        <tr><td><code>api.individual.githubcopilot.com</code></td><td>443</td><td>API Copilot (modèles IA)</td></tr>
+        <tr><td><code>copilot-proxy.githubusercontent.com</code></td><td>443</td><td>Proxy Copilot</td></tr>
+        <tr><td><code>registry.npmjs.org</code></td><td>443</td><td>Installation packages npm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Windows (PowerShell)</h3>
+  <pre><code class="language-powershell">$env:HTTP_PROXY = "http://proxy.entreprise.fr:8080"
+$env:HTTPS_PROXY = "http://proxy.entreprise.fr:8080"
+$env:NO_PROXY = "localhost,127.0.0.1"
+$env:NODE_EXTRA_CA_CERTS = "C:\Certificats\ca-entreprise.pem"
+opencode</code></pre>
+
+  <h3>WSL2</h3>
+  <pre><code class="language-bash"># WSL2 ne hérite pas du proxy Windows
+WIN_HOST=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export HTTP_PROXY=http://${WIN_HOST}:3128
+export HTTPS_PROXY=http://${WIN_HOST}:3128
+cp /mnt/c/Certificats/ca-entreprise.pem ~/ca-entreprise.pem
+export NODE_EXTRA_CA_CERTS=~/ca-entreprise.pem
+opencode</code></pre>
+
+  <h3>Diagnostic</h3>
+  <pre><code class="language-bash"># Tester via le proxy corporate
+curl -v --proxy http://proxy.entreprise.fr:8080 https://api.github.com/zen
+
+# Vérifier les variables proxy
+env | grep -i proxy</code></pre>
+
   <!-- ===== VS CLAUDE CODE ===== -->
   <h2 id="g-vs-claude">OpenCode vs Claude Code</h2>
 

@@ -373,6 +373,51 @@ npx copilot-api@latest start --proxy-env
 # Ou definissez les variables avant de lancer
 export HTTP_PROXY=http://proxy.entreprise.fr:8080
 export HTTPS_PROXY=http://proxy.entreprise.fr:8080
+export NO_PROXY=localhost,127.0.0.1
+```
+
+**Authentification NTLM/Kerberos** : installez [Cntlm](https://cntlm.sourceforge.net/) comme relais local, puis pointez `HTTP_PROXY` vers `http://127.0.0.1:3128`.
+
+**Certificats SSL auto-signés** (erreur `UNABLE_TO_VERIFY_LEAF_SIGNATURE`) :
+```bash
+# Ajouter le certificat racine de l'entreprise
+export NODE_EXTRA_CA_CERTS=/chemin/vers/cert-entreprise.pem
+
+# Python (LiteLLM)
+export REQUESTS_CA_BUNDLE=/chemin/vers/cert-entreprise.pem
+
+# Solution temporaire (dev uniquement !)
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+```
+
+**Windows (PowerShell)** :
+```powershell
+$env:HTTP_PROXY = "http://proxy.entreprise.fr:8080"
+$env:HTTPS_PROXY = "http://proxy.entreprise.fr:8080"
+$env:NODE_EXTRA_CA_CERTS = "C:\Certificats\ca-entreprise.pem"
+```
+
+**WSL2** : le proxy Windows n'est pas hérité automatiquement :
+```bash
+WIN_HOST=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export HTTP_PROXY=http://${WIN_HOST}:3128
+export HTTPS_PROXY=http://${WIN_HOST}:3128
+```
+
+**Domaines à whitelister** (firewall) :
+- `github.com` / `api.github.com` (port 443)
+- `api.individual.githubcopilot.com` (port 443)
+- `copilot-proxy.githubusercontent.com` (port 443)
+- `registry.npmjs.org` (port 443)
+- `localhost:4141` (proxy local — ne pas bloquer)
+
+**Chaîne de proxys** : seul copilot-api passe par le proxy corporate. Claude Code pointe vers `localhost:4141` uniquement.
+
+**Diagnostic** :
+```bash
+curl -v --proxy http://proxy.entreprise.fr:8080 https://api.github.com/zen
+curl http://localhost:4141/v1/models
+env | grep -i proxy
 ```
 
 ### 5. Risque sur le compte

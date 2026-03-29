@@ -984,6 +984,184 @@ export REQUESTS_CA_BUNDLE=/chemin/vers/certificat-entreprise.pem
 export SSL_CERT_FILE=/chemin/vers/certificat-entreprise.pem
 ```
 
+### 12.6 Fichier PAC / WPAD (auto-configuration)
+
+Si votre entreprise utilise un fichier PAC (Proxy Auto-Configuration) :
+
+```bash
+# Trouver l'URL du fichier PAC
+# Windows (PowerShell)
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" | Select-Object AutoConfigURL
+
+# macOS / Linux
+echo $auto_proxy
+# Ou cherchez dans les paramètres réseau du système
+```
+
+Le fichier PAC retourne le proxy à utiliser selon l'URL cible. Extrayez l'adresse du proxy pour les domaines GitHub :
+
+```bash
+# Typiquement, le PAC contient une règle comme :
+# if (shExpMatch(host, "*.github.com")) return "PROXY proxy.entreprise.fr:8080"
+
+# Utilisez cette adresse comme HTTP_PROXY
+export HTTP_PROXY=http://proxy.entreprise.fr:8080
+export HTTPS_PROXY=http://proxy.entreprise.fr:8080
+```
+
+### 12.7 Authentification NTLM / Kerberos
+
+Les proxys d'entreprise Windows utilisent souvent NTLM ou Kerberos. Node.js ne supporte pas nativement ces protocoles.
+
+**Solution : Cntlm (proxy relais local)**
+
+```bash
+# 1. Installer Cntlm
+# Windows : téléchargez depuis https://cntlm.sourceforge.net/
+# Ubuntu/Debian :
+sudo apt install cntlm
+# macOS :
+brew install cntlm
+
+# 2. Configurer /etc/cntlm.conf (ou C:\Program Files\Cntlm\cntlm.ini)
+Username    votre-login
+Domain      VOTRE-DOMAINE
+Proxy       proxy-entreprise.fr:8080
+Listen      127.0.0.1:3128
+
+# 3. Générer le hash du mot de passe (ne stockez jamais en clair)
+cntlm -H -d VOTRE-DOMAINE -u votre-login
+
+# 4. Copier les hashes dans cntlm.conf :
+# PassNTLMv2  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# 5. Démarrer Cntlm
+sudo systemctl start cntlm   # Linux
+net start cntlm              # Windows (service)
+
+# 6. Utiliser Cntlm comme proxy local (sans auth)
+export HTTP_PROXY=http://127.0.0.1:3128
+export HTTPS_PROXY=http://127.0.0.1:3128
+```
+
+### 12.8 Domaines et IP à autoriser (whitelist firewall)
+
+Si votre équipe réseau doit ouvrir des règles de firewall, voici les domaines nécessaires :
+
+| Domaine | Port | Usage |
+|---------|------|-------|
+| `github.com` | 443 | Authentification OAuth |
+| `api.github.com` | 443 | API REST GitHub |
+| `api.individual.githubcopilot.com` | 443 | API Copilot (modèles) |
+| `copilot-proxy.githubusercontent.com` | 443 | Proxy Copilot |
+| `default.exp-tas.com` | 443 | Telemetry GitHub |
+| `registry.npmjs.org` | 443 | Installation des packages npm |
+| `objects.githubusercontent.com` | 443 | Téléchargement d'assets GitHub |
+| `localhost` / `127.0.0.1` | 4141, 4399, 4000 | Proxy local (ne pas bloquer) |
+
+```bash
+# Ajoutez ces domaines dans NO_PROXY pour éviter de boucler via le proxy corporate
+export NO_PROXY=localhost,127.0.0.1,::1
+```
+
+### 12.9 Configuration proxy sous Windows (PowerShell)
+
+```powershell
+# Variables d'environnement (session courante)
+$env:HTTP_PROXY = "http://proxy.entreprise.fr:8080"
+$env:HTTPS_PROXY = "http://proxy.entreprise.fr:8080"
+$env:NO_PROXY = "localhost,127.0.0.1"
+
+# Permanent (utilisateur courant)
+[Environment]::SetEnvironmentVariable("HTTP_PROXY", "http://proxy.entreprise.fr:8080", "User")
+[Environment]::SetEnvironmentVariable("HTTPS_PROXY", "http://proxy.entreprise.fr:8080", "User")
+[Environment]::SetEnvironmentVariable("NO_PROXY", "localhost,127.0.0.1", "User")
+
+# Certificat SSL custom
+$env:NODE_EXTRA_CA_CERTS = "C:\Certificats\ca-entreprise.pem"
+
+# Avec authentification NTLM (via Cntlm)
+$env:HTTP_PROXY = "http://127.0.0.1:3128"
+$env:HTTPS_PROXY = "http://127.0.0.1:3128"
+```
+
+### 12.10 Configuration proxy sous WSL2
+
+WSL2 ne hérite pas automatiquement du proxy Windows :
+
+```bash
+# Récupérer l'IP de l'hôte Windows depuis WSL2
+WIN_HOST=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+
+# Si Cntlm tourne sur Windows
+export HTTP_PROXY=http://${WIN_HOST}:3128
+export HTTPS_PROXY=http://${WIN_HOST}:3128
+export NO_PROXY=localhost,127.0.0.1
+
+# Ajouter dans ~/.bashrc ou ~/.zshrc pour persister
+echo "export HTTP_PROXY=http://\$(cat /etc/resolv.conf | grep nameserver | awk '{print \$2}'):3128" >> ~/.bashrc
+echo "export HTTPS_PROXY=\$HTTP_PROXY" >> ~/.bashrc
+echo "export NO_PROXY=localhost,127.0.0.1" >> ~/.bashrc
+
+# Certificat SSL (copier depuis Windows)
+cp /mnt/c/Certificats/ca-entreprise.pem ~/ca-entreprise.pem
+export NODE_EXTRA_CA_CERTS=~/ca-entreprise.pem
+```
+
+### 12.11 Diagnostic de connectivité
+
+Commandes pour vérifier que tout fonctionne à travers le proxy :
+
+```bash
+# 1. Tester l'accès à GitHub via le proxy
+curl -v --proxy http://proxy.entreprise.fr:8080 https://api.github.com/zen
+
+# 2. Tester l'accès à l'API Copilot
+curl -v --proxy http://proxy.entreprise.fr:8080 https://api.individual.githubcopilot.com
+
+# 3. Vérifier que npm passe par le proxy
+npm config list
+npm ping
+
+# 4. Vérifier les variables d'environnement
+env | grep -i proxy
+
+# 5. Tester la résolution DNS
+nslookup api.individual.githubcopilot.com
+
+# 6. Tester le proxy local (copilot-api)
+curl http://localhost:4141/v1/models
+
+# 7. Vérifier le certificat SSL
+openssl s_client -connect api.github.com:443 -proxy proxy.entreprise.fr:8080
+
+# Windows (PowerShell)
+Test-NetConnection -ComputerName api.github.com -Port 443
+```
+
+### 12.12 Chaîne de proxys (proxy derrière un proxy)
+
+Dans certaines architectures, le proxy copilot-api doit lui-même passer par le proxy corporate :
+
+```
+Claude Code → copilot-api (localhost:4141) → proxy corporate (8080) → Internet → GitHub Copilot API
+```
+
+```bash
+# Lancer copilot-api avec le proxy corporate
+HTTP_PROXY=http://proxy.entreprise.fr:8080 \
+HTTPS_PROXY=http://proxy.entreprise.fr:8080 \
+NO_PROXY=localhost,127.0.0.1 \
+npx copilot-api@latest start --proxy-env
+
+# Claude Code pointe vers le proxy local (pas le corporate !)
+# Dans settings.json :
+# "ANTHROPIC_BASE_URL": "http://localhost:4141"
+# Ne PAS mettre HTTP_PROXY dans les env de Claude Code
+```
+
+> **Important** : Claude Code doit pointer vers `localhost:4141` (le proxy local), PAS vers le proxy corporate. Seul copilot-api a besoin du proxy corporate pour atteindre Internet.
+
 ---
 
 ## 13. Optimisation du quota Copilot

@@ -726,6 +726,96 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0
 # Python (LiteLLM)
 export REQUESTS_CA_BUNDLE=/chemin/vers/cert-entreprise.pem</code></pre>
 
+  <h3>Fichier PAC / WPAD</h3>
+  <p>Si votre entreprise utilise l'auto-configuration proxy (PAC/WPAD), extrayez l'adresse du proxy pour les domaines GitHub :</p>
+  <pre><code class="language-powershell"># Trouver l'URL du fichier PAC (Windows PowerShell)
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" | Select-Object AutoConfigURL</code></pre>
+
+  <h3>Authentification NTLM / Kerberos</h3>
+  <p>Les proxys Windows utilisent souvent NTLM. Node.js ne le supporte pas nativement. Utilisez <strong>Cntlm</strong> comme relais local :</p>
+  <pre><code class="language-bash"># Installer Cntlm (relais proxy local avec auth NTLM)
+# Ubuntu: sudo apt install cntlm
+# macOS: brew install cntlm
+# Windows: https://cntlm.sourceforge.net/
+
+# Configurer /etc/cntlm.conf :
+# Username votre-login
+# Domain   VOTRE-DOMAINE
+# Proxy    proxy-entreprise.fr:8080
+# Listen   127.0.0.1:3128
+
+# Générer le hash mot de passe
+cntlm -H -d VOTRE-DOMAINE -u votre-login
+
+# Utiliser Cntlm comme proxy (sans auth)
+export HTTP_PROXY=http://127.0.0.1:3128
+export HTTPS_PROXY=http://127.0.0.1:3128</code></pre>
+
+  <h3>Domaines à autoriser (whitelist firewall)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Domaine</th><th>Port</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>github.com</code></td><td>443</td><td>Authentification OAuth</td></tr>
+        <tr><td><code>api.github.com</code></td><td>443</td><td>API REST GitHub</td></tr>
+        <tr><td><code>api.individual.githubcopilot.com</code></td><td>443</td><td>API Copilot (modèles IA)</td></tr>
+        <tr><td><code>copilot-proxy.githubusercontent.com</code></td><td>443</td><td>Proxy Copilot</td></tr>
+        <tr><td><code>registry.npmjs.org</code></td><td>443</td><td>Installation packages npm</td></tr>
+        <tr><td><code>localhost</code> / <code>127.0.0.1</code></td><td>4141</td><td>Proxy local (ne pas bloquer)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Windows (PowerShell)</h3>
+  <pre><code class="language-powershell"># Session courante
+$env:HTTP_PROXY = "http://proxy.entreprise.fr:8080"
+$env:HTTPS_PROXY = "http://proxy.entreprise.fr:8080"
+$env:NO_PROXY = "localhost,127.0.0.1"
+$env:NODE_EXTRA_CA_CERTS = "C:\Certificats\ca-entreprise.pem"
+
+# Permanent (utilisateur courant)
+[Environment]::SetEnvironmentVariable("HTTP_PROXY", "http://proxy.entreprise.fr:8080", "User")
+[Environment]::SetEnvironmentVariable("HTTPS_PROXY", "http://proxy.entreprise.fr:8080", "User")</code></pre>
+
+  <h3>WSL2</h3>
+  <p>WSL2 ne hérite pas du proxy Windows :</p>
+  <pre><code class="language-bash"># Récupérer l'IP de l'hôte Windows
+WIN_HOST=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export HTTP_PROXY=http://${WIN_HOST}:3128
+export HTTPS_PROXY=http://${WIN_HOST}:3128
+
+# Copier le certificat depuis Windows
+cp /mnt/c/Certificats/ca-entreprise.pem ~/ca-entreprise.pem
+export NODE_EXTRA_CA_CERTS=~/ca-entreprise.pem</code></pre>
+
+  <h3>Diagnostic de connectivité</h3>
+  <pre><code class="language-bash"># Tester via le proxy corporate
+curl -v --proxy http://proxy.entreprise.fr:8080 https://api.github.com/zen
+
+# Tester le proxy local
+curl http://localhost:4141/v1/models
+
+# Vérifier les variables proxy
+env | grep -i proxy
+
+# Vérifier le certificat SSL
+openssl s_client -connect api.github.com:443 -proxy proxy.entreprise.fr:8080</code></pre>
+
+  <h3>Chaîne de proxys</h3>
+  <div class="box box-info">
+    <div class="box-title">Claude Code → proxy local → proxy corporate → Internet</div>
+    <p>Claude Code pointe vers <code>localhost:4141</code>. Seul copilot-api passe par le proxy corporate.</p>
+  </div>
+  <pre><code class="language-bash"># copilot-api utilise le proxy corporate
+HTTP_PROXY=http://proxy.entreprise.fr:8080 \
+HTTPS_PROXY=http://proxy.entreprise.fr:8080 \
+NO_PROXY=localhost,127.0.0.1 \
+npx copilot-api@latest start --proxy-env
+
+# Claude Code pointe UNIQUEMENT vers localhost
+# "ANTHROPIC_BASE_URL": "http://localhost:4141"
+# Ne PAS mettre HTTP_PROXY dans les env de Claude Code</code></pre>
+
   <!-- ===== OPTIMISATION ===== -->
   <h2 id="g-optimisation">Optimisation du quota</h2>
 
