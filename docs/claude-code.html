@@ -171,7 +171,7 @@ claude --version</code></pre>
     </div>
     <div class="step">
       <div class="step-title">Choisissez vos modèles</div>
-      <p>Modèle principal (ex: <code>gpt-4.1</code>) et modèle rapide (ex: <code>gpt-4.1-mini</code>).</p>
+      <p>Modèle principal (ex: <code>gpt-5.4</code>) et modèle rapide (ex: <code>gpt-5.4-mini</code>).</p>
     </div>
     <div class="step">
       <div class="step-title">Commande copiée dans le presse-papier</div>
@@ -182,8 +182,8 @@ claude --version</code></pre>
   <p>Ouvrez un <strong>2e terminal</strong> et collez la commande. Elle ressemble à :</p>
   <pre><code class="language-bash">ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
-ANTHROPIC_MODEL=gpt-4.1 \
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini \
+ANTHROPIC_MODEL=gpt-5.4 \
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude</code></pre>
 
@@ -198,8 +198,8 @@ claude</code></pre>
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -316,8 +316,8 @@ npx copilot-api@latest start --rate-limit 30 --wait</code></pre>
 "permissions": { "deny": ["WebSearch"] }</code></pre>
 
   <h4>4. Choisir des modèles économes</h4>
-  <pre><code class="language-bash">ANTHROPIC_MODEL=gpt-4.1-mini          # au lieu de gpt-4.1
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini</code></pre>
+  <pre><code class="language-bash">ANTHROPIC_MODEL=gpt-5.4-mini          # au lieu de gpt-5.4
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code></pre>
 
   <h4>5. Bonnes pratiques d'utilisation</h4>
   <ul>
@@ -399,8 +399,8 @@ npx copilot-api@latest start \
   <pre><code class="language-bash"># Terminal 2
 ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
-ANTHROPIC_MODEL=gpt-4.1 \
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini \
+ANTHROPIC_MODEL=gpt-5.4 \
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
 claude</code></pre>
@@ -565,23 +565,23 @@ litellm --version</code></pre>
   <h3>Configuration</h3>
   <p>Créez <code>copilot-config.yaml</code> :</p>
   <pre><code class="language-yaml">model_list:
-  - model_name: claude-sonnet-4
+  - model_name: claude-sonnet-4.6
     litellm_params:
-      model: github_copilot/claude-sonnet-4
+      model: github_copilot/claude-sonnet-4.6
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  - model_name: gpt-4.1
+  - model_name: gpt-5.4
     litellm_params:
-      model: github_copilot/gpt-4.1
+      model: github_copilot/gpt-5.4
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  - model_name: gpt-4.1-mini
+  - model_name: gpt-5.4-mini
     litellm_params:
-      model: github_copilot/gpt-4.1-mini
+      model: github_copilot/gpt-5.4-mini
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
@@ -607,8 +607,8 @@ litellm --config copilot-config.yaml --port 4000</code></pre>
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
-    "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4",
-    "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4.6",
+    "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
@@ -658,8 +658,8 @@ COPILOT_API_KEY="ghu_..." ./copilot-proxy</code></pre>
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -673,8 +673,8 @@ COPILOT_API_KEY="ghu_..." ./copilot-proxy</code></pre>
     <p>Ajoutez dans <code>~/.bashrc</code> ou <code>~/.zshrc</code> :</p>
     <pre><code class="language-bash">export ANTHROPIC_BASE_URL="http://localhost:4141"
 export ANTHROPIC_AUTH_TOKEN="dummy"
-export ANTHROPIC_MODEL="gpt-4.1"
-export ANTHROPIC_SMALL_FAST_MODEL="gpt-4.1-mini"
+export ANTHROPIC_MODEL="gpt-5.4"
+export ANTHROPIC_SMALL_FAST_MODEL="gpt-5.4-mini"
 export DISABLE_NON_ESSENTIAL_MODEL_CALLS="1"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"</code></pre>
   </div>
@@ -683,8 +683,8 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"</code></pre>
     <p>Ajoutez dans <code>$PROFILE</code> PowerShell :</p>
     <pre><code class="language-bash">$env:ANTHROPIC_BASE_URL = "http://localhost:4141"
 $env:ANTHROPIC_AUTH_TOKEN = "dummy"
-$env:ANTHROPIC_MODEL = "gpt-4.1"
-$env:ANTHROPIC_SMALL_FAST_MODEL = "gpt-4.1-mini"
+$env:ANTHROPIC_MODEL = "gpt-5.4"
+$env:ANTHROPIC_SMALL_FAST_MODEL = "gpt-5.4-mini"
 $env:DISABLE_NON_ESSENTIAL_MODEL_CALLS = "1"
 $env:CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"</code></pre>
   </div>
@@ -752,11 +752,11 @@ curl http://localhost:4141/usage</code></pre>
     <table>
       <thead><tr><th>Modèle</th><th>Fournisseur</th><th>Tokens/req</th><th>Qualite</th></tr></thead>
       <tbody>
-        <tr><td><code>gpt-4.1-mini</code></td><td>OpenAI</td><td>Faible</td><td>Correcte</td></tr>
-        <tr><td><code>gpt-4.1</code></td><td>OpenAI</td><td>Moyen</td><td>Bonne</td></tr>
-        <tr><td><code>claude-sonnet-4</code></td><td>Anthropic</td><td>Moyen</td><td>Très bonne</td></tr>
-        <tr><td><code>claude-opus-4</code></td><td>Anthropic</td><td>Eleve</td><td>Excellente</td></tr>
-        <tr><td><code>o3-mini</code></td><td>OpenAI</td><td>Moyen</td><td>Bonne (raisonnement)</td></tr>
+        <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td>Faible</td><td>Correcte</td></tr>
+        <tr><td><code>gpt-5.4</code></td><td>OpenAI</td><td>Moyen</td><td>Bonne</td></tr>
+        <tr><td><code>claude-sonnet-4.6</code></td><td>Anthropic</td><td>Moyen</td><td>Très bonne</td></tr>
+        <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td>Eleve</td><td>Excellente</td></tr>
+        <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td>Moyen</td><td>Bonne (raisonnement)</td></tr>
       </tbody>
     </table>
   </div>
@@ -766,22 +766,22 @@ curl http://localhost:4141/usage</code></pre>
     <div class="card">
       <div class="card-title">&#128640; Dev quotidien</div>
       <div class="card-desc">
-        <code>ANTHROPIC_MODEL=gpt-4.1</code><br>
-        <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini</code>
+        <code>ANTHROPIC_MODEL=gpt-5.4</code><br>
+        <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
     <div class="card">
       <div class="card-title">&#9733; Qualite max</div>
       <div class="card-desc">
-        <code>ANTHROPIC_MODEL=claude-sonnet-4</code><br>
-        <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini</code>
+        <code>ANTHROPIC_MODEL=claude-sonnet-4.6</code><br>
+        <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
     <div class="card">
       <div class="card-title">&#128176; Economique</div>
       <div class="card-desc">
-        <code>ANTHROPIC_MODEL=gpt-4.1-mini</code><br>
-        <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini</code>
+        <code>ANTHROPIC_MODEL=gpt-5.4-mini</code><br>
+        <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
   </div>
@@ -947,8 +947,8 @@ curl http://localhost:4141/usage</code></pre>
         <tr><td><code>ANTHROPIC_BASE_URL</code></td><td>URL du proxy local</td><td><code>http://localhost:4141</code></td><td>Oui</td></tr>
         <tr><td><code>ANTHROPIC_AUTH_TOKEN</code></td><td>Token (valeur bidon acceptee)</td><td><code>dummy</code></td><td>Oui</td></tr>
         <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Alternative a AUTH_TOKEN</td><td><code>copilot-proxy</code></td><td>Oui (ou AUTH_TOKEN)</td></tr>
-        <tr><td><code>ANTHROPIC_MODEL</code></td><td>Modèle principal</td><td><code>gpt-4.1</code></td><td>Recommande</td></tr>
-        <tr><td><code>ANTHROPIC_SMALL_FAST_MODEL</code></td><td>Modèle rapide/léger</td><td><code>gpt-4.1-mini</code></td><td>Recommande</td></tr>
+        <tr><td><code>ANTHROPIC_MODEL</code></td><td>Modèle principal</td><td><code>gpt-5.4</code></td><td>Recommande</td></tr>
+        <tr><td><code>ANTHROPIC_SMALL_FAST_MODEL</code></td><td>Modèle rapide/léger</td><td><code>gpt-5.4-mini</code></td><td>Recommande</td></tr>
         <tr><td><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS</code></td><td>Réduit les appels inutiles</td><td><code>1</code></td><td><strong>Fortement recommandé</strong></td></tr>
         <tr><td><code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC</code></td><td>Réduit le trafic non-essentiel</td><td><code>1</code></td><td><strong>Fortement recommandé</strong></td></tr>
       </tbody>
@@ -1000,14 +1000,14 @@ copilot-api debug          # Diagnostic</code></pre>
     <table>
       <thead><tr><th>Modèle</th><th>Fournisseur</th><th>Forces</th><th>Conso tokens</th></tr></thead>
       <tbody>
-        <tr><td><code>gpt-4.1</code></td><td>OpenAI</td><td>Polyvalent, bon en code</td><td>Moyenne</td></tr>
-        <tr><td><code>gpt-4.1-mini</code></td><td>OpenAI</td><td>Rapide, economique</td><td>Faible</td></tr>
-        <tr><td><code>gpt-4o</code></td><td>OpenAI</td><td>Multimodal</td><td>Moyenne</td></tr>
-        <tr><td><code>gpt-4o-mini</code></td><td>OpenAI</td><td>Très rapide</td><td>Faible</td></tr>
-        <tr><td><code>claude-sonnet-4</code></td><td>Anthropic</td><td>Excellent en code</td><td>Moyenne</td></tr>
-        <tr><td><code>claude-opus-4</code></td><td>Anthropic</td><td>Le plus puissant</td><td>Elevee</td></tr>
+        <tr><td><code>gpt-5.4</code></td><td>OpenAI</td><td>Polyvalent, bon en code</td><td>Moyenne</td></tr>
+        <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td>Rapide, economique</td><td>Faible</td></tr>
+        <tr><td><code>gpt-5.2</code></td><td>OpenAI</td><td>Multimodal</td><td>Moyenne</td></tr>
+        <tr><td><code>gpt-5-mini</code></td><td>OpenAI</td><td>Très rapide</td><td>Faible</td></tr>
+        <tr><td><code>claude-sonnet-4.6</code></td><td>Anthropic</td><td>Excellent en code</td><td>Moyenne</td></tr>
+        <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td>Le plus puissant</td><td>Elevee</td></tr>
         <tr><td><code>o3</code></td><td>OpenAI</td><td>Raisonnement avance</td><td>Elevee</td></tr>
-        <tr><td><code>o3-mini</code></td><td>OpenAI</td><td>Raisonnement, plus rapide</td><td>Moyenne</td></tr>
+        <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td>Raisonnement, plus rapide</td><td>Moyenne</td></tr>
       </tbody>
     </table>
   </div>
@@ -1024,8 +1024,8 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     "ANTHROPIC_AUTH_TOKEN": "dummy",
 
     // Modèles (RECOMMANDE)
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
 
     // Optimisation quota (FORTEMENT RECOMMANDE)
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",

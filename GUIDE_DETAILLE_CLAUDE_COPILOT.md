@@ -200,15 +200,15 @@ Waiting for authorization...
 ✅ Authentication successful!
 
 Select primary model:
-  1. gpt-4.1
-  2. claude-sonnet-4
-  3. claude-opus-4
-  4. gpt-4o
+  1. gpt-5.4
+  2. claude-sonnet-4.6
+  3. claude-opus-4.6
+  4. gpt-5.2
   > 1
 
 Select small/fast model:
-  1. gpt-4.1-mini
-  2. gpt-4o-mini
+  1. gpt-5.4-mini
+  2. gpt-5-mini
   > 1
 
 📋 Launch command copied to clipboard!
@@ -222,8 +222,8 @@ Proxy running on http://localhost:4141
 ```bash
 ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
-ANTHROPIC_MODEL=gpt-4.1 \
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini \
+ANTHROPIC_MODEL=gpt-5.4 \
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude
 ```
@@ -244,8 +244,8 @@ npx copilot-api@latest start \
 # Terminal 2 : lancer Claude Code
 ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
-ANTHROPIC_MODEL=gpt-4.1 \
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini \
+ANTHROPIC_MODEL=gpt-5.4 \
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
 claude
@@ -383,8 +383,8 @@ Vous n'avez plus qu'a lancer `claude` et ca marche.
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4399",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -686,33 +686,33 @@ Créez un fichier `copilot-config.yaml` :
 # copilot-config.yaml
 model_list:
   # Modèle principal pour Claude Code
-  - model_name: claude-sonnet-4
+  - model_name: claude-sonnet-4.6
     litellm_params:
-      model: github_copilot/claude-sonnet-4
+      model: github_copilot/claude-sonnet-4.6
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
   # Modèle rapide pour les tâches legeres
-  - model_name: gpt-4.1-mini
+  - model_name: gpt-5.4-mini
     litellm_params:
-      model: github_copilot/gpt-4.1-mini
+      model: github_copilot/gpt-5.4-mini
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
   # Modèle puissant (optionnel)
-  - model_name: gpt-4.1
+  - model_name: gpt-5.4
     litellm_params:
-      model: github_copilot/gpt-4.1
+      model: github_copilot/gpt-5.4
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
   # Claude Opus via Copilot (optionnel)
-  - model_name: claude-opus-4
+  - model_name: claude-opus-4.6
     litellm_params:
-      model: github_copilot/claude-opus-4
+      model: github_copilot/claude-opus-4.6
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
@@ -751,10 +751,10 @@ LiteLLM Proxy v1.x.x
 Starting server on http://0.0.0.0:4000
 
 Available models:
-  - claude-sonnet-4
-  - gpt-4.1-mini
-  - gpt-4.1
-  - claude-opus-4
+  - claude-sonnet-4.6
+  - gpt-5.4-mini
+  - gpt-5.4
+  - claude-opus-4.6
 
 Admin UI: http://0.0.0.0:4000/ui
 ```
@@ -766,8 +766,8 @@ Admin UI: http://0.0.0.0:4000/ui
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
-    "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4",
-    "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4.6",
+    "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -856,8 +856,8 @@ Au lieu de taper les variables d'environnement a chaque fois, configurez-les une
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -881,8 +881,8 @@ Créez `.claude/settings.json` a la racine de votre projet :
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
@@ -897,8 +897,8 @@ Ajoutez dans votre `~/.bashrc`, `~/.zshrc`, ou profil PowerShell :
 # ~/.bashrc ou ~/.zshrc
 export ANTHROPIC_BASE_URL="http://localhost:4141"
 export ANTHROPIC_AUTH_TOKEN="dummy"
-export ANTHROPIC_MODEL="gpt-4.1"
-export ANTHROPIC_SMALL_FAST_MODEL="gpt-4.1-mini"
+export ANTHROPIC_MODEL="gpt-5.4"
+export ANTHROPIC_SMALL_FAST_MODEL="gpt-5.4-mini"
 export DISABLE_NON_ESSENTIAL_MODEL_CALLS="1"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 ```
@@ -907,8 +907,8 @@ export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
 # PowerShell ($PROFILE)
 $env:ANTHROPIC_BASE_URL = "http://localhost:4141"
 $env:ANTHROPIC_AUTH_TOKEN = "dummy"
-$env:ANTHROPIC_MODEL = "gpt-4.1"
-$env:ANTHROPIC_SMALL_FAST_MODEL = "gpt-4.1-mini"
+$env:ANTHROPIC_MODEL = "gpt-5.4"
+$env:ANTHROPIC_SMALL_FAST_MODEL = "gpt-5.4-mini"
 $env:DISABLE_NON_ESSENTIAL_MODEL_CALLS = "1"
 $env:CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
 ```
@@ -1018,14 +1018,14 @@ npx copilot-api@latest start --rate-limit 30 --wait
 
 | Modèle | Tokens/requête | Qualite | Recommandation |
 |--------|---------------|---------|----------------|
-| gpt-4.1-mini | Faible | Correcte | Modèle rapide, tâches simples |
-| gpt-4.1 | Moyen | Bonne | Bon équilibre |
-| claude-sonnet-4 | Moyen | Très bonne | Meilleur pour le code |
-| claude-opus-4 | Eleve | Excellente | Taches complexes uniquement |
+| gpt-5.4-mini | Faible | Correcte | Modèle rapide, tâches simples |
+| gpt-5.4 | Moyen | Bonne | Bon équilibre |
+| claude-sonnet-4.6 | Moyen | Très bonne | Meilleur pour le code |
+| claude-opus-4.6 | Eleve | Excellente | Taches complexes uniquement |
 
 **Recommandation :**
-- `ANTHROPIC_MODEL=gpt-4.1` (principal)
-- `ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini` (tâches legeres)
+- `ANTHROPIC_MODEL=gpt-5.4` (principal)
+- `ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini` (tâches legeres)
 
 ### 13.4 Bonnes pratiques
 
@@ -1045,15 +1045,15 @@ Les modèles disponibles dependent de votre licence Copilot.
 
 | Modèle | Fournisseur | Forces |
 |--------|-------------|--------|
-| `gpt-4.1` | OpenAI | Polyvalent, bon en code |
-| `gpt-4.1-mini` | OpenAI | Rapide, economique |
-| `gpt-4o` | OpenAI | Multimodal |
-| `gpt-4o-mini` | OpenAI | Très rapide |
-| `claude-sonnet-4` | Anthropic | Excellent en code, raisonnement |
-| `claude-opus-4` | Anthropic | Le plus puissant mais lent |
-| `claude-haiku-4` | Anthropic | Rapide, economique |
+| `gpt-5.4` | OpenAI | Polyvalent, bon en code |
+| `gpt-5.4-mini` | OpenAI | Rapide, economique |
+| `gpt-5.2` | OpenAI | Multimodal |
+| `gpt-5-mini` | OpenAI | Très rapide |
+| `claude-sonnet-4.6` | Anthropic | Excellent en code, raisonnement |
+| `claude-opus-4.6` | Anthropic | Le plus puissant mais lent |
+| `claude-haiku-4.5` | Anthropic | Rapide, economique |
 | `o3` | OpenAI | Raisonnement avance |
-| `o3-mini` | OpenAI | Raisonnement, plus rapide |
+| `gpt-5.4-mini` | OpenAI | Raisonnement, plus rapide |
 
 ### 14.2 Voir les modèles disponibles
 
@@ -1069,20 +1069,20 @@ curl http://localhost:4141/v1/models | jq
 
 **Pour du dev quotidien :**
 ```
-ANTHROPIC_MODEL=gpt-4.1
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini
+ANTHROPIC_MODEL=gpt-5.4
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
 
 **Pour de la qualité maximale :**
 ```
-ANTHROPIC_MODEL=claude-sonnet-4
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini
+ANTHROPIC_MODEL=claude-sonnet-4.6
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
 
 **Pour economiser le quota :**
 ```
-ANTHROPIC_MODEL=gpt-4.1-mini
-ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1-mini
+ANTHROPIC_MODEL=gpt-5.4-mini
+ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
 
 ---
@@ -1127,7 +1127,7 @@ Solution : relancez l'authentification
 Cause : licence Copilot inactive ou modèle non autorisé
 Solution :
   1. Vérifiez https://github.com/settings/copilot
-  2. Essayez un autre modèle (gpt-4o au lieu de claude-sonnet-4)
+  2. Essayez un autre modèle (gpt-5.2 au lieu de claude-sonnet-4.6)
   3. Vérifiez --account-type (individual/business/enterprise)
 ```
 
@@ -1170,7 +1170,7 @@ Solution :
 Cause : Claude Code consomme beaucoup de tokens
 Solution :
   1. Attendez le renouvellement du quota
-  2. Utilisez des modèles plus légers (gpt-4.1-mini)
+  2. Utilisez des modèles plus légers (gpt-5.4-mini)
   3. Activez DISABLE_NON_ESSENTIAL_MODEL_CALLS=1
   4. npx copilot-api@latest check-usage pour surveiller
 ```

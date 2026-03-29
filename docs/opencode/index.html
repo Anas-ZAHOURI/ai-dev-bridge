@@ -206,7 +206,7 @@ opencode</code></pre>
     <div class="step">
       <div class="step-title">Choisissez votre modèle</div>
       <pre><code class="language-bash">/models</code></pre>
-      <p>Sélectionnez un modèle Copilot (ex: <code>copilot.gpt-4.1</code>, <code>copilot.claude-sonnet-4</code>).</p>
+      <p>Sélectionnez un modèle Copilot (ex: <code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code>).</p>
     </div>
   </div>
 
@@ -390,15 +390,15 @@ opencode</code></pre>
     <table>
       <thead><tr><th>Modèle</th><th>Fournisseur</th><th>Licence requise</th><th>Forces</th></tr></thead>
       <tbody>
-        <tr><td><code>copilot.gpt-4.1</code></td><td>OpenAI</td><td>Pro</td><td>Polyvalent, bon en code</td></tr>
-        <tr><td><code>copilot.gpt-4o</code></td><td>OpenAI</td><td>Pro</td><td>Multimodal, rapide</td></tr>
-        <tr><td><code>copilot.gpt-4o-mini</code></td><td>OpenAI</td><td>Pro</td><td>Très rapide, economique</td></tr>
-        <tr><td><code>copilot.claude-sonnet-4</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td>Excellent en code</td></tr>
+        <tr><td><code>copilot.gpt-5.4</code></td><td>OpenAI</td><td>Pro</td><td>Polyvalent, bon en code</td></tr>
+        <tr><td><code>copilot.gpt-5.2</code></td><td>OpenAI</td><td>Pro</td><td>Multimodal, rapide</td></tr>
+        <tr><td><code>copilot.gpt-5-mini</code></td><td>OpenAI</td><td>Pro</td><td>Très rapide, economique</td></tr>
+        <tr><td><code>copilot.claude-sonnet-4.6</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td>Excellent en code</td></tr>
         <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td>Raisonnement + code</td></tr>
-        <tr><td><code>copilot.o3-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td>Raisonnement avance</td></tr>
+        <tr><td><code>copilot.gpt-5.4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td>Raisonnement avance</td></tr>
         <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td>Raisonnement rapide</td></tr>
         <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td><strong>Pro+</strong></td><td>Long contexte</td></tr>
-        <tr><td><code>copilot.gemini-2.0-flash</code></td><td>Google</td><td>Pro</td><td>Rapide</td></tr>
+        <tr><td><code>copilot.gemini-3-flash</code></td><td>Google</td><td>Pro</td><td>Rapide</td></tr>
       </tbody>
     </table>
   </div>
@@ -439,7 +439,7 @@ opencode</code></pre>
   <h3>Comment reduire la consommation</h3>
   <ul>
     <li><strong>Activez <code>autoCompact</code></strong> (actif par défaut) : compresse le contexte a 95% d'utilisation</li>
-    <li><strong>Choisissez des modèles économes</strong> : <code>gpt-4o-mini</code> ou <code>gemini-2.0-flash</code> pour les tâches simples</li>
+    <li><strong>Choisissez des modèles économes</strong> : <code>gpt-5-mini</code> ou <code>gemini-3-flash</code> pour les tâches simples</li>
     <li><strong>Soyez precis</strong> : "corrige la ligne 42 de server.js" consomme moins que "corrige les bugs"</li>
     <li><strong>Fermez et relancez</strong> regulierement pour reinitialiser le contexte</li>
     <li><strong>Mode non-interactif</strong> pour les tâches ponctuelles : <code>opencode -p "question"</code></li>
@@ -464,7 +464,7 @@ opencode</code></pre>
   },
   "agents": {
     "coder": {
-      "model": "copilot.gpt-4.1"
+      "model": "copilot.gpt-5.4"
     }
   }
 }</code></pre>
@@ -478,15 +478,15 @@ opencode</code></pre>
   },
   "agents": {
     "coder": {
-      "model": "copilot.claude-sonnet-4",
+      "model": "copilot.claude-sonnet-4.6",
       "maxTokens": 5000
     },
     "task": {
-      "model": "copilot.gpt-4o",
+      "model": "copilot.gpt-5.2",
       "maxTokens": 5000
     },
     "title": {
-      "model": "copilot.gpt-4o-mini",
+      "model": "copilot.gpt-5-mini",
       "maxTokens": 80
     }
   },
@@ -500,9 +500,9 @@ opencode</code></pre>
     <table>
       <thead><tr><th>Agent</th><th>Role</th><th>Modèle recommandé</th></tr></thead>
       <tbody>
-        <tr><td><code>coder</code></td><td>Agent principal : ecrit et edite le code</td><td><code>copilot.gpt-4.1</code> ou <code>copilot.claude-sonnet-4</code></td></tr>
-        <tr><td><code>task</code></td><td>Sous-tâches, recherche, reflexion</td><td><code>copilot.gpt-4o</code></td></tr>
-        <tr><td><code>title</code></td><td>Generation des titres de session</td><td><code>copilot.gpt-4o-mini</code></td></tr>
+        <tr><td><code>coder</code></td><td>Agent principal : ecrit et edite le code</td><td><code>copilot.gpt-5.4</code> ou <code>copilot.claude-sonnet-4.6</code></td></tr>
+        <tr><td><code>task</code></td><td>Sous-tâches, recherche, reflexion</td><td><code>copilot.gpt-5.2</code></td></tr>
+        <tr><td><code>title</code></td><td>Generation des titres de session</td><td><code>copilot.gpt-5-mini</code></td></tr>
       </tbody>
     </table>
   </div>
@@ -680,15 +680,15 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0</code></pre>
   },
   "agents": {
     "coder": {
-      "model": "copilot.gpt-4.1",
+      "model": "copilot.gpt-5.4",
       "maxTokens": 5000
     },
     "task": {
-      "model": "copilot.gpt-4o",
+      "model": "copilot.gpt-5.2",
       "maxTokens": 5000
     },
     "title": {
-      "model": "copilot.gpt-4o-mini",
+      "model": "copilot.gpt-5-mini",
       "maxTokens": 80
     }
   },
@@ -791,15 +791,15 @@ opencode auth list</code></pre>
     <table>
       <thead><tr><th>ID dans OpenCode</th><th>Fournisseur</th><th>Licence</th><th>Usage recommandé</th></tr></thead>
       <tbody>
-        <tr><td><code>copilot.gpt-4.1</code></td><td>OpenAI</td><td>Pro</td><td>Agent coder principal</td></tr>
-        <tr><td><code>copilot.gpt-4o</code></td><td>OpenAI</td><td>Pro</td><td>Agent task, multimodal</td></tr>
-        <tr><td><code>copilot.gpt-4o-mini</code></td><td>OpenAI</td><td>Pro</td><td>Agent title, tâches legeres</td></tr>
-        <tr><td><code>copilot.claude-sonnet-4</code></td><td>Anthropic</td><td>Pro+</td><td>Agent coder (qualité max)</td></tr>
+        <tr><td><code>copilot.gpt-5.4</code></td><td>OpenAI</td><td>Pro</td><td>Agent coder principal</td></tr>
+        <tr><td><code>copilot.gpt-5.2</code></td><td>OpenAI</td><td>Pro</td><td>Agent task, multimodal</td></tr>
+        <tr><td><code>copilot.gpt-5-mini</code></td><td>OpenAI</td><td>Pro</td><td>Agent title, tâches legeres</td></tr>
+        <tr><td><code>copilot.claude-sonnet-4.6</code></td><td>Anthropic</td><td>Pro+</td><td>Agent coder (qualité max)</td></tr>
         <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td>Pro+</td><td>Raisonnement + code</td></tr>
-        <tr><td><code>copilot.o3-mini</code></td><td>OpenAI</td><td>Pro+</td><td>Problèmes complexes</td></tr>
+        <tr><td><code>copilot.gpt-5.4-mini</code></td><td>OpenAI</td><td>Pro+</td><td>Problèmes complexes</td></tr>
         <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td>Pro+</td><td>Raisonnement rapide</td></tr>
         <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td>Pro+</td><td>Long contexte</td></tr>
-        <tr><td><code>copilot.gemini-2.0-flash</code></td><td>Google</td><td>Pro</td><td>Rapide et economique</td></tr>
+        <tr><td><code>copilot.gemini-3-flash</code></td><td>Google</td><td>Pro</td><td>Rapide et economique</td></tr>
       </tbody>
     </table>
   </div>
@@ -810,27 +810,27 @@ opencode auth list</code></pre>
       <div class="card-icon">&#128640;</div>
       <div class="card-title">Quotidien (Copilot Pro)</div>
       <div class="card-desc">
-        <code>coder: copilot.gpt-4.1</code><br>
-        <code>task: copilot.gpt-4o</code><br>
-        <code>title: copilot.gpt-4o-mini</code>
+        <code>coder: copilot.gpt-5.4</code><br>
+        <code>task: copilot.gpt-5.2</code><br>
+        <code>title: copilot.gpt-5-mini</code>
       </div>
     </div>
     <div class="card">
       <div class="card-icon">&#9733;</div>
       <div class="card-title">Qualite max (Pro+)</div>
       <div class="card-desc">
-        <code>coder: copilot.claude-sonnet-4</code><br>
-        <code>task: copilot.gpt-4o</code><br>
-        <code>title: copilot.gpt-4o-mini</code>
+        <code>coder: copilot.claude-sonnet-4.6</code><br>
+        <code>task: copilot.gpt-5.2</code><br>
+        <code>title: copilot.gpt-5-mini</code>
       </div>
     </div>
     <div class="card">
       <div class="card-icon">&#128176;</div>
       <div class="card-title">Economique</div>
       <div class="card-desc">
-        <code>coder: copilot.gpt-4o-mini</code><br>
-        <code>task: copilot.gpt-4o-mini</code><br>
-        <code>title: copilot.gpt-4o-mini</code>
+        <code>coder: copilot.gpt-5-mini</code><br>
+        <code>task: copilot.gpt-5-mini</code><br>
+        <code>title: copilot.gpt-5-mini</code>
       </div>
     </div>
   </div>

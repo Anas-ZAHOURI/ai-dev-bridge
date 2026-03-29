@@ -58,8 +58,8 @@ Au premier lancement, le proxy affiche un **code d'appareil** et ouvre votre nav
 ### Étape 3 : Selection des modèles
 
 Le flag `--claude-code` vous demande de choisir :
-- Un **modèle principal** (ex: `gpt-4.1`, `claude-sonnet-4`)
-- Un **modèle rapide** (ex: `gpt-4.1-mini`)
+- Un **modèle principal** (ex: `gpt-5.4`, `claude-sonnet-4.6`)
+- Un **modèle rapide** (ex: `gpt-5.4-mini`)
 
 Une commande de lancement est **copiée dans votre presse-papier**. Collez-la dans un 2e terminal.
 
@@ -73,8 +73,8 @@ dans votre home ou votre projet :
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -147,8 +147,8 @@ Configuration `.claude/settings.json` :
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4399",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gpt-4.1",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-4.1-mini",
+    "ANTHROPIC_MODEL": "gpt-5.4",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
@@ -290,15 +290,15 @@ pip install 'litellm[proxy]'
 Contenu de `copilot-config.yaml` :
 ```yaml
 model_list:
-  - model_name: claude-sonnet-4
+  - model_name: claude-sonnet-4.6
     litellm_params:
-      model: github_copilot/claude-sonnet-4
+      model: github_copilot/claude-sonnet-4.6
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
-  - model_name: gpt-4.1
+  - model_name: gpt-5.4
     litellm_params:
-      model: github_copilot/gpt-4.1
+      model: github_copilot/gpt-5.4
       extra_headers:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
@@ -322,8 +322,8 @@ litellm --config copilot-config.yaml
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
-    "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4",
-    "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-4.1",
+    "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4.6",
+    "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-5.4",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
@@ -339,8 +339,8 @@ litellm --config copilot-config.yaml
 | `ANTHROPIC_BASE_URL` | URL du proxy local | `http://localhost:4141` |
 | `ANTHROPIC_AUTH_TOKEN` | Token (valeur bidon acceptee) | `dummy` |
 | `ANTHROPIC_API_KEY` | Alternative a AUTH_TOKEN | `copilot-proxy` |
-| `ANTHROPIC_MODEL` | Modèle principal | `gpt-4.1`, `claude-sonnet-4` |
-| `ANTHROPIC_SMALL_FAST_MODEL` | Modèle rapide/léger | `gpt-4.1-mini` |
+| `ANTHROPIC_MODEL` | Modèle principal | `gpt-5.4`, `claude-sonnet-4.6` |
+| `ANTHROPIC_SMALL_FAST_MODEL` | Modèle rapide/léger | `gpt-5.4-mini` |
 | `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Réduit les appels inutiles | `1` |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Réduit encore plus le trafic | `1` |
 
@@ -383,7 +383,7 @@ Une utilisation excessive peut déclencher une detection d'abus.
 
 ### 6. Noms de modèles
 Meme si Claude Code pense parler à l'API Anthropic, vous specifiez des noms
-de modèles **Copilot** (ex: `gpt-4.1`). Le proxy traduit tout.
+de modèles **Copilot** (ex: `gpt-5.4`). Le proxy traduit tout.
 
 ---
 
