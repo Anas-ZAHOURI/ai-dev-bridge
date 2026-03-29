@@ -90,6 +90,18 @@
     .nav-link:hover {
       background: var(--accent); color: #fff; text-decoration: none;
     }
+
+    /* Dark mode overrides */
+    [data-theme="dark"] .vs-banner {
+      background: linear-gradient(135deg, #2d2d2d 0%, #3d1520 100%);
+      border-color: #404040;
+    }
+    [data-theme="dark"] .vs-banner .vs-tool-name { color: #e0e0e0; }
+    [data-theme="dark"] .vs-banner .vs-tool-sub { color: #a0a0a0; }
+    [data-theme="dark"] .vs-banner .vs-sep { background: #3d1520; color: var(--accent); }
+    [data-theme="dark"] .verdict { background: #3d1520; border-color: var(--accent); }
+    [data-theme="dark"] .nav-link { border-color: var(--accent); color: var(--accent); }
+    [data-theme="dark"] .score-bar-track { background: #2d2d2d; border-color: #404040; }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
