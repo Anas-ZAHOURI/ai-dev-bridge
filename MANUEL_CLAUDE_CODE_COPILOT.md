@@ -278,7 +278,62 @@ ANTHROPIC_BASE_URL=http://localhost:8082 ANTHROPIC_API_KEY=copilot-proxy claude
 
 ---
 
-## Projet E : LiteLLM (Python, le plus flexible)
+## Projet E : cc-copilot-bridge (multi-provider)
+
+**Repo** : https://github.com/FlorianBruniaux/cc-copilot-bridge
+
+> Routeur multi-provider : basculez entre Copilot, Anthropic Direct et Ollama local.
+
+```bash
+# Installer via Homebrew
+brew tap FlorianBruniaux/tap
+brew install cc-copilot-bridge
+eval "$(claude-switch --shell-config)"
+
+# Ou via script
+curl -fsSL https://raw.githubusercontent.com/FlorianBruniaux/cc-copilot-bridge/main/install.sh | bash
+```
+
+```bash
+# Utilisation : aliases simples
+ccc    # Claude Code via Copilot (copilot-api doit tourner)
+ccd    # Claude Code via API Anthropic directe
+cco    # Claude Code via Ollama (offline)
+
+# Changer de modèle
+COPILOT_MODEL=claude-opus-4.6 ccc
+COPILOT_MODEL=gpt-5.4 ccc
+
+# Vérifier les providers
+ccs
+```
+
+**Points forts** : 40+ modèles, health checks, profils MCP auto, injection d'identité modèle, logging sessions.
+
+---
+
+## Projet F : copilot-api fork Anthropic-first
+
+**Repo** : https://github.com/caozhiyuan/copilot-api (branche `all`)
+
+> Fork amélioré de copilot-api avec routage natif Messages API pour Claude.
+
+```bash
+# Identique à copilot-api mais avec le fork
+npx @jeffreycao/copilot-api@latest start --claude-code
+```
+
+**Avantages vs l'original** :
+- **API Anthropic native** : préserve tool_use/tool_result et thinking
+- **Token counting exact** : via endpoint Anthropic (pas estimation GPT)
+- **Optimisation quota** : warmup via smallModel, continuation de sessions
+- **Sous-agents** : support des markers Claude Code
+
+Recommandé si vous utilisez principalement des modèles Claude via Copilot.
+
+---
+
+## Projet G : LiteLLM (Python, le plus flexible)
 
 ```bash
 # 1. Installer
@@ -420,13 +475,19 @@ curl http://localhost:4141/v1/models
 env | grep -i proxy
 ```
 
-### 5. Risque sur le compte
+### 5. Intégration officielle Claude/Copilot (février 2026)
+GitHub a lancé Claude et Codex officiellement comme agents de codage pour **Copilot Business et Pro**.
+Si votre entreprise dispose de Copilot Business/Pro, vérifiez d'abord si l'intégration native
+couvre votre besoin avant d'utiliser un proxy non-officiel.
+Voir : https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users/
+
+### 6. Risque sur le compte
 Ces outils utilisent des API **non-officielles** de GitHub Copilot.
 Une utilisation excessive peut déclencher une detection d'abus.
 - Utilisez le rate-limiting
 - Évitez les sessions tres longues sans pause
 
-### 6. Noms de modèles
+### 7. Noms de modèles
 Meme si Claude Code pense parler à l'API Anthropic, vous specifiez des noms
 de modèles **Copilot** (ex: `gpt-5.4`). Le proxy traduit tout.
 
@@ -434,14 +495,16 @@ de modèles **Copilot** (ex: `gpt-5.4`). Le proxy traduit tout.
 
 # Tableau comparatif
 
-| Projet | Langage | Install npx | Daemon | Auth auto | Port défaut |
-|--------|---------|-------------|--------|-----------|-------------|
-| copilot-api | Node.js | `npx copilot-api@latest` | Non | Oui | 4141 |
-| copilot-proxy (Jer-y) | Node.js | `npx @jer-y/copilot-proxy@latest` | Oui | Oui | 4399 |
-| claude-code-copilot | Node.js | Non (clone) | Non | Oui | 18080 |
-| claude-copilot-proxy | Go | Non (clone) | Non | Manuel | 8082 |
-| LM Proxy | VS Code ext | Non | Non | Via VS Code | 4000 |
-| LiteLLM | Python | Non (pip) | Non | Via config | 4000 |
+| Projet | Langage | Install rapide | Daemon | Auth auto | Port défaut | Spécificité |
+|--------|---------|---------------|--------|-----------|-------------|-------------|
+| copilot-api | Node.js | `npx copilot-api@latest` | Non | Oui | 4141 | Le plus populaire |
+| copilot-proxy (Jer-y) | Node.js | `npx @jer-y/copilot-proxy@latest` | Oui | Oui | 4399 | Mode daemon |
+| claude-code-copilot | Node.js | Non (clone) | Non | Oui | 18080 | Recherche web intégrée |
+| claude-copilot-proxy | Go | Non (clone) | Non | Manuel | 8082 | Léger, un binaire |
+| cc-copilot-bridge | Bash | Homebrew / script | Non | Via backend | Via backend | **Multi-provider** |
+| copilot-api fork | Node.js | `npx @jeffreycao/copilot-api@latest` | Non | Oui | 4141 | **API Anthropic native** |
+| LM Proxy | VS Code ext | Non | Non | Via VS Code | 4000 | Pas de terminal |
+| LiteLLM | Python | Non (pip) | Non | Via config | 4000 | Dashboard web |
 
 ---
 

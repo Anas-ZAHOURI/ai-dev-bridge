@@ -16,13 +16,15 @@
 8. [MÉTHODE 2bis : Cloner claude-code-copilot (zero dépendance)](#8-méthode-2bis--cloner-claude-code-copilot-zero-dépendance)
 9. [MÉTHODE 2ter : LiteLLM via pip (Python)](#9-méthode-2ter--litellm-via-pip-python)
 10. [MÉTHODE 2quater : claude-copilot-proxy en Go](#10-méthode-2quater--claude-copilot-proxy-en-go)
-11. [Configuration permanente de Claude Code](#11-configuration-permanente-de-claude-code)
-12. [Gestion du proxy entreprise (HTTP_PROXY)](#12-gestion-du-proxy-entreprise-http_proxy)
-13. [Optimisation du quota Copilot](#13-optimisation-du-quota-copilot)
-14. [Modèles disponibles et lequel choisir](#14-modèles-disponibles-et-lequel-choisir)
-15. [Dépannage complet](#15-dépannage-complet)
-16. [Sécurité et risques](#16-sécurité-et-risques)
-17. [Tableau comparatif final](#17-tableau-comparatif-final)
+11. [MÉTHODE 3 : cc-copilot-bridge (multi-provider)](#11-méthode-3--cc-copilot-bridge-multi-provider)
+12. [MÉTHODE 3bis : copilot-api fork Anthropic-first](#12-méthode-3bis--copilot-api-fork-anthropic-first)
+13. [Configuration permanente de Claude Code](#13-configuration-permanente-de-claude-code)
+14. [Gestion du proxy entreprise (HTTP_PROXY)](#14-gestion-du-proxy-entreprise-http_proxy)
+15. [Optimisation du quota Copilot](#15-optimisation-du-quota-copilot)
+16. [Modèles disponibles et lequel choisir](#16-modèles-disponibles-et-lequel-choisir)
+17. [Dépannage complet](#17-dépannage-complet)
+18. [Sécurité et risques](#18-sécurité-et-risques)
+19. [Tableau comparatif final](#19-tableau-comparatif-final)
 
 ---
 
@@ -843,11 +845,137 @@ COPILOT_API_KEY="ghu_..." ./copilot-proxy
 
 ---
 
-## 11. Configuration permanente de Claude Code
+## 11. MÉTHODE 3 : cc-copilot-bridge (multi-provider)
+
+**Repo** : https://github.com/FlorianBruniaux/cc-copilot-bridge
+**Difficulté** : Facile
+**Temps** : 2 minutes
+**Avantage** : Bascule instantanée entre Copilot, Anthropic Direct et Ollama local
+
+### 11.1 Concept
+
+cc-copilot-bridge est un routeur multi-provider pour Claude Code CLI. Au lieu d'être verrouillé sur un seul backend, vous basculez entre trois providers avec des aliases :
+
+| Alias | Provider | Backend | Coût |
+|-------|----------|---------|------|
+| `ccc` | GitHub Copilot | copilot-api (port 4141) | Quota Copilot |
+| `ccd` | Anthropic Direct | API Anthropic | Pay-per-token |
+| `cco` | Ollama Local | Modèles locaux | Gratuit / offline |
+
+### 11.2 Installation
+
+```bash
+# Via Homebrew (recommandé)
+brew tap FlorianBruniaux/tap
+brew install cc-copilot-bridge
+eval "$(claude-switch --shell-config)"
+
+# Via script d'installation
+curl -fsSL https://raw.githubusercontent.com/FlorianBruniaux/cc-copilot-bridge/main/install.sh | bash
+
+# Debian/Ubuntu : téléchargez le .deb depuis les releases GitHub
+# RHEL/Fedora : téléchargez le .rpm depuis les releases GitHub
+```
+
+### 11.3 Utilisation
+
+```bash
+# Lancer Claude Code via Copilot (le plus courant)
+ccc
+
+# Changer de modèle à la volée
+COPILOT_MODEL=gpt-5.4 ccc          # GPT-5.4 (quota gratuit)
+COPILOT_MODEL=claude-opus-4.6 ccc  # Claude Opus 4.6
+
+# Basculer sur Anthropic Direct (clé API requise)
+ccd
+
+# Mode hors-ligne avec Ollama
+cco
+
+# Vérifier la santé des providers
+ccs
+```
+
+### 11.4 Fonctionnalités avancées
+
+- **40+ modèles** : Claude, GPT, Gemini et modèles de codage spécialisés
+- **Health checks** : validation de la disponibilité avant lancement
+- **Profils MCP restreints** : génération automatique pour les modèles avec validation JSON stricte (ex: GPT-5.4)
+- **Injection d'identité** : les modèles non-Claude s'identifient correctement (ex: "GPT-5.4 by OpenAI")
+- **Logging** : sessions enregistrées dans `~/.claude/claude-switch.log`
+
+### 11.5 Prérequis
+
+- **Copilot** (`ccc`) : copilot-api doit tourner sur le port 4141
+- **Anthropic** (`ccd`) : variable `ANTHROPIC_API_KEY` configurée
+- **Ollama** (`cco`) : Ollama installé, 32 Go RAM minimum recommandés
+
+---
+
+## 12. MÉTHODE 3bis : copilot-api fork Anthropic-first
+
+**Repo** : https://github.com/caozhiyuan/copilot-api (branche `all`)
+**Package** : `npx @jeffreycao/copilot-api@latest`
+**Difficulté** : Facile
+**Temps** : 2 minutes
+**Avantage** : Routage natif Anthropic Messages API, meilleur pour Claude Code
+
+### 12.1 Pourquoi ce fork ?
+
+Le fork de caozhiyuan améliore le copilot-api original avec :
+
+| Fonctionnalité | Original (ericc-ch) | Fork (caozhiyuan) |
+|---------------|--------------------|--------------------|
+| API Claude | Via traduction Chat Completions | **Natif Messages API** (`/v1/messages`) |
+| Token counting | Estimation GPT tokenizer | **Exact via endpoint Anthropic** |
+| Thinking/tool_use | Conversion lossy | **Préservé nativement** |
+| Requêtes premium | Standard | **Optimisé** (warmup → smallModel) |
+| Sous-agents | Non | **Oui** (marker injection) |
+
+### 12.2 Installation et lancement
+
+```bash
+# Lancement rapide (comme l'original, mais avec le fork)
+npx @jeffreycao/copilot-api@latest start --claude-code
+
+# Avec options avancées
+npx @jeffreycao/copilot-api@latest start \
+  --account-type individual \
+  --rate-limit 20 --wait
+```
+
+### 12.3 Configuration Claude Code
+
+Identique à la méthode 1, pointez Claude Code vers `localhost:4141` :
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:4141",
+    "ANTHROPIC_AUTH_TOKEN": "dummy",
+    "ANTHROPIC_MODEL": "claude-sonnet-4.6",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gpt-5.4-mini",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  }
+}
+```
+
+### 12.4 Quand utiliser ce fork ?
+
+- Vous utilisez principalement des **modèles Claude** via Copilot
+- Vous avez besoin du **thinking/extended thinking** natif
+- Vous voulez un **comptage de tokens exact**
+- Vous utilisez les **sous-agents** de Claude Code
+
+---
+
+## 13. Configuration permanente de Claude Code
 
 Au lieu de taper les variables d'environnement a chaque fois, configurez-les une fois.
 
-### 11.1 Configuration globale (pour tous les projets)
+### 13.1 Configuration globale (pour tous les projets)
 
 Éditez `~/.claude/settings.json` :
 
@@ -872,7 +1000,7 @@ Au lieu de taper les variables d'environnement a chaque fois, configurez-les une
 C:\Users\VOTRE_USER\.claude\settings.json
 ```
 
-### 11.2 Configuration par projet
+### 13.2 Configuration par projet
 
 Créez `.claude/settings.json` a la racine de votre projet :
 
@@ -889,7 +1017,7 @@ Créez `.claude/settings.json` a la racine de votre projet :
 }
 ```
 
-### 11.3 Via les variables d'environnement du shell
+### 13.3 Via les variables d'environnement du shell
 
 Ajoutez dans votre `~/.bashrc`, `~/.zshrc`, ou profil PowerShell :
 
@@ -915,11 +1043,11 @@ $env:CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
 
 ---
 
-## 12. Gestion du proxy entreprise (HTTP_PROXY)
+## 14. Gestion du proxy entreprise (HTTP_PROXY)
 
 En entreprise, l'accès internet passe souvent par un proxy HTTP.
 
-### 12.1 Configurer npm
+### 14.1 Configurer npm
 
 ```bash
 npm config set proxy http://proxy.entreprise.fr:8080
@@ -934,14 +1062,14 @@ npm config get proxy
 npm config get https-proxy
 ```
 
-### 12.2 Configurer git
+### 14.2 Configurer git
 
 ```bash
 git config --global http.proxy http://proxy.entreprise.fr:8080
 git config --global https.proxy http://proxy.entreprise.fr:8080
 ```
 
-### 12.3 Configurer le proxy copilot-api
+### 14.3 Configurer le proxy copilot-api
 
 ```bash
 # Option 1 : flag --proxy-env (utilise HTTP_PROXY du système)
@@ -954,7 +1082,7 @@ export NO_PROXY=localhost,127.0.0.1
 npx copilot-api@latest start
 ```
 
-### 12.4 Configurer pip (pour LiteLLM)
+### 14.4 Configurer pip (pour LiteLLM)
 
 ```bash
 pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'
@@ -966,7 +1094,7 @@ pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'
 proxy = http://proxy.entreprise.fr:8080
 ```
 
-### 12.5 Certificats SSL auto-signés (fréquent en entreprise)
+### 14.5 Certificats SSL auto-signés (fréquent en entreprise)
 
 Si vous avez des erreurs SSL `UNABLE_TO_VERIFY_LEAF_SIGNATURE` :
 
@@ -984,7 +1112,7 @@ export REQUESTS_CA_BUNDLE=/chemin/vers/certificat-entreprise.pem
 export SSL_CERT_FILE=/chemin/vers/certificat-entreprise.pem
 ```
 
-### 12.6 Fichier PAC / WPAD (auto-configuration)
+### 14.6 Fichier PAC / WPAD (auto-configuration)
 
 Si votre entreprise utilise un fichier PAC (Proxy Auto-Configuration) :
 
@@ -1009,7 +1137,7 @@ export HTTP_PROXY=http://proxy.entreprise.fr:8080
 export HTTPS_PROXY=http://proxy.entreprise.fr:8080
 ```
 
-### 12.7 Authentification NTLM / Kerberos
+### 14.7 Authentification NTLM / Kerberos
 
 Les proxys d'entreprise Windows utilisent souvent NTLM ou Kerberos. Node.js ne supporte pas nativement ces protocoles.
 
@@ -1044,7 +1172,7 @@ export HTTP_PROXY=http://127.0.0.1:3128
 export HTTPS_PROXY=http://127.0.0.1:3128
 ```
 
-### 12.8 Domaines et IP à autoriser (whitelist firewall)
+### 14.8 Domaines et IP à autoriser (whitelist firewall)
 
 Si votre équipe réseau doit ouvrir des règles de firewall, voici les domaines nécessaires :
 
@@ -1064,7 +1192,7 @@ Si votre équipe réseau doit ouvrir des règles de firewall, voici les domaines
 export NO_PROXY=localhost,127.0.0.1,::1
 ```
 
-### 12.9 Configuration proxy sous Windows (PowerShell)
+### 14.9 Configuration proxy sous Windows (PowerShell)
 
 ```powershell
 # Variables d'environnement (session courante)
@@ -1085,7 +1213,7 @@ $env:HTTP_PROXY = "http://127.0.0.1:3128"
 $env:HTTPS_PROXY = "http://127.0.0.1:3128"
 ```
 
-### 12.10 Configuration proxy sous WSL2
+### 14.10 Configuration proxy sous WSL2
 
 WSL2 ne hérite pas automatiquement du proxy Windows :
 
@@ -1108,7 +1236,7 @@ cp /mnt/c/Certificats/ca-entreprise.pem ~/ca-entreprise.pem
 export NODE_EXTRA_CA_CERTS=~/ca-entreprise.pem
 ```
 
-### 12.11 Diagnostic de connectivité
+### 14.11 Diagnostic de connectivité
 
 Commandes pour vérifier que tout fonctionne à travers le proxy :
 
@@ -1139,7 +1267,7 @@ openssl s_client -connect api.github.com:443 -proxy proxy.entreprise.fr:8080
 Test-NetConnection -ComputerName api.github.com -Port 443
 ```
 
-### 12.12 Chaîne de proxys (proxy derrière un proxy)
+### 14.12 Chaîne de proxys (proxy derrière un proxy)
 
 Dans certaines architectures, le proxy copilot-api doit lui-même passer par le proxy corporate :
 
@@ -1164,12 +1292,12 @@ npx copilot-api@latest start --proxy-env
 
 ---
 
-## 13. Optimisation du quota Copilot
+## 15. Optimisation du quota Copilot
 
 Claude Code est TRÈS gourmand en tokens. Une session de 30 minutes peut
 consommer autant qu'une journee de Copilot Chat.
 
-### 13.1 Variables d'environnement essentielles
+### 15.1 Variables d'environnement essentielles
 
 ```bash
 # Réduit les appels en arrière-plan (complétions, suggestions)
@@ -1182,7 +1310,7 @@ CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 **Ces deux variables sont OBLIGATOIRES.** Sans elles, Claude Code fait
 des dizaines d'appels supplémentaires que vous ne voyez pas.
 
-### 13.2 Rate limiting sur le proxy
+### 15.2 Rate limiting sur le proxy
 
 ```bash
 # Attendre 30 secondes minimum entre chaque requête
@@ -1192,7 +1320,7 @@ npx copilot-api@latest start --rate-limit 30 --wait
 # Sans --wait : vous recevez une erreur et devez relancer
 ```
 
-### 13.3 Choisir le bon modèle
+### 15.3 Choisir le bon modèle
 
 | Modèle | Tokens/requête | Qualite | Recommandation |
 |--------|---------------|---------|----------------|
@@ -1205,7 +1333,7 @@ npx copilot-api@latest start --rate-limit 30 --wait
 - `ANTHROPIC_MODEL=gpt-5.4` (principal)
 - `ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini` (tâches legeres)
 
-### 13.4 Bonnes pratiques
+### 15.4 Bonnes pratiques
 
 1. **Soyez precis** : "corrige le bug ligne 42 de server.js" consomme moins que "corrige les bugs"
 2. **Évitez les sessions longues** : fermez et relancez Claude Code regulierement
@@ -1215,11 +1343,11 @@ npx copilot-api@latest start --rate-limit 30 --wait
 
 ---
 
-## 14. Modèles disponibles et lequel choisir
+## 16. Modèles disponibles et lequel choisir
 
 Les modèles disponibles dependent de votre licence Copilot.
 
-### 14.1 Modèles courants via Copilot
+### 16.1 Modèles courants via Copilot
 
 | Modèle | Fournisseur | Forces |
 |--------|-------------|--------|
@@ -1233,7 +1361,7 @@ Les modèles disponibles dependent de votre licence Copilot.
 | `o3` | OpenAI | Raisonnement avance |
 | `gpt-5.4-mini` | OpenAI | Raisonnement, plus rapide |
 
-### 14.2 Voir les modèles disponibles
+### 16.2 Voir les modèles disponibles
 
 ```bash
 # Via copilot-api
@@ -1243,7 +1371,7 @@ curl http://localhost:4141/v1/models | jq
 # Ouvrez http://localhost:4141/v1/models
 ```
 
-### 14.3 Combinaisons recommandées
+### 16.3 Combinaisons recommandées
 
 **Pour du dev quotidien :**
 ```
@@ -1265,9 +1393,9 @@ ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 
 ---
 
-## 15. Dépannage complet
+## 17. Dépannage complet
 
-### 15.1 Erreurs de connexion
+### 17.1 Erreurs de connexion
 
 **`ECONNREFUSED localhost:4141`**
 ```
@@ -1291,7 +1419,7 @@ Solution :
   npx copilot-api@latest start --proxy-env
 ```
 
-### 15.2 Erreurs d'authentification
+### 17.2 Erreurs d'authentification
 
 **`401 Unauthorized`**
 ```
@@ -1315,7 +1443,7 @@ Cause : le navigateur ne s'ouvre pas automatiquement
 Solution : copiez manuellement l'URL et le code affiches
 ```
 
-### 15.3 Erreurs de modèle
+### 17.3 Erreurs de modèle
 
 **`thinking parameter not supported`**
 ```
@@ -1333,7 +1461,7 @@ Solution :
   2. Changez ANTHROPIC_MODEL pour un modèle disponible
 ```
 
-### 15.4 Erreurs de quota
+### 17.4 Erreurs de quota
 
 **`429 Too Many Requests`**
 ```
@@ -1353,7 +1481,7 @@ Solution :
   4. npx copilot-api@latest check-usage pour surveiller
 ```
 
-### 15.5 Problèmes Windows specifiques
+### 17.5 Problèmes Windows specifiques
 
 **`command not found: npx`**
 ```
@@ -1378,9 +1506,11 @@ Solution :
 
 ---
 
-## 16. Sécurité et risques
+## 18. Sécurité et risques
 
-### 16.1 API non-officielle
+> **Note (février 2026)** : GitHub a officiellement lancé Claude et Codex comme agents de codage pour Copilot Business et Pro. À terme, ces proxies non-officiels pourraient devenir inutiles si l'intégration native couvre votre cas d'usage. Consultez https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users/
+
+### 18.1 API non-officielle
 
 Tous ces proxies utilisent des API **reverse-engineered** de GitHub Copilot.
 Ce n'est PAS un usage supporté officiellement par GitHub.
@@ -1390,7 +1520,7 @@ Ce n'est PAS un usage supporté officiellement par GitHub.
 - Les API peuvent changer sans préavis (mise à jour du proxy nécessaire)
 - Pas de support officiel en cas de problème
 
-### 16.2 Bonnes pratiques de sécurité
+### 18.2 Bonnes pratiques de sécurité
 
 1. **Ne commitez JAMAIS vos tokens** : ajoutez a `.gitignore` :
    ```
@@ -1406,7 +1536,7 @@ Ce n'est PAS un usage supporté officiellement par GitHub.
 
 4. **Surveillez les mises à jour** des proxies pour les correctifs de sécurité.
 
-### 16.3 Conformite entreprise
+### 18.3 Conformite entreprise
 
 Avant d'utiliser ces outils en entreprise :
 - Vérifiez les conditions d'utilisation de votre licence GitHub Copilot
@@ -1416,22 +1546,24 @@ Avant d'utiliser ces outils en entreprise :
 
 ---
 
-## 17. Tableau comparatif final
+## 19. Tableau comparatif final
 
-| Critere | copilot-api (npx) | copilot-proxy (npx) | LM Proxy (VS Code) | claude-code-copilot (clone) | LiteLLM (pip) | Go proxy (clone) |
-|---------|-------------------|---------------------|---------------------|----------------------------|---------------|-------------------|
-| **Difficulté** | Facile | Facile | Très facile | Facile | Moyenne | Moyenne |
-| **Temps install** | 2 min | 3 min | 1 min | 3 min | 5 min | 5 min |
-| **npm/npx** | Oui | Oui | Non | Non | Non | Non |
-| **Dépendances** | Node.js | Node.js | VS Code | Node.js seul | Python | Go |
-| **Mode daemon** | Non | Oui | Via VS Code | Non | Non | Non |
-| **Auth auto** | Oui | Oui | Via VS Code | Oui | Manuelle | Manuelle |
-| **Rate limiting** | Oui | Oui | Non | Non | Via config | Non |
-| **Recherche web** | Non | Non | Non | Oui (DuckDuckGo) | Non | Non |
-| **Dashboard** | Non | Non | Non | Non | Oui (web UI) | Non |
-| **Port défaut** | 4141 | 4399 | 4000 | 18080 | 4000 | 8082 |
-| **Communauté** | Grande | Moyenne | Petite | Petite | Grande | Petite |
-| **Maintenance** | Active | Active | Active | Active | Active | Faible |
+| Critere | copilot-api (npx) | copilot-proxy (npx) | LM Proxy (VS Code) | claude-code-copilot (clone) | LiteLLM (pip) | Go proxy (clone) | cc-copilot-bridge | copilot-api fork |
+|---------|-------------------|---------------------|---------------------|----------------------------|---------------|-------------------|-------------------|-----------------|
+| **Difficulté** | Facile | Facile | Très facile | Facile | Moyenne | Moyenne | Facile | Facile |
+| **Temps install** | 2 min | 3 min | 1 min | 3 min | 5 min | 5 min | 2 min | 2 min |
+| **npm/npx** | Oui | Oui | Non | Non | Non | Non | Homebrew/script | Oui |
+| **Dépendances** | Node.js | Node.js | VS Code | Node.js seul | Python | Go | Bash + copilot-api | Node.js |
+| **Mode daemon** | Non | Oui | Via VS Code | Non | Non | Non | Non | Non |
+| **Auth auto** | Oui | Oui | Via VS Code | Oui | Manuelle | Manuelle | Via copilot-api | Oui |
+| **Rate limiting** | Oui | Oui | Non | Non | Via config | Non | Via copilot-api | Oui |
+| **Recherche web** | Non | Non | Non | Oui (DuckDuckGo) | Non | Non | Non | Non |
+| **Dashboard** | Non | Non | Non | Non | Oui (web UI) | Non | Non | Oui (web) |
+| **Multi-provider** | Non | Non | Non | Non | Non | Non | **Oui** (3 backends) | Non |
+| **API Anthropic native** | Oui | Non | Non | Non | Non | Non | Via backend | **Oui (prioritaire)** |
+| **Port défaut** | 4141 | 4399 | 4000 | 18080 | 4000 | 8082 | Via backend | 4141 |
+| **Communauté** | Grande | Moyenne | Petite | Petite | Grande | Petite | Nouvelle | Moyenne |
+| **Maintenance** | Active | Active | Active | Active | Active | Faible | Active | Active |
 
 ---
 
@@ -1445,3 +1577,6 @@ Avant d'utiliser ces outils en entreprise :
 | npx est bloqué dans mon entreprise | claude-code-copilot clone (méthode 2bis) |
 | Je veux du controle total | LiteLLM (méthode 2ter) |
 | Je suis developpeur Go | claude-copilot-proxy (méthode 2quater) |
+| Je veux basculer entre providers | cc-copilot-bridge (méthode 3) |
+| J'utilise surtout Claude via Copilot | copilot-api fork Anthropic-first (méthode 3bis) |
+| Mon entreprise a Copilot Business/Pro | Vérifiez d'abord l'intégration officielle Claude/Copilot |

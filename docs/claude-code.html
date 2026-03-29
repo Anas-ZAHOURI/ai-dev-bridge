@@ -83,6 +83,11 @@
       <a href="#g-m2-go">Go proxy</a>
     </div>
     <div class="sidebar-section">
+      <div class="sidebar-section-title">Méthode 3 : Avancé</div>
+      <a href="#g-m3-bridge">cc-copilot-bridge</a>
+      <a href="#g-m3-fork">copilot-api fork</a>
+    </div>
+    <div class="sidebar-section">
       <div class="sidebar-section-title">Configuration</div>
       <a href="#g-config">Config permanente</a>
       <a href="#g-proxy-entreprise">Proxy entreprise</a>
@@ -641,6 +646,81 @@ claude</code></pre>
   <pre><code class="language-bash">go build -o copilot-proxy ./cmd/proxy/
 COPILOT_API_KEY="ghu_..." ./copilot-proxy</code></pre>
 
+  <!-- ===== MÉTHODE 3 : AVANCÉ ===== -->
+  <h2 id="g-m3-bridge">cc-copilot-bridge (multi-provider)</h2>
+
+  <div class="box box-info">
+    <div class="box-title">Basculez entre Copilot, Anthropic Direct et Ollama local</div>
+    <p>cc-copilot-bridge est un routeur multi-provider avec des aliases simples : <code>ccc</code> (Copilot), <code>ccd</code> (Anthropic), <code>cco</code> (Ollama).</p>
+  </div>
+
+  <h3>Installation</h3>
+  <pre><code class="language-bash"># Homebrew (recommandé)
+brew tap FlorianBruniaux/tap
+brew install cc-copilot-bridge
+eval "$(claude-switch --shell-config)"
+
+# Ou via script
+curl -fsSL https://raw.githubusercontent.com/FlorianBruniaux/cc-copilot-bridge/main/install.sh | bash</code></pre>
+
+  <h3>Utilisation</h3>
+  <pre><code class="language-bash"># Via Copilot (copilot-api doit tourner sur port 4141)
+ccc
+
+# Changer de modèle
+COPILOT_MODEL=claude-opus-4.6 ccc
+COPILOT_MODEL=gpt-5.4 ccc
+
+# Anthropic Direct (clé API requise)
+ccd
+
+# Ollama local (offline)
+cco
+
+# Vérifier les providers
+ccs</code></pre>
+
+  <h3>Points forts</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fonctionnalité</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>40+ modèles</strong></td><td>Claude, GPT, Gemini, modèles de codage</td></tr>
+        <tr><td><strong>Health checks</strong></td><td>Validation de disponibilité avant lancement</td></tr>
+        <tr><td><strong>Profils MCP</strong></td><td>Génération auto pour modèles avec validation JSON stricte</td></tr>
+        <tr><td><strong>Injection identité</strong></td><td>Les modèles non-Claude s'identifient correctement</td></tr>
+        <tr><td><strong>Logging</strong></td><td>Sessions dans <code>~/.claude/claude-switch.log</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="g-m3-fork">copilot-api fork Anthropic-first</h2>
+
+  <div class="box box-info">
+    <div class="box-title">Routage natif Anthropic Messages API pour Claude</div>
+    <p>Fork amélioré de copilot-api par caozhiyuan. Préserve tool_use/tool_result et thinking nativement.</p>
+  </div>
+
+  <h3>Installation</h3>
+  <pre><code class="language-bash"># Comme copilot-api, mais avec le fork
+npx @jeffreycao/copilot-api@latest start --claude-code</code></pre>
+
+  <h3>Avantages vs l'original</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fonctionnalité</th><th>Original</th><th>Fork</th></tr></thead>
+      <tbody>
+        <tr><td>API Claude</td><td>Traduction Chat Completions</td><td><strong>Messages API native</strong></td></tr>
+        <tr><td>Token counting</td><td>Estimation GPT</td><td><strong>Exact (endpoint Anthropic)</strong></td></tr>
+        <tr><td>Thinking/tool_use</td><td>Conversion</td><td><strong>Préservé nativement</strong></td></tr>
+        <tr><td>Quota premium</td><td>Standard</td><td><strong>Optimisé (warmup → smallModel)</strong></td></tr>
+        <tr><td>Sous-agents</td><td>Non</td><td><strong>Oui (marker injection)</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Recommandé si vous utilisez principalement des <strong>modèles Claude</strong> via Copilot.</p>
+
   <!-- ===== CONFIG ===== -->
   <h2 id="g-config">Configuration permanente</h2>
 
@@ -927,6 +1007,11 @@ curl http://localhost:4141/usage</code></pre>
 
   <!-- ===== SECURITE ===== -->
   <h2 id="g-sécurité">Sécurité et risques</h2>
+
+  <div class="box box-info">
+    <div class="box-title">Intégration officielle Claude/Copilot (février 2026)</div>
+    <p>GitHub a lancé Claude et Codex officiellement pour <strong>Copilot Business et Pro</strong>. Si votre entreprise dispose de ces plans, vérifiez d'abord si l'intégration native couvre votre besoin. <a href="https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users/" target="_blank">En savoir plus</a>.</p>
+  </div>
 
   <div class="box box-danger">
     <div class="box-title">API non-officielle</div>
