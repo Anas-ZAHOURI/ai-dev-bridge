@@ -37,7 +37,7 @@
 <header class="header">
   <a href="./" class="header-logo-link">
     <div class="header-logo">
-      <span class="icon">&#9881;</span>
+      <span class="icon"><i class="fa-solid fa-gear"></i></span>
       <span>Claude Code <span style="color:var(--text-muted);font-weight:400;font-size:14px">via Copilot</span></span>
     </div>
   </a>
@@ -49,7 +49,7 @@
   <a class="header-github" href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank" title="View on GitHub"><i class="fa-brands fa-github"></i> GitHub</a>
   <button class="dark-mode-toggle-header" onclick="toggleDarkMode()" title="Toggle dark/light theme"><i class="fa-solid fa-moon"></i></button>
   <button class="lang-toggle-header" onclick="toggleLang()" title="Passer en français"><i class="fa-solid fa-globe"></i><span class="lang-label">FR</span></button>
-  <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+  <button class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
 </header>
 
 <!-- ===== SIDEBAR ===== -->
@@ -137,7 +137,7 @@
 
   <!-- Warning tokens -->
   <div class="box box-danger">
-    <div class="box-title"><span class="lang-en">&#9888; Warning: Copilot token consumption</span><span class="lang-fr">&#9888; Avertissement : consommation de tokens Copilot</span></div>
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-triangle-exclamation"></i> Warning: Copilot token consumption</span><span class="lang-fr"><i class="fa-solid fa-triangle-exclamation"></i> Avertissement : consommation de tokens Copilot</span></div>
     <p><span class="lang-en">This method uses <strong>your GitHub Copilot token quota</strong>. Claude Code is extremely token-hungry: it consumes <strong>10 to 100 times more tokens</strong> than a regular Copilot chat.</span><span class="lang-fr">Cette méthode utilise <strong>votre quota de tokens GitHub Copilot</strong>. Claude Code est extrêmement gourmand :
     il consomme <strong>10 a 100 fois plus de tokens</strong> qu'un chat Copilot classique.</span></p>
     <ul>
@@ -200,7 +200,7 @@ DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude</code></pre>
 
   <div class="box box-success">
-    <div class="box-title"><span class="lang-en">&#10003; You're all set!</span><span class="lang-fr">&#10003; C'est prêt !</span></div>
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-check"></i> You're all set!</span><span class="lang-fr"><i class="fa-solid fa-check"></i> C'est prêt !</span></div>
     <span class="lang-en">Claude Code is connected to Copilot. Type your commands as usual.</span><span class="lang-fr">Claude Code est connecté a Copilot. Tapez vos commandes normalement.</span>
   </div>
 
@@ -261,20 +261,20 @@ claude</code></pre>
  POST /v1/messages   Translation     POST /v1/chat/completions
 
 The proxy also handles:
- <span class="orange">&#9679;</span> GitHub OAuth authentication
- <span class="orange">&#9679;</span> Automatic token renewal
- <span class="orange">&#9679;</span> Removal of "thinking" parameter
- <span class="orange">&#9679;</span> Rate limiting</span><span class="lang-fr"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Proxy local</span>  ───&gt;  <span class="purple">API GitHub Copilot</span>
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> GitHub OAuth authentication
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Automatic token renewal
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Removal of "thinking" parameter
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Rate limiting</span><span class="lang-fr"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Proxy local</span>  ───&gt;  <span class="purple">API GitHub Copilot</span>
  (terminal)       (localhost:4141)     (api.github.com)
 
  Format Anthropic    Traduction      Format OpenAI
  POST /v1/messages   automatique     POST /v1/chat/complétions
 
 Le proxy gère aussi :
- <span class="orange">&#9679;</span> Authentification OAuth GitHub
- <span class="orange">&#9679;</span> Renouvellement automatique du token
- <span class="orange">&#9679;</span> Suppression du paramètre "thinking"
- <span class="orange">&#9679;</span> Rate limiting</span></div>
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Authentification OAuth GitHub
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Renouvellement automatique du token
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Suppression du paramètre "thinking"
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Rate limiting</span></div>
 
   <h3><span class="lang-en">Authentication flow</span><span class="lang-fr">Flux d'authentification</span></h3>
   <div class="steps">
@@ -286,7 +286,7 @@ Le proxy gère aussi :
   </div>
 
   <!-- ===== TOKENS WARNING ===== -->
-  <h2 id="g-tokens"><span class="lang-en">&#9888; Copilot token consumption</span><span class="lang-fr">&#9888; Consommation de tokens Copilot</span></h2>
+  <h2 id="g-tokens"><span class="lang-en"><i class="fa-solid fa-triangle-exclamation"></i> Copilot token consumption</span><span class="lang-fr"><i class="fa-solid fa-triangle-exclamation"></i> Consommation de tokens Copilot</span></h2>
 
   <div class="box box-danger">
     <div class="box-title"><span class="lang-en">IMPORTANT: This method consumes your Copilot quota</span><span class="lang-fr">IMPORTANT : Cette méthode consomme votre quota Copilot</span></div>
@@ -951,21 +951,21 @@ curl http://localhost:4141/usage</code></pre>
   <h3><span class="lang-en">Recommended combinations</span><span class="lang-fr">Combinaisons recommandées</span></h3>
   <div class="card-grid">
     <div class="card">
-      <div class="card-title"><span class="lang-en">&#128640; Daily dev</span><span class="lang-fr">&#128640; Dev quotidien</span></div>
+      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-rocket"></i> Daily dev</span><span class="lang-fr"><i class="fa-solid fa-rocket"></i> Dev quotidien</span></div>
       <div class="card-desc">
         <code>ANTHROPIC_MODEL=gpt-5.4</code><br>
         <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="lang-en">&#9733; Max quality</span><span class="lang-fr">&#9733; Qualite max</span></div>
+      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-star"></i> Max quality</span><span class="lang-fr"><i class="fa-solid fa-star"></i> Qualite max</span></div>
       <div class="card-desc">
         <code>ANTHROPIC_MODEL=claude-sonnet-4.6</code><br>
         <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="lang-en">&#128176; Budget-friendly</span><span class="lang-fr">&#128176; Economique</span></div>
+      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-coins"></i> Budget-friendly</span><span class="lang-fr"><i class="fa-solid fa-coins"></i> Economique</span></div>
       <div class="card-desc">
         <code>ANTHROPIC_MODEL=gpt-5.4-mini</code><br>
         <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
@@ -1090,32 +1090,32 @@ curl http://localhost:4141/usage</code></pre>
   <h3><span class="lang-en">Which method to choose?</span><span class="lang-fr">Quelle méthode choisir ?</span></h3>
   <div class="card-grid">
     <div class="card" data-goto="#g-m1-copilot-api">
-      <div class="card-icon">&#9889;</div>
+      <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
       <div class="card-title"><span class="lang-en">I want it to work fast</span><span class="lang-fr">Je veux que ça marche vite</span></div>
       <div class="card-desc"><span class="lang-en">copilot-api with npx &mdash; 2 commands and you're up</span><span class="lang-fr">copilot-api avec npx &mdash; 2 commandes et c'est parti</span></div>
     </div>
     <div class="card" data-goto="#g-m1-copilot-proxy">
-      <div class="card-icon">&#127981;</div>
+      <div class="card-icon"><i class="fa-solid fa-building"></i></div>
       <div class="card-title"><span class="lang-en">Permanent enterprise use</span><span class="lang-fr">Usage permanent en entreprise</span></div>
       <div class="card-desc"><span class="lang-en">copilot-proxy with daemon &mdash; auto-start at boot</span><span class="lang-fr">copilot-proxy avec daemon &mdash; auto-démarrage au boot</span></div>
     </div>
     <div class="card" data-goto="#g-m1-lm-proxy">
-      <div class="card-icon">&#128187;</div>
+      <div class="card-icon"><i class="fa-solid fa-desktop"></i></div>
       <div class="card-title"><span class="lang-en">VS Code always open</span><span class="lang-fr">VS Code toujours ouvert</span></div>
       <div class="card-desc"><span class="lang-en">LM Proxy &mdash; zero extra config</span><span class="lang-fr">LM Proxy &mdash; zero config supplémentaire</span></div>
     </div>
     <div class="card" data-goto="#g-m2-ccc">
-      <div class="card-icon">&#128274;</div>
+      <div class="card-icon"><i class="fa-solid fa-lock"></i></div>
       <div class="card-title"><span class="lang-en">npx blocked in enterprise</span><span class="lang-fr">npx bloqué en entreprise</span></div>
       <div class="card-desc"><span class="lang-en">claude-code-copilot clone &mdash; zero dependency</span><span class="lang-fr">claude-code-copilot clone &mdash; zero dépendance</span></div>
     </div>
     <div class="card" data-goto="#g-m2-litellm">
-      <div class="card-icon">&#9881;</div>
+      <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
       <div class="card-title"><span class="lang-en">Full control</span><span class="lang-fr">Controle total</span></div>
       <div class="card-desc"><span class="lang-en">LiteLLM &mdash; web dashboard, multi-model</span><span class="lang-fr">LiteLLM &mdash; dashboard web, multi-modèles</span></div>
     </div>
     <div class="card" data-goto="#g-m2-go">
-      <div class="card-icon">&#128039;</div>
+      <div class="card-icon"><i class="fa-brands fa-linux"></i></div>
       <div class="card-title"><span class="lang-en">Go developer</span><span class="lang-fr">Developpeur Go</span></div>
       <div class="card-desc"><span class="lang-en">claude-copilot-proxy &mdash; lightweight, single binary</span><span class="lang-fr">claude-copilot-proxy &mdash; léger, un binaire</span></div>
     </div>
@@ -1259,32 +1259,32 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
   <h3><span class="lang-en">Cost-saving strategies</span><span class="lang-fr">Strategies d'economie</span></h3>
   <div class="card-grid">
     <div class="card">
-      <div class="card-icon">&#9881;</div>
+      <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
       <div class="card-title"><span class="lang-en">Env variables</span><span class="lang-fr">Variables d'env</span></div>
       <div class="card-desc"><span class="lang-en"><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code> and <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> reduce consumption by 50%+</span><span class="lang-fr"><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code> et <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> reduisent la conso de 50%+</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#9201;</div>
+      <div class="card-icon"><i class="fa-solid fa-stopwatch"></i></div>
       <div class="card-title">Rate limiting</div>
       <div class="card-desc"><span class="lang-en"><code>--rate-limit 30 --wait</code> spaces out requests and avoids spikes</span><span class="lang-fr"><code>--rate-limit 30 --wait</code> espace les requêtes et evite les pics</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128269;</div>
+      <div class="card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
       <div class="card-title"><span class="lang-en">Disable WebSearch</span><span class="lang-fr">Désactiver WebSearch</span></div>
       <div class="card-desc"><span class="lang-en"><code>"deny": ["WebSearch"]</code> avoids wasted calls</span><span class="lang-fr"><code>"deny": ["WebSearch"]</code> evite des appels gaspilles</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128172;</div>
+      <div class="card-icon"><i class="fa-solid fa-comment"></i></div>
       <div class="card-title"><span class="lang-en">Be specific</span><span class="lang-fr">Etre precis</span></div>
       <div class="card-desc"><span class="lang-en">"fix line 42 of server.js" &lt; "fix the bugs"</span><span class="lang-fr">"corrige ligne 42 de server.js" &lt; "corrige les bugs"</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128230;</div>
+      <div class="card-icon"><i class="fa-solid fa-box"></i></div>
       <div class="card-title"><span class="lang-en">Use /compact</span><span class="lang-fr">Utiliser /compact</span></div>
       <div class="card-desc"><span class="lang-en">Compresses context in Claude Code to reduce tokens sent</span><span class="lang-fr">Compresse le contexte dans Claude Code pour reduire les tokens envoyes</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128200;</div>
+      <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
       <div class="card-title"><span class="lang-en">Monitor</span><span class="lang-fr">Surveiller</span></div>
       <div class="card-desc"><span class="lang-en"><code>check-usage</code> and <code>/usage</code> endpoint to track consumption in real time</span><span class="lang-fr"><code>check-usage</code> et <code>/usage</code> endpoint pour suivre la conso en temps reel</span></div>
     </div>

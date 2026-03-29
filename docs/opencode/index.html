@@ -37,7 +37,7 @@
 <header class="header">
   <a href="../" class="header-logo-link">
     <div class="header-logo">
-      <span class="icon">&#9881;</span>
+      <span class="icon"><i class="fa-solid fa-gear"></i></span>
       <span>OpenCode <span style="color:var(--accent);font-weight:400;font-size:14px">via Copilot</span></span>
     </div>
   </a>
@@ -49,7 +49,7 @@
   <a class="header-github" href="https://github.com/Anas-ZAHOURI/ai-dev-bridge" target="_blank" title="View on GitHub"><i class="fa-brands fa-github"></i> GitHub</a>
   <button class="dark-mode-toggle-header" onclick="toggleDarkMode()" title="Toggle dark/light theme"><i class="fa-solid fa-moon"></i></button>
   <button class="lang-toggle-header" onclick="toggleLang()" title="Passer en français"><i class="fa-solid fa-globe"></i><span class="lang-label">FR</span></button>
-  <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+  <button class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
 </header>
 
 <!-- ===== SIDEBAR ===== -->
@@ -131,22 +131,22 @@
 
   <div class="card-grid">
     <div class="card">
-      <div class="card-icon">&#127793;</div>
+      <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
       <div class="card-title">Open Source (MIT)</div>
       <div class="card-desc"><span class="lang-en">Open source code, no vendor lock-in, active community.</span><span class="lang-fr">Code source ouvert, pas de vendor lock-in, communauté active.</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128279;</div>
+      <div class="card-icon"><i class="fa-solid fa-link"></i></div>
       <div class="card-title"><span class="lang-en">Native Copilot</span><span class="lang-fr">Copilot natif</span></div>
       <div class="card-desc"><span class="lang-en">Built-in GitHub Copilot support. No proxy, no hack.</span><span class="lang-fr">Support GitHub Copilot intégré. Pas de proxy, pas de hack.</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#9881;</div>
+      <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
       <div class="card-title">75+ providers</div>
       <div class="card-desc"><span class="lang-en">OpenAI, Anthropic, Google, Ollama, Azure, Bedrock, and more.</span><span class="lang-fr">OpenAI, Anthropic, Google, Ollama, Azure, Bedrock, et plus.</span></div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128187;</div>
+      <div class="card-icon"><i class="fa-solid fa-desktop"></i></div>
       <div class="card-title"><span class="lang-en">Modern TUI</span><span class="lang-fr">TUI moderne</span></div>
       <div class="card-desc"><span class="lang-en">Bubble Tea terminal interface with vim keybindings.</span><span class="lang-fr">Interface terminal Bubble Tea avec keybindings vim.</span></div>
     </div>
@@ -158,7 +158,7 @@
   </div>
 
   <div class="box box-danger">
-    <div class="box-title"><span class="lang-en">&#9888; Copilot token consumption</span><span class="lang-fr">&#9888; Consommation de tokens Copilot</span></div>
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-triangle-exclamation"></i> Copilot token consumption</span><span class="lang-fr"><i class="fa-solid fa-triangle-exclamation"></i> Consommation de tokens Copilot</span></div>
     <p><span class="lang-en">Like any terminal AI agent, OpenCode consumes <strong>far more tokens</strong> than a simple Copilot chat. A single work session can consume the equivalent of a full day of Copilot Chat. See the <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-copilot-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Token consumption</a> section for details.</span><span class="lang-fr">Comme tout agent IA en terminal, OpenCode consomme <strong>beaucoup plus de tokens</strong> qu'un simple chat Copilot. Une session de travail peut consommer l'equivalent d'une journee de Copilot Chat. Voir la section <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-copilot-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Consommation de tokens</a> pour les details.</span></p>
   </div>
 
@@ -218,7 +218,7 @@ opencode</code></pre>
   </div>
 
   <div class="box box-success">
-    <div class="box-title"><span class="lang-en">&#10003; You're all set!</span><span class="lang-fr">&#10003; C'est prêt !</span></div>
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-check"></i> You're all set!</span><span class="lang-fr"><i class="fa-solid fa-check"></i> C'est prêt !</span></div>
     <p><span class="lang-en">OpenCode is connected to Copilot. Type your commands directly.</span><span class="lang-fr">OpenCode est connecté a Copilot. Tapez vos commandes directement.</span></p>
   </div>
 
@@ -419,7 +419,7 @@ opencode</code></pre>
   <h2 id="g-copilot-tokens"><span class="lang-en">Copilot token consumption</span><span class="lang-fr">Consommation de tokens Copilot</span></h2>
 
   <div class="box box-danger">
-    <div class="box-title"><span class="lang-en">&#9888; OpenCode consumes your Copilot quota</span><span class="lang-fr">&#9888; OpenCode consomme votre quota Copilot</span></div>
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-triangle-exclamation"></i> OpenCode consumes your Copilot quota</span><span class="lang-fr"><i class="fa-solid fa-triangle-exclamation"></i> OpenCode consomme votre quota Copilot</span></div>
     <p><span class="lang-en">Every interaction with OpenCode consumes tokens from your GitHub Copilot license. A terminal agent consumes <strong>far more</strong> than a standard Copilot chat.</span><span class="lang-fr">Chaque interaction avec OpenCode consomme des tokens de votre licence GitHub Copilot. Un agent terminal consomme <strong>beaucoup plus</strong> qu'un chat Copilot classique.</span></p>
   </div>
 
@@ -639,14 +639,14 @@ env | grep -i proxy</code></pre>
     <table>
       <thead><tr><th><span class="lang-en">Criteria</span><span class="lang-fr">Critere</span></th><th>OpenCode</th><th>Claude Code</th></tr></thead>
       <tbody>
-        <tr><td><strong><span class="lang-en">Native Copilot</span><span class="lang-fr">Copilot natif</span></strong></td><td><span style="color:var(--green)"><span class="lang-en">&#10003; Yes, official</span><span class="lang-fr">&#10003; Oui, officiel</span></span></td><td><span style="color:var(--red)"><span class="lang-en">&#10007; Unofficial proxy required</span><span class="lang-fr">&#10007; Proxy non-officiel requis</span></span></td></tr>
-        <tr><td><strong>Open source</strong></td><td><span style="color:var(--green)">&#10003; MIT</span></td><td><span style="color:var(--red)"><span class="lang-en">&#10007; Proprietary</span><span class="lang-fr">&#10007; Proprietaire</span></span></td></tr>
+        <tr><td><strong><span class="lang-en">Native Copilot</span><span class="lang-fr">Copilot natif</span></strong></td><td><span style="color:var(--green)"><span class="lang-en"><i class="fa-solid fa-check"></i> Yes, official</span><span class="lang-fr"><i class="fa-solid fa-check"></i> Oui, officiel</span></span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> Unofficial proxy required</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Proxy non-officiel requis</span></span></td></tr>
+        <tr><td><strong>Open source</strong></td><td><span style="color:var(--green)"><i class="fa-solid fa-check"></i> MIT</span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> Proprietary</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Proprietaire</span></span></td></tr>
         <tr><td><strong>Providers</strong></td><td>75+ (BYO key)</td><td><span class="lang-en">Anthropic only</span><span class="lang-fr">Anthropic uniquement</span></td></tr>
-        <tr><td><strong><span class="lang-en">Local models</span><span class="lang-fr">Modèles locaux</span></strong></td><td><span style="color:var(--green)">&#10003; Ollama, LM Studio</span></td><td><span style="color:var(--red)"><span class="lang-en">&#10007; No</span><span class="lang-fr">&#10007; Non</span></span></td></tr>
+        <tr><td><strong><span class="lang-en">Local models</span><span class="lang-fr">Modèles locaux</span></strong></td><td><span style="color:var(--green)"><i class="fa-solid fa-check"></i> Ollama, LM Studio</span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> No</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Non</span></span></td></tr>
         <tr><td><strong>MCP</strong></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td></tr>
-        <tr><td><strong><span class="lang-en">Built-in LSP</span><span class="lang-fr">LSP intégré</span></strong></td><td><span style="color:var(--green)"><span class="lang-en">&#10003; Auto-detection</span><span class="lang-fr">&#10003; Auto-detection</span></span></td><td><span style="color:var(--red)"><span class="lang-en">&#10007; No</span><span class="lang-fr">&#10007; Non</span></span></td></tr>
-        <tr><td><strong>Multi-session</strong></td><td><span style="color:var(--green)"><span class="lang-en">&#10003; Yes</span><span class="lang-fr">&#10003; Oui</span></span></td><td><span class="lang-en">Single session</span><span class="lang-fr">Session unique</span></td></tr>
-        <tr><td><strong>Desktop app</strong></td><td><span style="color:var(--green)">&#10003; macOS, Win, Linux</span></td><td><span style="color:var(--red)">&#10007; CLI only</span></td></tr>
+        <tr><td><strong><span class="lang-en">Built-in LSP</span><span class="lang-fr">LSP intégré</span></strong></td><td><span style="color:var(--green)"><span class="lang-en"><i class="fa-solid fa-check"></i> Auto-detection</span><span class="lang-fr"><i class="fa-solid fa-check"></i> Auto-detection</span></span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> No</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Non</span></span></td></tr>
+        <tr><td><strong>Multi-session</strong></td><td><span style="color:var(--green)"><span class="lang-en"><i class="fa-solid fa-check"></i> Yes</span><span class="lang-fr"><i class="fa-solid fa-check"></i> Oui</span></span></td><td><span class="lang-en">Single session</span><span class="lang-fr">Session unique</span></td></tr>
+        <tr><td><strong>Desktop app</strong></td><td><span style="color:var(--green)"><i class="fa-solid fa-check"></i> macOS, Win, Linux</span></td><td><span style="color:var(--red)"><i class="fa-solid fa-xmark"></i> CLI only</span></td></tr>
         <tr><td><strong><span class="lang-en">Account risk</span><span class="lang-fr">Risque compte</span></strong></td><td><span style="color:var(--green)"><span class="lang-en">None (official)</span><span class="lang-fr">Aucun (officiel)</span></span></td><td><span style="color:var(--red)"><span class="lang-en">Possible (unofficial API)</span><span class="lang-fr">Possible (API non-officielle)</span></span></td></tr>
         <tr><td><strong>GitHub stars</strong></td><td>120K+</td><td>71K+</td></tr>
         <tr><td><strong>Auto-compact</strong></td><td><span class="lang-en">Yes (95% threshold)</span><span class="lang-fr">Oui (95% seuil)</span></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td></tr>
@@ -859,7 +859,7 @@ opencode auth list</code></pre>
   <h3><span class="lang-en">Recommended combinations</span><span class="lang-fr">Combinaisons recommandées</span></h3>
   <div class="card-grid">
     <div class="card">
-      <div class="card-icon">&#128640;</div>
+      <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
       <div class="card-title"><span class="lang-en">Daily use (Copilot Pro)</span><span class="lang-fr">Quotidien (Copilot Pro)</span></div>
       <div class="card-desc">
         <code>coder: copilot.gpt-5.4</code><br>
@@ -868,7 +868,7 @@ opencode auth list</code></pre>
       </div>
     </div>
     <div class="card">
-      <div class="card-icon">&#9733;</div>
+      <div class="card-icon"><i class="fa-solid fa-star"></i></div>
       <div class="card-title"><span class="lang-en">Max quality (Pro+)</span><span class="lang-fr">Qualite max (Pro+)</span></div>
       <div class="card-desc">
         <code>coder: copilot.claude-sonnet-4.6</code><br>
@@ -877,7 +877,7 @@ opencode auth list</code></pre>
       </div>
     </div>
     <div class="card">
-      <div class="card-icon">&#128176;</div>
+      <div class="card-icon"><i class="fa-solid fa-coins"></i></div>
       <div class="card-title"><span class="lang-en">Economical</span><span class="lang-fr">Economique</span></div>
       <div class="card-desc">
         <code>coder: copilot.gpt-5-mini</code><br>
