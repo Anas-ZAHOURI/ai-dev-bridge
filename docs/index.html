@@ -3,15 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Dev Bridge - Use Claude Code and OpenCode with your enterprise GitHub Copilot subscription via local proxy bridges.">
-  <meta property="og:title" content="AI Dev Bridge - Keep your tools, use your subscription">
-  <meta property="og:description" content="AI Dev Bridge - Use Claude Code and OpenCode with your enterprise GitHub Copilot subscription via local proxy bridges.">
+  <title>AI Dev Bridge - Use Claude Code &amp; OpenCode with GitHub Copilot</title>
+  <meta name="description" content="Use Claude Code or OpenCode with your company's GitHub Copilot subscription. A local proxy bridges the gap in 5 minutes. No API key needed, fully compliant.">
+  <meta name="keywords" content="Claude Code, OpenCode, GitHub Copilot, proxy, enterprise, AI coding, copilot-api, local proxy, developer tools">
+  <link rel="canonical" href="https://anas-zahouri.github.io/ai-dev-bridge/">
+  <link rel="alternate" hreflang="en" href="https://anas-zahouri.github.io/ai-dev-bridge/">
+  <link rel="alternate" hreflang="fr" href="https://anas-zahouri.github.io/ai-dev-bridge/">
+  <link rel="alternate" hreflang="x-default" href="https://anas-zahouri.github.io/ai-dev-bridge/">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://anas-zahouri.github.io/ai-dev-bridge/">
+  <meta property="og:title" content="AI Dev Bridge - Use Claude Code with your Copilot subscription">
+  <meta property="og:description" content="Bridge Claude Code or OpenCode to GitHub Copilot via a local proxy. 5-minute setup, no API key, enterprise compliant.">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:site_name" content="AI Dev Bridge">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Dev Bridge - Claude Code + Copilot in 5 minutes">
+  <meta name="twitter:description" content="Your company pays for Copilot, but you prefer Claude Code? A local proxy bridges the gap. No API key, no rule-breaking.">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AI Dev Bridge",
+    "url": "https://anas-zahouri.github.io/ai-dev-bridge/",
+    "description": "Use Claude Code or OpenCode with your enterprise GitHub Copilot subscription via local proxy bridges.",
+    "author": {
+      "@type": "Person",
+      "name": "Anas ZAHOURI",
+      "url": "https://www.linkedin.com/in/anaszahouri/"
+    },
+    "inLanguage": ["en", "fr"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Use Claude Code with GitHub Copilot",
+    "description": "Connect Claude Code to your enterprise GitHub Copilot subscription using a local proxy bridge.",
+    "totalTime": "PT5M",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Install Claude Code",
+        "text": "Install Claude Code globally via npm: npm install -g @anthropic-ai/claude-code"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Start the local proxy",
+        "text": "Run the proxy bridge: npx copilot-api@latest start --claude-code"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Launch Claude Code",
+        "text": "Set ANTHROPIC_BASE_URL=http://localhost:4141 and launch Claude Code as usual."
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e60028' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/><path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/></svg>">
-  <title>AI Dev Bridge - Keep your tools, use your subscription</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -121,39 +181,78 @@
       padding: 80px 24px 72px;
       text-align: center;
     }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(230,0,40,.15);
+      border: 1px solid rgba(230,0,40,.3);
+      color: #ff6b82;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
     .hero h1 {
       font-size: clamp(28px, 5vw, 44px);
       font-weight: 800;
       line-height: 1.2;
-      max-width: 780px;
-      margin: 0 auto 24px;
+      max-width: 820px;
+      margin: 0 auto 20px;
     }
-    .hero h1 span { color: var(--accent); }
-    .hero p {
+    .hero h1 .highlight { color: var(--accent); }
+    .hero .hero-sub {
       font-size: clamp(15px, 2.5vw, 18px);
       color: #b0b0b0;
       max-width: 640px;
-      margin: 0 auto 40px;
+      margin: 0 auto 36px;
       line-height: 1.7;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+    .hero-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .hero-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff !important;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #ccc !important;
     }
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 48px;
     }
     .hero-tag {
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      color: #ccc;
-      padding: 6px 16px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #999;
+      padding: 5px 14px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
     }
 
-    /* ===== Probleme / Solution ===== */
+    /* ===== Section ===== */
     .section {
       max-width: 900px;
       margin: 0 auto;
@@ -171,6 +270,57 @@
       max-width: 640px;
     }
 
+    /* ===== How It Works (3 steps) ===== */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 40px 0 48px;
+    }
+    .step {
+      text-align: center;
+      padding: 28px 20px;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .step h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .step code {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 6px 10px;
+      border-radius: 6px;
+      word-break: break-all;
+    }
+
+    /* ===== Problem / Solution ===== */
     .problem-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -183,12 +333,8 @@
       border: 1px solid var(--border);
       background: var(--bg-card);
     }
-    .problem-card.pain {
-      border-left: 3px solid var(--accent);
-    }
-    .problem-card.solution {
-      border-left: 3px solid var(--green);
-    }
+    .problem-card.pain { border-left: 3px solid var(--accent); }
+    .problem-card.solution { border-left: 3px solid var(--green); }
     .problem-card h3 {
       font-size: 15px;
       font-weight: 700;
@@ -350,6 +496,9 @@
     }
     .footer a { color: var(--text-muted); }
 
+    @media (max-width: 768px) {
+      .steps { grid-template-columns: 1fr; }
+    }
     @media (max-width: 640px) {
       .problem-grid { grid-template-columns: 1fr; }
       .hero { padding: 56px 20px 48px; }
@@ -361,10 +510,7 @@
     /* ===== Header logo link ===== */
     a.header-logo-link { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px; }
     a.header-logo-link:hover { color: inherit; text-decoration: none; }
-
-    .header-github i, .dark-mode-toggle-header i {
-      vertical-align: middle;
-    }
+    .header-github i, .dark-mode-toggle-header i { vertical-align: middle; }
 
     /* ===== Dark Mode ===== */
     [data-theme="dark"] {
@@ -377,57 +523,27 @@
       --text-light: #777777;
       --accent-light: #3d1520;
     }
-    [data-theme="dark"] .card {
-      background: #2d2d2d;
-    }
-    [data-theme="dark"] .schema-node {
-      background: #2d2d2d;
-    }
-    [data-theme="dark"] .compliance {
-      background: linear-gradient(135deg, #2d2d2d 0%, #3d1520 50%, #2d1a3d 100%);
-    }
-    [data-theme="dark"] .header {
-      background: #111111;
-    }
-    [data-theme="dark"] .hero {
-      background: linear-gradient(165deg, #111 0%, #1a1a1a 100%);
-    }
-    [data-theme="dark"] .footer {
-      border-color: #333;
-    }
-    [data-theme="dark"] .card {
-      background: #2d2d2d;
-      border-color: #404040;
-    }
-    [data-theme="dark"] .card:hover {
-      background: #333;
-    }
-    [data-theme="dark"] .problem-card {
-      background: #2d2d2d;
-      border-color: #404040;
-    }
-    [data-theme="dark"] .schema-box {
-      background: #2d2d2d;
-      border-color: #404040;
-    }
+    [data-theme="dark"] .card { background: #2d2d2d; border-color: #404040; }
+    [data-theme="dark"] .card:hover { background: #333; }
+    [data-theme="dark"] .schema-node { background: #2d2d2d; }
+    [data-theme="dark"] .compliance { background: linear-gradient(135deg, #2d2d2d 0%, #3d1520 50%, #2d1a3d 100%); }
+    [data-theme="dark"] .header { background: #111111; }
+    [data-theme="dark"] .hero { background: linear-gradient(165deg, #111 0%, #1a1a1a 100%); }
+    [data-theme="dark"] .footer { border-color: #333; }
+    [data-theme="dark"] .problem-card { background: #2d2d2d; border-color: #404040; }
+    [data-theme="dark"] .schema-box { background: #2d2d2d; border-color: #404040; }
+    [data-theme="dark"] .step { background: #2d2d2d; border-color: #404040; }
+    [data-theme="dark"] .step code { background: #3d1520; }
     pre[class*="language-"] { margin: 16px 0; border-radius: var(--radius); font-size: 13px; }
     code[class*="language-"] { font-family: var(--font-mono); }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
 </head>
 <body>
 
 <!-- ===== HEADER ===== -->
 <header class="header">
   <div class="header-logo">
-    <span class="icon">&#9881;</span>
+    <span class="icon"><i class="fa-solid fa-link"></i></span>
     <span>AI Dev Bridge</span>
   </div>
   <div class="header-links">
@@ -439,218 +555,267 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
+  <div class="hero-badge">
+    <i class="fa-solid fa-clock"></i>
+    <span class="lang-en">5-minute setup</span>
+    <span class="lang-fr">Installation en 5 min</span>
+  </div>
+  <h1>
+    <span class="lang-en">Use <span class="highlight">Claude Code</span> with your company's <span class="highlight">Copilot</span> subscription</span>
+    <span class="lang-fr">Utilisez <span class="highlight">Claude Code</span> avec l'abonnement <span class="highlight">Copilot</span> de votre entreprise</span>
+  </h1>
+  <p class="hero-sub lang-en">
+    Your company pays for GitHub Copilot but you prefer Claude Code or OpenCode?
+    A local proxy bridges the two. No API key, no workaround, fully compliant.
+  </p>
+  <p class="hero-sub lang-fr">
+    Votre entreprise paye GitHub Copilot mais vous preferez Claude Code ou OpenCode ?
+    Un proxy local fait le pont entre les deux. Pas de cle API, pas de contournement, 100% conforme.
+  </p>
+  <div class="hero-cta">
+    <a href="claude-code.html" class="btn-primary">
+      <i class="fa-solid fa-bolt"></i>
+      <span class="lang-en">Get started with Claude Code</span>
+      <span class="lang-fr">Demarrer avec Claude Code</span>
+    </a>
+    <a href="opencode/" class="btn-secondary">
+      <i class="fa-solid fa-gear"></i>
+      <span class="lang-en">OpenCode guide</span>
+      <span class="lang-fr">Guide OpenCode</span>
+    </a>
+  </div>
   <div class="hero-tags">
     <span class="hero-tag">Claude Code</span>
     <span class="hero-tag">OpenCode</span>
     <span class="hero-tag">GitHub Copilot</span>
     <span class="hero-tag">Gemini</span>
+    <span class="hero-tag"><span class="lang-en">6 proxy methods</span><span class="lang-fr">6 methodes de proxy</span></span>
   </div>
-  <h1>
-    <span class="lang-en">Keep <span>your tools</span>, use <span>your subscription</span></span>
-    <span class="lang-fr">Gardez <span>vos outils</span>, utilisez <span>votre abonnement</span></span>
-  </h1>
-  <p class="lang-en">
-    Your company provides GitHub Copilot or Gemini, but you work better with Claude Code or OpenCode.
-    Good news: they are compatible. This guide shows you how to connect them together,
-    without breaking anything, without bending the rules.
-  </p>
-  <p class="lang-fr">
-    Votre entreprise vous fournit GitHub Copilot ou Gemini, mais vous travaillez mieux avec Claude Code ou OpenCode.
-    Bonne nouvelle : les deux sont compatibles. Ce guide vous montre comment les brancher ensemble,
-    sans rien casser, sans contourner les r&#232;gles.
-  </p>
 </section>
 
-<!-- ===== THE PROBLEM ===== -->
+<!-- ===== HOW IT WORKS ===== -->
 <div class="section">
   <h2 class="section-title">
-    <span class="lang-en">The problem everyone knows</span>
-    <span class="lang-fr">Le probl&#232;me que tout le monde conna&#238;t</span>
+    <span class="lang-en">How it works</span>
+    <span class="lang-fr">Comment ca marche</span>
   </h2>
   <p class="section-sub">
-    <span class="lang-en">You have your habits, your reflexes, your productivity. Then the company imposes a different tool.</span>
-    <span class="lang-fr">Vous avez vos habitudes, vos r&#233;flexes, votre productivit&#233;. Puis l'entreprise impose un outil diff&#233;rent.</span>
+    <span class="lang-en">A small server runs on your machine and translates API calls on the fly. Three steps, one result.</span>
+    <span class="lang-fr">Un petit serveur tourne sur votre machine et traduit les appels API a la volee. Trois etapes, un resultat.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>
+        <span class="lang-en">Install your tool</span>
+        <span class="lang-fr">Installez votre outil</span>
+      </h3>
+      <p>
+        <span class="lang-en">Install Claude Code or OpenCode via npm. One command, done.</span>
+        <span class="lang-fr">Installez Claude Code ou OpenCode via npm. Une commande, c'est fait.</span>
+      </p>
+      <code>npm i -g @anthropic-ai/claude-code</code>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>
+        <span class="lang-en">Start the proxy</span>
+        <span class="lang-fr">Lancez le proxy</span>
+      </h3>
+      <p>
+        <span class="lang-en">The proxy intercepts requests and routes them through your Copilot subscription.</span>
+        <span class="lang-fr">Le proxy intercepte les requetes et les route via votre abonnement Copilot.</span>
+      </p>
+      <code>npx copilot-api@latest start</code>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>
+        <span class="lang-en">Code as usual</span>
+        <span class="lang-fr">Codez comme d'habitude</span>
+      </h3>
+      <p>
+        <span class="lang-en">Launch Claude Code pointing to the proxy. Your workflow stays the same.</span>
+        <span class="lang-fr">Lancez Claude Code vers le proxy. Votre workflow reste identique.</span>
+      </p>
+      <code>ANTHROPIC_BASE_URL=http://localhost:4141</code>
+    </div>
+  </div>
+
+  <!-- Schema diagram -->
+  <div class="schema-box">
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;font-weight:600;">
+      <span class="lang-en">What happens under the hood</span>
+      <span class="lang-fr">Ce qui se passe sous le capot</span>
+    </p>
+    <div class="schema-flow">
+      <span class="schema-node tool">Claude Code / OpenCode</span>
+      <span class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      <span class="schema-node proxy"><span class="lang-en">Local Proxy</span><span class="lang-fr">Proxy local</span></span>
+      <span class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      <span class="schema-node provider">GitHub Copilot API</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:14px;">
+      <span class="lang-en">The proxy translates API formats between your tool and Copilot. All traffic stays on the official network.</span>
+      <span class="lang-fr">Le proxy traduit les formats d'API entre votre outil et Copilot. Tout le trafic reste sur le reseau officiel.</span>
+    </p>
+  </div>
+
+  <!-- ===== WHY ===== -->
+  <h2 class="section-title">
+    <span class="lang-en">Why you need this</span>
+    <span class="lang-fr">Pourquoi vous en avez besoin</span>
+  </h2>
+  <p class="section-sub">
+    <span class="lang-en">Your company chose one tool, you work better with another. This solves the gap.</span>
+    <span class="lang-fr">Votre entreprise a choisi un outil, vous etes plus productif avec un autre. Ceci comble l'ecart.</span>
   </p>
 
   <div class="problem-grid">
     <div class="problem-card pain">
       <h3>
-        <span>&#10060;</span>
-        <span class="lang-en">Imposed subscription, limited tool</span>
-        <span class="lang-fr">Abonnement impos&#233;, outil limit&#233;</span>
+        <i class="fa-solid fa-ban" style="color:var(--accent)"></i>
+        <span class="lang-en">Locked into the wrong tool</span>
+        <span class="lang-fr">Bloque sur le mauvais outil</span>
       </h3>
       <p>
-        <span class="lang-en">Your company pays for GitHub Copilot or Gemini. You have no choice over the subscription,
-           but the chat interface or autocompletion doesn't cover your needs.</span>
-        <span class="lang-fr">L'entreprise paye GitHub Copilot ou Gemini. Vous n'avez pas le choix de l'abonnement,
-           mais l'interface chat ou l'autocompletion ne couvrent pas vos besoins.</span>
+        <span class="lang-en">Your company pays for Copilot or Gemini. The chat and autocomplete don't match how you actually work.</span>
+        <span class="lang-fr">Votre entreprise paye Copilot ou Gemini. Le chat et l'autocompletion ne correspondent pas a votre facon de travailler.</span>
       </p>
     </div>
     <div class="problem-card pain">
       <h3>
-        <span>&#10060;</span>
-        <span class="lang-en">Loss of reflexes and speed</span>
-        <span class="lang-fr">Perte de r&#233;flexes et de vitesse</span>
+        <i class="fa-solid fa-gauge-high" style="color:var(--accent)"></i>
+        <span class="lang-en">Losing your speed</span>
+        <span class="lang-fr">Perdre sa vitesse</span>
       </h3>
       <p>
-        <span class="lang-en">You've learned to be productive with Claude Code or OpenCode. Switching tools
-           means losing weeks of muscle memory and proven workflows.</span>
-        <span class="lang-fr">Vous avez appris &#224; &#234;tre productif avec Claude Code ou OpenCode. Changer d'outil,
-           c'est perdre des semaines de muscle memory et de workflows rod&#233;es.</span>
+        <span class="lang-en">You've built muscle memory with Claude Code or OpenCode. Switching tools means weeks of lost productivity.</span>
+        <span class="lang-fr">Vous avez construit des reflexes avec Claude Code ou OpenCode. Changer d'outil, c'est des semaines de productivite perdues.</span>
       </p>
     </div>
     <div class="problem-card solution">
       <h3>
-        <span>&#9989;</span>
-        <span class="lang-en">A transparent local proxy</span>
-        <span class="lang-fr">Un proxy local, transparent</span>
+        <i class="fa-solid fa-shuffle" style="color:var(--green)"></i>
+        <span class="lang-en">One bridge, zero friction</span>
+        <span class="lang-fr">Un pont, zero friction</span>
       </h3>
       <p>
-        <span class="lang-en">A small local server translates calls between your preferred tool and the enterprise subscription API.
-           Nothing is installed on the company's servers.</span>
-        <span class="lang-fr">Un petit serveur local traduit les appels entre votre outil pr&#233;f&#233;r&#233; et l'API de l'abonnement entreprise.
-           Rien n'est install&#233; sur les serveurs de l'entreprise.</span>
+        <span class="lang-en">A local proxy translates between your tool and the enterprise API. Nothing changes on the company side.</span>
+        <span class="lang-fr">Un proxy local traduit entre votre outil et l'API entreprise. Rien ne change cote entreprise.</span>
       </p>
     </div>
     <div class="problem-card solution">
       <h3>
-        <span>&#9989;</span>
-        <span class="lang-en">Standards compliant</span>
-        <span class="lang-fr">Conforme aux standards</span>
+        <i class="fa-solid fa-shield-halved" style="color:var(--green)"></i>
+        <span class="lang-en">100% compliant</span>
+        <span class="lang-fr">100% conforme</span>
       </h3>
       <p>
-        <span class="lang-en">Traffic goes through the official subscription. No personal API key, no parallel account.
-           You stay within the framework authorized by your organization.</span>
-        <span class="lang-fr">Le trafic passe par l'abonnement officiel. Pas de cl&#233; API personnelle, pas de compte parall&#232;le.
-           Vous restez dans le cadre autoris&#233; par votre organisation.</span>
+        <span class="lang-en">All traffic uses the official subscription. No personal API keys, no shadow accounts. IT-friendly.</span>
+        <span class="lang-fr">Tout le trafic passe par l'abonnement officiel. Pas de cle API perso, pas de compte parallele. Compatible IT.</span>
       </p>
     </div>
-  </div>
-
-  <!-- Schema -->
-  <div class="schema-box">
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;font-weight:600;">
-      <span class="lang-en">How it works</span>
-      <span class="lang-fr">Comment &#231;a marche</span>
-    </p>
-    <div class="schema-flow">
-      <span class="schema-node tool">Claude Code / OpenCode</span>
-      <span class="schema-arrow">&#8594;</span>
-      <span class="schema-node proxy"><span class="lang-en">Local Proxy</span><span class="lang-fr">Proxy local</span></span>
-      <span class="schema-arrow">&#8594;</span>
-      <span class="schema-node provider">GitHub Copilot / Gemini</span>
-    </div>
-    <p style="font-size:12px;color:var(--text-light);margin-top:14px;">
-      <span class="lang-en">The proxy runs on your machine and translates the API format on the fly. No data leaves the official circuit.</span>
-      <span class="lang-fr">Le proxy tourne sur votre machine, traduit le format d'API &#224; la vol&#233;e. Aucune donn&#233;e ne sort du circuit officiel.</span>
-    </p>
   </div>
 
   <!-- Compliance -->
   <div class="compliance">
     <h3>
-      <span class="lang-en">Enterprise standards compliant</span>
-      <span class="lang-fr">Respectueux des standards entreprise</span>
+      <span class="lang-en">Enterprise-grade compliance</span>
+      <span class="lang-fr">Conformite enterprise</span>
     </h3>
     <p>
       <span class="lang-en">
-        This approach doesn't bypass anything. It uses the subscription your company already pays for,
-        via official APIs, through the authorized network. You change the interface, not the pipe.
+        This is not a workaround. You use the same subscription, the same APIs, the same network.
+        Only the interface changes. Your IT team can audit every request.
       </span>
       <span class="lang-fr">
-        Cette approche ne contourne rien. Elle utilise l'abonnement que votre entreprise paye d&#233;j&#224;,
-        via les API officielles, en passant par le r&#233;seau autoris&#233;. Vous changez l'interface, pas le tuyau.
+        Ce n'est pas un contournement. Vous utilisez le meme abonnement, les memes API, le meme reseau.
+        Seule l'interface change. Votre equipe IT peut auditer chaque requete.
       </span>
     </p>
     <div class="compliance-checks">
-      <span class="compliance-check">&#10003; <span class="lang-en">Enterprise subscription used</span><span class="lang-fr">Abonnement entreprise utilis&#233;</span></span>
-      <span class="compliance-check">&#10003; <span class="lang-en">No external API key</span><span class="lang-fr">Aucune cl&#233; API externe</span></span>
-      <span class="compliance-check">&#10003; <span class="lang-en">Local proxy only</span><span class="lang-fr">Proxy local uniquement</span></span>
-      <span class="compliance-check">&#10003; <span class="lang-en">Data stays in official circuit</span><span class="lang-fr">Donn&#233;es dans le circuit officiel</span></span>
+      <span class="compliance-check"><i class="fa-solid fa-check"></i> <span class="lang-en">Official subscription</span><span class="lang-fr">Abonnement officiel</span></span>
+      <span class="compliance-check"><i class="fa-solid fa-check"></i> <span class="lang-en">No external API key</span><span class="lang-fr">Aucune cle API externe</span></span>
+      <span class="compliance-check"><i class="fa-solid fa-check"></i> <span class="lang-en">Local proxy only</span><span class="lang-fr">Proxy local uniquement</span></span>
+      <span class="compliance-check"><i class="fa-solid fa-check"></i> <span class="lang-en">Auditable traffic</span><span class="lang-fr">Trafic auditable</span></span>
     </div>
   </div>
 
   <!-- Cards documentation -->
   <h2 class="section-title">
-    <span class="lang-en">The guides</span>
-    <span class="lang-fr">Les guides</span>
+    <span class="lang-en">Pick your guide</span>
+    <span class="lang-fr">Choisissez votre guide</span>
   </h2>
   <p class="section-sub">
-    <span class="lang-en">Three docs, three angles. Pick the one that matches your need.</span>
-    <span class="lang-fr">Trois docs, trois angles. Choisissez celle qui correspond &#224; votre besoin.</span>
+    <span class="lang-en">Three guides, three angles. Start with the one that fits your setup.</span>
+    <span class="lang-fr">Trois guides, trois angles. Commencez par celui qui correspond a votre setup.</span>
   </p>
 
   <div class="cards">
     <a href="claude-code.html" class="card" style="text-decoration:none;color:inherit;">
       <div class="card-icon red"><i class="fa-solid fa-bolt"></i></div>
-      <h3>
-        <span class="lang-en">Claude Code via Copilot</span>
-        <span class="lang-fr">Claude Code via Copilot</span>
-      </h3>
+      <h3>Claude Code via Copilot</h3>
       <p class="card-desc">
         <span class="lang-en">
-          Complete guide to connect Claude Code to your GitHub Copilot subscription.
-          5-minute quick start, detailed guide with 6 proxy methods,
-          and environment variable reference.
+          The complete guide. 5-minute quick start, 6 proxy methods from simple to advanced,
+          environment variables reference, and enterprise proxy config.
         </span>
         <span class="lang-fr">
-          Guide complet pour brancher Claude Code sur votre abonnement GitHub Copilot.
-          Quick start en 5 minutes, guide d&#233;taill&#233; avec 6 m&#233;thodes de proxy,
-          et r&#233;f&#233;rence des variables d'environnement.
+          Le guide complet. Quick start en 5 min, 6 methodes de proxy du simple au avance,
+          reference des variables d'environnement, et config proxy entreprise.
         </span>
       </p>
       <div class="card-tags">
         <span class="card-tag">Claude Code</span>
         <span class="card-tag">Copilot</span>
-        <span class="card-tag">Quick Start</span>
+        <span class="card-tag"><span class="lang-en">6 methods</span><span class="lang-fr">6 methodes</span></span>
       </div>
       <span class="card-link">
-        <span class="lang-en">Open the guide</span>
-        <span class="lang-fr">Ouvrir le guide</span>
+        <span class="lang-en">Start here</span>
+        <span class="lang-fr">Commencer ici</span>
       </span>
     </a>
 
     <a href="comparaison/" class="card" style="text-decoration:none;color:inherit;">
       <div class="card-icon purple"><i class="fa-solid fa-scale-balanced"></i></div>
       <h3>
-        <span class="lang-en">Claude Code vs OpenCode Comparison</span>
-        <span class="lang-fr">Comparatif Claude Code vs OpenCode</span>
+        <span class="lang-en">Claude Code vs OpenCode</span>
+        <span class="lang-fr">Claude Code vs OpenCode</span>
       </h3>
       <p class="card-desc">
         <span class="lang-en">
-          Can't decide between Claude Code and OpenCode? This detailed comparison covers the strengths of each,
-          scenarios where one shines more than the other, and helps you make your choice.
+          Not sure which tool to pick? Side-by-side comparison with real scenarios,
+          decision tree, and recommendations based on your workflow.
         </span>
         <span class="lang-fr">
-          Vous h&#233;sitez entre Claude Code et OpenCode ? Ce comparatif d&#233;taille les forces de chacun,
-          les sc&#233;narios o&#249; l'un brille plus que l'autre, et vous aide &#224; faire votre choix.
+          Pas sur de quel outil choisir ? Comparaison cote a cote avec scenarios reels,
+          arbre de decision et recommandations selon votre workflow.
         </span>
       </p>
       <div class="card-tags">
         <span class="card-tag"><span class="lang-en">Comparison</span><span class="lang-fr">Comparatif</span></span>
-        <span class="card-tag"><span class="lang-en">Decision</span><span class="lang-fr">D&#233;cision</span></span>
-        <span class="card-tag"><span class="lang-en">Scenarios</span><span class="lang-fr">Sc&#233;narios</span></span>
+        <span class="card-tag"><span class="lang-en">Decision tree</span><span class="lang-fr">Arbre de decision</span></span>
+        <span class="card-tag"><span class="lang-en">Scenarios</span><span class="lang-fr">Scenarios</span></span>
       </div>
       <span class="card-link">
-        <span class="lang-en">View the comparison</span>
-        <span class="lang-fr">Voir le comparatif</span>
+        <span class="lang-en">Compare tools</span>
+        <span class="lang-fr">Comparer les outils</span>
       </span>
     </a>
 
     <a href="opencode/" class="card" style="text-decoration:none;color:inherit;">
       <div class="card-icon blue"><i class="fa-solid fa-gear"></i></div>
-      <h3>
-        <span class="lang-en">OpenCode via Copilot</span>
-        <span class="lang-fr">OpenCode via Copilot</span>
-      </h3>
+      <h3>OpenCode via Copilot</h3>
       <p class="card-desc">
         <span class="lang-en">
-          Complete guide to use OpenCode with your GitHub Copilot subscription.
-          Same local proxy approach, adapted to the OpenCode ecosystem.
+          Prefer OpenCode? Same proxy approach, adapted to the OpenCode ecosystem.
+          Quick start, configuration, and troubleshooting included.
         </span>
         <span class="lang-fr">
-          Guide complet pour utiliser OpenCode avec votre abonnement GitHub Copilot.
-          M&#234;me approche de proxy local, adapt&#233;e &#224; l'&#233;cosyst&#232;me OpenCode.
+          Vous preferez OpenCode ? Meme approche proxy, adaptee a l'ecosysteme OpenCode.
+          Quick start, configuration et depannage inclus.
         </span>
       </p>
       <div class="card-tags">
@@ -659,7 +824,7 @@
         <span class="card-tag">Quick Start</span>
       </div>
       <span class="card-link">
-        <span class="lang-en">Open the guide</span>
+        <span class="lang-en">Open guide</span>
         <span class="lang-fr">Ouvrir le guide</span>
       </span>
     </a>
