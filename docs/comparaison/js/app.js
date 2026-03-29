@@ -53,14 +53,14 @@ function setupCopyButtons() {
   document.querySelectorAll('pre').forEach(pre => {
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-    btn.textContent = 'Copier';
+    btn.textContent = getLangText('Copy', 'Copier');
     btn.addEventListener('click', () => {
       const code = pre.querySelector('code')?.textContent || pre.textContent;
       navigator.clipboard.writeText(code).then(() => {
-        btn.textContent = 'Copie !';
+        btn.textContent = getLangText('Copied!', 'Copié !');
         btn.classList.add('copied');
         setTimeout(() => {
-          btn.textContent = 'Copier';
+          btn.textContent = getLangText('Copy', 'Copier');
           btn.classList.remove('copied');
         }, 2000);
       });
@@ -162,4 +162,38 @@ function updateDarkModeIcon() {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
   document.addEventListener('DOMContentLoaded', updateDarkModeIcon);
+})();
+
+// ===== Language Toggle =====
+function getLangText(en, fr) {
+  return document.documentElement.getAttribute('data-lang') === 'fr' ? fr : en;
+}
+function toggleLang() {
+  const current = document.documentElement.getAttribute('data-lang') || 'en';
+  const next = current === 'fr' ? 'en' : 'fr';
+  document.documentElement.setAttribute('data-lang', next);
+  document.documentElement.setAttribute('lang', next);
+  localStorage.setItem('lang', next);
+  updateLangButton();
+  document.querySelectorAll('.copy-btn:not(.copied)').forEach(btn => {
+    btn.textContent = next === 'fr' ? 'Copier' : 'Copy';
+  });
+}
+function updateLangButton() {
+  const btn = document.querySelector('.lang-toggle-header');
+  if (!btn) return;
+  const lang = document.documentElement.getAttribute('data-lang') || 'en';
+  btn.querySelector('.lang-label').textContent = lang === 'fr' ? 'EN' : 'FR';
+  btn.title = lang === 'fr' ? 'Switch to English' : 'Passer en français';
+}
+(function initLang() {
+  const saved = localStorage.getItem('lang');
+  if (saved === 'fr') {
+    document.documentElement.setAttribute('data-lang', 'fr');
+    document.documentElement.setAttribute('lang', 'fr');
+  } else {
+    document.documentElement.setAttribute('data-lang', 'en');
+    document.documentElement.setAttribute('lang', 'en');
+  }
+  document.addEventListener('DOMContentLoaded', updateLangButton);
 })();
