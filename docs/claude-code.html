@@ -133,7 +133,7 @@
 <div id="quickstart" class="page active">
 
   <h1><span class="lang-en">Quick Start</span><span class="lang-fr">Quick Start</span></h1>
-  <p class="subtitle"><span class="lang-en">3 commands to connect Claude Code to your Copilot license. No API key, no hack — just a local translator.</span><span class="lang-fr">3 commandes pour connecter Claude Code à votre licence Copilot. Aucune clé API, aucun hack — juste un traducteur local.</span></p>
+  <p class="subtitle"><span class="lang-en">3 commands to connect Claude Code to your Copilot or Gemini Code Assist license. No hack — just a local translator.</span><span class="lang-fr">3 commandes pour connecter Claude Code à votre licence Copilot ou Gemini Code Assist. Aucun hack — juste un traducteur local.</span></p>
 
   <!-- Warning tokens -->
   <div class="box box-danger">
@@ -166,6 +166,8 @@ nvm install 20 && nvm use 20
 claude --version</code></pre>
 
   <h2 id="qs-proxy"><span class="lang-en">Step 2: Start the proxy</span><span class="lang-fr">Étape 2 : Lancer le proxy</span></h2>
+
+  <h3><span class="lang-en">Option A: Via GitHub Copilot</span><span class="lang-fr">Option A : Via GitHub Copilot</span></h3>
   <p><span class="lang-en">Open a terminal:</span><span class="lang-fr">Ouvrez un terminal :</span></p>
   <pre><code class="language-bash">npx copilot-api@latest start --claude-code</code></pre>
 
@@ -190,8 +192,35 @@ claude --version</code></pre>
     </div>
   </div>
 
+  <h3><span class="lang-en">Option B: Via Gemini Code Assist</span><span class="lang-fr">Option B : Via Gemini Code Assist</span></h3>
+  <p><span class="lang-en">If your company provides Gemini Code Assist instead of Copilot, use LiteLLM:</span><span class="lang-fr">Si votre entreprise fournit Gemini Code Assist au lieu de Copilot, utilisez LiteLLM :</span></p>
+  <pre><code class="language-bash"># 1. Installer LiteLLM
+pip install 'litellm[proxy]'
+
+# 2. S'authentifier a Google Cloud
+gcloud auth application-default login
+# Ou avec une cle API : export GEMINI_API_KEY=AIzaSy...votre_cle
+
+# 3. Créer gemini-config.yaml (voir ci-dessous)
+
+# 4. Lancer le proxy
+litellm --config gemini-config.yaml --port 4141</code></pre>
+  <p><span class="lang-en">Content of <code>gemini-config.yaml</code>:</span><span class="lang-fr">Contenu de <code>gemini-config.yaml</code> :</span></p>
+  <pre><code class="language-yaml">model_list:
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+
+litellm_settings:
+  drop_params: true</code></pre>
+
   <h2 id="qs-launch"><span class="lang-en">Step 3: Launch Claude Code</span><span class="lang-fr">Étape 3 : Lancer Claude Code</span></h2>
-  <p><span class="lang-en">Open a <strong>2nd terminal</strong> and paste the command. It looks like:</span><span class="lang-fr">Ouvrez un <strong>2e terminal</strong> et collez la commande. Elle ressemble à :</span></p>
+  <p><span class="lang-en">Open a <strong>2nd terminal</strong> and paste the command (Copilot) or launch manually:</span><span class="lang-fr">Ouvrez un <strong>2e terminal</strong> et collez la commande (Copilot) ou lancez manuellement :</span></p>
+
+  <h4><span class="lang-en">Via Copilot (clipboard command):</span><span class="lang-fr">Via Copilot (commande du presse-papier) :</span></h4>
   <pre><code class="language-bash">ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
 ANTHROPIC_MODEL=gpt-5.4 \
@@ -199,13 +228,23 @@ ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude</code></pre>
 
+  <h4><span class="lang-en">Via Gemini Code Assist:</span><span class="lang-fr">Via Gemini Code Assist :</span></h4>
+  <pre><code class="language-bash">ANTHROPIC_BASE_URL=http://localhost:4141 \
+ANTHROPIC_AUTH_TOKEN=dummy \
+ANTHROPIC_MODEL=gemini-2.5-pro \
+ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash \
+DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
+claude</code></pre>
+
   <div class="box box-success">
     <div class="box-title"><span class="lang-en"><i class="fa-solid fa-check"></i> You're all set!</span><span class="lang-fr"><i class="fa-solid fa-check"></i> C'est prêt !</span></div>
-    <span class="lang-en">Claude Code is connected to Copilot. Type your commands as usual.</span><span class="lang-fr">Claude Code est connecté a Copilot. Tapez vos commandes normalement.</span>
+    <span class="lang-en">Claude Code is connected to Copilot or Gemini. Type your commands as usual.</span><span class="lang-fr">Claude Code est connecté a Copilot ou Gemini. Tapez vos commandes normalement.</span>
   </div>
 
   <h2 id="qs-permanent"><span class="lang-en">Permanent configuration</span><span class="lang-fr">Configuration permanente</span></h2>
   <p><span class="lang-en">To avoid typing the variables every time, create <code>~/.claude/settings.json</code>:</span><span class="lang-fr">Pour ne plus taper les variables a chaque fois, créez <code>~/.claude/settings.json</code> :</span></p>
+
+  <h4><span class="lang-en">For GitHub Copilot:</span><span class="lang-fr">Pour GitHub Copilot :</span></h4>
   <pre><code class="language-json">{
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
@@ -219,9 +258,28 @@ claude</code></pre>
     "deny": ["WebSearch"]
   }
 }</code></pre>
+
+  <h4><span class="lang-en">For Gemini Code Assist:</span><span class="lang-fr">Pour Gemini Code Assist :</span></h4>
+  <pre><code class="language-json">{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:4141",
+    "ANTHROPIC_AUTH_TOKEN": "dummy",
+    "ANTHROPIC_MODEL": "gemini-2.5-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-2.5-flash",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
+  "permissions": {
+    "deny": ["WebSearch"]
+  }
+}</code></pre>
+
   <p><span class="lang-en">Then, simply run:</span><span class="lang-fr">Ensuite, il suffit de :</span></p>
-  <pre><code class="language-bash"># Terminal 1
+  <pre><code class="language-bash"># Terminal 1 (Copilot)
 npx copilot-api@latest start
+
+# Terminal 1 (Gemini — alternative)
+litellm --config gemini-config.yaml --port 4141
 
 # Terminal 2
 claude</code></pre>
@@ -232,9 +290,10 @@ claude</code></pre>
       <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Probleme</span></th><th><span class="lang-en">Solution</span><span class="lang-fr">Solution</span></th></tr></thead>
       <tbody>
         <tr><td><code>ECONNREFUSED</code></td><td><span class="lang-en">The proxy is not running (terminal 1)</span><span class="lang-fr">Le proxy n'est pas lance (terminal 1)</span></td></tr>
-        <tr><td><code>401 Unauthorized</code></td><td><span class="lang-en">Re-run <code>npx copilot-api@latest auth</code></span><span class="lang-fr">Relancez <code>npx copilot-api@latest auth</code></span></td></tr>
+        <tr><td><code>401 Unauthorized</code> (Copilot)</td><td><span class="lang-en">Re-run <code>npx copilot-api@latest auth</code></span><span class="lang-fr">Relancez <code>npx copilot-api@latest auth</code></span></td></tr>
+        <tr><td><code>403 Permission Denied</code> (Gemini)</td><td><span class="lang-en">Re-run <code>gcloud auth application-default login</code> or check your <code>GEMINI_API_KEY</code></span><span class="lang-fr">Relancez <code>gcloud auth application-default login</code> ou vérifiez votre <code>GEMINI_API_KEY</code></span></td></tr>
         <tr><td><code>thinking parameter error</code></td><td><span class="lang-en">With LiteLLM: add <code>drop_params: true</code></span><span class="lang-fr">Avec LiteLLM : ajoutez <code>drop_params: true</code></span></td></tr>
-        <tr><td><span class="lang-en">Quota exhausted quickly</span><span class="lang-fr">Quota epuise vite</span></td><td><span class="lang-en">Add <code>--rate-limit 30 --wait</code> to the proxy</span><span class="lang-fr">Ajoutez <code>--rate-limit 30 --wait</code> au proxy</span></td></tr>
+        <tr><td><span class="lang-en">Quota exhausted quickly</span><span class="lang-fr">Quota epuise vite</span></td><td><span class="lang-en">Add <code>--rate-limit 30 --wait</code> to the proxy (Copilot)</span><span class="lang-fr">Ajoutez <code>--rate-limit 30 --wait</code> au proxy (Copilot)</span></td></tr>
         <tr><td><span class="lang-en">Enterprise proxy</span><span class="lang-fr">Proxy entreprise</span></td><td><span class="lang-en">Add <code>--proxy-env</code> to the proxy</span><span class="lang-fr">Ajoutez <code>--proxy-env</code> au proxy</span></td></tr>
       </tbody>
     </table>
@@ -252,26 +311,26 @@ claude</code></pre>
 
   <!-- ===== Architecture ===== -->
   <h2 id="g-archi"><span class="lang-en">How it works</span><span class="lang-fr">Comment ça marche</span></h2>
-  <p><span class="lang-en">Claude Code speaks the <strong>Anthropic Messages API</strong> format. GitHub Copilot speaks the <strong>OpenAI</strong> format. A local proxy translates between the two.</span><span class="lang-fr">Claude Code parle le format <strong>Anthropic Messages API</strong>. GitHub Copilot parle le format <strong>OpenAI</strong>. Un proxy local traduit entre les deux.</span></p>
+  <p><span class="lang-en">Claude Code speaks the <strong>Anthropic Messages API</strong> format. GitHub Copilot speaks <strong>OpenAI</strong> format and Google Gemini speaks <strong>Generative Language</strong> format. A local proxy translates between them.</span><span class="lang-fr">Claude Code parle le format <strong>Anthropic Messages API</strong>. GitHub Copilot parle le format <strong>OpenAI</strong> et Google Gemini le format <strong>Generative Language</strong>. Un proxy local traduit entre eux.</span></p>
 
-  <div class="diagram"><span class="lang-en"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Local Proxy</span>  ───&gt;  <span class="purple">GitHub Copilot API</span>
- (terminal)       (localhost:4141)     (api.github.com)
-
- Anthropic Format    Automatic       OpenAI Format
- POST /v1/messages   Translation     POST /v1/chat/completions
+  <div class="diagram"><span class="lang-en"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Local Proxy</span>  ─┬─&gt;  <span class="purple">GitHub Copilot API</span>
+ (terminal)       (localhost:4141) │    (api.github.com)
+                                   │
+ Anthropic Format    Automatic     └─&gt;  <span class="purple">Google Gemini API</span>
+ POST /v1/messages   Translation        (generativelanguage.googleapis.com)
 
 The proxy also handles:
- <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> GitHub OAuth authentication
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Authentication (GitHub OAuth / Google Cloud)
  <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Automatic token renewal
  <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Removal of "thinking" parameter
- <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Rate limiting</span><span class="lang-fr"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Proxy local</span>  ───&gt;  <span class="purple">API GitHub Copilot</span>
- (terminal)       (localhost:4141)     (api.github.com)
-
- Format Anthropic    Traduction      Format OpenAI
- POST /v1/messages   automatique     POST /v1/chat/complétions
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Rate limiting</span><span class="lang-fr"><span class="highlight">Claude Code</span>  ───&gt;  <span class="green">Proxy local</span>  ─┬─&gt;  <span class="purple">API GitHub Copilot</span>
+ (terminal)       (localhost:4141) │    (api.github.com)
+                                   │
+ Format Anthropic    Traduction    └─&gt;  <span class="purple">API Google Gemini</span>
+ POST /v1/messages   automatique        (generativelanguage.googleapis.com)
 
 Le proxy gère aussi :
- <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Authentification OAuth GitHub
+ <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Authentification (OAuth GitHub / Google Cloud)
  <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Renouvellement automatique du token
  <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Suppression du paramètre "thinking"
  <span class="orange"><i class="fa-solid fa-circle fa-2xs"></i></span> Rate limiting</span></div>
