@@ -61,7 +61,7 @@ Si votre entreprise fournit Gemini Code Assist au lieu de Copilot, utilisez Lite
 
 ```bash
 # 1. Installer LiteLLM
-pip install 'litellm[proxy]'
+pip install litellm[proxy]
 
 # 2. S'authentifier a Google Cloud
 gcloud auth application-default login

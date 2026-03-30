@@ -354,7 +354,7 @@ LiteLLM supporte **tous les fournisseurs** : GitHub Copilot, Gemini Code Assist,
 
 ```bash
 # 1. Installer
-pip install 'litellm[proxy]'
+pip install litellm[proxy]
 
 # 2. Créer le fichier de config (choisissez votre fournisseur ci-dessous)
 ```
@@ -643,7 +643,7 @@ copilot-proxy enable   # auto-démarrage au boot
 
 ### Le plus flexible (Python, Copilot ou Gemini) :
 ```bash
-pip install 'litellm[proxy]'
+pip install litellm[proxy]
 
 # Via GitHub Copilot :
 litellm --config copilot-config.yaml

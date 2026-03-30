@@ -195,7 +195,7 @@ claude --version</code></pre>
   <h3><span class="lang-en">Option B: Via Gemini Code Assist</span><span class="lang-fr">Option B : Via Gemini Code Assist</span></h3>
   <p><span class="lang-en">If your company provides Gemini Code Assist instead of Copilot, use LiteLLM:</span><span class="lang-fr">Si votre entreprise fournit Gemini Code Assist au lieu de Copilot, utilisez LiteLLM :</span></p>
   <pre><code class="language-bash"># 1. Installer LiteLLM
-pip install 'litellm[proxy]'
+pip install litellm[proxy]
 
 # 2. S'authentifier a Google Cloud
 gcloud auth application-default login
@@ -640,7 +640,7 @@ ANTHROPIC_BASE_URL=http://localhost:18080 ANTHROPIC_API_KEY=copilot-proxy claude
   <p><span class="lang-en"><span class="badge badge-medium">Medium</span> <span class="badge badge-clone">pip</span> &mdash; The most flexible, with admin web interface.</span><span class="lang-fr"><span class="badge badge-medium">Moyen</span> <span class="badge badge-clone">pip</span> &mdash; Le plus flexible, interface web d'admin.</span></p>
 
   <h3><span class="lang-en">Installation</span><span class="lang-fr">Installation</span></h3>
-  <pre><code class="language-bash">pip install 'litellm[proxy]'
+  <pre><code class="language-bash">pip install litellm[proxy]
 litellm --version</code></pre>
 
   <h3><span class="lang-en">Configuration</span><span class="lang-fr">Configuration</span></h3>
@@ -903,7 +903,7 @@ export NO_PROXY=localhost,127.0.0.1
 npx copilot-api@latest start</code></pre>
 
   <h3>pip (LiteLLM)</h3>
-  <pre><code class="language-bash">pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'</code></pre>
+  <pre><code class="language-bash">pip install --proxy http://proxy.entreprise.fr:8080 litellm[proxy]</code></pre>
 
   <h3><span class="lang-en">Self-signed SSL certificates</span><span class="lang-fr">Certificats SSL auto-signés</span></h3>
   <pre><code class="language-bash"># Node.js (copilot-api, claude code)

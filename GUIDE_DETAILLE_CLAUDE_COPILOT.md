@@ -679,7 +679,7 @@ claude
 ### 9.1 Installer
 
 ```bash
-pip install 'litellm[proxy]'
+pip install litellm[proxy]
 
 # Vérifiez
 litellm --version
@@ -687,7 +687,7 @@ litellm --version
 
 **Si pip est derrière un proxy entreprise :**
 ```bash
-pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'
+pip install --proxy http://proxy.entreprise.fr:8080 litellm[proxy]
 ```
 
 ### 9.2 Créer le fichier de configuration
@@ -1200,7 +1200,7 @@ npx copilot-api@latest start
 ### 14.4 Configurer pip (pour LiteLLM)
 
 ```bash
-pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'
+pip install --proxy http://proxy.entreprise.fr:8080 litellm[proxy]
 
 # Ou dans pip.conf
 # Linux: ~/.config/pip/pip.conf
