@@ -214,8 +214,8 @@
         </tr>
         <tr>
           <td><strong>Providers</strong></td>
-          <td><span class="lang-en">Anthropic only</span><span class="lang-fr">Anthropic uniquement</span></td>
-          <td>75+ providers</td>
+          <td><span class="lang-en">Anthropic only (Gemini via LiteLLM proxy)</span><span class="lang-fr">Anthropic uniquement (Gemini via proxy LiteLLM)</span></td>
+          <td><span class="lang-en">75+ providers (incl. Gemini via LiteLLM)</span><span class="lang-fr">75+ providers (dont Gemini via LiteLLM)</span></td>
           <td class="winner">OpenCode</td>
         </tr>
         <tr>
@@ -384,6 +384,7 @@
       <tbody>
         <tr><td><strong><span class="lang-en">Native providers</span><span class="lang-fr">Providers natifs</span></strong></td><td>1 (Anthropic)</td><td>75+</td></tr>
         <tr><td><strong>Via Copilot</strong></td><td><span class="lang-en">Proxy required</span><span class="lang-fr">Proxy requis</span></td><td><span class="lang-en">Native</span><span class="lang-fr">Natif</span></td></tr>
+        <tr><td><strong>Via Gemini</strong></td><td><span class="lang-en">Via LiteLLM proxy</span><span class="lang-fr">Via proxy LiteLLM</span></td><td><span class="lang-en">Via LiteLLM proxy</span><span class="lang-fr">Via proxy LiteLLM</span></td></tr>
         <tr><td><strong><span class="lang-en">Local models</span><span class="lang-fr">Modèles locaux</span></strong></td><td><span class="lang-en">No</span><span class="lang-fr">Non</span></td><td>Ollama, LM Studio</td></tr>
         <tr><td><strong><span class="lang-en">Model switching</span><span class="lang-fr">Changement de modèle</span></strong></td><td><span class="lang-en">Env variable</span><span class="lang-fr">Variable d'env</span></td><td><code>/models</code> <span class="lang-en">or</span><span class="lang-fr">ou</span> <code>Ctrl+O</code></td></tr>
         <tr><td><strong><span class="lang-en">Differentiated agents</span><span class="lang-fr">Agents différenciés</span></strong></td><td><span class="lang-en">1 model for everything</span><span class="lang-fr">1 modèle pour tout</span></td><td>3 agents (coder/task/title)</td></tr>
@@ -627,12 +628,18 @@
       <div class="card-title"><span class="lang-en">OpenCode with Claude via Copilot Pro+</span><span class="lang-fr">OpenCode avec Claude via Copilot Pro+</span></div>
       <div class="card-desc"><span class="lang-en">You can use <code>copilot.claude-sonnet-4.6</code> in OpenCode. Very good, but not as optimized as native Claude Code.</span><span class="lang-fr">Vous pouvez utiliser <code>copilot.claude-sonnet-4.6</code> dans OpenCode. Très bon, mais pas aussi optimise que Claude Code natif.</span></div>
     </div>
+    <div class="card">
+      <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <div class="card-title"><span class="lang-en">Gemini Code Assist via LiteLLM</span><span class="lang-fr">Gemini Code Assist via LiteLLM</span></div>
+      <div class="card-desc"><span class="lang-en">If your company provides Gemini Code Assist, you can route it through LiteLLM to both Claude Code and OpenCode. A good alternative when Copilot is not available.</span><span class="lang-fr">Si votre entreprise fournit Gemini Code Assist, vous pouvez le router via LiteLLM vers Claude Code et OpenCode. Une bonne alternative quand Copilot n'est pas disponible.</span></div>
+    </div>
   </div>
 
   <h2 id="s-budget"><span class="lang-en">Tight Budget / Limited Quota</span><span class="lang-fr">Budget serré / quota limité</span></h2>
   <div class="verdict">
     <div class="verdict-title"><span class="lang-en">OpenCode (slight advantage)</span><span class="lang-fr">OpenCode (léger avantage)</span></div>
     <p><span class="lang-en">The 3-agent system allows using lightweight models for subtasks. Claude Code uses the same model (and therefore the same cost) for everything. Both consume a lot, but OpenCode allows better distribution.</span><span class="lang-fr">Le système de 3 agents permet d'utiliser des modèles légers pour les sous-tâches. Claude Code utilise le même modèle (et donc le même coût) pour tout. Les deux consomment beaucoup, mais OpenCode permet une meilleure répartition.</span></p>
+    <p><span class="lang-en"><strong>Gemini option:</strong> If your company provides Gemini Code Assist, you can use it via LiteLLM as a cost-effective provider for both tools, reducing your dependence on Anthropic or Copilot quotas.</span><span class="lang-fr"><strong>Option Gemini :</strong> Si votre entreprise fournit Gemini Code Assist, vous pouvez l'utiliser via LiteLLM comme provider economique pour les deux outils, reduisant votre dependance aux quotas Anthropic ou Copilot.</span></p>
   </div>
 
 </div>
@@ -668,6 +675,18 @@
   │       │
   │       └─ <span class="green">YES</span> ──── <span class="green"><i class="fa-solid fa-arrow-right"></i> OpenCode + Ollama</span>
   │
+  ├─ <span class="orange">Does your company provide Gemini Code Assist?</span>
+  │   │
+  │   ├─ <span class="green">YES</span> ──── Use LiteLLM proxy
+  │   │   │
+  │   │   ├─ Want Claude Code experience?
+  │   │   │   └─ <span class="green">YES</span> ──── <span class="orange"><i class="fa-solid fa-arrow-right"></i> Claude Code + LiteLLM + Gemini</span>
+  │   │   │
+  │   │   └─ Want flexibility?
+  │   │       └─ <span class="green">YES</span> ──── <span class="green"><i class="fa-solid fa-arrow-right"></i> OpenCode + LiteLLM + Gemini</span>
+  │   │
+  │   └─ <span class="green">NO</span> ──── See below
+  │
   └─ <span class="orange">NO</span> (direct API access)
       │
       ├─ Anthropic budget available?
@@ -681,7 +700,7 @@
           ├─ <span class="green">YES</span> ──── <span class="green"><i class="fa-solid fa-arrow-right"></i> OpenCode</span> (75+ providers)
           │
           └─ <span class="orange">NO</span> ──── <span class="purple"><i class="fa-solid fa-arrow-right"></i> Claude Code OR OpenCode</span>
-                     (both work)</span><span class="lang-fr"><span class="highlight">Votre entreprise autorisé-t-elle uniquement GitHub Copilot ?</span>
+                     (both work)</span><span class="lang-fr"><span class="highlight">Votre entreprise autorise-t-elle uniquement GitHub Copilot ?</span>
   │
   ├─ <span class="green">OUI</span>
   │   │
@@ -701,6 +720,18 @@
   │   └─ Avez-vous besoin de modèles locaux (air-gap) ?
   │       │
   │       └─ <span class="green">OUI</span> ──── <span class="green"><i class="fa-solid fa-arrow-right"></i> OpenCode + Ollama</span>
+  │
+  ├─ <span class="orange">Votre entreprise fournit-elle Gemini Code Assist ?</span>
+  │   │
+  │   ├─ <span class="green">OUI</span> ──── Utiliser le proxy LiteLLM
+  │   │   │
+  │   │   ├─ Vous voulez l'experience Claude Code ?
+  │   │   │   └─ <span class="green">OUI</span> ──── <span class="orange"><i class="fa-solid fa-arrow-right"></i> Claude Code + LiteLLM + Gemini</span>
+  │   │   │
+  │   │   └─ Vous voulez de la flexibilite ?
+  │   │       └─ <span class="green">OUI</span> ──── <span class="green"><i class="fa-solid fa-arrow-right"></i> OpenCode + LiteLLM + Gemini</span>
+  │   │
+  │   └─ <span class="green">NON</span> ──── Voir ci-dessous
   │
   └─ <span class="orange">NON</span> (acces direct aux API)
       │

@@ -1,6 +1,6 @@
-# Guide Detaille : Claude Code via GitHub Copilot
+# Guide Detaille : Claude Code via GitHub Copilot / Gemini Code Assist
 
-> Pour PC de dev entreprise avec uniquement GitHub Copilot autorisé.
+> Pour PC de dev entreprise avec GitHub Copilot et/ou Google Gemini Code Assist autorisé.
 
 ---
 
@@ -33,25 +33,34 @@
 ### Pourquoi un proxy ?
 
 Claude Code est conçu pour parler à l'API Anthropic (format Messages API).
-GitHub Copilot expose ses modèles via une API au format OpenAI.
-Un proxy local fait la traduction entre les deux.
+GitHub Copilot expose ses modèles via une API au format OpenAI, et Google Gemini
+via l'API Generative Language. Un proxy local fait la traduction entre ces formats.
 
 ### Schema complet
 
 ```
-┌──────────────┐     Format Anthropic      ┌─────────────────┐     Format OpenAI      ┌──────────────────┐
-│              │  ───────────────────────>  │                 │  ──────────────────>   │                  │
-│  Claude Code │    POST /v1/messages       │  Proxy local    │   POST /v1/chat/       │  API GitHub      │
-│  (terminal)  │    localhost:4141          │  (Node/Python)  │   complétions          │  Copilot         │
-│              │  <───────────────────────  │                 │  <──────────────────   │                  │
-└──────────────┘     Reponse Anthropic      └─────────────────┘     Reponse OpenAI      └──────────────────┘
-                                                    │
-                                                    │ Gère aussi :
-                                                    ├─ Authentification OAuth GitHub
-                                                    ├─ Renouvellement automatique du token
-                                                    ├─ Suppression du paramètre "thinking"
-                                                    └─ Rate limiting
+                                                                      ┌──────────────────┐
+                                                        Format OpenAI │  API GitHub      │
+                                                    ┌───────────────> │  Copilot         │
+┌──────────────┐     Format Anthropic      ┌────────┴────────┐       └──────────────────┘
+│              │  ───────────────────────>  │                 │
+│  Claude Code │    POST /v1/messages       │  Proxy local    │
+│  (terminal)  │    localhost:4141          │  (Node/Python)  │
+│              │  <───────────────────────  │                 │
+└──────────────┘     Reponse Anthropic      └────────┬────────┘       ┌──────────────────┐
+                                                     │  Format Gemini │  API Google      │
+                                                     └──────────────> │  Gemini          │
+                                                                      └──────────────────┘
+                                                    Le proxy gère :
+                                                    - Authentification (OAuth GitHub / Google Cloud)
+                                                    - Renouvellement automatique du token
+                                                    - Suppression du paramètre "thinking"
+                                                    - Rate limiting
 ```
+
+**Deux fournisseurs supportés :**
+- **GitHub Copilot** : proxies dédiés Node.js (copilot-api, copilot-proxy) ou LiteLLM
+- **Google Gemini Code Assist** : via LiteLLM (le seul proxy qui supporte les deux)
 
 ### Flux d'authentification
 
@@ -664,7 +673,8 @@ claude
 **Doc** : https://docs.litellm.ai
 **Difficulté** : Moyenne
 **Temps** : 5-10 minutes
-**Avantage** : Le plus flexible, supporté tous les modèles, interface d'admin web
+**Avantage** : Le plus flexible, supporte tous les modèles, interface d'admin web
+**Fournisseurs** : GitHub Copilot, Google Gemini Code Assist, et 100+ autres
 
 ### 9.1 Installer
 
@@ -682,7 +692,9 @@ pip install --proxy http://proxy.entreprise.fr:8080 'litellm[proxy]'
 
 ### 9.2 Créer le fichier de configuration
 
-Créez un fichier `copilot-config.yaml` :
+Choisissez le fichier de configuration selon votre fournisseur.
+
+#### Option A : GitHub Copilot (`copilot-config.yaml`)
 
 ```yaml
 # copilot-config.yaml
@@ -724,7 +736,67 @@ litellm_settings:
   drop_params: true
 ```
 
-### 9.3 Authentification GitHub pour LiteLLM
+#### Option B : Google Gemini Code Assist (`gemini-config.yaml`)
+
+```yaml
+# gemini-config.yaml
+model_list:
+  # Modèle principal — Gemini 2.5 Pro (raisonnement avancé, code, contexte 1M tokens)
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+
+  # Modèle rapide — Gemini 2.5 Flash (rapide, économique, multimodal)
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+
+  # Modèle ultra rapide — Gemini 2.0 Flash (latence minimale)
+  - model_name: gemini-2.0-flash
+    litellm_params:
+      model: gemini/gemini-2.0-flash
+
+litellm_settings:
+  drop_params: true
+```
+
+#### Option C : Configuration mixte Copilot + Gemini (`mixed-config.yaml`)
+
+```yaml
+# mixed-config.yaml — utilise les deux fournisseurs
+model_list:
+  # --- GitHub Copilot ---
+  - model_name: gpt-5.4
+    litellm_params:
+      model: github_copilot/gpt-5.4
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+  - model_name: claude-sonnet-4.6
+    litellm_params:
+      model: github_copilot/claude-sonnet-4.6
+      extra_headers:
+        editor-version: "vscode/1.85.1"
+        Copilot-Integration-Id: "vscode-chat"
+
+  # --- Google Gemini ---
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+
+litellm_settings:
+  drop_params: true
+```
+
+> Avec la config mixte, vous pouvez basculer entre Copilot et Gemini en changeant
+> simplement `ANTHROPIC_MODEL` dans votre `settings.json`.
+
+### 9.3 Authentification pour LiteLLM
+
+#### Pour GitHub Copilot :
 
 LiteLLM a besoin d'un token GitHub Copilot. Deux options :
 
@@ -739,6 +811,31 @@ export GITHUB_TOKEN=ghu_xxxxxxxxxxxx
 npx copilot-api@latest auth --show-token
 # Copiez le token affiche
 export GITHUB_TOKEN=ghu_xxxxxxxxxxxx
+```
+
+#### Pour Google Gemini Code Assist :
+
+Trois options selon votre environnement :
+
+**Option A : Clé API Google AI Studio (le plus simple)**
+```bash
+# Obtenez votre clé sur https://aistudio.google.com/apikey
+export GEMINI_API_KEY=AIzaSy...votre_cle
+```
+
+**Option B : gcloud CLI (pour Vertex AI en entreprise)**
+```bash
+# Authentification interactive
+gcloud auth application-default login
+
+# Configurez le projet Google Cloud
+export VERTEXAI_PROJECT=votre-projet-gcp
+export VERTEXAI_LOCATION=us-central1   # ou europe-west1, etc.
+```
+
+**Option C : Clé de compte de service (CI/CD, serveurs)**
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=/chemin/vers/service-account.json
 ```
 
 ### 9.4 Lancer LiteLLM
@@ -763,6 +860,7 @@ Admin UI: http://0.0.0.0:4000/ui
 
 ### 9.5 Configurer Claude Code
 
+#### settings.json pour Copilot via LiteLLM :
 ```json
 {
   "env": {
@@ -770,6 +868,23 @@ Admin UI: http://0.0.0.0:4000/ui
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
     "ANTHROPIC_MODEL": "github_copilot/claude-sonnet-4.6",
     "ANTHROPIC_SMALL_FAST_MODEL": "github_copilot/gpt-5.4-mini",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
+  "permissions": {
+    "deny": ["WebSearch"]
+  }
+}
+```
+
+#### settings.json pour Gemini Code Assist via LiteLLM :
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:4000",
+    "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
+    "ANTHROPIC_MODEL": "gemini-2.5-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-2.5-flash",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -1176,6 +1291,8 @@ export HTTPS_PROXY=http://127.0.0.1:3128
 
 Si votre équipe réseau doit ouvrir des règles de firewall, voici les domaines nécessaires :
 
+**GitHub Copilot :**
+
 | Domaine | Port | Usage |
 |---------|------|-------|
 | `github.com` | 443 | Authentification OAuth |
@@ -1185,6 +1302,21 @@ Si votre équipe réseau doit ouvrir des règles de firewall, voici les domaines
 | `default.exp-tas.com` | 443 | Telemetry GitHub |
 | `registry.npmjs.org` | 443 | Installation des packages npm |
 | `objects.githubusercontent.com` | 443 | Téléchargement d'assets GitHub |
+
+**Google Gemini Code Assist :**
+
+| Domaine | Port | Usage |
+|---------|------|-------|
+| `generativelanguage.googleapis.com` | 443 | API Gemini (Google AI Studio) |
+| `aiplatform.googleapis.com` | 443 | API Vertex AI (entreprise) |
+| `oauth2.googleapis.com` | 443 | Authentification Google OAuth |
+| `accounts.google.com` | 443 | Login Google |
+| `storage.googleapis.com` | 443 | Stockage Google Cloud (optionnel) |
+
+**Commun :**
+
+| Domaine | Port | Usage |
+|---------|------|-------|
 | `localhost` / `127.0.0.1` | 4141, 4399, 4000 | Proxy local (ne pas bloquer) |
 
 ```bash
@@ -1347,7 +1479,7 @@ npx copilot-api@latest start --rate-limit 30 --wait
 
 Les modèles disponibles dependent de votre licence Copilot.
 
-### 16.1 Modèles courants via Copilot
+### 16.1 Modèles courants via GitHub Copilot
 
 | Modèle | Fournisseur | Forces |
 |--------|-------------|--------|
@@ -1359,37 +1491,71 @@ Les modèles disponibles dependent de votre licence Copilot.
 | `claude-opus-4.6` | Anthropic | Le plus puissant mais lent |
 | `claude-haiku-4.5` | Anthropic | Rapide, economique |
 | `o3` | OpenAI | Raisonnement avance |
-| `gpt-5.4-mini` | OpenAI | Raisonnement, plus rapide |
+
+### 16.1bis Modèles courants via Gemini Code Assist
+
+| Modèle | Forces | Contexte max |
+|--------|--------|-------------|
+| `gemini-2.5-pro` | Raisonnement avancé, excellent en code, multimodal | 1M tokens |
+| `gemini-2.5-flash` | Rapide, economique, multimodal | 1M tokens |
+| `gemini-2.0-flash` | Ultra rapide, latence minimale | 1M tokens |
+| `gemini-2.0-flash-lite` | Le plus léger, gratuit dans les quotas de base | 1M tokens |
+
+> **Avantage Gemini** : contexte de 1 million de tokens, ideal pour les gros codebases.
+> **Avantage Copilot** : plus de choix de modèles (GPT, Claude, o3).
 
 ### 16.2 Voir les modèles disponibles
 
 ```bash
-# Via copilot-api
+# Via copilot-api (GitHub Copilot)
 curl http://localhost:4141/v1/models | jq
 
+# Via LiteLLM (Copilot ou Gemini)
+curl http://localhost:4000/v1/models | jq
+
 # Via le navigateur
-# Ouvrez http://localhost:4141/v1/models
+# Ouvrez http://localhost:4141/v1/models ou http://localhost:4000/v1/models
 ```
 
 ### 16.3 Combinaisons recommandées
 
-**Pour du dev quotidien :**
+**GitHub Copilot — dev quotidien :**
 ```
 ANTHROPIC_MODEL=gpt-5.4
 ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
 
-**Pour de la qualité maximale :**
+**GitHub Copilot — qualité maximale :**
 ```
 ANTHROPIC_MODEL=claude-sonnet-4.6
 ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
 
-**Pour economiser le quota :**
+**GitHub Copilot — economiser le quota :**
 ```
 ANTHROPIC_MODEL=gpt-5.4-mini
 ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
+
+**Gemini Code Assist — dev quotidien :**
+```
+ANTHROPIC_MODEL=gemini-2.5-pro
+ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
+```
+
+**Gemini Code Assist — economiser le quota :**
+```
+ANTHROPIC_MODEL=gemini-2.5-flash
+ANTHROPIC_SMALL_FAST_MODEL=gemini-2.0-flash
+```
+
+**Gemini Code Assist — gros codebase (contexte 1M) :**
+```
+ANTHROPIC_MODEL=gemini-2.5-pro
+ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
+```
+> Gemini 2.5 Pro gère nativement 1M tokens de contexte, ideal pour analyser
+> de grands projets d'un coup.
 
 ---
 
@@ -1428,13 +1594,23 @@ Solution : relancez l'authentification
   npx copilot-api@latest auth
 ```
 
-**`403 Forbidden`**
+**`403 Forbidden` (Copilot)**
 ```
 Cause : licence Copilot inactive ou modèle non autorisé
 Solution :
   1. Vérifiez https://github.com/settings/copilot
   2. Essayez un autre modèle (gpt-5.2 au lieu de claude-sonnet-4.6)
   3. Vérifiez --account-type (individual/business/enterprise)
+```
+
+**`403 Permission Denied` ou `API key not valid` (Gemini)**
+```
+Cause : clé API invalide ou quota Google Cloud epuise
+Solution :
+  1. Vérifiez votre clé : echo $GEMINI_API_KEY
+  2. Regénérez sur https://aistudio.google.com/apikey
+  3. Si Vertex AI : gcloud auth application-default login
+  4. Vérifiez les quotas sur https://console.cloud.google.com/apis/dashboard
 ```
 
 **Le device code expire avant que je puisse l'entrer**
@@ -1510,15 +1686,24 @@ Solution :
 
 > **Note (février 2026)** : GitHub a officiellement lancé Claude et Codex comme agents de codage pour Copilot Business et Pro. À terme, ces proxies non-officiels pourraient devenir inutiles si l'intégration native couvre votre cas d'usage. Consultez https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users/
 
-### 18.1 API non-officielle
+### 18.1 API non-officielle vs officielle
 
-Tous ces proxies utilisent des API **reverse-engineered** de GitHub Copilot.
+**GitHub Copilot** : les proxies Node.js utilisent des API **reverse-engineered** de GitHub Copilot.
 Ce n'est PAS un usage supporté officiellement par GitHub.
 
-**Risques :**
+**Risques Copilot :**
 - Suspension temporaire de l'accès Copilot en cas d'abus détecté
 - Les API peuvent changer sans préavis (mise à jour du proxy nécessaire)
 - Pas de support officiel en cas de problème
+
+**Google Gemini Code Assist** : via LiteLLM, vous utilisez l'**API officielle** de Google
+(Google AI Studio ou Vertex AI). C'est un usage **supporté et documenté**.
+
+**Avantages Gemini :**
+- API officielle et stable
+- Pas de risque de suspension
+- Support Google Cloud en cas de problème
+- Quotas gratuits généreux (Google AI Studio)
 
 ### 18.2 Bonnes pratiques de sécurité
 
@@ -1539,10 +1724,10 @@ Ce n'est PAS un usage supporté officiellement par GitHub.
 ### 18.3 Conformite entreprise
 
 Avant d'utiliser ces outils en entreprise :
-- Vérifiez les conditions d'utilisation de votre licence GitHub Copilot
+- **Copilot** : Vérifiez les conditions d'utilisation de votre licence GitHub Copilot. L'utilisation de proxies non-officiels peut violer les ToS de GitHub
+- **Gemini** : Vérifiez que votre entreprise autorise l'utilisation de Google Cloud / Vertex AI. L'API Gemini est officielle et documentée
 - Consultez votre equipe sécurité/conformite
-- L'utilisation de proxies non-officiels peut violer les ToS de GitHub
-- Les données de code transitent par les serveurs de GitHub/OpenAI/Anthropic
+- Les données de code transitent par les serveurs de GitHub/OpenAI (Copilot) ou Google (Gemini)
 
 ---
 
@@ -1571,12 +1756,15 @@ Avant d'utiliser ces outils en entreprise :
 
 | Situation | Solution recommandée |
 |-----------|---------------------|
-| Je veux que ça marche vite | copilot-api avec `npx` (méthode 1) |
+| Je veux que ça marche vite (Copilot) | copilot-api avec `npx` (méthode 1) |
+| Je veux que ça marche vite (Gemini) | LiteLLM + gemini-config.yaml (méthode 2ter) |
 | Je veux un service permanent | copilot-proxy avec daemon (méthode 1bis) |
 | VS Code est toujours ouvert | LM Proxy extension (méthode 1ter) |
 | npx est bloqué dans mon entreprise | claude-code-copilot clone (méthode 2bis) |
 | Je veux du controle total | LiteLLM (méthode 2ter) |
+| J'ai Copilot ET Gemini | LiteLLM avec mixed-config.yaml (méthode 2ter) |
 | Je suis developpeur Go | claude-copilot-proxy (méthode 2quater) |
 | Je veux basculer entre providers | cc-copilot-bridge (méthode 3) |
 | J'utilise surtout Claude via Copilot | copilot-api fork Anthropic-first (méthode 3bis) |
 | Mon entreprise a Copilot Business/Pro | Vérifiez d'abord l'intégration officielle Claude/Copilot |
+| J'ai besoin d'un contexte 1M tokens | Gemini 2.5 Pro via LiteLLM (méthode 2ter) |

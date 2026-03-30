@@ -415,6 +415,11 @@ opencode</code></pre>
     <p><span class="lang-en">Claude, O3, O4, and Gemini Pro models require a <strong>Copilot Pro+</strong> subscription (not just Pro or Business). Check your license at <a href="https://github.com/settings/copilot" target="_blank">github.com/settings/copilot</a>.</span><span class="lang-fr">Les modèles Claude, O3, O4 et Gemini Pro nécessitent un abonnement <strong>Copilot Pro+</strong> (et non juste Pro ou Business). Vérifiez votre licence sur <a href="https://github.com/settings/copilot" target="_blank">github.com/settings/copilot</a>.</span></p>
   </div>
 
+  <div class="box box-info">
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-circle-info"></i> Gemini also available directly via LiteLLM</span><span class="lang-fr"><i class="fa-solid fa-circle-info"></i> Gemini aussi disponible directement via LiteLLM</span></div>
+    <p><span class="lang-en">The Gemini models listed above go through the Copilot proxy. You can also access Gemini models <strong>directly</strong> via LiteLLM as a custom provider, bypassing Copilot quotas entirely. This requires a Google AI API key (<code>GEMINI_API_KEY</code>) or a Google Cloud project with Vertex AI enabled. See the <a href="#g-config-file">configuration section</a> below for examples.</span><span class="lang-fr">Les modèles Gemini ci-dessus passent par le proxy Copilot. Vous pouvez aussi accéder aux modèles Gemini <strong>directement</strong> via LiteLLM comme provider custom, sans consommer votre quota Copilot. Cela nécessite une clé API Google AI (<code>GEMINI_API_KEY</code>) ou un projet Google Cloud avec Vertex AI activé. Voir la <a href="#g-config-file">section configuration</a> ci-dessous pour des exemples.</span></p>
+  </div>
+
   <!-- ===== TOKENS ===== -->
   <h2 id="g-copilot-tokens"><span class="lang-en">Copilot token consumption</span><span class="lang-fr">Consommation de tokens Copilot</span></h2>
 
@@ -501,15 +506,55 @@ opencode</code></pre>
   "debug": false
 }</code></pre>
 
+  <h3><span class="lang-en">Config with Gemini via LiteLLM (direct access)</span><span class="lang-fr">Config avec Gemini via LiteLLM (accès direct)</span></h3>
+  <p><span class="lang-en">To use Gemini models directly without going through Copilot, configure LiteLLM as a custom provider. Set your <code>GEMINI_API_KEY</code> environment variable first:</span><span class="lang-fr">Pour utiliser les modèles Gemini directement sans passer par Copilot, configurez LiteLLM comme provider custom. Définissez d'abord votre variable d'environnement <code>GEMINI_API_KEY</code> :</span></p>
+  <pre><code class="language-bash">export GEMINI_API_KEY="votre-clé-api-google"</code></pre>
+  <pre><code class="language-json">{
+  "provider": {
+    "copilot": { "disabled": false },
+    "litellm-gemini": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:4000/v1",
+        "apiKey": "sk-litellm"
+      },
+      "models": {
+        "gemini-2.5-pro": { "name": "gemini/gemini-2.5-pro" },
+        "gemini-2.5-flash": { "name": "gemini/gemini-2.5-flash" },
+        "gemini-3-flash": { "name": "gemini/gemini-3-flash" }
+      }
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "litellm-gemini.gemini-2.5-pro",
+      "maxTokens": 5000
+    },
+    "task": {
+      "model": "litellm-gemini.gemini-2.5-flash",
+      "maxTokens": 5000
+    },
+    "title": {
+      "model": "litellm-gemini.gemini-3-flash",
+      "maxTokens": 80
+    }
+  }
+}</code></pre>
+
+  <div class="box box-info">
+    <div class="box-title"><span class="lang-en"><i class="fa-solid fa-circle-info"></i> LiteLLM proxy required</span><span class="lang-fr"><i class="fa-solid fa-circle-info"></i> Proxy LiteLLM requis</span></div>
+    <p><span class="lang-en">This configuration requires a running LiteLLM proxy (<code>litellm --model gemini/gemini-2.5-pro</code>). LiteLLM translates OpenAI-compatible requests to the Google Gemini API. Install it with <code>pip install litellm[proxy]</code>.</span><span class="lang-fr">Cette configuration nécessite un proxy LiteLLM en cours d'exécution (<code>litellm --model gemini/gemini-2.5-pro</code>). LiteLLM traduit les requêtes OpenAI-compatible vers l'API Google Gemini. Installez-le avec <code>pip install litellm[proxy]</code>.</span></p>
+  </div>
+
   <h2 id="g-config-agents"><span class="lang-en">Agents: coder, task, title</span><span class="lang-fr">Agents : coder, task, title</span></h2>
   <p><span class="lang-en">OpenCode uses 3 agents with different roles:</span><span class="lang-fr">OpenCode utilise 3 agents avec des rôles différents :</span></p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Agent</th><th><span class="lang-en">Role</span><span class="lang-fr">Role</span></th><th><span class="lang-en">Recommended model</span><span class="lang-fr">Modèle recommandé</span></th></tr></thead>
       <tbody>
-        <tr><td><code>coder</code></td><td><span class="lang-en">Main agent: writes and edits code</span><span class="lang-fr">Agent principal : ecrit et edite le code</span></td><td><span class="lang-en"><code>copilot.gpt-5.4</code> or <code>copilot.claude-sonnet-4.6</code></span><span class="lang-fr"><code>copilot.gpt-5.4</code> ou <code>copilot.claude-sonnet-4.6</code></span></td></tr>
-        <tr><td><code>task</code></td><td><span class="lang-en">Sub-tasks, research, reasoning</span><span class="lang-fr">Sous-tâches, recherche, reflexion</span></td><td><code>copilot.gpt-5.2</code></td></tr>
-        <tr><td><code>title</code></td><td><span class="lang-en">Session title generation</span><span class="lang-fr">Generation des titres de session</span></td><td><code>copilot.gpt-5-mini</code></td></tr>
+        <tr><td><code>coder</code></td><td><span class="lang-en">Main agent: writes and edits code</span><span class="lang-fr">Agent principal : ecrit et edite le code</span></td><td><span class="lang-en"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> or <code>gemini-2.5-pro</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> ou <code>gemini-2.5-pro</code> (via LiteLLM)</span></td></tr>
+        <tr><td><code>task</code></td><td><span class="lang-en">Sub-tasks, research, reasoning</span><span class="lang-fr">Sous-tâches, recherche, reflexion</span></td><td><span class="lang-en"><code>copilot.gpt-5.2</code> or <code>gemini-2.5-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.2</code> ou <code>gemini-2.5-flash</code> (via LiteLLM)</span></td></tr>
+        <tr><td><code>title</code></td><td><span class="lang-en">Session title generation</span><span class="lang-fr">Generation des titres de session</span></td><td><span class="lang-en"><code>copilot.gpt-5-mini</code> or <code>gemini-3-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5-mini</code> ou <code>gemini-3-flash</code> (via LiteLLM)</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -605,6 +650,9 @@ opencode</code></pre>
         <tr><td><code>api.individual.githubcopilot.com</code></td><td>443</td><td><span class="lang-en">Copilot API (AI models)</span><span class="lang-fr">API Copilot (modèles IA)</span></td></tr>
         <tr><td><code>copilot-proxy.githubusercontent.com</code></td><td>443</td><td><span class="lang-en">Copilot proxy</span><span class="lang-fr">Proxy Copilot</span></td></tr>
         <tr><td><code>registry.npmjs.org</code></td><td>443</td><td><span class="lang-en">npm package installation</span><span class="lang-fr">Installation packages npm</span></td></tr>
+        <tr><td><code>generativelanguage.googleapis.com</code></td><td>443</td><td><span class="lang-en">Google Gemini API (direct access via LiteLLM)</span><span class="lang-fr">API Google Gemini (accès direct via LiteLLM)</span></td></tr>
+        <tr><td><code>aiplatform.googleapis.com</code></td><td>443</td><td><span class="lang-en">Google Vertex AI (alternative Gemini endpoint)</span><span class="lang-fr">Google Vertex AI (endpoint Gemini alternatif)</span></td></tr>
+        <tr><td><code>oauth2.googleapis.com</code></td><td>443</td><td><span class="lang-en">Google OAuth (Vertex AI authentication)</span><span class="lang-fr">Google OAuth (authentification Vertex AI)</span></td></tr>
       </tbody>
     </table>
   </div>
