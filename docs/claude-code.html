@@ -142,10 +142,10 @@
     il consomme <strong>10 a 100 fois plus de tokens</strong> qu'un chat Copilot classique.</span></p>
     <ul>
       <li><span class="lang-en">A single "edit this file" command = <strong>50,000 to 150,000 tokens</strong></span><span class="lang-fr">Une seule commande "edite ce fichier" = <strong>50 000 a 150 000 tokens</strong></span></li>
-      <li><span class="lang-en">A 30-minute session = the equivalent of a <strong>full day</strong> of Copilot Chat</span><span class="lang-fr">Une session de 30 minutes = l'equivalent d'une <strong>journee entiere</strong> de Copilot Chat</span></li>
-      <li><span class="lang-en">Multiple users report having <strong>exhausted their monthly quota in just a few days</strong></span><span class="lang-fr">Plusieurs utilisateurs rapportent avoir <strong>epuise leur quota mensuel en quelques jours</strong></span></li>
+      <li><span class="lang-en">A 30-minute session = the equivalent of a <strong>full day</strong> of Copilot Chat</span><span class="lang-fr">Une session de 30 minutes = l'équivalent d'une <strong>journée entière</strong> de Copilot Chat</span></li>
+      <li><span class="lang-en">Multiple users report having <strong>exhausted their monthly quota in just a few days</strong></span><span class="lang-fr">Plusieurs utilisateurs rapportent avoir <strong>épuisé leur quota mensuel en quelques jours</strong></span></li>
     </ul>
-    <p><span class="lang-en">See the <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Token consumption</a> section for details and optimization strategies.</span><span class="lang-fr">Voir la section <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Consommation de tokens</a> pour les details et les strategies d'optimisation.</span></p>
+    <p><span class="lang-en">See the <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Token consumption</a> section for details and optimization strategies.</span><span class="lang-fr">Voir la section <a href="#" onclick="showPage('guide');setTimeout(()=>document.getElementById('g-tokens').scrollIntoView({behavior:'smooth'}),100);return false;">Consommation de tokens</a> pour les détails et les stratégies d'optimisation.</span></p>
   </div>
 
   <h2 id="qs-prereqs"><span class="lang-en">Prerequisites</span><span class="lang-fr">Pré-requis</span></h2>
@@ -242,7 +242,7 @@ claude</code></pre>
   </div>
 
   <h2 id="qs-permanent"><span class="lang-en">Permanent configuration</span><span class="lang-fr">Configuration permanente</span></h2>
-  <p><span class="lang-en">To avoid typing the variables every time, create <code>~/.claude/settings.json</code>:</span><span class="lang-fr">Pour ne plus taper les variables a chaque fois, créez <code>~/.claude/settings.json</code> :</span></p>
+  <p><span class="lang-en">To avoid typing the variables every time, create <code>~/.claude/settings.json</code>:</span><span class="lang-fr">Pour ne plus taper les variables à chaque fois, créez <code>~/.claude/settings.json</code> :</span></p>
 
   <h4><span class="lang-en">For GitHub Copilot:</span><span class="lang-fr">Pour GitHub Copilot :</span></h4>
   <pre><code class="language-json">{
@@ -289,11 +289,11 @@ claude</code></pre>
     <table>
       <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Probleme</span></th><th><span class="lang-en">Solution</span><span class="lang-fr">Solution</span></th></tr></thead>
       <tbody>
-        <tr><td><code>ECONNREFUSED</code></td><td><span class="lang-en">The proxy is not running (terminal 1)</span><span class="lang-fr">Le proxy n'est pas lance (terminal 1)</span></td></tr>
+        <tr><td><code>ECONNREFUSED</code></td><td><span class="lang-en">The proxy is not running (terminal 1)</span><span class="lang-fr">Le proxy n'est pas lancé (terminal 1)</span></td></tr>
         <tr><td><code>401 Unauthorized</code> (Copilot)</td><td><span class="lang-en">Re-run <code>npx copilot-api@latest auth</code></span><span class="lang-fr">Relancez <code>npx copilot-api@latest auth</code></span></td></tr>
         <tr><td><code>403 Permission Denied</code> (Gemini)</td><td><span class="lang-en">Re-run <code>gcloud auth application-default login</code> or check your <code>GEMINI_API_KEY</code></span><span class="lang-fr">Relancez <code>gcloud auth application-default login</code> ou vérifiez votre <code>GEMINI_API_KEY</code></span></td></tr>
         <tr><td><code>thinking parameter error</code></td><td><span class="lang-en">With LiteLLM: add <code>drop_params: true</code></span><span class="lang-fr">Avec LiteLLM : ajoutez <code>drop_params: true</code></span></td></tr>
-        <tr><td><span class="lang-en">Quota exhausted quickly</span><span class="lang-fr">Quota epuise vite</span></td><td><span class="lang-en">Add <code>--rate-limit 30 --wait</code> to the proxy (Copilot)</span><span class="lang-fr">Ajoutez <code>--rate-limit 30 --wait</code> au proxy (Copilot)</span></td></tr>
+        <tr><td><span class="lang-en">Quota exhausted quickly</span><span class="lang-fr">Quota épuisé vite</span></td><td><span class="lang-en">Add <code>--rate-limit 30 --wait</code> to the proxy (Copilot)</span><span class="lang-fr">Ajoutez <code>--rate-limit 30 --wait</code> au proxy (Copilot)</span></td></tr>
         <tr><td><span class="lang-en">Enterprise proxy</span><span class="lang-fr">Proxy entreprise</span></td><td><span class="lang-en">Add <code>--proxy-env</code> to the proxy</span><span class="lang-fr">Ajoutez <code>--proxy-env</code> au proxy</span></td></tr>
       </tbody>
     </table>
@@ -338,9 +338,9 @@ Le proxy gère aussi :
   <h3><span class="lang-en">Authentication flow</span><span class="lang-fr">Flux d'authentification</span></h3>
   <div class="steps">
     <div class="step"><div class="step-title"><span class="lang-en">You start the proxy</span><span class="lang-fr">Vous lancez le proxy</span></div></div>
-    <div class="step"><div class="step-title"><span class="lang-en">The proxy requests a device code from GitHub</span><span class="lang-fr">Le proxy demande un device code a GitHub</span></div></div>
+    <div class="step"><div class="step-title"><span class="lang-en">The proxy requests a device code from GitHub</span><span class="lang-fr">Le proxy demande un device code à GitHub</span></div></div>
     <div class="step"><div class="step-title"><span class="lang-en">You enter the code on github.com/login/device</span><span class="lang-fr">Vous entrez le code sur github.com/login/device</span></div></div>
-    <div class="step"><div class="step-title"><span class="lang-en">The proxy receives an OAuth token (<code>ghu_...</code>)</span><span class="lang-fr">Le proxy recoit un token OAuth (<code>ghu_...</code>)</span></div><p><span class="lang-en">Saved locally, renewed automatically.</span><span class="lang-fr">Sauvegarde localement, renouvele automatiquement.</span></p></div>
+    <div class="step"><div class="step-title"><span class="lang-en">The proxy receives an OAuth token (<code>ghu_...</code>)</span><span class="lang-fr">Le proxy reçoit un token OAuth (<code>ghu_...</code>)</span></div><p><span class="lang-en">Saved locally, renewed automatically.</span><span class="lang-fr">Sauvegardé localement, renouvelé automatiquement.</span></p></div>
     <div class="step"><div class="step-title"><span class="lang-en">For each request, the token obtains a temporary Copilot token</span><span class="lang-fr">A chaque requête, le token obtient un jeton temporaire Copilot</span></div></div>
   </div>
 
@@ -353,29 +353,29 @@ Le proxy gère aussi :
   </div>
 
   <h3><span class="lang-en">Why does Claude Code consume so much?</span><span class="lang-fr">Pourquoi Claude Code consomme autant ?</span></h3>
-  <p><span class="lang-en">Claude Code works differently from a simple chat:</span><span class="lang-fr">Claude Code fonctionne differemment d'un simple chat :</span></p>
+  <p><span class="lang-en">Claude Code works differently from a simple chat:</span><span class="lang-fr">Claude Code fonctionne différemment d'un simple chat :</span></p>
   <ul>
-    <li><span class="lang-en"><strong>Massive context</strong>: for each request, Claude Code sends the contents of open files, conversation history, tool results, etc. A single message can contain 10,000 to 50,000 context tokens.</span><span class="lang-fr"><strong>Contexte massif</strong> : a chaque requête, Claude Code envoie le contenu des fichiers ouverts, l'historique de conversation, les resultats d'outils, etc. Un seul message peut contenir 10 000 a 50 000 tokens de contexte.</span></li>
-    <li><span class="lang-en"><strong>Multiple calls</strong>: a single user command can generate 3 to 15 cascading API calls (file reading, reasoning, editing, verification...).</span><span class="lang-fr"><strong>Appels multiples</strong> : une seule commande utilisateur peut generer 3 a 15 appels API en cascade (lecture de fichiers, reflexion, edition, verification...).</span></li>
-    <li><span class="lang-en"><strong>Background requests</strong>: without optimization flags, Claude Code makes additional calls for completions, suggestions and telemetry.</span><span class="lang-fr"><strong>Requetes en arrière-plan</strong> : sans les flags d'optimisation, Claude Code fait des appels supplémentaires pour les complétions, suggestions et télémétrie.</span></li>
-    <li><span class="lang-en"><strong>Long responses</strong>: responses containing generated code are often 5 to 20x longer than a regular chat.</span><span class="lang-fr"><strong>Reponses longues</strong> : les reponses contenant du code genere sont souvent 5 a 20x plus longues qu'un chat classique.</span></li>
+    <li><span class="lang-en"><strong>Massive context</strong>: for each request, Claude Code sends the contents of open files, conversation history, tool results, etc. A single message can contain 10,000 to 50,000 context tokens.</span><span class="lang-fr"><strong>Contexte massif</strong> : à chaque requête, Claude Code envoie le contenu des fichiers ouverts, l'historique de conversation, les résultats d'outils, etc. Un seul message peut contenir 10 000 à 50 000 tokens de contexte.</span></li>
+    <li><span class="lang-en"><strong>Multiple calls</strong>: a single user command can generate 3 to 15 cascading API calls (file reading, reasoning, editing, verification...).</span><span class="lang-fr"><strong>Appels multiples</strong> : une seule commande utilisateur peut générer 3 à 15 appels API en cascade (lecture de fichiers, réflexion, édition, vérification...).</span></li>
+    <li><span class="lang-en"><strong>Background requests</strong>: without optimization flags, Claude Code makes additional calls for completions, suggestions and telemetry.</span><span class="lang-fr"><strong>Requêtes en arrière-plan</strong> : sans les flags d'optimisation, Claude Code fait des appels supplémentaires pour les complétions, suggestions et télémétrie.</span></li>
+    <li><span class="lang-en"><strong>Long responses</strong>: responses containing generated code are often 5 to 20x longer than a regular chat.</span><span class="lang-fr"><strong>Réponses longues</strong> : les réponses contenant du code généré sont souvent 5 à 20x plus longues qu'un chat classique.</span></li>
   </ul>
 
   <h3><span class="lang-en">Orders of magnitude</span><span class="lang-fr">Ordres de grandeur</span></h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Action</span><span class="lang-fr">Action</span></th><th><span class="lang-en">Estimated tokens</span><span class="lang-fr">Tokens estimes</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Equivalent Copilot Chat</span></th></tr></thead>
+      <thead><tr><th><span class="lang-en">Action</span><span class="lang-fr">Action</span></th><th><span class="lang-en">Estimated tokens</span><span class="lang-fr">Tokens estimés</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Equivalent Copilot Chat</span></th></tr></thead>
       <tbody>
         <tr><td><span class="lang-en">Simple question ("what does this file do?")</span><span class="lang-fr">Question simple ("qu'est-ce que ce fichier fait ?")</span></td><td>5 000 - 15 000</td><td><span class="lang-en">~3-5 chat messages</span><span class="lang-fr">~3-5 messages chat</span></td></tr>
         <tr><td><span class="lang-en">Edit command ("fix the bug on line 42")</span><span class="lang-fr">Commande d'edition ("corrige le bug ligne 42")</span></td><td>50 000 - 150 000</td><td><span class="lang-en">~30-50 chat messages</span><span class="lang-fr">~30-50 messages chat</span></td></tr>
         <tr><td><span class="lang-en">Complex task ("add a REST API with tests")</span><span class="lang-fr">Tache complexe ("ajoute une API REST avec tests")</span></td><td>200 000 - 500 000</td><td><span class="lang-en">~100-200 chat messages</span><span class="lang-fr">~100-200 messages chat</span></td></tr>
-        <tr><td><span class="lang-en">30-minute session</span><span class="lang-fr">Session de 30 minutes</span></td><td>500 000 - 2 000 000</td><td><span class="lang-en"><strong>1 full day</strong> of chat</span><span class="lang-fr"><strong>1 journee entiere</strong> de chat</span></td></tr>
+        <tr><td><span class="lang-en">30-minute session</span><span class="lang-fr">Session de 30 minutes</span></td><td>500 000 - 2 000 000</td><td><span class="lang-en"><strong>1 full day</strong> of chat</span><span class="lang-fr"><strong>1 journée entière</strong> de chat</span></td></tr>
         <tr><td><span class="lang-en">Full day work session</span><span class="lang-fr">Session de travail d'une journee</span></td><td>5 000 000+</td><td><span class="lang-en"><strong>Weekly quota</strong></span><span class="lang-fr"><strong>Quota hebdomadaire</strong></span></td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3><span class="lang-en">How to reduce consumption</span><span class="lang-fr">Comment reduire la consommation</span></h3>
+  <h3><span class="lang-en">How to reduce consumption</span><span class="lang-fr">Comment réduire la consommation</span></h3>
 
   <h4><span class="lang-en">1. Required environment variables</span><span class="lang-fr">1. Variables d'environnement obligatoires</span></h4>
   <pre><code class="language-bash"># Réduit les appels en arrière-plan (complétions, suggestions)
@@ -402,11 +402,11 @@ ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code></pre>
 
   <h4><span class="lang-en">5. Usage best practices</span><span class="lang-fr">5. Bonnes pratiques d'utilisation</span></h4>
   <ul>
-    <li><span class="lang-en"><strong>Be specific</strong>: "fix the bug on line 42 of server.js" consumes less than "fix the bugs"</span><span class="lang-fr"><strong>Soyez precis</strong> : "corrige le bug ligne 42 de server.js" consomme moins que "corrige les bugs"</span></li>
+    <li><span class="lang-en"><strong>Be specific</strong>: "fix the bug on line 42 of server.js" consumes less than "fix the bugs"</span><span class="lang-fr"><strong>Soyez précis</strong> : "corrige le bug ligne 42 de server.js" consomme moins que "corrige les bugs"</span></li>
     <li><span class="lang-en"><strong>Use <code>/compact</code></strong> in Claude Code to compress context</span><span class="lang-fr"><strong>Utilisez <code>/compact</code></strong> dans Claude Code pour compresser le contexte</span></li>
-    <li><span class="lang-en"><strong>Close and restart</strong> Claude Code regularly to reset context</span><span class="lang-fr"><strong>Fermez et relancez</strong> Claude Code regulierement pour reinitialiser le contexte</span></li>
+    <li><span class="lang-en"><strong>Close and restart</strong> Claude Code regularly to reset context</span><span class="lang-fr"><strong>Fermez et relancez</strong> Claude Code régulièrement pour réinitialiser le contexte</span></li>
     <li><span class="lang-en"><strong>Monitor quota</strong>: <code>npx copilot-api@latest check-usage</code></span><span class="lang-fr"><strong>Surveillez le quota</strong> : <code>npx copilot-api@latest check-usage</code></span></li>
-    <li><span class="lang-en"><strong>Avoid "agent loops"</strong> where Claude Code chains tools endlessly</span><span class="lang-fr"><strong>Évitez les "agent loops"</strong> ou Claude Code enchaine les outils sans fin</span></li>
+    <li><span class="lang-en"><strong>Avoid "agent loops"</strong> where Claude Code chains tools endlessly</span><span class="lang-fr"><strong>Évitez les "agent loops"</strong> où Claude Code enchaîne les outils sans fin</span></li>
   </ul>
 
   <h4><span class="lang-en">6. Quota monitoring</span><span class="lang-fr">6. Surveillance du quota</span></h4>
@@ -521,13 +521,13 @@ copilot-proxy disable      # Désactiver l'auto-démarrage</code></pre>
 
   <div class="box box-info">
     <div class="box-title"><span class="lang-en">Auto-start at boot</span><span class="lang-fr">Auto-démarrage au boot</span></div>
-    <p><span class="lang-en"><code>copilot-proxy enable</code> creates depending on OS:</span><span class="lang-fr"><code>copilot-proxy enable</code> cree selon l'OS :</span></p>
+    <p><span class="lang-en"><code>copilot-proxy enable</code> creates depending on OS:</span><span class="lang-fr"><code>copilot-proxy enable</code> crée selon l'OS :</span></p>
     <ul>
       <li><span class="lang-en"><strong>Linux</strong>: systemd service in <code>~/.config/systemd/user/</code></span><span class="lang-fr"><strong>Linux</strong> : service systemd dans <code>~/.config/systemd/user/</code></span></li>
       <li><span class="lang-en"><strong>macOS</strong>: plist in <code>~/Library/LaunchAgents/</code></span><span class="lang-fr"><strong>macOS</strong> : plist dans <code>~/Library/LaunchAgents/</code></span></li>
       <li><span class="lang-en"><strong>Windows</strong>: scheduled task in Task Scheduler</span><span class="lang-fr"><strong>Windows</strong> : tache planifiee dans le Task Scheduler</span></li>
     </ul>
-    <p><span class="lang-en">Result: the proxy runs permanently. You just need to launch <code>claude</code>.</span><span class="lang-fr">Resultat : le proxy tourne en permanence. Vous n'avez plus qu'a lancer <code>claude</code>.</span></p>
+    <p><span class="lang-en">Result: the proxy runs permanently. You just need to launch <code>claude</code>.</span><span class="lang-fr">Résultat : le proxy tourne en permanence. Vous n'avez plus qu'à lancer <code>claude</code>.</span></p>
   </div>
 
   <!-- LM Proxy -->
@@ -554,7 +554,7 @@ claude</code></pre>
 
   <div class="box box-warn">
     <div class="box-title"><span class="lang-en">VS Code must remain open</span><span class="lang-fr">VS Code doit rester ouvert</span></div>
-    <p><span class="lang-en">The proxy runs inside VS Code. If you close VS Code, the proxy stops.</span><span class="lang-fr">Le proxy tourne a l'interieur de VS Code. Si vous fermez VS Code, le proxy s'arrete.</span></p>
+    <p><span class="lang-en">The proxy runs inside VS Code. If you close VS Code, the proxy stops.</span><span class="lang-fr">Le proxy tourne à l'intérieur de VS Code. Si vous fermez VS Code, le proxy s'arrête.</span></p>
   </div>
 
   <!-- ===== MÉTHODE 2 ===== -->
@@ -619,7 +619,7 @@ claude</code></pre>
         <tr><td><code>COPILOT_PROXY_PORT</code></td><td>18080</td><td><span class="lang-en">Proxy port</span><span class="lang-fr">Port du proxy</span></td></tr>
         <tr><td><code>COPILOT_AUTH_FILE</code></td><td>~/.claude-copilot-auth.json</td><td><span class="lang-en">OAuth token file</span><span class="lang-fr">Fichier token OAuth</span></td></tr>
         <tr><td><code>BRAVE_API_KEY</code></td><td><span class="lang-en">(none)</span><span class="lang-fr">(aucun)</span></td><td><span class="lang-en">Brave Search key</span><span class="lang-fr">Cle Brave Search</span></td></tr>
-        <tr><td><code>WEB_SEARCH_MAX_RESULTS</code></td><td>5</td><td><span class="lang-en">Number of results</span><span class="lang-fr">Nombre de resultats</span></td></tr>
+        <tr><td><code>WEB_SEARCH_MAX_RESULTS</code></td><td>5</td><td><span class="lang-en">Number of results</span><span class="lang-fr">Nombre de résultats</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1013,7 +1013,7 @@ npx copilot-api@latest start --proxy-env
 
   <div class="box box-warn">
     <div class="box-title"><span class="lang-en">Claude Code consumes 10 to 100x more than a regular Copilot chat</span><span class="lang-fr">Claude Code consomme 10 a 100x plus qu'un chat Copilot classique</span></div>
-    <p><span class="lang-en">A 30-min session can consume the equivalent of a full day of Copilot Chat. See the <a href="#g-tokens">Token consumption</a> section for full details.</span><span class="lang-fr">Une session de 30 min peut consommer l'equivalent d'une journee de Copilot Chat. Voir la section <a href="#g-tokens">Consommation de tokens</a> pour les details complets.</span></p>
+    <p><span class="lang-en">A 30-min session can consume the equivalent of a full day of Copilot Chat. See the <a href="#g-tokens">Token consumption</a> section for full details.</span><span class="lang-fr">Une session de 30 min peut consommer l'équivalent d'une journée de Copilot Chat. Voir la section <a href="#g-tokens">Consommation de tokens</a> pour les détails complets.</span></p>
   </div>
 
   <h3><span class="lang-en">Required variables</span><span class="lang-fr">Variables obligatoires</span></h3>
@@ -1093,8 +1093,8 @@ curl http://localhost:4141/usage</code></pre>
     <table>
       <thead><tr><th><span class="lang-en">Error</span><span class="lang-fr">Erreur</span></th><th><span class="lang-en">Cause</span><span class="lang-fr">Cause</span></th><th>Solution</th></tr></thead>
       <tbody>
-        <tr><td><code>ECONNREFUSED</code></td><td><span class="lang-en">Proxy not running</span><span class="lang-fr">Proxy pas lance</span></td><td><span class="lang-en">Check terminal 1</span><span class="lang-fr">Vérifiez le terminal 1</span></td></tr>
-        <tr><td><code>ECONNRESET</code></td><td><span class="lang-en">Proxy crashed</span><span class="lang-fr">Proxy a crashe</span></td><td><span class="lang-en">Restart with <code>--verbose</code></span><span class="lang-fr">Relancez avec <code>--verbose</code></span></td></tr>
+        <tr><td><code>ECONNREFUSED</code></td><td><span class="lang-en">Proxy not running</span><span class="lang-fr">Proxy pas lancé</span></td><td><span class="lang-en">Check terminal 1</span><span class="lang-fr">Vérifiez le terminal 1</span></td></tr>
+        <tr><td><code>ECONNRESET</code></td><td><span class="lang-en">Proxy crashed</span><span class="lang-fr">Proxy a crashé</span></td><td><span class="lang-en">Restart with <code>--verbose</code></span><span class="lang-fr">Relancez avec <code>--verbose</code></span></td></tr>
         <tr><td><code>ETIMEDOUT</code></td><td><span class="lang-en">Enterprise proxy</span><span class="lang-fr">Proxy entreprise</span></td><td><code>--proxy-env</code> <span class="lang-en">or</span><span class="lang-fr">ou</span> <code>HTTP_PROXY</code></td></tr>
       </tbody>
     </table>
@@ -1116,7 +1116,7 @@ curl http://localhost:4141/usage</code></pre>
     <table>
       <thead><tr><th><span class="lang-en">Error</span><span class="lang-fr">Erreur</span></th><th><span class="lang-en">Cause</span><span class="lang-fr">Cause</span></th><th>Solution</th></tr></thead>
       <tbody>
-        <tr><td><code>thinking parameter</code></td><td><span class="lang-en">Copilot doesn't support it</span><span class="lang-fr">Copilot ne supporté pas</span></td><td><span class="lang-en">Node.js proxies: automatic. LiteLLM: <code>drop_params: true</code></span><span class="lang-fr">Proxies Node.js : automatique. LiteLLM : <code>drop_params: true</code></span></td></tr>
+        <tr><td><code>thinking parameter</code></td><td><span class="lang-en">Copilot doesn't support it</span><span class="lang-fr">Copilot ne supporte pas</span></td><td><span class="lang-en">Node.js proxies: automatic. LiteLLM: <code>drop_params: true</code></span><span class="lang-fr">Proxies Node.js : automatique. LiteLLM : <code>drop_params: true</code></span></td></tr>
         <tr><td><code>model not found</code></td><td><span class="lang-en">Model unavailable</span><span class="lang-fr">Modèle indisponible</span></td><td><code>curl localhost:4141/v1/models</code></td></tr>
       </tbody>
     </table>
@@ -1157,7 +1157,7 @@ curl http://localhost:4141/usage</code></pre>
     <li><span class="lang-en"><strong>Never commit your tokens</strong>: add <code>.claude-copilot-auth.json</code> and <code>.copilot-api/</code> to <code>.gitignore</code></span><span class="lang-fr"><strong>Ne commitez jamais vos tokens</strong> : ajoutez <code>.claude-copilot-auth.json</code> et <code>.copilot-api/</code> a <code>.gitignore</code></span></li>
     <li><span class="lang-en"><strong>Local proxy only</strong>: never expose on <code>0.0.0.0</code></span><span class="lang-fr"><strong>Proxy en local uniquement</strong> : n'exposez jamais sur <code>0.0.0.0</code></span></li>
     <li><span class="lang-en"><strong>Use rate-limiting</strong> to avoid abuse detection</span><span class="lang-fr"><strong>Utilisez le rate-limiting</strong> pour eviter la detection d'abus</span></li>
-    <li><span class="lang-en"><strong>Consult your security team</strong> before using in an enterprise setting</span><span class="lang-fr"><strong>Consultez votre equipe sécurité</strong> avant utilisation en entreprise</span></li>
+    <li><span class="lang-en"><strong>Consult your security team</strong> before using in an enterprise setting</span><span class="lang-fr"><strong>Consultez votre équipe sécurité</strong> avant utilisation en entreprise</span></li>
   </ul>
 
   <!-- ===== COMPARATIF ===== -->
@@ -1241,7 +1241,7 @@ curl http://localhost:4141/usage</code></pre>
 <div id="référence" class="page">
 
   <h1><span class="lang-en">Reference</span><span class="lang-fr">Référence</span></h1>
-  <p class="subtitle"><span class="lang-en">All variables, options and endpoints at a glance.</span><span class="lang-fr">Toutes les variables, options et endpoints en un coup d'oeil.</span></p>
+  <p class="subtitle"><span class="lang-en">All variables, options and endpoints at a glance.</span><span class="lang-fr">Toutes les variables, options et endpoints en un coup d'œil.</span></p>
 
   <h2 id="r-env"><span class="lang-en">Environment variables</span><span class="lang-fr">Variables d'environnement</span></h2>
   <div class="table-wrap">
@@ -1290,7 +1290,7 @@ copilot-api debug          # Diagnostic</code></pre>
       <tbody>
         <tr><td><code>POST /v1/messages</code></td><td>Anthropic</td><td><span class="lang-en">Used by Claude Code</span><span class="lang-fr">Utilise par Claude Code</span></td></tr>
         <tr><td><code>POST /v1/messages/count_tokens</code></td><td>Anthropic</td><td><span class="lang-en">Token counting</span><span class="lang-fr">Comptage de tokens</span></td></tr>
-        <tr><td><code>POST /v1/chat/complétions</code></td><td>OpenAI</td><td><span class="lang-en">Compatible with other tools</span><span class="lang-fr">Compatible autres outils</span></td></tr>
+        <tr><td><code>POST /v1/chat/complétions</code></td><td>OpenAI</td><td><span class="lang-en">Compatible with other tools</span><span class="lang-fr">Compatible avec d'autres outils</span></td></tr>
         <tr><td><code>GET /v1/models</code></td><td>OpenAI</td><td><span class="lang-en">Model list</span><span class="lang-fr">Liste des modèles</span></td></tr>
         <tr><td><code>POST /v1/embeddings</code></td><td>OpenAI</td><td>Embeddings</td></tr>
         <tr><td><code>GET /usage</code></td><td>Custom</td><td><span class="lang-en">Usage stats</span><span class="lang-fr">Stats d'utilisation</span></td></tr>
@@ -1348,12 +1348,12 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
   <h2 id="r-tokens-detail"><span class="lang-en">Tokens &amp; Quota: understanding consumption</span><span class="lang-fr">Tokens &amp; Quota : comprendre la consommation</span></h2>
 
   <div class="box box-danger">
-    <div class="box-title"><span class="lang-en">Why consumption is so high</span><span class="lang-fr">Pourquoi la consommation est si elevee</span></div>
-    <p><span class="lang-en">Claude Code is not a simple chatbot. For each interaction, it:</span><span class="lang-fr">Claude Code n'est pas un simple chatbot. A chaque interaction, il :</span></p>
+    <div class="box-title"><span class="lang-en">Why consumption is so high</span><span class="lang-fr">Pourquoi la consommation est si élevée</span></div>
+    <p><span class="lang-en">Claude Code is not a simple chatbot. For each interaction, it:</span><span class="lang-fr">Claude Code n'est pas un simple chatbot. À chaque interaction, il :</span></p>
     <ol>
-      <li><span class="lang-en">Sends <strong>the full context</strong> (files, history, tool results) = 10,000-50,000 input tokens</span><span class="lang-fr">Envoie <strong>tout le contexte</strong> (fichiers, historique, resultats d'outils) = 10 000-50 000 tokens d'entrée</span></li>
-      <li><span class="lang-en">Can chain <strong>3 to 15 API calls</strong> in cascade for a single command</span><span class="lang-fr">Peut enchainer <strong>3 a 15 appels API</strong> en cascade pour une seule commande</span></li>
-      <li><span class="lang-en">Generates <strong>long responses</strong> with full code = 2,000-10,000 output tokens</span><span class="lang-fr">Genere des <strong>reponses longues</strong> avec du code complet = 2 000-10 000 tokens de sortie</span></li>
+      <li><span class="lang-en">Sends <strong>the full context</strong> (files, history, tool results) = 10,000-50,000 input tokens</span><span class="lang-fr">Envoie <strong>tout le contexte</strong> (fichiers, historique, résultats d'outils) = 10 000-50 000 tokens d'entrée</span></li>
+      <li><span class="lang-en">Can chain <strong>3 to 15 API calls</strong> in cascade for a single command</span><span class="lang-fr">Peut enchaîner <strong>3 à 15 appels API</strong> en cascade pour une seule commande</span></li>
+      <li><span class="lang-en">Generates <strong>long responses</strong> with full code = 2,000-10,000 output tokens</span><span class="lang-fr">Génère des <strong>réponses longues</strong> avec du code complet = 2 000-10 000 tokens de sortie</span></li>
       <li><span class="lang-en">Makes <strong>background calls</strong> (without optimization flags)</span><span class="lang-fr">Fait des <strong>appels en arrière-plan</strong> (sans les flags d'optimisation)</span></li>
     </ol>
   </div>
@@ -1371,7 +1371,7 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     </table>
   </div>
 
-  <h3><span class="lang-en">Cost-saving strategies</span><span class="lang-fr">Strategies d'economie</span></h3>
+  <h3><span class="lang-en">Cost-saving strategies</span><span class="lang-fr">Stratégies d'économie</span></h3>
   <div class="card-grid">
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
@@ -1390,13 +1390,13 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     </div>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-comment"></i></div>
-      <div class="card-title"><span class="lang-en">Be specific</span><span class="lang-fr">Etre precis</span></div>
+      <div class="card-title"><span class="lang-en">Be specific</span><span class="lang-fr">Être précis</span></div>
       <div class="card-desc"><span class="lang-en">"fix line 42 of server.js" &lt; "fix the bugs"</span><span class="lang-fr">"corrige ligne 42 de server.js" &lt; "corrige les bugs"</span></div>
     </div>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-box"></i></div>
       <div class="card-title"><span class="lang-en">Use /compact</span><span class="lang-fr">Utiliser /compact</span></div>
-      <div class="card-desc"><span class="lang-en">Compresses context in Claude Code to reduce tokens sent</span><span class="lang-fr">Compresse le contexte dans Claude Code pour reduire les tokens envoyes</span></div>
+      <div class="card-desc"><span class="lang-en">Compresses context in Claude Code to reduce tokens sent</span><span class="lang-fr">Compresse le contexte dans Claude Code pour réduire les tokens envoyés</span></div>
     </div>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
