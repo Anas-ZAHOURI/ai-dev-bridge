@@ -3,7 +3,7 @@
 > **Contexte** : Vous êtes sur un PC de dev entreprise qui autorise uniquement GitHub Copilot
 > et/ou Google Gemini Code Assist.
 > Ce guide vous permet d'utiliser **Claude Code** en passant par votre licence existante,
-> grace a un proxy local qui traduit les requêtes entre les API.
+> grâce à un proxy local qui traduit les requêtes entre les API.
 
 ---
 
@@ -16,7 +16,7 @@
 │  Claude Code │  ─────────────────────>  │  Proxy local      │         │
 │  (terminal)  │    POST /v1/messages     │  (Node/Python)    │         │
 │              │  <─────────────────────  │  localhost:4141    │         │
-└──────────────┘     Reponse Anthropic    └───┬───────────────┘         │
+└──────────────┘     Réponse Anthropic    └───┬───────────────┘         │
                                               └──>│  API Gemini (Google) │
                                                   └─────────────────────┘
 ```
@@ -31,13 +31,13 @@ la réponse pour Claude Code.
 
 ---
 
-## Prerequis communs
+## Prérequis communs
 
-- **Node.js** >= 18 installe (vérifiez avec `node --version`)
+- **Node.js** >= 18 installé (vérifiez avec `node --version`)
 - **Au moins un fournisseur actif** :
   - **GitHub Copilot** actif sur votre compte GitHub (Individual, Business ou Enterprise)
-  - ET/OU **Google Gemini Code Assist** avec accès a Google Cloud (API key ou `gcloud` CLI)
-- **Claude Code** installe :
+  - ET/OU **Google Gemini Code Assist** avec accès à Google Cloud (API key ou `gcloud` CLI)
+- **Claude Code** installé :
   ```bash
   npm install -g @anthropic-ai/claude-code
   ```
@@ -53,7 +53,7 @@ la réponse pour Claude Code.
 ### Étape 1 : Lancer le proxy
 
 ```bash
-# Méthode rapide avec npx (rien a installer)
+# Méthode rapide avec npx (rien à installer)
 npx copilot-api@latest start --claude-code
 ```
 
@@ -66,11 +66,11 @@ copilot-api start --claude-code
 ### Étape 2 : Authentification
 
 Au premier lancement, le proxy affiche un **code d'appareil** et ouvre votre navigateur.
-1. Connectez-vous a GitHub
-2. Entrez le code affiche dans le terminal
+1. Connectez-vous à GitHub
+2. Entrez le code affiché dans le terminal
 3. Autorisez l'application
 
-### Étape 3 : Selection des modèles
+### Étape 3 : Sélection des modèles
 
 Le flag `--claude-code` vous demande de choisir :
 - Un **modèle principal** (ex: `gpt-5.4`, `claude-sonnet-4.6`)
@@ -80,7 +80,7 @@ Une commande de lancement est **copiée dans votre presse-papier**. Collez-la da
 
 ### Étape 4 : Configuration manuelle (alternative)
 
-Si vous preferez configurer manuellement, créez/editez le fichier `.claude/settings.json`
+Si vous préférez configurer manuellement, créez/éditez le fichier `.claude/settings.json`
 dans votre home ou votre projet :
 
 ```json
@@ -147,7 +147,7 @@ copilot-proxy start --claude-code
 ### Avantage : mode daemon (arrière-plan)
 
 ```bash
-copilot-proxy start -d       # Demarrer en arrière-plan
+copilot-proxy start -d       # Démarrer en arrière-plan
 copilot-proxy status          # Voir le statut
 copilot-proxy logs            # Voir les logs
 copilot-proxy stop            # Arrêter
@@ -178,7 +178,7 @@ Configuration `.claude/settings.json` :
 **Marketplace** : cherchez "LM Proxy" dans les extensions VS Code
 
 1. Installez l'extension dans VS Code
-2. Elle utilise l'authentification Copilot déjà presente dans VS Code
+2. Elle utilise l'authentification Copilot déjà présente dans VS Code
 3. Lancez Claude Code avec :
 
 ```bash
@@ -192,7 +192,7 @@ ANTHROPIC_BASE_URL=http://localhost:4000/anthropic/claude claude
 
 # MÉTHODE 2 : Cloner les projets et les démarrer à la main
 
-Pour un controle total ou si npx est bloqué par votre proxy entreprise.
+Pour un contrôle total ou si npx est bloqué par votre proxy entreprise.
 
 ## Projet A : copilot-api (Node.js)
 
@@ -245,7 +245,7 @@ ANTHROPIC_BASE_URL=http://localhost:18080 ANTHROPIC_API_KEY=copilot-proxy claude
 |----------|--------|-------------|
 | `COPILOT_PROXY_PORT` | 18080 | Port du proxy |
 | `COPILOT_AUTH_FILE` | ~/.claude-copilot-auth.json | Fichier token OAuth |
-| `BRAVE_API_KEY` | (aucun) | Cle Brave Search (recherche web) |
+| `BRAVE_API_KEY` | (aucun) | Clé Brave Search (recherche web) |
 
 > **Bonus** : Ce projet inclut une recherche web intégrée (DuckDuckGo gratuit ou Brave Search).
 
@@ -480,11 +480,11 @@ litellm --config mixed-config.yaml      # Les deux !
 
 # Référence des variables d'environnement
 
-| Variable | Role | Exemple Copilot | Exemple Gemini |
+| Variable | Rôle | Exemple Copilot | Exemple Gemini |
 |----------|------|-----------------|----------------|
 | `ANTHROPIC_BASE_URL` | URL du proxy local | `http://localhost:4141` | `http://localhost:4000` |
-| `ANTHROPIC_AUTH_TOKEN` | Token (valeur bidon acceptee) | `dummy` | `dummy` ou `sk-litellm-static-key` |
-| `ANTHROPIC_API_KEY` | Alternative a AUTH_TOKEN | `copilot-proxy` | `sk-litellm-static-key` |
+| `ANTHROPIC_AUTH_TOKEN` | Token (valeur bidon acceptée) | `dummy` | `dummy` ou `sk-litellm-static-key` |
+| `ANTHROPIC_API_KEY` | Alternative à AUTH_TOKEN | `copilot-proxy` | `sk-litellm-static-key` |
 | `ANTHROPIC_MODEL` | Modèle principal | `gpt-5.4`, `claude-sonnet-4.6` | `gemini-2.5-pro` |
 | `ANTHROPIC_SMALL_FAST_MODEL` | Modèle rapide/léger | `gpt-5.4-mini` | `gemini-2.5-flash` |
 | `GEMINI_API_KEY` | Clé API Google AI Studio | — | `AIzaSy...` |
@@ -493,17 +493,17 @@ litellm --config mixed-config.yaml      # Les deux !
 
 ---
 
-# Conseils et pieges a eviter
+# Conseils et pièges à éviter
 
-### 1. Consommation de quota elevee
-Claude Code consomme **10 a 100x plus de tokens** qu'un chat Copilot classique.
-Une seule commande "edite ce fichier" peut consommer 50 000 a 150 000 tokens.
+### 1. Consommation de quota élevée
+Claude Code consomme **10 à 100x plus de tokens** qu'un chat Copilot classique.
+Une seule commande "édite ce fichier" peut consommer 50 000 à 150 000 tokens.
 - Activez `DISABLE_NON_ESSENTIAL_MODEL_CALLS=1`
 - Utilisez `--rate-limit 30 --wait` pour espacer les requêtes
 
 ### 2. Erreur "thinking parameter"
-Claude Code envoie un paramètre `thinking` que Copilot ne supporté pas.
-- Les proxies Node.js (copilot-api, copilot-proxy) gèrent ca automatiquement
+Claude Code envoie un paramètre `thinking` que Copilot ne supporte pas.
+- Les proxies Node.js (copilot-api, copilot-proxy) gèrent ça automatiquement
 - Avec LiteLLM, mettez `drop_params: true` dans la config
 
 ### 3. Recherche web qui échoue
@@ -517,7 +517,7 @@ Si vous êtes derrière un proxy HTTP d'entreprise :
 # Pour copilot-api
 npx copilot-api@latest start --proxy-env
 
-# Ou definissez les variables avant de lancer
+# Ou définissez les variables avant de lancer
 export HTTP_PROXY=http://proxy.entreprise.fr:8080
 export HTTPS_PROXY=http://proxy.entreprise.fr:8080
 export NO_PROXY=localhost,127.0.0.1
@@ -584,12 +584,12 @@ Voir : https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-f
 
 ### 6. Risque sur le compte
 Ces outils utilisent des API **non-officielles** de GitHub Copilot.
-Une utilisation excessive peut déclencher une detection d'abus.
+Une utilisation excessive peut déclencher une détection d'abus.
 - Utilisez le rate-limiting
-- Évitez les sessions tres longues sans pause
+- Évitez les sessions très longues sans pause
 
 ### 7. Noms de modèles
-Meme si Claude Code pense parler à l'API Anthropic, vous specifiez des noms
+Même si Claude Code pense parler à l'API Anthropic, vous spécifiez des noms
 de modèles **Copilot** (ex: `gpt-5.4`) ou **Gemini** (ex: `gemini-2.5-pro`). Le proxy traduit tout.
 
 ---
@@ -599,12 +599,12 @@ de modèles **Copilot** (ex: `gpt-5.4`) ou **Gemini** (ex: `gemini-2.5-pro`). Le
 | Modèle | Fournisseur | Forces | Recommandation |
 |--------|-------------|--------|----------------|
 | `gpt-5.4` | GitHub Copilot (OpenAI) | Polyvalent, bon en code | Principal Copilot |
-| `gpt-5.4-mini` | GitHub Copilot (OpenAI) | Rapide, economique | Rapide Copilot |
+| `gpt-5.4-mini` | GitHub Copilot (OpenAI) | Rapide, économique | Rapide Copilot |
 | `claude-sonnet-4.6` | GitHub Copilot (Anthropic) | Excellent en code | Principal qualité |
-| `claude-opus-4.6` | GitHub Copilot (Anthropic) | Le plus puissant | Taches complexes |
+| `claude-opus-4.6` | GitHub Copilot (Anthropic) | Le plus puissant | Tâches complexes |
 | `gemini-2.5-pro` | Gemini Code Assist | Raisonnement avancé, code, contexte 1M | Principal Gemini |
 | `gemini-2.5-flash` | Gemini Code Assist | Très rapide, multimodal | Rapide Gemini |
-| `gemini-2.0-flash` | Gemini Code Assist | Ultra rapide, low latency | Taches simples Gemini |
+| `gemini-2.0-flash` | Gemini Code Assist | Ultra rapide, low latency | Tâches simples Gemini |
 
 ---
 

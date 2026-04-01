@@ -5,7 +5,7 @@
 
 ---
 
-## Pre-requis
+## Prérequis
 
 ```bash
 node --version    # >= 18 requis
@@ -63,7 +63,7 @@ Si votre entreprise fournit Gemini Code Assist au lieu de Copilot, utilisez Lite
 # 1. Installer LiteLLM
 pip install litellm[proxy]
 
-# 2. S'authentifier a Google Cloud
+# 2. S'authentifier à Google Cloud
 gcloud auth application-default login
 
 # 3. Créer un fichier gemini-config.yaml (voir ci-dessous)
@@ -118,7 +118,7 @@ claude
 
 ## C'est prêt !
 
-Claude Code est maintenant connecté a Copilot. Tapez vos commandes normalement.
+Claude Code est maintenant connecté à Copilot ou Gemini. Tapez vos commandes normalement.
 
 ---
 
@@ -132,8 +132,8 @@ npx copilot-api@latest start
 claude
 ```
 
-Si vous avez configure `.claude/settings.json` (voir ci-dessous), vous n'avez plus
-besoin des variables d'environnement a chaque fois.
+Si vous avez configuré `.claude/settings.json` (voir ci-dessous), vous n'avez plus
+besoin des variables d'environnement à chaque fois.
 
 ---
 
@@ -191,11 +191,11 @@ claude
 
 ## Dépannage rapide
 
-| Probleme | Solution |
+| Problème | Solution |
 |----------|----------|
-| `ECONNREFUSED` | Le proxy n'est pas lance (terminal 1) |
+| `ECONNREFUSED` | Le proxy n'est pas lancé (terminal 1) |
 | `401 Unauthorized` (Copilot) | Relancez `npx copilot-api@latest auth` |
 | `403 Permission Denied` (Gemini) | Relancez `gcloud auth application-default login` |
 | `thinking parameter error` | Normal avec LiteLLM, ajoutez `drop_params: true` |
-| Quota epuise rapidement | Ajoutez `--rate-limit 30 --wait` au proxy (Copilot) |
+| Quota épuisé rapidement | Ajoutez `--rate-limit 30 --wait` au proxy (Copilot) |
 | Proxy entreprise bloqué | Ajoutez `--proxy-env` au proxy |

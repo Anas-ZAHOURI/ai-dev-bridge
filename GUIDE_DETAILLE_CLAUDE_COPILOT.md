@@ -1,4 +1,4 @@
-# Guide Detaille : Claude Code via GitHub Copilot / Gemini Code Assist
+# Guide Détaillé : Claude Code via GitHub Copilot / Gemini Code Assist
 
 > Pour PC de dev entreprise avec GitHub Copilot et/ou Google Gemini Code Assist autorisé.
 
@@ -7,7 +7,7 @@
 ## Table des matières
 
 1. [Comprendre l'architecture](#1-comprendre-larchitecture)
-2. [Pre-requis détaillés](#2-pre-requis-détaillés)
+2. [Prérequis détaillés](#2-prérequis-détaillés)
 3. [Installer Claude Code](#3-installer-claude-code)
 4. [MÉTHODE 1 : copilot-api via npx](#4-méthode-1--copilot-api-via-npx)
 5. [MÉTHODE 1bis : copilot-proxy (Jer-y) via npx avec daemon](#5-méthode-1bis--copilot-proxy-jer-y-via-npx-avec-daemon)
@@ -36,7 +36,7 @@ Claude Code est conçu pour parler à l'API Anthropic (format Messages API).
 GitHub Copilot expose ses modèles via une API au format OpenAI, et Google Gemini
 via l'API Generative Language. Un proxy local fait la traduction entre ces formats.
 
-### Schema complet
+### Schéma complet
 
 ```
                                                                       ┌──────────────────┐
@@ -47,7 +47,7 @@ via l'API Generative Language. Un proxy local fait la traduction entre ces forma
 │  Claude Code │    POST /v1/messages       │  Proxy local    │
 │  (terminal)  │    localhost:4141          │  (Node/Python)  │
 │              │  <───────────────────────  │                 │
-└──────────────┘     Reponse Anthropic      └────────┬────────┘       ┌──────────────────┐
+└──────────────┘     Réponse Anthropic      └────────┬────────┘       ┌──────────────────┐
                                                      │  Format Gemini │  API Google      │
                                                      └──────────────> │  Gemini          │
                                                                       └──────────────────┘
@@ -69,16 +69,16 @@ via l'API Generative Language. Un proxy local fait la traduction entre ces forma
 2. Le proxy contacte GitHub : "je veux un device code"
 3. GitHub répond : "voici le code XXXX-XXXX, envoyez l'utilisateur sur github.com/login/device"
 4. Vous ouvrez le navigateur, entrez le code, autorisez
-5. Le proxy recoit un token OAuth (ghu_...)
+5. Le proxy reçoit un token OAuth (ghu_...)
 6. Ce token est sauvegardé localement (~/.copilot-api/ ou similaire)
-7. A chaque requête, le proxy utilise ce token pour obtenir un token temporaire Copilot
-8. Le token temporaire est utilise pour appeler l'API Copilot
-9. Le proxy renouvelle automatiquement les tokens expires
+7. À chaque requête, le proxy utilise ce token pour obtenir un token temporaire Copilot
+8. Le token temporaire est utilisé pour appeler l'API Copilot
+9. Le proxy renouvelle automatiquement les tokens expirés
 ```
 
 ---
 
-## 2. Pre-requis détaillés
+## 2. Prérequis détaillés
 
 ### Node.js
 
@@ -138,7 +138,7 @@ go version
 
 Vérifiez que votre licence Copilot est active :
 1. Allez sur https://github.com/settings/copilot
-2. Vous devez voir "Copilot is active" ou equivalent
+2. Vous devez voir "Copilot is active" ou équivalent
 3. Notez votre type : Individual, Business, ou Enterprise
 
 ---
@@ -193,7 +193,7 @@ export PATH="$HOME/.local/node_modules/.bin:$PATH"
 ### 4.1 Lancement automatique (mode --claude-code)
 
 ```bash
-# Rien a installer, npx télécharge et execute directement
+# Rien à installer, npx télécharge et exécute directement
 npx copilot-api@latest start --claude-code
 ```
 
@@ -294,15 +294,15 @@ Autres commandes :
   copilot-api debug            Informations de diagnostic
 ```
 
-### 4.5 Endpoints exposes par le proxy
+### 4.5 Endpoints exposés par le proxy
 
 | Endpoint | Format | Description |
 |----------|--------|-------------|
-| `POST /v1/messages` | Anthropic | Utilise par Claude Code |
+| `POST /v1/messages` | Anthropic | Utilisé par Claude Code |
 | `POST /v1/messages/count_tokens` | Anthropic | Comptage de tokens |
-| `POST /v1/chat/complétions` | OpenAI | Compatible avec d'autres outils |
+| `POST /v1/chat/completions` | OpenAI | Compatible avec d'autres outils |
 | `GET /v1/models` | OpenAI | Liste des modèles disponibles |
-| `POST /v1/embeddings` | OpenAI | Embeddings (si supporte) |
+| `POST /v1/embeddings` | OpenAI | Embeddings (si supporté) |
 | `GET /usage` | Custom | Statistiques d'utilisation |
 | `GET /token` | Custom | Info sur le token actuel |
 
@@ -321,7 +321,7 @@ Autres commandes :
 npx @jer-y/copilot-proxy@latest start --claude-code
 ```
 
-Meme flow que copilot-api : auth GitHub, choix de modèles, commande copiée.
+Même flow que copilot-api : auth GitHub, choix de modèles, commande copiée.
 
 ### 5.2 Mode daemon (arrière-plan)
 
@@ -331,13 +331,13 @@ C'est le gros avantage de ce fork : le proxy peut tourner en service système.
 # Installer en global (nécessaire pour le daemon)
 npm install -g @jer-y/copilot-proxy
 
-# Premiere authentification
+# Première authentification
 copilot-proxy auth
 
-# Demarrer en daemon (arrière-plan)
+# Démarrer en daemon (arrière-plan)
 copilot-proxy start -d
 
-# Vérifier que ca tourne
+# Vérifier que ça tourne
 copilot-proxy status
 ```
 
@@ -354,7 +354,7 @@ copilot-proxy daemon status:
 ### 5.3 Gestion complète du daemon
 
 ```bash
-# Demarrer en arrière-plan
+# Démarrer en arrière-plan
 copilot-proxy start -d
 
 # Voir le statut
@@ -367,7 +367,7 @@ copilot-proxy logs --tail 50     # 50 dernières lignes
 # Arrêter
 copilot-proxy stop
 
-# Redémarrer (utile apres une mise à jour)
+# Redémarrer (utile après une mise à jour)
 copilot-proxy restart
 
 # Activer le démarrage automatique au boot du PC
@@ -380,12 +380,12 @@ copilot-proxy disable
 ### 5.4 Ce que fait `copilot-proxy enable`
 
 Selon votre OS :
-- **Linux** : cree un service systemd dans `~/.config/systemd/user/`
-- **macOS** : cree un plist dans `~/Library/LaunchAgents/`
-- **Windows** : cree une tache planifiee dans le Task Scheduler
+- **Linux** : crée un service systemd dans `~/.config/systemd/user/`
+- **macOS** : crée un plist dans `~/Library/LaunchAgents/`
+- **Windows** : crée une tâche planifiée dans le Task Scheduler
 
-Resultat : le proxy démarre automatiquement a chaque ouverture de session.
-Vous n'avez plus qu'a lancer `claude` et ca marche.
+Résultat : le proxy démarre automatiquement à chaque ouverture de session.
+Vous n'avez plus qu'à lancer `claude` et ça marche.
 
 ### 5.5 Configuration Claude Code
 
@@ -443,14 +443,14 @@ ANTHROPIC_API_KEY=dummy \
 claude
 ```
 
-### 6.4 Avantages / Inconvenients
+### 6.4 Avantages / Inconvénients
 
 **Avantages :**
 - Aucune authentification supplémentaire (utilise celle de VS Code/Copilot)
 - Pas de gestion de token
 - Installation en 1 clic
 
-**Inconvenients :**
+**Inconvénients :**
 - VS Code doit rester ouvert
 - Moins d'options de configuration
 - Pas de rate limiting intégré
@@ -522,8 +522,8 @@ Si le navigateur ne s'ouvre pas (environnement sans GUI) :
 # 1. Lancez l'auth seule
 node dist/index.js auth --show-token
 
-# 2. Copiez l'URL et le code affiches
-# 3. Ouvrez l'URL sur un autre appareil (telephone, autre PC)
+# 2. Copiez l'URL et le code affichés
+# 3. Ouvrez l'URL sur un autre appareil (téléphone, autre PC)
 # 4. Entrez le code
 # 5. Le token s'affiche dans le terminal
 # 6. Relancez le proxy
@@ -707,7 +707,7 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-  # Modèle rapide pour les tâches legeres
+  # Modèle rapide pour les tâches légères
   - model_name: gpt-5.4-mini
     litellm_params:
       model: github_copilot/gpt-5.4-mini
@@ -731,7 +731,7 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
 
-# CRITIQUE : supprime les paramètres non supportes comme "thinking"
+# CRITIQUE : supprime les paramètres non supportés comme "thinking"
 litellm_settings:
   drop_params: true
 ```
@@ -809,7 +809,7 @@ export GITHUB_TOKEN=ghu_xxxxxxxxxxxx
 **Option B : Utiliser copilot-api juste pour l'auth**
 ```bash
 npx copilot-api@latest auth --show-token
-# Copiez le token affiche
+# Copiez le token affiché
 export GITHUB_TOKEN=ghu_xxxxxxxxxxxx
 ```
 
@@ -896,8 +896,8 @@ Admin UI: http://0.0.0.0:4000/ui
 
 ### 9.6 Interface d'administration
 
-LiteLLM inclut un dashboard web a `http://localhost:4000/ui` ou vous pouvez :
-- Voir les requêtes en temps reel
+LiteLLM inclut un dashboard web à `http://localhost:4000/ui` où vous pouvez :
+- Voir les requêtes en temps réel
 - Surveiller la consommation de tokens
 - Gérer les modèles
 - Voir les erreurs
@@ -1042,7 +1042,7 @@ Le fork de caozhiyuan améliore le copilot-api original avec :
 
 | Fonctionnalité | Original (ericc-ch) | Fork (caozhiyuan) |
 |---------------|--------------------|--------------------|
-| API Claude | Via traduction Chat Completions | **Natif Messages API** (`/v1/messages`) |
+| API Claude | Via traduction Chat completions | **Natif Messages API** (`/v1/messages`) |
 | Token counting | Estimation GPT tokenizer | **Exact via endpoint Anthropic** |
 | Thinking/tool_use | Conversion lossy | **Préservé nativement** |
 | Requêtes premium | Standard | **Optimisé** (warmup → smallModel) |
@@ -1088,7 +1088,7 @@ Identique à la méthode 1, pointez Claude Code vers `localhost:4141` :
 
 ## 13. Configuration permanente de Claude Code
 
-Au lieu de taper les variables d'environnement a chaque fois, configurez-les une fois.
+Au lieu de taper les variables d'environnement à chaque fois, configurez-les une fois.
 
 ### 13.1 Configuration globale (pour tous les projets)
 
@@ -1117,7 +1117,7 @@ C:\Users\VOTRE_USER\.claude\settings.json
 
 ### 13.2 Configuration par projet
 
-Créez `.claude/settings.json` a la racine de votre projet :
+Créez `.claude/settings.json` à la racine de votre projet :
 
 ```json
 {
@@ -1216,7 +1216,7 @@ Si vous avez des erreurs SSL `UNABLE_TO_VERIFY_LEAF_SIGNATURE` :
 ```bash
 # Pour Node.js (copilot-api, claude code)
 export NODE_TLS_REJECT_UNAUTHORIZED=0
-# ⚠️ Désactive la verification SSL - utilisez uniquement en dev
+# ⚠️ Désactive la vérification SSL - utilisez uniquement en dev
 
 # Meilleure solution : ajouter le certificat racine de l'entreprise
 export NODE_EXTRA_CA_CERTS=/chemin/vers/certificat-entreprise.pem
@@ -1427,12 +1427,12 @@ npx copilot-api@latest start --proxy-env
 ## 15. Optimisation du quota Copilot
 
 Claude Code est TRÈS gourmand en tokens. Une session de 30 minutes peut
-consommer autant qu'une journee de Copilot Chat.
+consommer autant qu'une journée de Copilot Chat.
 
 ### 15.1 Variables d'environnement essentielles
 
 ```bash
-# Réduit les appels en arrière-plan (complétions, suggestions)
+# Réduit les appels en arrière-plan (completions, suggestions)
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1
 
 # Désactive le trafic non-essentiel (télémétrie, checks)
@@ -1454,54 +1454,54 @@ npx copilot-api@latest start --rate-limit 30 --wait
 
 ### 15.3 Choisir le bon modèle
 
-| Modèle | Tokens/requête | Qualite | Recommandation |
+| Modèle | Tokens/requête | Qualité | Recommandation |
 |--------|---------------|---------|----------------|
 | gpt-5.4-mini | Faible | Correcte | Modèle rapide, tâches simples |
 | gpt-5.4 | Moyen | Bonne | Bon équilibre |
 | claude-sonnet-4.6 | Moyen | Très bonne | Meilleur pour le code |
-| claude-opus-4.6 | Eleve | Excellente | Taches complexes uniquement |
+| claude-opus-4.6 | Élevé | Excellente | Tâches complexes uniquement |
 
 **Recommandation :**
 - `ANTHROPIC_MODEL=gpt-5.4` (principal)
-- `ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini` (tâches legeres)
+- `ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini` (tâches légères)
 
 ### 15.4 Bonnes pratiques
 
-1. **Soyez precis** : "corrige le bug ligne 42 de server.js" consomme moins que "corrige les bugs"
-2. **Évitez les sessions longues** : fermez et relancez Claude Code regulierement
+1. **Soyez précis** : "corrige le bug ligne 42 de server.js" consomme moins que "corrige les bugs"
+2. **Évitez les sessions longues** : fermez et relancez Claude Code régulièrement
 3. **Surveillez le quota** : `npx copilot-api@latest check-usage`
 4. **Utilisez /compact** dans Claude Code pour compresser le contexte
-5. **Desactivez WebSearch** : chaque recherche web = requêtes supplémentaires inutiles
+5. **Désactivez WebSearch** : chaque recherche web = requêtes supplémentaires inutiles
 
 ---
 
 ## 16. Modèles disponibles et lequel choisir
 
-Les modèles disponibles dependent de votre licence Copilot.
+Les modèles disponibles dépendent de votre licence Copilot.
 
 ### 16.1 Modèles courants via GitHub Copilot
 
 | Modèle | Fournisseur | Forces |
 |--------|-------------|--------|
 | `gpt-5.4` | OpenAI | Polyvalent, bon en code |
-| `gpt-5.4-mini` | OpenAI | Rapide, economique |
+| `gpt-5.4-mini` | OpenAI | Rapide, économique |
 | `gpt-5.2` | OpenAI | Multimodal |
 | `gpt-5-mini` | OpenAI | Très rapide |
 | `claude-sonnet-4.6` | Anthropic | Excellent en code, raisonnement |
 | `claude-opus-4.6` | Anthropic | Le plus puissant mais lent |
-| `claude-haiku-4.5` | Anthropic | Rapide, economique |
-| `o3` | OpenAI | Raisonnement avance |
+| `claude-haiku-4.5` | Anthropic | Rapide, économique |
+| `o3` | OpenAI | Raisonnement avancé |
 
 ### 16.1bis Modèles courants via Gemini Code Assist
 
 | Modèle | Forces | Contexte max |
 |--------|--------|-------------|
 | `gemini-2.5-pro` | Raisonnement avancé, excellent en code, multimodal | 1M tokens |
-| `gemini-2.5-flash` | Rapide, economique, multimodal | 1M tokens |
+| `gemini-2.5-flash` | Rapide, économique, multimodal | 1M tokens |
 | `gemini-2.0-flash` | Ultra rapide, latence minimale | 1M tokens |
 | `gemini-2.0-flash-lite` | Le plus léger, gratuit dans les quotas de base | 1M tokens |
 
-> **Avantage Gemini** : contexte de 1 million de tokens, ideal pour les gros codebases.
+> **Avantage Gemini** : contexte de 1 million de tokens, idéal pour les gros codebases.
 > **Avantage Copilot** : plus de choix de modèles (GPT, Claude, o3).
 
 ### 16.2 Voir les modèles disponibles
@@ -1531,7 +1531,7 @@ ANTHROPIC_MODEL=claude-sonnet-4.6
 ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 ```
 
-**GitHub Copilot — economiser le quota :**
+**GitHub Copilot — économiser le quota :**
 ```
 ANTHROPIC_MODEL=gpt-5.4-mini
 ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
@@ -1543,7 +1543,7 @@ ANTHROPIC_MODEL=gemini-2.5-pro
 ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
 ```
 
-**Gemini Code Assist — economiser le quota :**
+**Gemini Code Assist — économiser le quota :**
 ```
 ANTHROPIC_MODEL=gemini-2.5-flash
 ANTHROPIC_SMALL_FAST_MODEL=gemini-2.0-flash
@@ -1554,7 +1554,7 @@ ANTHROPIC_SMALL_FAST_MODEL=gemini-2.0-flash
 ANTHROPIC_MODEL=gemini-2.5-pro
 ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
 ```
-> Gemini 2.5 Pro gère nativement 1M tokens de contexte, ideal pour analyser
+> Gemini 2.5 Pro gère nativement 1M tokens de contexte, idéal pour analyser
 > de grands projets d'un coup.
 
 ---
@@ -1565,20 +1565,20 @@ ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
 
 **`ECONNREFUSED localhost:4141`**
 ```
-Cause : le proxy n'est pas lance
+Cause : le proxy n'est pas lancé
 Solution : vérifiez que le proxy tourne dans un autre terminal
   npx copilot-api@latest start
 ```
 
 **`ECONNRESET` ou `socket hang up`**
 ```
-Cause : le proxy a crashe
+Cause : le proxy a crashé
 Solution : relancez le proxy, ajoutez --verbose pour voir les logs
 ```
 
 **`ETIMEDOUT` vers api.github.com**
 ```
-Cause : proxy entreprise bloqué la connexion
+Cause : le proxy entreprise bloque la connexion
 Solution :
   export HTTP_PROXY=http://proxy.entreprise.fr:8080
   export HTTPS_PROXY=http://proxy.entreprise.fr:8080
@@ -1589,7 +1589,7 @@ Solution :
 
 **`401 Unauthorized`**
 ```
-Cause : token expire ou invalide
+Cause : token expiré ou invalide
 Solution : relancez l'authentification
   npx copilot-api@latest auth
 ```
@@ -1605,10 +1605,10 @@ Solution :
 
 **`403 Permission Denied` ou `API key not valid` (Gemini)**
 ```
-Cause : clé API invalide ou quota Google Cloud epuise
+Cause : clé API invalide ou quota Google Cloud épuisé
 Solution :
   1. Vérifiez votre clé : echo $GEMINI_API_KEY
-  2. Regénérez sur https://aistudio.google.com/apikey
+  2. Régénérez sur https://aistudio.google.com/apikey
   3. Si Vertex AI : gcloud auth application-default login
   4. Vérifiez les quotas sur https://console.cloud.google.com/apis/dashboard
 ```
@@ -1616,7 +1616,7 @@ Solution :
 **Le device code expire avant que je puisse l'entrer**
 ```
 Cause : le navigateur ne s'ouvre pas automatiquement
-Solution : copiez manuellement l'URL et le code affiches
+Solution : copiez manuellement l'URL et le code affichés
 ```
 
 ### 17.3 Erreurs de modèle
@@ -1631,7 +1631,7 @@ Solution :
 
 **`model not found` ou `model not available`**
 ```
-Cause : le modèle demande n'est pas disponible sur votre licence
+Cause : le modèle demandé n'est pas disponible sur votre licence
 Solution :
   1. curl http://localhost:4141/v1/models pour voir les modèles dispo
   2. Changez ANTHROPIC_MODEL pour un modèle disponible
@@ -1647,7 +1647,7 @@ Solution :
   (30 secondes minimum entre les requêtes, attend au lieu d'erreur)
 ```
 
-**Quota mensuel epuise**
+**Quota mensuel épuisé**
 ```
 Cause : Claude Code consomme beaucoup de tokens
 Solution :
@@ -1657,7 +1657,7 @@ Solution :
   4. npx copilot-api@latest check-usage pour surveiller
 ```
 
-### 17.5 Problèmes Windows specifiques
+### 17.5 Problèmes Windows spécifiques
 
 **`command not found: npx`**
 ```
@@ -1673,7 +1673,7 @@ Solution : utilisez Git Bash, WSL, ou lancez manuellement les commandes
   claude                (terminal 2)
 ```
 
-**Probleme de droits d'execution npm global**
+**Problème de droits d'exécution npm global**
 ```
 Solution :
   npm config set prefix %USERPROFILE%\.npm-global
@@ -1707,7 +1707,7 @@ Ce n'est PAS un usage supporté officiellement par GitHub.
 
 ### 18.2 Bonnes pratiques de sécurité
 
-1. **Ne commitez JAMAIS vos tokens** : ajoutez a `.gitignore` :
+1. **Ne commitez JAMAIS vos tokens** : ajoutez à `.gitignore` :
    ```
    .claude-copilot-auth.json
    .copilot-api/
@@ -1717,23 +1717,23 @@ Ce n'est PAS un usage supporté officiellement par GitHub.
    Ne l'exposez JAMAIS sur `0.0.0.0` en entreprise.
 
 3. **Le token `ANTHROPIC_AUTH_TOKEN=dummy`** n'est pas un vrai token.
-   Les proxies acceptent n'importe quelle valeur car l'auth se fait cote GitHub.
+   Les proxies acceptent n'importe quelle valeur car l'auth se fait côté GitHub.
 
 4. **Surveillez les mises à jour** des proxies pour les correctifs de sécurité.
 
-### 18.3 Conformite entreprise
+### 18.3 Conformité entreprise
 
 Avant d'utiliser ces outils en entreprise :
 - **Copilot** : Vérifiez les conditions d'utilisation de votre licence GitHub Copilot. L'utilisation de proxies non-officiels peut violer les ToS de GitHub
 - **Gemini** : Vérifiez que votre entreprise autorise l'utilisation de Google Cloud / Vertex AI. L'API Gemini est officielle et documentée
-- Consultez votre equipe sécurité/conformite
+- Consultez votre équipe sécurité/conformité
 - Les données de code transitent par les serveurs de GitHub/OpenAI (Copilot) ou Google (Gemini)
 
 ---
 
 ## 19. Tableau comparatif final
 
-| Critere | copilot-api (npx) | copilot-proxy (npx) | LM Proxy (VS Code) | claude-code-copilot (clone) | LiteLLM (pip) | Go proxy (clone) | cc-copilot-bridge | copilot-api fork |
+| Critère | copilot-api (npx) | copilot-proxy (npx) | LM Proxy (VS Code) | claude-code-copilot (clone) | LiteLLM (pip) | Go proxy (clone) | cc-copilot-bridge | copilot-api fork |
 |---------|-------------------|---------------------|---------------------|----------------------------|---------------|-------------------|-------------------|-----------------|
 | **Difficulté** | Facile | Facile | Très facile | Facile | Moyenne | Moyenne | Facile | Facile |
 | **Temps install** | 2 min | 3 min | 1 min | 3 min | 5 min | 5 min | 2 min | 2 min |
@@ -1744,7 +1744,7 @@ Avant d'utiliser ces outils en entreprise :
 | **Rate limiting** | Oui | Oui | Non | Non | Via config | Non | Via copilot-api | Oui |
 | **Recherche web** | Non | Non | Non | Oui (DuckDuckGo) | Non | Non | Non | Non |
 | **Dashboard** | Non | Non | Non | Non | Oui (web UI) | Non | Non | Oui (web) |
-| **Multi-provider** | Non | Non | Non | Non | Non | Non | **Oui** (3 backends) | Non |
+| **Multi-provider** | Non | Non | Non | Non | **Oui** (100+ providers) | Non | **Oui** (3 backends) | Non |
 | **API Anthropic native** | Oui | Non | Non | Non | Non | Non | Via backend | **Oui (prioritaire)** |
 | **Port défaut** | 4141 | 4399 | 4000 | 18080 | 4000 | 8082 | Via backend | 4141 |
 | **Communauté** | Grande | Moyenne | Petite | Petite | Grande | Petite | Nouvelle | Moyenne |
@@ -1761,9 +1761,9 @@ Avant d'utiliser ces outils en entreprise :
 | Je veux un service permanent | copilot-proxy avec daemon (méthode 1bis) |
 | VS Code est toujours ouvert | LM Proxy extension (méthode 1ter) |
 | npx est bloqué dans mon entreprise | claude-code-copilot clone (méthode 2bis) |
-| Je veux du controle total | LiteLLM (méthode 2ter) |
+| Je veux du contrôle total | LiteLLM (méthode 2ter) |
 | J'ai Copilot ET Gemini | LiteLLM avec mixed-config.yaml (méthode 2ter) |
-| Je suis developpeur Go | claude-copilot-proxy (méthode 2quater) |
+| Je suis développeur Go | claude-copilot-proxy (méthode 2quater) |
 | Je veux basculer entre providers | cc-copilot-bridge (méthode 3) |
 | J'utilise surtout Claude via Copilot | copilot-api fork Anthropic-first (méthode 3bis) |
 | Mon entreprise a Copilot Business/Pro | Vérifiez d'abord l'intégration officielle Claude/Copilot |

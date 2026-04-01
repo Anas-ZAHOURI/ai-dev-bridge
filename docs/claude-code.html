@@ -139,9 +139,9 @@
   <div class="box box-danger">
     <div class="box-title"><span class="lang-en"><i class="fa-solid fa-triangle-exclamation"></i> Warning: Copilot token consumption</span><span class="lang-fr"><i class="fa-solid fa-triangle-exclamation"></i> Avertissement : consommation de tokens Copilot</span></div>
     <p><span class="lang-en">This method uses <strong>your GitHub Copilot token quota</strong>. Claude Code is extremely token-hungry: it consumes <strong>10 to 100 times more tokens</strong> than a regular Copilot chat.</span><span class="lang-fr">Cette méthode utilise <strong>votre quota de tokens GitHub Copilot</strong>. Claude Code est extrêmement gourmand :
-    il consomme <strong>10 a 100 fois plus de tokens</strong> qu'un chat Copilot classique.</span></p>
+    il consomme <strong>10 à 100 fois plus de tokens</strong> qu'un chat Copilot classique.</span></p>
     <ul>
-      <li><span class="lang-en">A single "edit this file" command = <strong>50,000 to 150,000 tokens</strong></span><span class="lang-fr">Une seule commande "edite ce fichier" = <strong>50 000 a 150 000 tokens</strong></span></li>
+      <li><span class="lang-en">A single "edit this file" command = <strong>50,000 to 150,000 tokens</strong></span><span class="lang-fr">Une seule commande "édite ce fichier" = <strong>50 000 à 150 000 tokens</strong></span></li>
       <li><span class="lang-en">A 30-minute session = the equivalent of a <strong>full day</strong> of Copilot Chat</span><span class="lang-fr">Une session de 30 minutes = l'équivalent d'une <strong>journée entière</strong> de Copilot Chat</span></li>
       <li><span class="lang-en">Multiple users report having <strong>exhausted their monthly quota in just a few days</strong></span><span class="lang-fr">Plusieurs utilisateurs rapportent avoir <strong>épuisé leur quota mensuel en quelques jours</strong></span></li>
     </ul>
@@ -197,9 +197,9 @@ claude --version</code></pre>
   <pre><code class="language-bash"># 1. Installer LiteLLM
 pip install litellm[proxy]
 
-# 2. S'authentifier a Google Cloud
+# 2. S'authentifier à Google Cloud
 gcloud auth application-default login
-# Ou avec une cle API : export GEMINI_API_KEY=AIzaSy...votre_cle
+# Ou avec une clé API : export GEMINI_API_KEY=AIzaSy...votre_clé
 
 # 3. Créer gemini-config.yaml (voir ci-dessous)
 
@@ -238,7 +238,7 @@ claude</code></pre>
 
   <div class="box box-success">
     <div class="box-title"><span class="lang-en"><i class="fa-solid fa-check"></i> You're all set!</span><span class="lang-fr"><i class="fa-solid fa-check"></i> C'est prêt !</span></div>
-    <span class="lang-en">Claude Code is connected to Copilot or Gemini. Type your commands as usual.</span><span class="lang-fr">Claude Code est connecté a Copilot ou Gemini. Tapez vos commandes normalement.</span>
+    <span class="lang-en">Claude Code is connected to Copilot or Gemini. Type your commands as usual.</span><span class="lang-fr">Claude Code est connecté à Copilot ou Gemini. Tapez vos commandes normalement.</span>
   </div>
 
   <h2 id="qs-permanent"><span class="lang-en">Permanent configuration</span><span class="lang-fr">Configuration permanente</span></h2>
@@ -287,7 +287,7 @@ claude</code></pre>
   <h2 id="qs-troubleshoot"><span class="lang-en">Quick troubleshooting</span><span class="lang-fr">Dépannage rapide</span></h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Probleme</span></th><th><span class="lang-en">Solution</span><span class="lang-fr">Solution</span></th></tr></thead>
+      <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Problème</span></th><th><span class="lang-en">Solution</span><span class="lang-fr">Solution</span></th></tr></thead>
       <tbody>
         <tr><td><code>ECONNREFUSED</code></td><td><span class="lang-en">The proxy is not running (terminal 1)</span><span class="lang-fr">Le proxy n'est pas lancé (terminal 1)</span></td></tr>
         <tr><td><code>401 Unauthorized</code> (Copilot)</td><td><span class="lang-en">Re-run <code>npx copilot-api@latest auth</code></span><span class="lang-fr">Relancez <code>npx copilot-api@latest auth</code></span></td></tr>
@@ -341,7 +341,7 @@ Le proxy gère aussi :
     <div class="step"><div class="step-title"><span class="lang-en">The proxy requests a device code from GitHub</span><span class="lang-fr">Le proxy demande un device code à GitHub</span></div></div>
     <div class="step"><div class="step-title"><span class="lang-en">You enter the code on github.com/login/device</span><span class="lang-fr">Vous entrez le code sur github.com/login/device</span></div></div>
     <div class="step"><div class="step-title"><span class="lang-en">The proxy receives an OAuth token (<code>ghu_...</code>)</span><span class="lang-fr">Le proxy reçoit un token OAuth (<code>ghu_...</code>)</span></div><p><span class="lang-en">Saved locally, renewed automatically.</span><span class="lang-fr">Sauvegardé localement, renouvelé automatiquement.</span></p></div>
-    <div class="step"><div class="step-title"><span class="lang-en">For each request, the token obtains a temporary Copilot token</span><span class="lang-fr">A chaque requête, le token obtient un jeton temporaire Copilot</span></div></div>
+    <div class="step"><div class="step-title"><span class="lang-en">For each request, the token obtains a temporary Copilot token</span><span class="lang-fr">À chaque requête, le token obtient un jeton temporaire Copilot</span></div></div>
   </div>
 
   <!-- ===== TOKENS WARNING ===== -->
@@ -349,7 +349,7 @@ Le proxy gère aussi :
 
   <div class="box box-danger">
     <div class="box-title"><span class="lang-en">IMPORTANT: This method consumes your Copilot quota</span><span class="lang-fr">IMPORTANT : Cette méthode consomme votre quota Copilot</span></div>
-    <p><span class="lang-en">All methods described in this guide route Claude Code requests through your GitHub Copilot license. <strong>Every interaction with Claude Code consumes Copilot tokens</strong>, just as if you were using Copilot Chat, but in much greater quantity.</span><span class="lang-fr">Toutes les méthodes décrites dans ce guide font passer les requêtes de Claude Code a travers votre licence GitHub Copilot. <strong>Chaque interaction avec Claude Code consomme des tokens Copilot</strong>, exactement comme si vous utilisiez Copilot Chat, mais en beaucoup plus grande quantite.</span></p>
+    <p><span class="lang-en">All methods described in this guide route Claude Code requests through your GitHub Copilot license. <strong>Every interaction with Claude Code consumes Copilot tokens</strong>, just as if you were using Copilot Chat, but in much greater quantity.</span><span class="lang-fr">Toutes les méthodes décrites dans ce guide font passer les requêtes de Claude Code à travers votre licence GitHub Copilot. <strong>Chaque interaction avec Claude Code consomme des tokens Copilot</strong>, exactement comme si vous utilisiez Copilot Chat, mais en beaucoup plus grande quantité.</span></p>
   </div>
 
   <h3><span class="lang-en">Why does Claude Code consume so much?</span><span class="lang-fr">Pourquoi Claude Code consomme autant ?</span></h3>
@@ -364,13 +364,13 @@ Le proxy gère aussi :
   <h3><span class="lang-en">Orders of magnitude</span><span class="lang-fr">Ordres de grandeur</span></h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Action</span><span class="lang-fr">Action</span></th><th><span class="lang-en">Estimated tokens</span><span class="lang-fr">Tokens estimés</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Equivalent Copilot Chat</span></th></tr></thead>
+      <thead><tr><th><span class="lang-en">Action</span><span class="lang-fr">Action</span></th><th><span class="lang-en">Estimated tokens</span><span class="lang-fr">Tokens estimés</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Équivalent Copilot Chat</span></th></tr></thead>
       <tbody>
         <tr><td><span class="lang-en">Simple question ("what does this file do?")</span><span class="lang-fr">Question simple ("qu'est-ce que ce fichier fait ?")</span></td><td>5 000 - 15 000</td><td><span class="lang-en">~3-5 chat messages</span><span class="lang-fr">~3-5 messages chat</span></td></tr>
-        <tr><td><span class="lang-en">Edit command ("fix the bug on line 42")</span><span class="lang-fr">Commande d'edition ("corrige le bug ligne 42")</span></td><td>50 000 - 150 000</td><td><span class="lang-en">~30-50 chat messages</span><span class="lang-fr">~30-50 messages chat</span></td></tr>
-        <tr><td><span class="lang-en">Complex task ("add a REST API with tests")</span><span class="lang-fr">Tache complexe ("ajoute une API REST avec tests")</span></td><td>200 000 - 500 000</td><td><span class="lang-en">~100-200 chat messages</span><span class="lang-fr">~100-200 messages chat</span></td></tr>
+        <tr><td><span class="lang-en">Edit command ("fix the bug on line 42")</span><span class="lang-fr">Commande d'édition ("corrige le bug ligne 42")</span></td><td>50 000 - 150 000</td><td><span class="lang-en">~30-50 chat messages</span><span class="lang-fr">~30-50 messages chat</span></td></tr>
+        <tr><td><span class="lang-en">Complex task ("add a REST API with tests")</span><span class="lang-fr">Tâche complexe ("ajoute une API REST avec tests")</span></td><td>200 000 - 500 000</td><td><span class="lang-en">~100-200 chat messages</span><span class="lang-fr">~100-200 messages chat</span></td></tr>
         <tr><td><span class="lang-en">30-minute session</span><span class="lang-fr">Session de 30 minutes</span></td><td>500 000 - 2 000 000</td><td><span class="lang-en"><strong>1 full day</strong> of chat</span><span class="lang-fr"><strong>1 journée entière</strong> de chat</span></td></tr>
-        <tr><td><span class="lang-en">Full day work session</span><span class="lang-fr">Session de travail d'une journee</span></td><td>5 000 000+</td><td><span class="lang-en"><strong>Weekly quota</strong></span><span class="lang-fr"><strong>Quota hebdomadaire</strong></span></td></tr>
+        <tr><td><span class="lang-en">Full day work session</span><span class="lang-fr">Session de travail d'une journée</span></td><td>5 000 000+</td><td><span class="lang-en"><strong>Weekly quota</strong></span><span class="lang-fr"><strong>Quota hebdomadaire</strong></span></td></tr>
       </tbody>
     </table>
   </div>
@@ -413,7 +413,7 @@ ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code></pre>
   <pre><code class="language-bash"># Voir la consommation actuelle
 npx copilot-api@latest check-usage
 
-# Voir les stats en temps reel (si le proxy tourne)
+# Voir les stats en temps réel (si le proxy tourne)
 curl http://localhost:4141/usage</code></pre>
 
   <!-- ===== Pré-requis ===== -->
@@ -508,7 +508,7 @@ npm install -g @jer-y/copilot-proxy
 # Authentification
 copilot-proxy auth
 
-# Demarrer en daemon
+# Démarrer en daemon
 copilot-proxy start -d
 
 # Gestion
@@ -618,7 +618,7 @@ claude</code></pre>
       <tbody>
         <tr><td><code>COPILOT_PROXY_PORT</code></td><td>18080</td><td><span class="lang-en">Proxy port</span><span class="lang-fr">Port du proxy</span></td></tr>
         <tr><td><code>COPILOT_AUTH_FILE</code></td><td>~/.claude-copilot-auth.json</td><td><span class="lang-en">OAuth token file</span><span class="lang-fr">Fichier token OAuth</span></td></tr>
-        <tr><td><code>BRAVE_API_KEY</code></td><td><span class="lang-en">(none)</span><span class="lang-fr">(aucun)</span></td><td><span class="lang-en">Brave Search key</span><span class="lang-fr">Cle Brave Search</span></td></tr>
+        <tr><td><code>BRAVE_API_KEY</code></td><td><span class="lang-en">(none)</span><span class="lang-fr">(aucun)</span></td><td><span class="lang-en">Brave Search key</span><span class="lang-fr">Clé Brave Search</span></td></tr>
         <tr><td><code>WEB_SEARCH_MAX_RESULTS</code></td><td>5</td><td><span class="lang-en">Number of results</span><span class="lang-fr">Nombre de résultats</span></td></tr>
       </tbody>
     </table>
@@ -729,7 +729,7 @@ litellm --config copilot-config.yaml --port 4000</code></pre>
 }</code></pre>
 
   <h3><span class="lang-en">Web dashboard</span><span class="lang-fr">Dashboard web</span></h3>
-  <p><span class="lang-en">LiteLLM includes an admin interface at <code>http://localhost:4000/ui</code>: real-time requests, token consumption, model management, errors.</span><span class="lang-fr">LiteLLM inclut une interface d'administration sur <code>http://localhost:4000/ui</code> : requêtes en temps reel, consommation de tokens, gestion des modèles, erreurs.</span></p>
+  <p><span class="lang-en">LiteLLM includes an admin interface at <code>http://localhost:4000/ui</code>: real-time requests, token consumption, model management, errors.</span><span class="lang-fr">LiteLLM inclut une interface d'administration sur <code>http://localhost:4000/ui</code> : requêtes en temps réel, consommation de tokens, gestion des modèles, erreurs.</span></p>
 
   <!-- Go proxy -->
   <h2 id="g-m2-go"><span class="lang-en">Method 2D: claude-copilot-proxy (Go)</span><span class="lang-fr">Méthode 2D : claude-copilot-proxy (Go)</span></h2>
@@ -841,7 +841,7 @@ npx @jeffreycao/copilot-api@latest start --claude-code</code></pre>
 
   <div id="config-json" class="tab-content active" data-group="config">
     <p><span class="lang-en"><strong>Global</strong> (all projects): <code>~/.claude/settings.json</code></span><span class="lang-fr"><strong>Global</strong> (tous les projets) : <code>~/.claude/settings.json</code></span></p>
-    <p><span class="lang-en"><strong>Per project</strong>: <code>.claude/settings.json</code> at the project root</span><span class="lang-fr"><strong>Par projet</strong> : <code>.claude/settings.json</code> a la racine du projet</span></p>
+    <p><span class="lang-en"><strong>Per project</strong>: <code>.claude/settings.json</code> at the project root</span><span class="lang-fr"><strong>Par projet</strong> : <code>.claude/settings.json</code> à la racine du projet</span></p>
     <p><span class="lang-en">Windows: <code>C:\Users\YOUR_USER\.claude\settings.json</code></span><span class="lang-fr">Windows : <code>C:\Users\VOTRE_USER\.claude\settings.json</code></span></p>
     <pre><code class="language-json">{
   "env": {
@@ -1012,7 +1012,7 @@ npx copilot-api@latest start --proxy-env
   <h2 id="g-optimisation"><span class="lang-en">Quota optimization</span><span class="lang-fr">Optimisation du quota</span></h2>
 
   <div class="box box-warn">
-    <div class="box-title"><span class="lang-en">Claude Code consumes 10 to 100x more than a regular Copilot chat</span><span class="lang-fr">Claude Code consomme 10 a 100x plus qu'un chat Copilot classique</span></div>
+    <div class="box-title"><span class="lang-en">Claude Code consumes 10 to 100x more than a regular Copilot chat</span><span class="lang-fr">Claude Code consomme 10 à 100x plus qu'un chat Copilot classique</span></div>
     <p><span class="lang-en">A 30-min session can consume the equivalent of a full day of Copilot Chat. See the <a href="#g-tokens">Token consumption</a> section for full details.</span><span class="lang-fr">Une session de 30 min peut consommer l'équivalent d'une journée de Copilot Chat. Voir la section <a href="#g-tokens">Consommation de tokens</a> pour les détails complets.</span></p>
   </div>
 
@@ -1032,7 +1032,7 @@ curl http://localhost:4141/usage</code></pre>
 
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Model</span><span class="lang-fr">Modèle</span></th><th><span class="lang-en">Provider</span><span class="lang-fr">Fournisseur</span></th><th>Tokens/req</th><th><span class="lang-en">Quality</span><span class="lang-fr">Qualite</span></th></tr></thead>
+      <thead><tr><th><span class="lang-en">Model</span><span class="lang-fr">Modèle</span></th><th><span class="lang-en">Provider</span><span class="lang-fr">Fournisseur</span></th><th>Tokens/req</th><th><span class="lang-en">Quality</span><span class="lang-fr">Qualité</span></th></tr></thead>
       <tbody>
         <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td><td><span class="lang-en">Decent</span><span class="lang-fr">Correcte</span></td></tr>
         <tr><td><code>gpt-5.4</code></td><td>OpenAI</td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyen</span></td><td><span class="lang-en">Good</span><span class="lang-fr">Bonne</span></td></tr>
@@ -1056,21 +1056,21 @@ curl http://localhost:4141/usage</code></pre>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-star"></i> Max quality</span><span class="lang-fr"><i class="fa-solid fa-star"></i> Qualite max</span></div>
+      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-star"></i> Max quality</span><span class="lang-fr"><i class="fa-solid fa-star"></i> Qualité max</span></div>
       <div class="card-desc">
         <code>ANTHROPIC_MODEL=claude-sonnet-4.6</code><br>
         <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-coins"></i> Budget-friendly</span><span class="lang-fr"><i class="fa-solid fa-coins"></i> Economique</span></div>
+      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-coins"></i> Budget-friendly</span><span class="lang-fr"><i class="fa-solid fa-coins"></i> Économique</span></div>
       <div class="card-desc">
         <code>ANTHROPIC_MODEL=gpt-5.4-mini</code><br>
         <code>ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini</code>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-gem"></i> Gemini quality</span><span class="lang-fr"><i class="fa-solid fa-gem"></i> Qualite Gemini</span></div>
+      <div class="card-title"><span class="lang-en"><i class="fa-solid fa-gem"></i> Gemini quality</span><span class="lang-fr"><i class="fa-solid fa-gem"></i> Qualité Gemini</span></div>
       <div class="card-desc">
         <code>ANTHROPIC_MODEL=gemini/gemini-2.5-pro</code><br>
         <code>ANTHROPIC_SMALL_FAST_MODEL=gemini/gemini-2.5-flash</code>
@@ -1105,7 +1105,7 @@ curl http://localhost:4141/usage</code></pre>
     <table>
       <thead><tr><th><span class="lang-en">Error</span><span class="lang-fr">Erreur</span></th><th><span class="lang-en">Cause</span><span class="lang-fr">Cause</span></th><th>Solution</th></tr></thead>
       <tbody>
-        <tr><td><code>401</code></td><td><span class="lang-en">Token expired</span><span class="lang-fr">Token expire</span></td><td><code>npx copilot-api@latest auth</code></td></tr>
+        <tr><td><code>401</code></td><td><span class="lang-en">Token expired</span><span class="lang-fr">Token expiré</span></td><td><code>npx copilot-api@latest auth</code></td></tr>
         <tr><td><code>403</code></td><td><span class="lang-en">Inactive license or unauthorized model</span><span class="lang-fr">Licence inactive ou modèle non autorisé</span></td><td><span class="lang-en">Check github.com/settings/copilot, try <code>--account-type</code></span><span class="lang-fr">Vérifiez github.com/settings/copilot, essayez <code>--account-type</code></span></td></tr>
       </tbody>
     </table>
@@ -1122,10 +1122,10 @@ curl http://localhost:4141/usage</code></pre>
     </table>
   </div>
 
-  <h3><span class="lang-en">Windows specific</span><span class="lang-fr">Windows specifique</span></h3>
+  <h3><span class="lang-en">Windows specific</span><span class="lang-fr">Windows spécifique</span></h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Probleme</span></th><th>Solution</th></tr></thead>
+      <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Problème</span></th><th>Solution</th></tr></thead>
       <tbody>
         <tr><td><span class="lang-en"><code>npx</code> not found</span><span class="lang-fr"><code>npx</code> introuvable</span></td><td><span class="lang-en">Reinstall Node.js with "Add to PATH"</span><span class="lang-fr">Réinstallez Node.js avec "Add to PATH"</span></td></tr>
         <tr><td><span class="lang-en"><code>.sh</code> scripts don't work</span><span class="lang-fr">Scripts <code>.sh</code> ne marchent pas</span></td><td><span class="lang-en">Use Git Bash or WSL</span><span class="lang-fr">Utilisez Git Bash ou WSL</span></td></tr>
@@ -1156,7 +1156,7 @@ curl http://localhost:4141/usage</code></pre>
   <ul>
     <li><span class="lang-en"><strong>Never commit your tokens</strong>: add <code>.claude-copilot-auth.json</code> and <code>.copilot-api/</code> to <code>.gitignore</code></span><span class="lang-fr"><strong>Ne commitez jamais vos tokens</strong> : ajoutez <code>.claude-copilot-auth.json</code> et <code>.copilot-api/</code> a <code>.gitignore</code></span></li>
     <li><span class="lang-en"><strong>Local proxy only</strong>: never expose on <code>0.0.0.0</code></span><span class="lang-fr"><strong>Proxy en local uniquement</strong> : n'exposez jamais sur <code>0.0.0.0</code></span></li>
-    <li><span class="lang-en"><strong>Use rate-limiting</strong> to avoid abuse detection</span><span class="lang-fr"><strong>Utilisez le rate-limiting</strong> pour eviter la detection d'abus</span></li>
+    <li><span class="lang-en"><strong>Use rate-limiting</strong> to avoid abuse detection</span><span class="lang-fr"><strong>Utilisez le rate-limiting</strong> pour éviter la détection d'abus</span></li>
     <li><span class="lang-en"><strong>Consult your security team</strong> before using in an enterprise setting</span><span class="lang-fr"><strong>Consultez votre équipe sécurité</strong> avant utilisation en entreprise</span></li>
   </ul>
 
@@ -1246,13 +1246,13 @@ curl http://localhost:4141/usage</code></pre>
   <h2 id="r-env"><span class="lang-en">Environment variables</span><span class="lang-fr">Variables d'environnement</span></h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Variable</th><th><span class="lang-en">Role</span><span class="lang-fr">Role</span></th><th><span class="lang-en">Example</span><span class="lang-fr">Exemple</span></th><th><span class="lang-en">Required</span><span class="lang-fr">Obligatoire</span></th></tr></thead>
+      <thead><tr><th>Variable</th><th><span class="lang-en">Role</span><span class="lang-fr">Rôle</span></th><th><span class="lang-en">Example</span><span class="lang-fr">Exemple</span></th><th><span class="lang-en">Required</span><span class="lang-fr">Obligatoire</span></th></tr></thead>
       <tbody>
         <tr><td><code>ANTHROPIC_BASE_URL</code></td><td><span class="lang-en">Local proxy URL</span><span class="lang-fr">URL du proxy local</span></td><td><code>http://localhost:4141</code></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td></tr>
-        <tr><td><code>ANTHROPIC_AUTH_TOKEN</code></td><td><span class="lang-en">Token (dummy value accepted)</span><span class="lang-fr">Token (valeur bidon acceptee)</span></td><td><code>dummy</code></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td></tr>
-        <tr><td><code>ANTHROPIC_API_KEY</code></td><td><span class="lang-en">Alternative to AUTH_TOKEN</span><span class="lang-fr">Alternative a AUTH_TOKEN</span></td><td><code>copilot-proxy</code></td><td><span class="lang-en">Yes (or AUTH_TOKEN)</span><span class="lang-fr">Oui (ou AUTH_TOKEN)</span></td></tr>
-        <tr><td><code>ANTHROPIC_MODEL</code></td><td><span class="lang-en">Main model</span><span class="lang-fr">Modèle principal</span></td><td><code>gpt-5.4</code></td><td><span class="lang-en">Recommended</span><span class="lang-fr">Recommande</span></td></tr>
-        <tr><td><code>ANTHROPIC_SMALL_FAST_MODEL</code></td><td><span class="lang-en">Fast/lightweight model</span><span class="lang-fr">Modèle rapide/léger</span></td><td><code>gpt-5.4-mini</code></td><td><span class="lang-en">Recommended</span><span class="lang-fr">Recommande</span></td></tr>
+        <tr><td><code>ANTHROPIC_AUTH_TOKEN</code></td><td><span class="lang-en">Token (dummy value accepted)</span><span class="lang-fr">Token (valeur bidon acceptée)</span></td><td><code>dummy</code></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td></tr>
+        <tr><td><code>ANTHROPIC_API_KEY</code></td><td><span class="lang-en">Alternative to AUTH_TOKEN</span><span class="lang-fr">Alternative à AUTH_TOKEN</span></td><td><code>copilot-proxy</code></td><td><span class="lang-en">Yes (or AUTH_TOKEN)</span><span class="lang-fr">Oui (ou AUTH_TOKEN)</span></td></tr>
+        <tr><td><code>ANTHROPIC_MODEL</code></td><td><span class="lang-en">Main model</span><span class="lang-fr">Modèle principal</span></td><td><code>gpt-5.4</code></td><td><span class="lang-en">Recommended</span><span class="lang-fr">Recommandé</span></td></tr>
+        <tr><td><code>ANTHROPIC_SMALL_FAST_MODEL</code></td><td><span class="lang-en">Fast/lightweight model</span><span class="lang-fr">Modèle rapide/léger</span></td><td><code>gpt-5.4-mini</code></td><td><span class="lang-en">Recommended</span><span class="lang-fr">Recommandé</span></td></tr>
         <tr><td><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS</code></td><td><span class="lang-en">Reduces unnecessary calls</span><span class="lang-fr">Réduit les appels inutiles</span></td><td><code>1</code></td><td><strong><span class="lang-en">Strongly recommended</span><span class="lang-fr">Fortement recommandé</span></strong></td></tr>
         <tr><td><code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC</code></td><td><span class="lang-en">Reduces non-essential traffic</span><span class="lang-fr">Réduit le trafic non-essentiel</span></td><td><code>1</code></td><td><strong><span class="lang-en">Strongly recommended</span><span class="lang-fr">Fortement recommandé</span></strong></td></tr>
       </tbody>
@@ -1288,9 +1288,9 @@ copilot-api debug          # Diagnostic</code></pre>
     <table>
       <thead><tr><th>Endpoint</th><th>Format</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td><code>POST /v1/messages</code></td><td>Anthropic</td><td><span class="lang-en">Used by Claude Code</span><span class="lang-fr">Utilise par Claude Code</span></td></tr>
+        <tr><td><code>POST /v1/messages</code></td><td>Anthropic</td><td><span class="lang-en">Used by Claude Code</span><span class="lang-fr">Utilisé par Claude Code</span></td></tr>
         <tr><td><code>POST /v1/messages/count_tokens</code></td><td>Anthropic</td><td><span class="lang-en">Token counting</span><span class="lang-fr">Comptage de tokens</span></td></tr>
-        <tr><td><code>POST /v1/chat/complétions</code></td><td>OpenAI</td><td><span class="lang-en">Compatible with other tools</span><span class="lang-fr">Compatible avec d'autres outils</span></td></tr>
+        <tr><td><code>POST /v1/chat/completions</code></td><td>OpenAI</td><td><span class="lang-en">Compatible with other tools</span><span class="lang-fr">Compatible avec d'autres outils</span></td></tr>
         <tr><td><code>GET /v1/models</code></td><td>OpenAI</td><td><span class="lang-en">Model list</span><span class="lang-fr">Liste des modèles</span></td></tr>
         <tr><td><code>POST /v1/embeddings</code></td><td>OpenAI</td><td>Embeddings</td></tr>
         <tr><td><code>GET /usage</code></td><td>Custom</td><td><span class="lang-en">Usage stats</span><span class="lang-fr">Stats d'utilisation</span></td></tr>
@@ -1305,16 +1305,16 @@ copilot-api debug          # Diagnostic</code></pre>
       <thead><tr><th><span class="lang-en">Model</span><span class="lang-fr">Modèle</span></th><th><span class="lang-en">Provider</span><span class="lang-fr">Fournisseur</span></th><th><span class="lang-en">Strengths</span><span class="lang-fr">Forces</span></th><th><span class="lang-en">Token usage</span><span class="lang-fr">Conso tokens</span></th></tr></thead>
       <tbody>
         <tr><td><code>gpt-5.4</code></td><td>OpenAI</td><td><span class="lang-en">Versatile, good at code</span><span class="lang-fr">Polyvalent, bon en code</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
-        <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Fast, economical</span><span class="lang-fr">Rapide, economique</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
+        <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Fast, economical</span><span class="lang-fr">Rapide, économique</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
         <tr><td><code>gpt-5.2</code></td><td>OpenAI</td><td><span class="lang-en">Multimodal</span><span class="lang-fr">Multimodal</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
         <tr><td><code>gpt-5-mini</code></td><td>OpenAI</td><td><span class="lang-en">Very fast</span><span class="lang-fr">Très rapide</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
         <tr><td><code>claude-sonnet-4.6</code></td><td>Anthropic</td><td><span class="lang-en">Excellent at code</span><span class="lang-fr">Excellent en code</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
-        <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td><span class="lang-en">Most powerful</span><span class="lang-fr">Le plus puissant</span></td><td><span class="lang-en">High</span><span class="lang-fr">Elevee</span></td></tr>
-        <tr><td><code>o3</code></td><td>OpenAI</td><td><span class="lang-en">Advanced reasoning</span><span class="lang-fr">Raisonnement avance</span></td><td><span class="lang-en">High</span><span class="lang-fr">Elevee</span></td></tr>
+        <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td><span class="lang-en">Most powerful</span><span class="lang-fr">Le plus puissant</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
+        <tr><td><code>o3</code></td><td>OpenAI</td><td><span class="lang-en">Advanced reasoning</span><span class="lang-fr">Raisonnement avancé</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
         <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Reasoning, faster</span><span class="lang-fr">Raisonnement, plus rapide</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
-        <tr><td><code>gemini-2.5-pro</code></td><td>Google</td><td><span class="lang-en">Powerful, long context</span><span class="lang-fr">Puissant, contexte long</span></td><td><span class="lang-en">High</span><span class="lang-fr">Elevee</span></td></tr>
-        <tr><td><code>gemini-2.5-flash</code></td><td>Google</td><td><span class="lang-en">Fast, good quality</span><span class="lang-fr">Rapide, bonne qualite</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
-        <tr><td><code>gemini-2.0-flash</code></td><td>Google</td><td><span class="lang-en">Very fast, economical</span><span class="lang-fr">Très rapide, economique</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
+        <tr><td><code>gemini-2.5-pro</code></td><td>Google</td><td><span class="lang-en">Powerful, long context</span><span class="lang-fr">Puissant, contexte long</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
+        <tr><td><code>gemini-2.5-flash</code></td><td>Google</td><td><span class="lang-en">Fast, good quality</span><span class="lang-fr">Rapide, bonne qualité</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
+        <tr><td><code>gemini-2.0-flash</code></td><td>Google</td><td><span class="lang-en">Very fast, economical</span><span class="lang-fr">Très rapide, économique</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1361,12 +1361,12 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
   <h3><span class="lang-en">Estimation by usage type</span><span class="lang-fr">Estimation par type d'usage</span></h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Usage</span><span class="lang-fr">Usage</span></th><th><span class="lang-en">Tokens / interaction</span><span class="lang-fr">Tokens / interaction</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Equivalent Copilot Chat</span></th></tr></thead>
+      <thead><tr><th><span class="lang-en">Usage</span><span class="lang-fr">Usage</span></th><th><span class="lang-en">Tokens / interaction</span><span class="lang-fr">Tokens / interaction</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Équivalent Copilot Chat</span></th></tr></thead>
       <tbody>
         <tr><td><span class="lang-en">Simple question</span><span class="lang-fr">Question simple</span></td><td>5 000 - 15 000</td><td>3-5 messages</td></tr>
-        <tr><td><span class="lang-en">File editing</span><span class="lang-fr">Edition de fichier</span></td><td>50 000 - 150 000</td><td>30-50 messages</td></tr>
-        <tr><td><span class="lang-en">Complex task</span><span class="lang-fr">Tache complexe</span></td><td>200 000 - 500 000</td><td>100-200 messages</td></tr>
-        <tr><td><span class="lang-en">30-min session</span><span class="lang-fr">Session 30 min</span></td><td>500 000 - 2 000 000</td><td><strong><span class="lang-en">1 day of chat</span><span class="lang-fr">1 journee de chat</span></strong></td></tr>
+        <tr><td><span class="lang-en">File editing</span><span class="lang-fr">Édition de fichier</span></td><td>50 000 - 150 000</td><td>30-50 messages</td></tr>
+        <tr><td><span class="lang-en">Complex task</span><span class="lang-fr">Tâche complexe</span></td><td>200 000 - 500 000</td><td>100-200 messages</td></tr>
+        <tr><td><span class="lang-en">30-min session</span><span class="lang-fr">Session 30 min</span></td><td>500 000 - 2 000 000</td><td><strong><span class="lang-en">1 day of chat</span><span class="lang-fr">1 journée de chat</span></strong></td></tr>
       </tbody>
     </table>
   </div>
@@ -1376,17 +1376,17 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
       <div class="card-title"><span class="lang-en">Env variables</span><span class="lang-fr">Variables d'env</span></div>
-      <div class="card-desc"><span class="lang-en"><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code> and <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> reduce consumption by 50%+</span><span class="lang-fr"><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code> et <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> reduisent la conso de 50%+</span></div>
+      <div class="card-desc"><span class="lang-en"><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code> and <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> reduce consumption by 50%+</span><span class="lang-fr"><code>DISABLE_NON_ESSENTIAL_MODEL_CALLS=1</code> et <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> réduisent la conso de 50%+</span></div>
     </div>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-stopwatch"></i></div>
       <div class="card-title">Rate limiting</div>
-      <div class="card-desc"><span class="lang-en"><code>--rate-limit 30 --wait</code> spaces out requests and avoids spikes</span><span class="lang-fr"><code>--rate-limit 30 --wait</code> espace les requêtes et evite les pics</span></div>
+      <div class="card-desc"><span class="lang-en"><code>--rate-limit 30 --wait</code> spaces out requests and avoids spikes</span><span class="lang-fr"><code>--rate-limit 30 --wait</code> espace les requêtes et évite les pics</span></div>
     </div>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
       <div class="card-title"><span class="lang-en">Disable WebSearch</span><span class="lang-fr">Désactiver WebSearch</span></div>
-      <div class="card-desc"><span class="lang-en"><code>"deny": ["WebSearch"]</code> avoids wasted calls</span><span class="lang-fr"><code>"deny": ["WebSearch"]</code> evite des appels gaspilles</span></div>
+      <div class="card-desc"><span class="lang-en"><code>"deny": ["WebSearch"]</code> avoids wasted calls</span><span class="lang-fr"><code>"deny": ["WebSearch"]</code> évite des appels gaspillés</span></div>
     </div>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-comment"></i></div>
@@ -1401,7 +1401,7 @@ curl http://localhost:4141/v1/models | jq '.data[].id'</code></pre>
     <div class="card">
       <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
       <div class="card-title"><span class="lang-en">Monitor</span><span class="lang-fr">Surveiller</span></div>
-      <div class="card-desc"><span class="lang-en"><code>check-usage</code> and <code>/usage</code> endpoint to track consumption in real time</span><span class="lang-fr"><code>check-usage</code> et <code>/usage</code> endpoint pour suivre la conso en temps reel</span></div>
+      <div class="card-desc"><span class="lang-en"><code>check-usage</code> and <code>/usage</code> endpoint to track consumption in real time</span><span class="lang-fr"><code>check-usage</code> et <code>/usage</code> endpoint pour suivre la conso en temps réel</span></div>
     </div>
   </div>
 

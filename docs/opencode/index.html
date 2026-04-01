@@ -127,7 +127,7 @@
   <p class="subtitle"><span class="lang-en">OpenCode supports Copilot natively — no translator, no proxy, no workaround. Just connect and code.</span><span class="lang-fr">OpenCode supporte Copilot nativement — pas de traducteur, pas de proxy, pas de bidouille. Connectez et codez.</span></p>
 
   <h2 id="qs-what"><span class="lang-en">What is OpenCode?</span><span class="lang-fr">C'est quoi OpenCode ?</span></h2>
-  <p><span class="lang-en"><strong>OpenCode</strong> is an open source (MIT) terminal AI coding agent with 120K+ stars on GitHub. It is an alternative to Claude Code that supports <strong>75+ providers</strong> including GitHub Copilot natively.</span><span class="lang-fr"><strong>OpenCode</strong> est un agent IA de coding en terminal, open source (MIT), avec 120K+ stars sur GitHub. C'est une alternative a Claude Code qui supporté <strong>75+ providers</strong> dont GitHub Copilot nativement.</span></p>
+  <p><span class="lang-en"><strong>OpenCode</strong> is an open source (MIT) terminal AI coding agent with 120K+ stars on GitHub. It is an alternative to Claude Code that supports <strong>75+ providers</strong> including GitHub Copilot natively.</span><span class="lang-fr"><strong>OpenCode</strong> est un agent IA de coding en terminal, open source (MIT), avec 120K+ stars sur GitHub. C'est une alternative à Claude Code qui supporte <strong>75+ providers</strong> dont GitHub Copilot nativement.</span></p>
 
   <div class="card-grid">
     <div class="card">
@@ -233,15 +233,15 @@ opencode -p "explique ce fichier" -f json
 # Ctrl+O : changer de modèle
 # Ctrl+K : palette de commandes
 # Ctrl+N : nouvelle session
-# Ctrl+X : annuler la generation</code></pre>
+# Ctrl+X : annuler la génération</code></pre>
 
   <h2 id="qs-troubleshoot"><span class="lang-en">Quick troubleshooting</span><span class="lang-fr">Dépannage rapide</span></h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Probleme</span></th><th>Solution</th></tr></thead>
+      <thead><tr><th><span class="lang-en">Problem</span><span class="lang-fr">Problème</span></th><th>Solution</th></tr></thead>
       <tbody>
         <tr><td><span class="lang-en"><code>/connect</code> does not show Copilot</span><span class="lang-fr"><code>/connect</code> ne propose pas Copilot</span></td><td><span class="lang-en">Update: <code>npm update -g opencode-ai</code></span><span class="lang-fr">Mettez à jour : <code>npm update -g opencode-ai</code></span></td></tr>
-        <tr><td><span class="lang-en">Device code expired</span><span class="lang-fr">Device code expire</span></td><td><span class="lang-en">Copy the URL manually and open on another device</span><span class="lang-fr">Copiez l'URL manuellement et ouvrez sur un autre appareil</span></td></tr>
+        <tr><td><span class="lang-en">Device code expired</span><span class="lang-fr">Device code expiré</span></td><td><span class="lang-en">Copy the URL manually and open on another device</span><span class="lang-fr">Copiez l'URL manuellement et ouvrez sur un autre appareil</span></td></tr>
         <tr><td><span class="lang-en">Model unavailable</span><span class="lang-fr">Modèle indisponible</span></td><td><span class="lang-en">Some models (Claude) require Copilot <strong>Pro+</strong></span><span class="lang-fr">Certains modèles (Claude) nécessitent Copilot <strong>Pro+</strong></span></td></tr>
         <tr><td><span class="lang-en">Token not detected</span><span class="lang-fr">Token non détecté</span></td><td><span class="lang-en">Run <code>/connect</code> to re-authenticate</span><span class="lang-fr">Lancez <code>/connect</code> pour re-authentifier</span></td></tr>
         <tr><td><span class="lang-en">Enterprise proxy</span><span class="lang-fr">Proxy entreprise</span></td><td><span class="lang-en">Set <code>HTTP_PROXY</code> before launching</span><span class="lang-fr">Configurez <code>HTTP_PROXY</code> avant de lancer</span></td></tr>
@@ -320,7 +320,7 @@ paru -S opencode-bin</code></pre>
   <pre><code class="language-bash"># Installation rapide
 curl -fsSL https://opencode.ai/install | bash
 
-# Version specifique
+# Version spécifique
 curl -fsSL https://opencode.ai/install | VERSION=1.3.3 bash</code></pre>
 
   <h2 id="g-install-go"><span class="lang-en">Installation from source (Go)</span><span class="lang-fr">Installation depuis les sources (Go)</span></h2>
@@ -365,7 +365,7 @@ go install github.com/opencode-ai/opencode@latest</code></pre>
     </div>
   </div>
 
-  <h2 id="g-copilot-auto"><span class="lang-en">Automatic token detection</span><span class="lang-fr">Detection automatique du token</span></h2>
+  <h2 id="g-copilot-auto"><span class="lang-en">Automatic token detection</span><span class="lang-fr">Détection automatique du token</span></h2>
 
   <p><span class="lang-en">If you already use Copilot in VS Code, GitHub CLI, or Neovim, OpenCode <strong>automatically detects</strong> your token from:</span><span class="lang-fr">Si vous utilisez déjà Copilot dans VS Code, le GitHub CLI, ou Neovim, OpenCode <strong>détecte automatiquement</strong> votre token depuis :</span></p>
   <ul>
@@ -402,7 +402,7 @@ opencode</code></pre>
         <tr><td><code>copilot.gpt-5-mini</code></td><td>OpenAI</td><td>Pro</td><td><span class="lang-en">Very fast, economical</span><span class="lang-fr">Très rapide, économique</span></td></tr>
         <tr><td><code>copilot.claude-sonnet-4.6</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td><span class="lang-en">Excellent at code</span><span class="lang-fr">Excellent en code</span></td></tr>
         <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td><span class="lang-en">Reasoning + code</span><span class="lang-fr">Raisonnement + code</span></td></tr>
-        <tr><td><code>copilot.gpt-5.4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td><span class="lang-en">Advanced reasoning</span><span class="lang-fr">Raisonnement avance</span></td></tr>
+        <tr><td><code>copilot.gpt-5.4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td><span class="lang-en">Advanced reasoning</span><span class="lang-fr">Raisonnement avancé</span></td></tr>
         <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td><span class="lang-en">Fast reasoning</span><span class="lang-fr">Raisonnement rapide</span></td></tr>
         <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td><strong>Pro+</strong></td><td><span class="lang-en">Long context</span><span class="lang-fr">Long contexte</span></td></tr>
         <tr><td><code>copilot.gemini-3-flash</code></td><td>Google</td><td>Pro</td><td><span class="lang-en">Fast</span><span class="lang-fr">Rapide</span></td></tr>
@@ -430,19 +430,19 @@ opencode</code></pre>
 
   <h3><span class="lang-en">Why consumption is high</span><span class="lang-fr">Pourquoi la consommation est élevée</span></h3>
   <ul>
-    <li><span class="lang-en"><strong>Large context</strong>: OpenCode sends file contents, history, and tool results with each request (10,000 - 50,000 input tokens)</span><span class="lang-fr"><strong>Contexte volumineux</strong> : OpenCode envoie le contenu des fichiers, l'historique, les resultats d'outils a chaque requête (10 000 - 50 000 tokens d'entrée)</span></li>
-    <li><span class="lang-en"><strong>Cascading calls</strong>: a single command can generate 3 to 15 API calls (read, reason, edit, verify)</span><span class="lang-fr"><strong>Appels en cascade</strong> : une commande peut générer 3 à 15 appels API (lecture, reflexion, edition, verification)</span></li>
-    <li><span class="lang-en"><strong>Long responses</strong>: responses containing code are 5 to 20x longer than a chat</span><span class="lang-fr"><strong>Reponses longues</strong> : les reponses contenant du code sont 5 a 20x plus longues qu'un chat</span></li>
+    <li><span class="lang-en"><strong>Large context</strong>: OpenCode sends file contents, history, and tool results with each request (10,000 - 50,000 input tokens)</span><span class="lang-fr"><strong>Contexte volumineux</strong> : OpenCode envoie le contenu des fichiers, l'historique, les résultats d'outils à chaque requête (10 000 - 50 000 tokens d'entrée)</span></li>
+    <li><span class="lang-en"><strong>Cascading calls</strong>: a single command can generate 3 to 15 API calls (read, reason, edit, verify)</span><span class="lang-fr"><strong>Appels en cascade</strong> : une commande peut générer 3 à 15 appels API (lecture, réflexion, édition, vérification)</span></li>
+    <li><span class="lang-en"><strong>Long responses</strong>: responses containing code are 5 to 20x longer than a chat</span><span class="lang-fr"><strong>Réponses longues</strong> : les réponses contenant du code sont 5 à 20x plus longues qu'un chat</span></li>
   </ul>
 
   <h3><span class="lang-en">Orders of magnitude</span><span class="lang-fr">Ordres de grandeur</span></h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Action</th><th><span class="lang-en">Estimated tokens</span><span class="lang-fr">Tokens estimés</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Equivalent Copilot Chat</span></th></tr></thead>
+      <thead><tr><th>Action</th><th><span class="lang-en">Estimated tokens</span><span class="lang-fr">Tokens estimés</span></th><th><span class="lang-en">Copilot Chat equivalent</span><span class="lang-fr">Équivalent Copilot Chat</span></th></tr></thead>
       <tbody>
         <tr><td><span class="lang-en">Simple question</span><span class="lang-fr">Question simple</span></td><td>5 000 - 15 000</td><td><span class="lang-en">3-5 chat messages</span><span class="lang-fr">3-5 messages chat</span></td></tr>
-        <tr><td><span class="lang-en">File edit</span><span class="lang-fr">Edition de fichier</span></td><td>50 000 - 150 000</td><td><span class="lang-en">30-50 chat messages</span><span class="lang-fr">30-50 messages chat</span></td></tr>
-        <tr><td><span class="lang-en">Complex task</span><span class="lang-fr">Tache complexe</span></td><td>200 000 - 500 000</td><td><span class="lang-en">100-200 chat messages</span><span class="lang-fr">100-200 messages chat</span></td></tr>
+        <tr><td><span class="lang-en">File edit</span><span class="lang-fr">Édition de fichier</span></td><td>50 000 - 150 000</td><td><span class="lang-en">30-50 chat messages</span><span class="lang-fr">30-50 messages chat</span></td></tr>
+        <tr><td><span class="lang-en">Complex task</span><span class="lang-fr">Tâche complexe</span></td><td>200 000 - 500 000</td><td><span class="lang-en">100-200 chat messages</span><span class="lang-fr">100-200 messages chat</span></td></tr>
         <tr><td><span class="lang-en">30 min session</span><span class="lang-fr">Session 30 min</span></td><td>500 000 - 2 000 000</td><td><span class="lang-en"><strong>1 full day of chat</strong></span><span class="lang-fr"><strong>1 journée de chat</strong></span></td></tr>
       </tbody>
     </table>
@@ -450,10 +450,10 @@ opencode</code></pre>
 
   <h3><span class="lang-en">How to reduce consumption</span><span class="lang-fr">Comment réduire la consommation</span></h3>
   <ul>
-    <li><span class="lang-en"><strong>Enable <code>autoCompact</code></strong> (on by default): compresses context at 95% usage</span><span class="lang-fr"><strong>Activez <code>autoCompact</code></strong> (actif par défaut) : compresse le contexte a 95% d'utilisation</span></li>
+    <li><span class="lang-en"><strong>Enable <code>autoCompact</code></strong> (on by default): compresses context at 95% usage</span><span class="lang-fr"><strong>Activez <code>autoCompact</code></strong> (actif par défaut) : compresse le contexte à 95% d'utilisation</span></li>
     <li><span class="lang-en"><strong>Choose lightweight models</strong>: <code>gpt-5-mini</code> or <code>gemini-3-flash</code> for simple tasks</span><span class="lang-fr"><strong>Choisissez des modèles économes</strong> : <code>gpt-5-mini</code> ou <code>gemini-3-flash</code> pour les tâches simples</span></li>
-    <li><span class="lang-en"><strong>Be specific</strong>: "fix line 42 of server.js" uses fewer tokens than "fix the bugs"</span><span class="lang-fr"><strong>Soyez precis</strong> : "corrige la ligne 42 de server.js" consomme moins que "corrige les bugs"</span></li>
-    <li><span class="lang-en"><strong>Close and restart</strong> regularly to reset context</span><span class="lang-fr"><strong>Fermez et relancez</strong> regulierement pour reinitialiser le contexte</span></li>
+    <li><span class="lang-en"><strong>Be specific</strong>: "fix line 42 of server.js" uses fewer tokens than "fix the bugs"</span><span class="lang-fr"><strong>Soyez précis</strong> : "corrige la ligne 42 de server.js" consomme moins que "corrige les bugs"</span></li>
+    <li><span class="lang-en"><strong>Close and restart</strong> regularly to reset context</span><span class="lang-fr"><strong>Fermez et relancez</strong> régulièrement pour réinitialiser le contexte</span></li>
     <li><span class="lang-en"><strong>Non-interactive mode</strong> for one-off tasks: <code>opencode -p "question"</code></span><span class="lang-fr"><strong>Mode non-interactif</strong> pour les tâches ponctuelles : <code>opencode -p "question"</code></span></li>
   </ul>
 
@@ -550,11 +550,11 @@ opencode</code></pre>
   <p><span class="lang-en">OpenCode uses 3 agents with different roles:</span><span class="lang-fr">OpenCode utilise 3 agents avec des rôles différents :</span></p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Agent</th><th><span class="lang-en">Role</span><span class="lang-fr">Role</span></th><th><span class="lang-en">Recommended model</span><span class="lang-fr">Modèle recommandé</span></th></tr></thead>
+      <thead><tr><th>Agent</th><th><span class="lang-en">Role</span><span class="lang-fr">Rôle</span></th><th><span class="lang-en">Recommended model</span><span class="lang-fr">Modèle recommandé</span></th></tr></thead>
       <tbody>
-        <tr><td><code>coder</code></td><td><span class="lang-en">Main agent: writes and edits code</span><span class="lang-fr">Agent principal : ecrit et edite le code</span></td><td><span class="lang-en"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> or <code>gemini-2.5-pro</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> ou <code>gemini-2.5-pro</code> (via LiteLLM)</span></td></tr>
+        <tr><td><code>coder</code></td><td><span class="lang-en">Main agent: writes and edits code</span><span class="lang-fr">Agent principal : écrit et édite le code</span></td><td><span class="lang-en"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> or <code>gemini-2.5-pro</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> ou <code>gemini-2.5-pro</code> (via LiteLLM)</span></td></tr>
         <tr><td><code>task</code></td><td><span class="lang-en">Sub-tasks, research, reasoning</span><span class="lang-fr">Sous-tâches, recherche, réflexion</span></td><td><span class="lang-en"><code>copilot.gpt-5.2</code> or <code>gemini-2.5-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.2</code> ou <code>gemini-2.5-flash</code> (via LiteLLM)</span></td></tr>
-        <tr><td><code>title</code></td><td><span class="lang-en">Session title generation</span><span class="lang-fr">Generation des titres de session</span></td><td><span class="lang-en"><code>copilot.gpt-5-mini</code> or <code>gemini-3-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5-mini</code> ou <code>gemini-3-flash</code> (via LiteLLM)</span></td></tr>
+        <tr><td><code>title</code></td><td><span class="lang-en">Session title generation</span><span class="lang-fr">Génération des titres de session</span></td><td><span class="lang-en"><code>copilot.gpt-5-mini</code> or <code>gemini-3-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5-mini</code> ou <code>gemini-3-flash</code> (via LiteLLM)</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -565,7 +565,7 @@ opencode</code></pre>
   </div>
 
   <h2 id="g-config-providers"><span class="lang-en">Custom providers</span><span class="lang-fr">Providers custom</span></h2>
-  <p><span class="lang-en">OpenCode can connect to any OpenAI-compatible endpoint:</span><span class="lang-fr">OpenCode peut se connecter a n'importe quel endpoint OpenAI-compatible :</span></p>
+  <p><span class="lang-en">OpenCode can connect to any OpenAI-compatible endpoint:</span><span class="lang-fr">OpenCode peut se connecter à n'importe quel endpoint OpenAI-compatible :</span></p>
 
   <pre><code class="language-json">{
   "provider": {
@@ -685,10 +685,10 @@ env | grep -i proxy</code></pre>
 
   <div class="table-wrap">
     <table>
-      <thead><tr><th><span class="lang-en">Criteria</span><span class="lang-fr">Critere</span></th><th>OpenCode</th><th>Claude Code</th></tr></thead>
+      <thead><tr><th><span class="lang-en">Criteria</span><span class="lang-fr">Critère</span></th><th>OpenCode</th><th>Claude Code</th></tr></thead>
       <tbody>
         <tr><td><strong><span class="lang-en">Native Copilot</span><span class="lang-fr">Copilot natif</span></strong></td><td><span style="color:var(--green)"><span class="lang-en"><i class="fa-solid fa-check"></i> Yes, official</span><span class="lang-fr"><i class="fa-solid fa-check"></i> Oui, officiel</span></span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> Unofficial proxy required</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Proxy non-officiel requis</span></span></td></tr>
-        <tr><td><strong>Open source</strong></td><td><span style="color:var(--green)"><i class="fa-solid fa-check"></i> MIT</span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> Proprietary</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Proprietaire</span></span></td></tr>
+        <tr><td><strong>Open source</strong></td><td><span style="color:var(--green)"><i class="fa-solid fa-check"></i> MIT</span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> Proprietary</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Propriétaire</span></span></td></tr>
         <tr><td><strong>Providers</strong></td><td>75+ (BYO key)</td><td><span class="lang-en">Anthropic only</span><span class="lang-fr">Anthropic uniquement</span></td></tr>
         <tr><td><strong><span class="lang-en">Local models</span><span class="lang-fr">Modèles locaux</span></strong></td><td><span style="color:var(--green)"><i class="fa-solid fa-check"></i> Ollama, LM Studio</span></td><td><span style="color:var(--red)"><span class="lang-en"><i class="fa-solid fa-xmark"></i> No</span><span class="lang-fr"><i class="fa-solid fa-xmark"></i> Non</span></span></td></tr>
         <tr><td><strong>MCP</strong></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td><td><span class="lang-en">Yes</span><span class="lang-fr">Oui</span></td></tr>
@@ -704,7 +704,7 @@ env | grep -i proxy</code></pre>
 
   <div class="box box-success">
     <div class="box-title"><span class="lang-en">Enterprise recommendation</span><span class="lang-fr">Recommandation pour l'entreprise</span></div>
-    <p><span class="lang-en">If your company only allows GitHub Copilot, <strong>OpenCode is the safest choice</strong>: official support, no proxy hack, no risk of account suspension. Claude Code via proxy remains an option but with risks.</span><span class="lang-fr">Si votre entreprise autorise uniquement GitHub Copilot, <strong>OpenCode est le choix le plus sur</strong> : support officiel, pas de proxy hack, pas de risque de suspension de compte. Claude Code via proxy reste une option mais avec des risques.</span></p>
+    <p><span class="lang-en">If your company only allows GitHub Copilot, <strong>OpenCode is the safest choice</strong>: official support, no proxy hack, no risk of account suspension. Claude Code via proxy remains an option but with risks.</span><span class="lang-fr">Si votre entreprise autorise uniquement GitHub Copilot, <strong>OpenCode est le choix le plus sûr</strong> : support officiel, pas de proxy hack, pas de risque de suspension de compte. Claude Code via proxy reste une option mais avec des risques.</span></p>
   </div>
 
   <!-- ===== SECURITE ===== -->
@@ -723,7 +723,7 @@ env | grep -i proxy</code></pre>
     <li><span class="lang-en"><strong>Quota consumption</strong>: can exhaust the Copilot quota quickly</span><span class="lang-fr"><strong>Consommation de quota</strong> : peut épuiser le quota Copilot rapidement</span></li>
     <li><span class="lang-en"><strong>Data transits</strong> through provider servers (GitHub/OpenAI/Anthropic/Google)</span><span class="lang-fr"><strong>Données transitent</strong> par les serveurs du provider (GitHub/OpenAI/Anthropic/Google)</span></li>
     <li><span class="lang-en"><strong>Never commit tokens</strong>: add <code>.opencode.json</code> to <code>.gitignore</code> if it contains keys</span><span class="lang-fr"><strong>Ne commitez jamais les tokens</strong> : ajoutez <code>.opencode.json</code> à <code>.gitignore</code> s'il contient des clés</span></li>
-    <li><span class="lang-en"><strong>Check compliance</strong> with your security team</span><span class="lang-fr"><strong>Vérifiez la conformite</strong> avec votre equipe sécurité</span></li>
+    <li><span class="lang-en"><strong>Check compliance</strong> with your security team</span><span class="lang-fr"><strong>Vérifiez la conformité</strong> avec votre équipe sécurité</span></li>
   </ul>
 
 </div>
@@ -742,14 +742,14 @@ env | grep -i proxy</code></pre>
       <thead><tr><th>Variable</th><th>Provider</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td><code>GITHUB_TOKEN</code></td><td>GitHub Copilot</td><td><span class="lang-en">GitHub token (auto-detected if VS Code installed)</span><span class="lang-fr">Token GitHub (auto-détecté si VS Code installé)</span></td></tr>
-        <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Anthropic</td><td><span class="lang-en">Direct Claude API key</span><span class="lang-fr">Cle API Claude directe</span></td></tr>
-        <tr><td><code>OPENAI_API_KEY</code></td><td>OpenAI</td><td><span class="lang-en">Direct OpenAI API key</span><span class="lang-fr">Cle API OpenAI directe</span></td></tr>
-        <tr><td><code>GEMINI_API_KEY</code></td><td>Google Gemini</td><td><span class="lang-en">Gemini API key</span><span class="lang-fr">Cle API Gemini</span></td></tr>
-        <tr><td><code>GROQ_API_KEY</code></td><td>Groq</td><td><span class="lang-en">Groq API key</span><span class="lang-fr">Cle API Groq</span></td></tr>
+        <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Anthropic</td><td><span class="lang-en">Direct Claude API key</span><span class="lang-fr">Clé API Claude directe</span></td></tr>
+        <tr><td><code>OPENAI_API_KEY</code></td><td>OpenAI</td><td><span class="lang-en">Direct OpenAI API key</span><span class="lang-fr">Clé API OpenAI directe</span></td></tr>
+        <tr><td><code>GEMINI_API_KEY</code></td><td>Google Gemini</td><td><span class="lang-en">Gemini API key</span><span class="lang-fr">Clé API Gemini</span></td></tr>
+        <tr><td><code>GROQ_API_KEY</code></td><td>Groq</td><td><span class="lang-en">Groq API key</span><span class="lang-fr">Clé API Groq</span></td></tr>
         <tr><td><code>AWS_ACCESS_KEY_ID</code></td><td>AWS Bedrock</td><td><span class="lang-en">AWS identifier</span><span class="lang-fr">Identifiant AWS</span></td></tr>
-        <tr><td><code>AWS_SECRET_ACCESS_KEY</code></td><td>AWS Bedrock</td><td><span class="lang-en">AWS secret key</span><span class="lang-fr">Cle secrete AWS</span></td></tr>
+        <tr><td><code>AWS_SECRET_ACCESS_KEY</code></td><td>AWS Bedrock</td><td><span class="lang-en">AWS secret key</span><span class="lang-fr">Clé secrète AWS</span></td></tr>
         <tr><td><code>AZURE_OPENAI_ENDPOINT</code></td><td>Azure OpenAI</td><td><span class="lang-en">Azure endpoint</span><span class="lang-fr">Endpoint Azure</span></td></tr>
-        <tr><td><code>AZURE_OPENAI_API_KEY</code></td><td>Azure OpenAI</td><td><span class="lang-en">Azure API key</span><span class="lang-fr">Cle API Azure</span></td></tr>
+        <tr><td><code>AZURE_OPENAI_API_KEY</code></td><td>Azure OpenAI</td><td><span class="lang-en">Azure API key</span><span class="lang-fr">Clé API Azure</span></td></tr>
         <tr><td><code>HTTP_PROXY</code></td><td><span class="lang-en">System</span><span class="lang-fr">Système</span></td><td><span class="lang-en">Enterprise HTTP proxy</span><span class="lang-fr">Proxy HTTP d'entreprise</span></td></tr>
         <tr><td><code>HTTPS_PROXY</code></td><td><span class="lang-en">System</span><span class="lang-fr">Système</span></td><td><span class="lang-en">Enterprise HTTPS proxy</span><span class="lang-fr">Proxy HTTPS d'entreprise</span></td></tr>
         <tr><td><code>NODE_EXTRA_CA_CERTS</code></td><td><span class="lang-en">System</span><span class="lang-fr">Système</span></td><td><span class="lang-en">Enterprise SSL certificate</span><span class="lang-fr">Certificat SSL entreprise</span></td></tr>
@@ -838,7 +838,7 @@ env | grep -i proxy</code></pre>
         <tr><td><code>Ctrl+K</code></td><td><span class="lang-en">Command palette</span><span class="lang-fr">Palette de commandes</span></td></tr>
         <tr><td><code>Ctrl+N</code></td><td><span class="lang-en">New session</span><span class="lang-fr">Nouvelle session</span></td></tr>
         <tr><td><code>Ctrl+A</code></td><td><span class="lang-en">Switch session</span><span class="lang-fr">Changer de session</span></td></tr>
-        <tr><td><code>Ctrl+X</code></td><td><span class="lang-en">Cancel current generation</span><span class="lang-fr">Annuler la generation en cours</span></td></tr>
+        <tr><td><code>Ctrl+X</code></td><td><span class="lang-en">Cancel current generation</span><span class="lang-fr">Annuler la génération en cours</span></td></tr>
         <tr><td><code>Ctrl+C</code></td><td><span class="lang-en">Quit</span><span class="lang-fr">Quitter</span></td></tr>
       </tbody>
     </table>
