@@ -216,7 +216,7 @@ node dist/index.js start --port 4141 --verbose
 
 ---
 
-## Projet B : claude-code-copilot (Node.js pur, zero dépendance externe)
+## Projet B : claude-code-copilot (Node.js pur, zéro dépendance externe)
 
 **Repo** : https://github.com/samarth777/claude-code-copilot
 

@@ -13,7 +13,7 @@
 5. [MÉTHODE 1bis : copilot-proxy (Jer-y) via npx avec daemon](#5-méthode-1bis--copilot-proxy-jer-y-via-npx-avec-daemon)
 6. [MÉTHODE 1ter : LM Proxy (extension VS Code)](#6-méthode-1ter--lm-proxy-extension-vs-code)
 7. [MÉTHODE 2 : Cloner copilot-api et builder à la main](#7-méthode-2--cloner-copilot-api-et-builder-a-la-main)
-8. [MÉTHODE 2bis : Cloner claude-code-copilot (zero dépendance)](#8-méthode-2bis--cloner-claude-code-copilot-zero-dépendance)
+8. [MÉTHODE 2bis : Cloner claude-code-copilot (zéro dépendance)](#8-méthode-2bis--cloner-claude-code-copilot-zéro-dépendance)
 9. [MÉTHODE 2ter : LiteLLM via pip (Python)](#9-méthode-2ter--litellm-via-pip-python)
 10. [MÉTHODE 2quater : claude-copilot-proxy en Go](#10-méthode-2quater--claude-copilot-proxy-en-go)
 11. [MÉTHODE 3 : cc-copilot-bridge (multi-provider)](#11-méthode-3--cc-copilot-bridge-multi-provider)
@@ -542,7 +542,7 @@ npm run build
 
 ---
 
-## 8. MÉTHODE 2bis : Cloner claude-code-copilot (zero dépendance)
+## 8. MÉTHODE 2bis : Cloner claude-code-copilot (zéro dépendance)
 
 **Repo** : https://github.com/samarth777/claude-code-copilot
 **Difficulté** : Facile
@@ -1498,8 +1498,7 @@ Les modèles disponibles dépendent de votre licence Copilot.
 |--------|--------|-------------|
 | `gemini-3.1-pro` | Raisonnement avancé, excellent en code, multimodal | 1M tokens |
 | `gemini-3-flash` | Rapide, économique, multimodal | 1M tokens |
-| `gemini-3.1-flash-lite` | Ultra rapide, latence minimale | 1M tokens |
-| `gemini-3.1-flash-lite` | Le plus léger, gratuit dans les quotas de base | 1M tokens |
+| `gemini-3.1-flash-lite` | Ultra rapide, latence minimale, gratuit dans les quotas de base | 1M tokens |
 
 > **Avantage Gemini** : contexte de 1 million de tokens, idéal pour les gros codebases.
 > **Avantage Copilot** : plus de choix de modèles (GPT, Claude, o3).
