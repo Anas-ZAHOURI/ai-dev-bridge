@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://anas-zahouri.github.io/dev-passport/sitemap.xml
+Sitemap: https://anas-zahouri.github.io/ai-dev-bridge/sitemap.xml

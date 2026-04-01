@@ -2,7 +2,7 @@
 
 **Gardez vos outils, utilisez votre abonnement** -- Guide interactif pour intégrer Claude Code avec GitHub Copilot via des proxys locaux.
 
-> **[Accéder au site](https://anas-zahouri.github.io/dev-passport/)**
+> **[Accéder au site](https://anas-zahouri.github.io/ai-dev-bridge/)**
 
 ## Contenu
 
@@ -16,7 +16,7 @@ Ce projet propose une documentation complète en français pour les développeur
 
 Le site est déployé via GitHub Pages :
 
-**https://anas-zahouri.github.io/dev-passport/**
+**https://anas-zahouri.github.io/ai-dev-bridge/**
 
 Il s'agit d'une application statique (HTML/CSS/JS, sans framework ni build) avec navigation SPA, scroll spy et thème sombre/clair.
 
