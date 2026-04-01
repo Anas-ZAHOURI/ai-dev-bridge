@@ -207,12 +207,12 @@ gcloud auth application-default login
 litellm --config gemini-config.yaml --port 4141</code></pre>
   <p><span class="lang-en">Content of <code>gemini-config.yaml</code>:</span><span class="lang-fr">Contenu de <code>gemini-config.yaml</code> :</span></p>
   <pre><code class="language-yaml">model_list:
-  - model_name: gemini-2.5-pro
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
-  - model_name: gemini-2.5-flash
+      model: gemini/gemini-3.1-pro
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-3-flash
 
 litellm_settings:
   drop_params: true</code></pre>
@@ -231,8 +231,8 @@ claude</code></pre>
   <h4><span class="lang-en">Via Gemini Code Assist:</span><span class="lang-fr">Via Gemini Code Assist :</span></h4>
   <pre><code class="language-bash">ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
-ANTHROPIC_MODEL=gemini-2.5-pro \
-ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash \
+ANTHROPIC_MODEL=gemini-3.1-pro \
+ANTHROPIC_SMALL_FAST_MODEL=gemini-3-flash \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude</code></pre>
 
@@ -264,8 +264,8 @@ claude</code></pre>
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gemini-2.5-pro",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-2.5-flash",
+    "ANTHROPIC_MODEL": "gemini-3.1-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-3-flash",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -672,19 +672,19 @@ litellm_settings:
 
   <p><span class="lang-en">Alternative: <code>gemini-config.yaml</code> for Google Gemini models:</span><span class="lang-fr">Alternative : <code>gemini-config.yaml</code> pour les modèles Google Gemini :</span></p>
   <pre><code class="language-yaml">model_list:
-  - model_name: gemini-2.5-pro
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
+      model: gemini/gemini-3.1-pro
       api_key: os.environ/GEMINI_API_KEY
 
-  - model_name: gemini-2.5-flash
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-3-flash
       api_key: os.environ/GEMINI_API_KEY
 
-  - model_name: gemini-2.0-flash
+  - model_name: gemini-3.1-flash-lite
     litellm_params:
-      model: gemini/gemini-2.0-flash
+      model: gemini/gemini-3.1-flash-lite
       api_key: os.environ/GEMINI_API_KEY
 
 litellm_settings:
@@ -721,8 +721,8 @@ litellm --config copilot-config.yaml --port 4000</code></pre>
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
-    "ANTHROPIC_MODEL": "gemini/gemini-2.5-pro",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gemini/gemini-2.5-flash",
+    "ANTHROPIC_MODEL": "gemini/gemini-3.1-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini/gemini-3-flash",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
@@ -1037,11 +1037,11 @@ curl http://localhost:4141/usage</code></pre>
         <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td><td><span class="lang-en">Decent</span><span class="lang-fr">Correcte</span></td></tr>
         <tr><td><code>gpt-5.4</code></td><td>OpenAI</td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyen</span></td><td><span class="lang-en">Good</span><span class="lang-fr">Bonne</span></td></tr>
         <tr><td><code>claude-sonnet-4.6</code></td><td>Anthropic</td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyen</span></td><td><span class="lang-en">Very good</span><span class="lang-fr">Très bonne</span></td></tr>
-        <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td><span class="lang-en">High</span><span class="lang-fr">Eleve</span></td><td><span class="lang-en">Excellent</span><span class="lang-fr">Excellente</span></td></tr>
+        <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td><span class="lang-en">High</span><span class="lang-fr">Élevé</span></td><td><span class="lang-en">Excellent</span><span class="lang-fr">Excellente</span></td></tr>
         <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyen</span></td><td><span class="lang-en">Good (reasoning)</span><span class="lang-fr">Bonne (raisonnement)</span></td></tr>
-        <tr><td><code>gemini-2.5-pro</code></td><td>Google</td><td><span class="lang-en">High</span><span class="lang-fr">Eleve</span></td><td><span class="lang-en">Excellent</span><span class="lang-fr">Excellente</span></td></tr>
-        <tr><td><code>gemini-2.5-flash</code></td><td>Google</td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyen</span></td><td><span class="lang-en">Very good</span><span class="lang-fr">Très bonne</span></td></tr>
-        <tr><td><code>gemini-2.0-flash</code></td><td>Google</td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td><td><span class="lang-en">Good</span><span class="lang-fr">Bonne</span></td></tr>
+        <tr><td><code>gemini-3.1-pro</code></td><td>Google</td><td><span class="lang-en">High</span><span class="lang-fr">Élevé</span></td><td><span class="lang-en">Excellent</span><span class="lang-fr">Excellente</span></td></tr>
+        <tr><td><code>gemini-3-flash</code></td><td>Google</td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyen</span></td><td><span class="lang-en">Very good</span><span class="lang-fr">Très bonne</span></td></tr>
+        <tr><td><code>gemini-3.1-flash-lite</code></td><td>Google</td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td><td><span class="lang-en">Good</span><span class="lang-fr">Bonne</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1072,15 +1072,15 @@ curl http://localhost:4141/usage</code></pre>
     <div class="card">
       <div class="card-title"><span class="lang-en"><i class="fa-solid fa-gem"></i> Gemini quality</span><span class="lang-fr"><i class="fa-solid fa-gem"></i> Qualité Gemini</span></div>
       <div class="card-desc">
-        <code>ANTHROPIC_MODEL=gemini/gemini-2.5-pro</code><br>
-        <code>ANTHROPIC_SMALL_FAST_MODEL=gemini/gemini-2.5-flash</code>
+        <code>ANTHROPIC_MODEL=gemini/gemini-3.1-pro</code><br>
+        <code>ANTHROPIC_SMALL_FAST_MODEL=gemini/gemini-3-flash</code>
       </div>
     </div>
     <div class="card">
       <div class="card-title"><span class="lang-en"><i class="fa-solid fa-bolt"></i> Gemini fast</span><span class="lang-fr"><i class="fa-solid fa-bolt"></i> Gemini rapide</span></div>
       <div class="card-desc">
-        <code>ANTHROPIC_MODEL=gemini/gemini-2.5-flash</code><br>
-        <code>ANTHROPIC_SMALL_FAST_MODEL=gemini/gemini-2.0-flash</code>
+        <code>ANTHROPIC_MODEL=gemini/gemini-3-flash</code><br>
+        <code>ANTHROPIC_SMALL_FAST_MODEL=gemini/gemini-3.1-flash-lite</code>
       </div>
     </div>
   </div>
@@ -1312,9 +1312,9 @@ copilot-api debug          # Diagnostic</code></pre>
         <tr><td><code>claude-opus-4.6</code></td><td>Anthropic</td><td><span class="lang-en">Most powerful</span><span class="lang-fr">Le plus puissant</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
         <tr><td><code>o3</code></td><td>OpenAI</td><td><span class="lang-en">Advanced reasoning</span><span class="lang-fr">Raisonnement avancé</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
         <tr><td><code>gpt-5.4-mini</code></td><td>OpenAI</td><td><span class="lang-en">Reasoning, faster</span><span class="lang-fr">Raisonnement, plus rapide</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
-        <tr><td><code>gemini-2.5-pro</code></td><td>Google</td><td><span class="lang-en">Powerful, long context</span><span class="lang-fr">Puissant, contexte long</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
-        <tr><td><code>gemini-2.5-flash</code></td><td>Google</td><td><span class="lang-en">Fast, good quality</span><span class="lang-fr">Rapide, bonne qualité</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
-        <tr><td><code>gemini-2.0-flash</code></td><td>Google</td><td><span class="lang-en">Very fast, economical</span><span class="lang-fr">Très rapide, économique</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
+        <tr><td><code>gemini-3.1-pro</code></td><td>Google</td><td><span class="lang-en">Powerful, long context</span><span class="lang-fr">Puissant, contexte long</span></td><td><span class="lang-en">High</span><span class="lang-fr">Élevée</span></td></tr>
+        <tr><td><code>gemini-3-flash</code></td><td>Google</td><td><span class="lang-en">Fast, good quality</span><span class="lang-fr">Rapide, bonne qualité</span></td><td><span class="lang-en">Medium</span><span class="lang-fr">Moyenne</span></td></tr>
+        <tr><td><code>gemini-3.1-flash-lite</code></td><td>Google</td><td><span class="lang-en">Very fast, economical</span><span class="lang-fr">Très rapide, économique</span></td><td><span class="lang-en">Low</span><span class="lang-fr">Faible</span></td></tr>
       </tbody>
     </table>
   </div>

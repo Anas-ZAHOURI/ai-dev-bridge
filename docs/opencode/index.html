@@ -404,7 +404,7 @@ opencode</code></pre>
         <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td><strong>Pro+</strong></td><td><span class="lang-en">Reasoning + code</span><span class="lang-fr">Raisonnement + code</span></td></tr>
         <tr><td><code>copilot.gpt-5.4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td><span class="lang-en">Advanced reasoning</span><span class="lang-fr">Raisonnement avancé</span></td></tr>
         <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td><strong>Pro+</strong></td><td><span class="lang-en">Fast reasoning</span><span class="lang-fr">Raisonnement rapide</span></td></tr>
-        <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td><strong>Pro+</strong></td><td><span class="lang-en">Long context</span><span class="lang-fr">Long contexte</span></td></tr>
+        <tr><td><code>copilot.gemini-3.1-pro</code></td><td>Google</td><td><strong>Pro+</strong></td><td><span class="lang-en">Long context</span><span class="lang-fr">Long contexte</span></td></tr>
         <tr><td><code>copilot.gemini-3-flash</code></td><td>Google</td><td>Pro</td><td><span class="lang-en">Fast</span><span class="lang-fr">Rapide</span></td></tr>
       </tbody>
     </table>
@@ -519,19 +519,19 @@ opencode</code></pre>
         "apiKey": "sk-litellm"
       },
       "models": {
-        "gemini-2.5-pro": { "name": "gemini/gemini-2.5-pro" },
-        "gemini-2.5-flash": { "name": "gemini/gemini-2.5-flash" },
-        "gemini-3-flash": { "name": "gemini/gemini-3-flash" }
+        "gemini-3.1-pro": { "name": "gemini/gemini-3.1-pro" },
+        "gemini-3-flash": { "name": "gemini/gemini-3-flash" },
+        "gemini-3.1-flash-lite": { "name": "gemini/gemini-3.1-flash-lite" }
       }
     }
   },
   "agents": {
     "coder": {
-      "model": "litellm-gemini.gemini-2.5-pro",
+      "model": "litellm-gemini.gemini-3.1-pro",
       "maxTokens": 5000
     },
     "task": {
-      "model": "litellm-gemini.gemini-2.5-flash",
+      "model": "litellm-gemini.gemini-3-flash",
       "maxTokens": 5000
     },
     "title": {
@@ -543,7 +543,7 @@ opencode</code></pre>
 
   <div class="box box-info">
     <div class="box-title"><span class="lang-en"><i class="fa-solid fa-circle-info"></i> LiteLLM proxy required</span><span class="lang-fr"><i class="fa-solid fa-circle-info"></i> Proxy LiteLLM requis</span></div>
-    <p><span class="lang-en">This configuration requires a running LiteLLM proxy (<code>litellm --model gemini/gemini-2.5-pro</code>). LiteLLM translates OpenAI-compatible requests to the Google Gemini API. Install it with <code>pip install litellm[proxy]</code>.</span><span class="lang-fr">Cette configuration nécessite un proxy LiteLLM en cours d'exécution (<code>litellm --model gemini/gemini-2.5-pro</code>). LiteLLM traduit les requêtes OpenAI-compatible vers l'API Google Gemini. Installez-le avec <code>pip install litellm[proxy]</code>.</span></p>
+    <p><span class="lang-en">This configuration requires a running LiteLLM proxy (<code>litellm --model gemini/gemini-3.1-pro</code>). LiteLLM translates OpenAI-compatible requests to the Google Gemini API. Install it with <code>pip install litellm[proxy]</code>.</span><span class="lang-fr">Cette configuration nécessite un proxy LiteLLM en cours d'exécution (<code>litellm --model gemini/gemini-3.1-pro</code>). LiteLLM traduit les requêtes OpenAI-compatible vers l'API Google Gemini. Installez-le avec <code>pip install litellm[proxy]</code>.</span></p>
   </div>
 
   <h2 id="g-config-agents"><span class="lang-en">Agents: coder, task, title</span><span class="lang-fr">Agents : coder, task, title</span></h2>
@@ -552,8 +552,8 @@ opencode</code></pre>
     <table>
       <thead><tr><th>Agent</th><th><span class="lang-en">Role</span><span class="lang-fr">Rôle</span></th><th><span class="lang-en">Recommended model</span><span class="lang-fr">Modèle recommandé</span></th></tr></thead>
       <tbody>
-        <tr><td><code>coder</code></td><td><span class="lang-en">Main agent: writes and edits code</span><span class="lang-fr">Agent principal : écrit et édite le code</span></td><td><span class="lang-en"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> or <code>gemini-2.5-pro</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> ou <code>gemini-2.5-pro</code> (via LiteLLM)</span></td></tr>
-        <tr><td><code>task</code></td><td><span class="lang-en">Sub-tasks, research, reasoning</span><span class="lang-fr">Sous-tâches, recherche, réflexion</span></td><td><span class="lang-en"><code>copilot.gpt-5.2</code> or <code>gemini-2.5-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.2</code> ou <code>gemini-2.5-flash</code> (via LiteLLM)</span></td></tr>
+        <tr><td><code>coder</code></td><td><span class="lang-en">Main agent: writes and edits code</span><span class="lang-fr">Agent principal : écrit et édite le code</span></td><td><span class="lang-en"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> or <code>gemini-3.1-pro</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.4</code>, <code>copilot.claude-sonnet-4.6</code> ou <code>gemini-3.1-pro</code> (via LiteLLM)</span></td></tr>
+        <tr><td><code>task</code></td><td><span class="lang-en">Sub-tasks, research, reasoning</span><span class="lang-fr">Sous-tâches, recherche, réflexion</span></td><td><span class="lang-en"><code>copilot.gpt-5.2</code> or <code>gemini-3-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5.2</code> ou <code>gemini-3-flash</code> (via LiteLLM)</span></td></tr>
         <tr><td><code>title</code></td><td><span class="lang-en">Session title generation</span><span class="lang-fr">Génération des titres de session</span></td><td><span class="lang-en"><code>copilot.gpt-5-mini</code> or <code>gemini-3-flash</code> (via LiteLLM)</span><span class="lang-fr"><code>copilot.gpt-5-mini</code> ou <code>gemini-3-flash</code> (via LiteLLM)</span></td></tr>
       </tbody>
     </table>
@@ -898,7 +898,7 @@ opencode auth list</code></pre>
         <tr><td><code>copilot.claude-3.7-sonnet</code></td><td>Anthropic</td><td>Pro+</td><td><span class="lang-en">Reasoning + code</span><span class="lang-fr">Raisonnement + code</span></td></tr>
         <tr><td><code>copilot.gpt-5.4-mini</code></td><td>OpenAI</td><td>Pro+</td><td><span class="lang-en">Complex problems</span><span class="lang-fr">Problèmes complexes</span></td></tr>
         <tr><td><code>copilot.o4-mini</code></td><td>OpenAI</td><td>Pro+</td><td><span class="lang-en">Fast reasoning</span><span class="lang-fr">Raisonnement rapide</span></td></tr>
-        <tr><td><code>copilot.gemini-2.5-pro</code></td><td>Google</td><td>Pro+</td><td><span class="lang-en">Long context</span><span class="lang-fr">Long contexte</span></td></tr>
+        <tr><td><code>copilot.gemini-3.1-pro</code></td><td>Google</td><td>Pro+</td><td><span class="lang-en">Long context</span><span class="lang-fr">Long contexte</span></td></tr>
         <tr><td><code>copilot.gemini-3-flash</code></td><td>Google</td><td>Pro</td><td><span class="lang-en">Fast and economical</span><span class="lang-fr">Rapide et économique</span></td></tr>
       </tbody>
     </table>

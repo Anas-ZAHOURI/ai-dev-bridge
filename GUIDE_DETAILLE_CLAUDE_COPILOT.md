@@ -741,20 +741,20 @@ litellm_settings:
 ```yaml
 # gemini-config.yaml
 model_list:
-  # Modèle principal — Gemini 2.5 Pro (raisonnement avancé, code, contexte 1M tokens)
-  - model_name: gemini-2.5-pro
+  # Modèle principal — Gemini 3.1 Pro (raisonnement avancé, code, contexte 1M tokens)
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
+      model: gemini/gemini-3.1-pro
 
-  # Modèle rapide — Gemini 2.5 Flash (rapide, économique, multimodal)
-  - model_name: gemini-2.5-flash
+  # Modèle rapide — Gemini 3 Flash (rapide, économique, multimodal)
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-3-flash
 
-  # Modèle ultra rapide — Gemini 2.0 Flash (latence minimale)
-  - model_name: gemini-2.0-flash
+  # Modèle ultra rapide — Gemini 3.1 Flash Lite (latence minimale)
+  - model_name: gemini-3.1-flash-lite
     litellm_params:
-      model: gemini/gemini-2.0-flash
+      model: gemini/gemini-3.1-flash-lite
 
 litellm_settings:
   drop_params: true
@@ -780,12 +780,12 @@ model_list:
         Copilot-Integration-Id: "vscode-chat"
 
   # --- Google Gemini ---
-  - model_name: gemini-2.5-pro
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
-  - model_name: gemini-2.5-flash
+      model: gemini/gemini-3.1-pro
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-3-flash
 
 litellm_settings:
   drop_params: true
@@ -883,8 +883,8 @@ Admin UI: http://0.0.0.0:4000/ui
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
-    "ANTHROPIC_MODEL": "gemini-2.5-pro",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-2.5-flash",
+    "ANTHROPIC_MODEL": "gemini-3.1-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-3-flash",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
@@ -1496,10 +1496,10 @@ Les modèles disponibles dépendent de votre licence Copilot.
 
 | Modèle | Forces | Contexte max |
 |--------|--------|-------------|
-| `gemini-2.5-pro` | Raisonnement avancé, excellent en code, multimodal | 1M tokens |
-| `gemini-2.5-flash` | Rapide, économique, multimodal | 1M tokens |
-| `gemini-2.0-flash` | Ultra rapide, latence minimale | 1M tokens |
-| `gemini-2.0-flash-lite` | Le plus léger, gratuit dans les quotas de base | 1M tokens |
+| `gemini-3.1-pro` | Raisonnement avancé, excellent en code, multimodal | 1M tokens |
+| `gemini-3-flash` | Rapide, économique, multimodal | 1M tokens |
+| `gemini-3.1-flash-lite` | Ultra rapide, latence minimale | 1M tokens |
+| `gemini-3.1-flash-lite` | Le plus léger, gratuit dans les quotas de base | 1M tokens |
 
 > **Avantage Gemini** : contexte de 1 million de tokens, idéal pour les gros codebases.
 > **Avantage Copilot** : plus de choix de modèles (GPT, Claude, o3).
@@ -1539,22 +1539,22 @@ ANTHROPIC_SMALL_FAST_MODEL=gpt-5.4-mini
 
 **Gemini Code Assist — dev quotidien :**
 ```
-ANTHROPIC_MODEL=gemini-2.5-pro
-ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
+ANTHROPIC_MODEL=gemini-3.1-pro
+ANTHROPIC_SMALL_FAST_MODEL=gemini-3-flash
 ```
 
 **Gemini Code Assist — économiser le quota :**
 ```
-ANTHROPIC_MODEL=gemini-2.5-flash
-ANTHROPIC_SMALL_FAST_MODEL=gemini-2.0-flash
+ANTHROPIC_MODEL=gemini-3-flash
+ANTHROPIC_SMALL_FAST_MODEL=gemini-3.1-flash-lite
 ```
 
 **Gemini Code Assist — gros codebase (contexte 1M) :**
 ```
-ANTHROPIC_MODEL=gemini-2.5-pro
-ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash
+ANTHROPIC_MODEL=gemini-3.1-pro
+ANTHROPIC_SMALL_FAST_MODEL=gemini-3-flash
 ```
-> Gemini 2.5 Pro gère nativement 1M tokens de contexte, idéal pour analyser
+> Gemini 3.1 Pro gère nativement 1M tokens de contexte, idéal pour analyser
 > de grands projets d'un coup.
 
 ---
@@ -1767,4 +1767,4 @@ Avant d'utiliser ces outils en entreprise :
 | Je veux basculer entre providers | cc-copilot-bridge (méthode 3) |
 | J'utilise surtout Claude via Copilot | copilot-api fork Anthropic-first (méthode 3bis) |
 | Mon entreprise a Copilot Business/Pro | Vérifiez d'abord l'intégration officielle Claude/Copilot |
-| J'ai besoin d'un contexte 1M tokens | Gemini 2.5 Pro via LiteLLM (méthode 2ter) |
+| J'ai besoin d'un contexte 1M tokens | Gemini 3.1 Pro via LiteLLM (méthode 2ter) |

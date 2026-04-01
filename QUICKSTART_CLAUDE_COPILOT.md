@@ -75,12 +75,12 @@ litellm --config gemini-config.yaml --port 4141
 Contenu de `gemini-config.yaml` :
 ```yaml
 model_list:
-  - model_name: gemini-2.5-pro
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
-  - model_name: gemini-2.5-flash
+      model: gemini/gemini-3.1-pro
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-3-flash
 
 litellm_settings:
   drop_params: true
@@ -108,8 +108,8 @@ claude
 ```bash
 ANTHROPIC_BASE_URL=http://localhost:4141 \
 ANTHROPIC_AUTH_TOKEN=dummy \
-ANTHROPIC_MODEL=gemini-2.5-pro \
-ANTHROPIC_SMALL_FAST_MODEL=gemini-2.5-flash \
+ANTHROPIC_MODEL=gemini-3.1-pro \
+ANTHROPIC_SMALL_FAST_MODEL=gemini-3-flash \
 DISABLE_NON_ESSENTIAL_MODEL_CALLS=1 \
 claude
 ```
@@ -164,8 +164,8 @@ Créez le fichier `~/.claude/settings.json` :
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4141",
     "ANTHROPIC_AUTH_TOKEN": "dummy",
-    "ANTHROPIC_MODEL": "gemini-2.5-pro",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-2.5-flash",
+    "ANTHROPIC_MODEL": "gemini-3.1-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-3-flash",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },

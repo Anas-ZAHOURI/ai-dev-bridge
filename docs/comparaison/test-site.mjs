@@ -76,7 +76,7 @@ async function test(n, fn) { try { await fn(); ok(n); } catch(e) { fail(n, e.mes
     const s = await page.locator('.score-bar').count();
     if (s < 6) throw new Error(`Only ${s} bars`);
   });
-  await test('Arbre de decision present', async () => {
+  await test('Arbre de décision present', async () => {
     await page.click('.header-nav a[data-page="decision"]');
     await page.waitForTimeout(200);
     const d = await page.locator('#decision .diagram').count();

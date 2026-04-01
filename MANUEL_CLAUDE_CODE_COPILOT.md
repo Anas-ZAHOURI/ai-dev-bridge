@@ -382,18 +382,18 @@ litellm_settings:
 ### Config pour Gemini Code Assist (`gemini-config.yaml`) :
 ```yaml
 model_list:
-  # Modèle principal — Gemini 2.5 Pro (raisonnement avancé, code)
-  - model_name: gemini-2.5-pro
+  # Modèle principal — Gemini 3.1 Pro (raisonnement avancé, code)
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
-  # Modèle rapide — Gemini 2.5 Flash (rapide, économique)
-  - model_name: gemini-2.5-flash
+      model: gemini/gemini-3.1-pro
+  # Modèle rapide — Gemini 3 Flash (rapide, économique)
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
-  # Alternative : Gemini 2.0 Flash (très rapide)
-  - model_name: gemini-2.0-flash
+      model: gemini/gemini-3-flash
+  # Alternative : Gemini 3.1 Flash Lite (très rapide)
+  - model_name: gemini-3.1-flash-lite
     litellm_params:
-      model: gemini/gemini-2.0-flash
+      model: gemini/gemini-3.1-flash-lite
 
 litellm_settings:
   drop_params: true
@@ -416,12 +416,12 @@ model_list:
         editor-version: "vscode/1.85.1"
         Copilot-Integration-Id: "vscode-chat"
   # Google Gemini
-  - model_name: gemini-2.5-pro
+  - model_name: gemini-3.1-pro
     litellm_params:
-      model: gemini/gemini-2.5-pro
-  - model_name: gemini-2.5-flash
+      model: gemini/gemini-3.1-pro
+  - model_name: gemini-3-flash
     litellm_params:
-      model: gemini/gemini-2.5-flash
+      model: gemini/gemini-3-flash
 
 litellm_settings:
   drop_params: true
@@ -468,8 +468,8 @@ litellm --config mixed-config.yaml      # Les deux !
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-litellm-static-key",
-    "ANTHROPIC_MODEL": "gemini-2.5-pro",
-    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-2.5-flash",
+    "ANTHROPIC_MODEL": "gemini-3.1-pro",
+    "ANTHROPIC_SMALL_FAST_MODEL": "gemini-3-flash",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
@@ -485,8 +485,8 @@ litellm --config mixed-config.yaml      # Les deux !
 | `ANTHROPIC_BASE_URL` | URL du proxy local | `http://localhost:4141` | `http://localhost:4000` |
 | `ANTHROPIC_AUTH_TOKEN` | Token (valeur bidon acceptée) | `dummy` | `dummy` ou `sk-litellm-static-key` |
 | `ANTHROPIC_API_KEY` | Alternative à AUTH_TOKEN | `copilot-proxy` | `sk-litellm-static-key` |
-| `ANTHROPIC_MODEL` | Modèle principal | `gpt-5.4`, `claude-sonnet-4.6` | `gemini-2.5-pro` |
-| `ANTHROPIC_SMALL_FAST_MODEL` | Modèle rapide/léger | `gpt-5.4-mini` | `gemini-2.5-flash` |
+| `ANTHROPIC_MODEL` | Modèle principal | `gpt-5.4`, `claude-sonnet-4.6` | `gemini-3.1-pro` |
+| `ANTHROPIC_SMALL_FAST_MODEL` | Modèle rapide/léger | `gpt-5.4-mini` | `gemini-3-flash` |
 | `GEMINI_API_KEY` | Clé API Google AI Studio | — | `AIzaSy...` |
 | `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Réduit les appels inutiles | `1` | `1` |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Réduit encore plus le trafic | `1` | `1` |
@@ -590,7 +590,7 @@ Une utilisation excessive peut déclencher une détection d'abus.
 
 ### 7. Noms de modèles
 Même si Claude Code pense parler à l'API Anthropic, vous spécifiez des noms
-de modèles **Copilot** (ex: `gpt-5.4`) ou **Gemini** (ex: `gemini-2.5-pro`). Le proxy traduit tout.
+de modèles **Copilot** (ex: `gpt-5.4`) ou **Gemini** (ex: `gemini-3.1-pro`). Le proxy traduit tout.
 
 ---
 
@@ -602,9 +602,9 @@ de modèles **Copilot** (ex: `gpt-5.4`) ou **Gemini** (ex: `gemini-2.5-pro`). Le
 | `gpt-5.4-mini` | GitHub Copilot (OpenAI) | Rapide, économique | Rapide Copilot |
 | `claude-sonnet-4.6` | GitHub Copilot (Anthropic) | Excellent en code | Principal qualité |
 | `claude-opus-4.6` | GitHub Copilot (Anthropic) | Le plus puissant | Tâches complexes |
-| `gemini-2.5-pro` | Gemini Code Assist | Raisonnement avancé, code, contexte 1M | Principal Gemini |
-| `gemini-2.5-flash` | Gemini Code Assist | Très rapide, multimodal | Rapide Gemini |
-| `gemini-2.0-flash` | Gemini Code Assist | Ultra rapide, low latency | Tâches simples Gemini |
+| `gemini-3.1-pro` | Gemini Code Assist | Raisonnement avancé, code, contexte 1M | Principal Gemini |
+| `gemini-3-flash` | Gemini Code Assist | Très rapide, multimodal | Rapide Gemini |
+| `gemini-3.1-flash-lite` | Gemini Code Assist | Ultra rapide, low latency | Tâches simples Gemini |
 
 ---
 
